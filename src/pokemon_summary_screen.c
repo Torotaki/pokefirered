@@ -180,6 +180,7 @@ struct PokemonSummaryScreenData
         u8 ALIGNED(4) moveNameStrBufs[5][MOVE_NAME_LENGTH + 1];
         u8 ALIGNED(4) movePowerStrBufs[5][5];
         u8 ALIGNED(4) moveAccuracyStrBufs[5][5];
+        u8 ALIGNED(4) moveCategoryStrBufs[5][5];
 
         u8 ALIGNED(4) expPointsStrBuf[9];
         u8 ALIGNED(4) expToNextLevelStrBuf[9];
@@ -2300,6 +2301,19 @@ static void BufferMonMoveI(u8 i)
         StringCopy(sMonSummaryScreen->summary.moveAccuracyStrBufs[i], gText_ThreeHyphens);
     else
         ConvertIntToDecimalStringN(sMonSummaryScreen->summary.moveAccuracyStrBufs[i], gBattleMoves[sMonSummaryScreen->moveIds[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+    switch (gBattleMoves[sMonSummaryScreen->moveIds[i]].category)
+    {
+    case CATEGORY_STATUS:
+        StringCopy(sMonSummaryScreen->summary.moveCategoryStrBufs[i], gText_CategoryStatus);
+        break;
+    case CATEGORY_PHYSICAL:
+        StringCopy(sMonSummaryScreen->summary.moveCategoryStrBufs[i], gText_CategoryPhysical);
+        break;
+    case CATEGORY_SPECIAL:
+        StringCopy(sMonSummaryScreen->summary.moveCategoryStrBufs[i], gText_CategorySpecial);
+        break;
+    }
 }
 
 static u8 PokeSum_HandleCreateSprites(void)
@@ -2874,6 +2888,11 @@ static void PokeSum_PrintSelectedMoveStats(void)
                                      0, 0,
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                      gMoveDescriptionPointers[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] - 1]);
+
+        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
+                                     89, 1,
+                                     sLevelNickTextColors[0], TEXT_SKIP_DRAW,
+                                     sMonSummaryScreen->summary.moveCategoryStrBufs[sMoveSelectionCursorPos]);
     }
 }
 
