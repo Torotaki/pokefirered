@@ -17,6 +17,7 @@
 #include "text_window.h"
 #include "text_window_graphics.h"
 #include "constants/songs.h"
+#include "badge.h"
 
 enum MainMenuType
 {
@@ -663,12 +664,8 @@ static void PrintBadgeCount(void)
     u8 strbuf[30];
     u8 *ptr;
     u32 flagId;
-    u8 nbadges = 0;
-    for (flagId = FLAG_BADGE01_GET; flagId < FLAG_BADGE01_GET + 8; flagId++)
-    {
-        if (FlagGet(flagId))
-            nbadges++;
-    }
+    int nbadges = GetBadgesEarned();
+
     AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, FONT_NORMAL, 2, 66, sTextColor2, -1, gText_Badges);
     ptr = ConvertIntToDecimalStringN(strbuf, nbadges, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringAppend(ptr, gTextJPDummy_Ko);

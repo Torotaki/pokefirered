@@ -4,6 +4,7 @@
 #include "pokedex.h"
 #include "region_map.h"
 #include "save_menu_util.h"
+#include "badge.h"
 
 void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
 {
@@ -42,11 +43,7 @@ void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
         GetMapNameGeneric(dest, gMapHeader.regionMapSectionId);
         break;
     case SAVE_STAT_BADGES:
-        for (flagId = FLAG_BADGE01_GET, nBadges = 0; flagId < FLAG_BADGE01_GET + 8; flagId++)
-        {
-            if (FlagGet(flagId))
-                nBadges++;
-        }
+        nBadges = GetBadgesEarned();
         *dest++ = nBadges + CHAR_0;
         *dest++ = 10; // 'こ'
         *dest++ = EOS;
