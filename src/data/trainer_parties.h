@@ -5616,6 +5616,41 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock[] = {
     },
 };
 
+static const struct TrainerMonItemCustomMoves sParty_LeaderBrocks[9][6] = {
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_GEODUDE,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_ONIX,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TACKLE, MOVE_BIND, MOVE_ROCK_TOMB, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_KABUTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_ONIX,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TACKLE, MOVE_BIND, MOVE_ROCK_TOMB, MOVE_NONE},
+        },
+    }
+};
+
 static const struct TrainerMonNoItemCustomMoves sParty_LeaderMisty[] = {
     {
         .iv = 0,

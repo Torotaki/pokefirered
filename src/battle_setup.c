@@ -604,6 +604,16 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
                 sum += party[i].lvl;
         }
         break;
+    case F_TRAINER_PARTY_MULTIPLE:
+        {
+            const struct TrainerMonItemCustomMoves (*partyList)[9][6];
+            const struct TrainerMonItemCustomMoves *party;
+
+            partyList = gTrainers[opponentId].party.GetLeaderParty;
+            party = (*partyList)[GetBadgesEarned()];
+            for (i = 0; i < count; ++i)
+                sum += party[i].lvl;
+        }
     }
     return sum;
 }
