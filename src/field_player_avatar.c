@@ -1184,6 +1184,7 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
 bool8 PartyHasMonWithSurf(void)
 {
     u8 i;
+    u32 monSpecies;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
@@ -1191,7 +1192,8 @@ bool8 PartyHasMonWithSurf(void)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
                 break;
-            if (MonKnowsMove(&gPlayerParty[i], MOVE_SURF))
+
+            if (CanMonUseFieldMove(&gPlayerParty[i], FIELD_MOVE_SURF))
                 return TRUE;
         }
     }

@@ -1712,6 +1712,21 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
     .callback = SpriteCallbackDummy,
 };
 
+static const struct FieldMoveMapping sFieldMoveMappings[] = {
+    [FIELD_MOVE_FLASH]      = {FLAG_CAN_FLASH,      {MOVE_FLASH, MOVE_EMBER, MOVE_FLAME_WHEEL}},
+    [FIELD_MOVE_CUT]        = {FLAG_CAN_CUT,        {MOVE_CUT, MOVE_SLASH, MOVE_SCRATCH}},
+    [FIELD_MOVE_FLY]        = {FLAG_CAN_FLY,        {MOVE_FLY}},
+    [FIELD_MOVE_STRENGTH]   = {FLAG_CAN_STRENGTH,   {MOVE_STRENGTH, MOVE_SEISMIC_TOSS}},
+    [FIELD_MOVE_SURF]       = {FLAG_CAN_SURF,       {MOVE_SURF, MOVE_WATERFALL}},
+    [FIELD_MOVE_ROCK_SMASH] = {0,                   {}},
+    [FIELD_MOVE_WATERFALL]  = {0,                   {}},
+    [FIELD_MOVE_TELEPORT]   = {FLAG_CAN_TELEPORT,   {MOVE_TELEPORT}},
+    [FIELD_MOVE_DIG]        = {FLAG_CAN_DIG,        {MOVE_DIG}},
+    [FIELD_MOVE_MILK_DRINK] = {0,                   {MOVE_MILK_DRINK}},
+    [FIELD_MOVE_SOFT_BOILED]= {0,                   {MOVE_SOFT_BOILED}},
+    [FIELD_MOVE_SWEET_SCENT]= {0,                   {MOVE_SWEET_SCENT}}
+};
+
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
     u8 *raw = (u8 *)boxMon;
@@ -6441,4 +6456,25 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
             spriteNum = 0;
         return sMonSpritesGfxManager->spritePointers[spriteNum];
     }
+}
+
+bool8 CanMonUseFieldMove(struct Pokemon *mon, u8 fieldMove)
+{
+    u8 i, j;
+    u16 monSpecies = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    
+    if (gSpeciesInfo[monSpecies].fieldUtilityFlags & sFieldMoveMappings[fieldMove].flag)
+    {
+        return TRUE;
+    }
+    
+    for (j = 0; j < MAX_MOVES_FOR_FIELD_MOVES; ++j)
+    {
+        if (sFieldMoveMappings[fieldMove].moves[j] != MOVE_NONE && MonKnowsMove(mon, sFieldMoveMappings[fieldMove].moves[j]))
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }

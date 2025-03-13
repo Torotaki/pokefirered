@@ -237,6 +237,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .fieldUtilityFlags = FLAG_CAN_SURF | FLAG_CAN_TELEPORT | FLAG_CAN_DIG | FLAG_CAN_STRENGTH | FLAG_CAN_FLY
     },
     [SPECIES_WARTORTLE] =
     {

@@ -234,6 +234,15 @@
 #define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT 100
 
+// Pokemon Field Utility Flags
+#define FLAG_CAN_CUT                (1 << 0)
+#define FLAG_CAN_FLY                (1 << 1)
+#define FLAG_CAN_SURF               (1 << 2)
+#define FLAG_CAN_STRENGTH           (1 << 3)
+#define FLAG_CAN_FLASH              (1 << 4)
+#define FLAG_CAN_DIG                (1 << 5)
+#define FLAG_CAN_TELEPORT           (1 << 6)
+
 // Battle move flags
 #define FLAG_MAKES_CONTACT          (1 << 0)
 #define FLAG_PROTECT_AFFECTED       (1 << 1)

@@ -1,6 +1,6 @@
 EventScript_UseSurf::
 	goto_if_questlog EventScript_UseSurfEnd
-	checkpartymove MOVE_SURF
+	checkpartymove FIELD_MOVE_SURF
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_UseSurfEnd
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT

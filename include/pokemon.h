@@ -233,6 +233,7 @@ struct SpeciesInfo
  /* 0x18 */ u8 safariZoneFleeRate;
  /* 0x19 */ u8 bodyColor : 7;
             u8 noFlip : 1;
+ /* 0x1A */ u8 fieldUtilityFlags;
 };
 
 struct BattleMove
@@ -282,6 +283,14 @@ struct Evolution
 
 #define GET_SHINY_VALUE(otId, personality) (HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality))
 
+#define MAX_MOVES_FOR_FIELD_MOVES 3
+
+struct FieldMoveMapping
+{
+    u8 flag;
+    u16 moves[MAX_MOVES_FOR_FIELD_MOVES];
+};
+
 extern const struct BattleMove gBattleMoves[];
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
@@ -298,6 +307,7 @@ extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpriteTemplate gSpriteTemplates_Battlers[];
 extern const u8 gPPUpGetMask[];
+extern const struct FieldMoveMapping sFieldMoveMappings[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -425,5 +435,6 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode);
 void DestroyMonSpritesGfxManager(void);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
+bool8 CanMonUseFieldMove(struct Pokemon *mon, u8 fieldMove);
 
 #endif // GUARD_POKEMON_H
