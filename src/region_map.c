@@ -3957,11 +3957,6 @@ static void Task_FlyMap(u8 taskId)
             {
                 switch (GetMapTypeByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
                 {
-                case MAP_TYPE_UNDERGROUND:
-                case MAP_TYPE_INDOOR:
-                    sFlyMap->selectedDestination = FALSE;
-                    sFlyMap->state++;
-                    break;
                 default:
                     PlaySE(SE_USE_ITEM);
                     sFlyMap->selectedDestination = TRUE;

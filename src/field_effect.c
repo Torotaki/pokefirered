@@ -2428,7 +2428,7 @@ static void TeleportFieldEffectTask4(struct Task *task)
     {
         if (BGMusicStopped() == TRUE)
         {
-            SetWarpDestinationToLastHealLocation();
+            Overworld_ResetStateAfterFly();
             WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = FieldCallback_TeleportIn;
