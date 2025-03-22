@@ -1627,7 +1627,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             case F_TRAINER_PARTY_MULTIPLE:
             {
                 const struct TrainerMonItemCustomMoves (*partyDataList)[9][6] = gTrainers[trainerNum].party.GetLeaderParty;
-                const struct TrainerMonItemCustomMoves *partyData = (*partyDataList)[GetBadgesEarned()];
+                const struct TrainerMonItemCustomMoves *partyData = (*partyDataList)[GetGymLeaderPartyTier()];
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];

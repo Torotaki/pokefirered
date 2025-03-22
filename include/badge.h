@@ -6,5 +6,6 @@
 #include "gba/types.h"
 
 int GetBadgesEarned(void);
+int GetGymLeaderPartyTier(void);
 
 #endif // GUARD_BADGE_H

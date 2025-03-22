@@ -5365,7 +5365,7 @@ static void Cmd_getmoneyreward(void)
                 break;
             case (F_TRAINER_PARTY_MULTIPLE):
                 {
-                    const struct TrainerMonItemCustomMoves *party5 = (*gTrainers[gTrainerBattleOpponent_A].party.GetLeaderParty)[GetBadgesEarned()];
+                    const struct TrainerMonItemCustomMoves *party5 = (*gTrainers[gTrainerBattleOpponent_A].party.GetLeaderParty)[GetGymLeaderPartyTier()];
                     
                     lastMonLevel = party5[0].lvl;
                 }

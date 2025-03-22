@@ -12,3 +12,15 @@ int GetBadgesEarned(void)
 
     return nbadges;
 }
+
+int GetGymLeaderPartyTier(void)
+{
+    int partyTier = GetBadgesEarned();
+
+    if (partyTier > 8)
+    {
+        partyTier = 8;
+    }
+
+    return partyTier;
+}

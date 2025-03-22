@@ -44,7 +44,7 @@ void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
         break;
     case SAVE_STAT_BADGES:
         nBadges = GetBadgesEarned();
-        *dest++ = nBadges + CHAR_0;
+        dest = ConvertIntToDecimalStringN(dest, nBadges, STR_CONV_MODE_LEADING_ZEROS, 2);
         *dest++ = 10; // 'こ'
         *dest++ = EOS;
         break;
