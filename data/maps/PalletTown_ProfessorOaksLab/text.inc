@@ -355,3 +355,15 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
     .string "ONE ISLAND first…\p"
     .string "Anyways, I'm outta here!$"
 
+PalletTown_ProfessorOaksLab_Text_ChallengeQuestion::
+    .string "This lab also functions as a POKéMON\n"
+    .string "GYM with me as the GYM LEADER\p"
+    .string "Would you like to challenge me to\n"
+    .string "battle?$"
+
+PalletTown_ProfessorOaksLab_Text_OakBattleIntro::
+    .string "Very well!\n"
+    .string "Show me what your POKéMON can do.$"
+
+PalletTown_ProfessorOaksLab_Text_OakBattleDefeat::
+    .string "Such interesting techinques!$"

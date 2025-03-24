@@ -7169,7 +7169,153 @@ static const struct TrainerMonNoItemDefaultMoves sParty_HikerFranklin2[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_PkmnProfProfOak[] = {DUMMY_TRAINER_MON};
+static const struct TrainerMonItemCustomMoves sParty_PkmnProfProfOak[9][6] = {
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 12,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 13,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    },
+    {
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_DITTO,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        },
+        {
+            .iv = 0,
+            .lvl = 14,
+            .species = SPECIES_LICKITUNG,
+            .heldItem = ITEM_NONE,
+            .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL, MOVE_NONE},
+        },
+    }
+};
+
 static const struct TrainerMonNoItemDefaultMoves sParty_PlayerBrendan[] = {DUMMY_TRAINER_MON};
 static const struct TrainerMonNoItemDefaultMoves sParty_PlayerMay[] = {DUMMY_TRAINER_MON};
 static const struct TrainerMonNoItemDefaultMoves sParty_PlayerRed[] = {DUMMY_TRAINER_MON};
