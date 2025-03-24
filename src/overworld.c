@@ -53,6 +53,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
+#include "badge.h"
 
 #define PLAYER_LINK_STATE_IDLE 0x80
 #define PLAYER_LINK_STATE_BUSY 0x81
@@ -120,7 +121,6 @@ static KeyInterCB sPlayerKeyInterceptCallback;
 static bool8 sReceivingFromLink;
 static u8 sRfuKeepAliveTimer;
 
-static u8 CountBadgesForOverworldWhiteOutLossCalculation(void);
 static void Overworld_ResetStateAfterWhitingOut(void);
 static void Overworld_SetWhiteoutRespawnPoint(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *playerStruct, u16 metatileBehavior, u8 mapType);
@@ -228,18 +228,15 @@ static const u8 sWhiteOutMoneyLossMultipliers[] = {
     16,
     20,
     25,
+    30,
+    30,
+    30,
+    30,
+    30,
+    30,
+    30,
+    30,
     30
-};
-
-static const u16 sWhiteOutMoneyLossBadgeFlagIDs[] = {
-    FLAG_BADGE01_GET,
-    FLAG_BADGE02_GET,
-    FLAG_BADGE03_GET,
-    FLAG_BADGE04_GET,
-    FLAG_BADGE05_GET,
-    FLAG_BADGE06_GET,
-    FLAG_BADGE07_GET,
-    FLAG_BADGE08_GET
 };
 
 static void DoWhiteOut(void)
@@ -254,7 +251,7 @@ static void DoWhiteOut(void)
 
 u32 ComputeWhiteOutMoneyLoss(void)
 {
-    u8 nbadges = CountBadgesForOverworldWhiteOutLossCalculation();
+    int nbadges =  GetBadgesEarned();
     u8 toplevel = GetPlayerPartyHighestLevel();
     u32 losings = toplevel * 4 * sWhiteOutMoneyLossMultipliers[nbadges];
     u32 money = GetMoney(&gSaveBlock1Ptr->money);
@@ -267,18 +264,6 @@ void OverworldWhiteOutGetMoneyLoss(void)
 {
     u32 losings = ComputeWhiteOutMoneyLoss();
     ConvertIntToDecimalStringN(gStringVar1, losings, STR_CONV_MODE_LEFT_ALIGN, CountDigits(losings));
-}
-
-static u8 CountBadgesForOverworldWhiteOutLossCalculation(void)
-{
-    int i;
-    u8 nbadges = 0;
-    for (i = 0; i < NELEMS(sWhiteOutMoneyLossBadgeFlagIDs); i++)
-    {
-        if (FlagGet(sWhiteOutMoneyLossBadgeFlagIDs[i]))
-            nbadges++;
-    }
-    return nbadges;
 }
 
 void Overworld_ResetStateAfterFly(void)
