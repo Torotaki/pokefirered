@@ -280,6 +280,7 @@ extern const u8 gText_CantUseHere[];
 extern const u8 gText_NoPokemonForBattle[];
 extern const u8 gText_ChoosePokemon2[];
 extern const u8 gText_NotEnoughHp[];
+extern const u8 gText_NotEnoughPp[];
 extern const u8 gText_ThreePkmnAreNeeded[];
 extern const u8 gText_TwoPokemonAreNeeded[];
 extern const u8 gText_PokemonCantBeSame[];
@@ -309,6 +310,7 @@ extern const u8 gText_ClimbAWaterfall[];
 extern const u8 gText_EscapeFromHere[];
 extern const u8 gText_LureWildPokemon[];
 extern const u8 gText_ShareHp[];
+extern const u8 gText_HealPokemon[];
 extern const u8 gText_ReturnToAHealingSpot[];
 extern const u8 gText_Summary5[];
 extern const u8 gText_Switch2[];
@@ -1337,6 +1339,7 @@ extern const u8 gText_QuestLog_PokemonResearchLab[];
 extern const u8 gText_QuestLog_VictoryRoad[];
 extern const u8 gText_QuestLog_PokemonLeague[];
 extern const u8 gText_QuestLog_CeruleanCave[];
+extern const u8 gText_QuestLog_UsedHealingSeed[];
 
 // clear_save_data_screen
 extern const u8 gText_ClearAllSaveData[];

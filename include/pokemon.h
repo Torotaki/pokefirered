@@ -436,5 +436,6 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mo
 void DestroyMonSpritesGfxManager(void);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
 bool8 CanMonUseFieldMove(struct Pokemon *mon, u8 fieldMove);
+bool8 isMoveFieldMove(s16 fieldMove, u16 move);
 
 #endif // GUARD_POKEMON_H

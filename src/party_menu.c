@@ -1143,7 +1143,7 @@ void Task_HandleChooseMonInput(u8 taskId)
 
 static s8 *GetCurrentPartySlotPtr(void)
 {
-    if (gPartyMenu.action == PARTY_ACTION_SWITCH || gPartyMenu.action == PARTY_ACTION_SOFTBOILED)
+    if (gPartyMenu.action == PARTY_ACTION_SWITCH || gPartyMenu.action == PARTY_ACTION_SOFTBOILED || gPartyMenu.action == PARTY_ACTION_FIXED_HEAL_MOVE)
         return &gPartyMenu.slotId2;
     else
         return &gPartyMenu.slotId;
@@ -1160,6 +1160,10 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
         case PARTY_ACTION_SOFTBOILED:
             if (IsSelectedMonNotEgg((u8 *)slotPtr))
                 Task_TryUseSoftboiledOnPartyMon(taskId);
+            break;
+        case PARTY_ACTION_FIXED_HEAL_MOVE:
+            if (IsSelectedMonNotEgg((u8 *)slotPtr))
+                Task_TryUseFixedHealingOnPartyMon(taskId);
             break;
         case PARTY_ACTION_USE_ITEM:
             if (IsSelectedMonNotEgg((u8 *)slotPtr))
@@ -3921,6 +3925,11 @@ static void CursorCB_FieldMove(u8 taskId)
     }
     else
     {
+        if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc == SetUpFieldMove_FixedHealing)
+        {
+            gPartyMenu.data[0] = fieldMove;
+        }
+        
         if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc() == TRUE)
         {
             switch (fieldMove)
@@ -3928,6 +3937,9 @@ static void CursorCB_FieldMove(u8 taskId)
             case FIELD_MOVE_MILK_DRINK:
             case FIELD_MOVE_SOFT_BOILED:
                 ChooseMonForSoftboiled(taskId);
+                break;
+            case FIELD_MOVE_HEALING_SEED:
+                ChooseMonForFixedHealing(taskId);
                 break;
             case FIELD_MOVE_TELEPORT:
                 sPartyMenuInternal->data[0] = fieldMove;

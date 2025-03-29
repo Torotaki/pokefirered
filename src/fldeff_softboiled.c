@@ -1,14 +1,10 @@
-#include "global.h"
 #include "gflib.h"
 #include "party_menu.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
+#include "fldeff_softboiled.h"
 
-static void Task_SoftboiledRestoreHealth(u8 taskId);
-static void Task_DisplayHPRestoredMessage(u8 taskId);
-static void Task_FinishSoftboiled(u8 taskId);
-static void CantUseSoftboiledOnMon(u8 taskId);
 
 extern const u8 gText_CantBeUsedOnPkmn[];
 extern const u8 gText_PkmnHPRestoredByVar2[];
@@ -60,13 +56,13 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
     }
 }
 
-static void Task_SoftboiledRestoreHealth(u8 taskId)
+void Task_SoftboiledRestoreHealth(u8 taskId)
 {
     PlaySE(SE_USE_ITEM);
     PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MAX_HP) / 5, Task_DisplayHPRestoredMessage);
 }
 
-static void Task_DisplayHPRestoredMessage(u8 taskId)
+void Task_DisplayHPRestoredMessage(u8 taskId)
 {
     GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
@@ -75,7 +71,7 @@ static void Task_DisplayHPRestoredMessage(u8 taskId)
     gTasks[taskId].func = Task_FinishSoftboiled;
 }
 
-static void Task_FinishSoftboiled(u8 taskId)
+void Task_FinishSoftboiled(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
@@ -90,7 +86,7 @@ static void Task_FinishSoftboiled(u8 taskId)
     }
 }
 
-static void Task_ChooseNewMonForSoftboiled(u8 taskId)
+void Task_ChooseNewMonForSoftboiled(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
@@ -99,7 +95,7 @@ static void Task_ChooseNewMonForSoftboiled(u8 taskId)
     }
 }
 
-static void CantUseSoftboiledOnMon(u8 taskId)
+void CantUseSoftboiledOnMon(u8 taskId)
 {
     PlaySE(SE_SELECT);
     DisplayPartyMenuMessage(gText_CantBeUsedOnPkmn, FALSE);

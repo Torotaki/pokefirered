@@ -308,6 +308,7 @@ static void Cmd_subattackerhpbydmg(void);
 static void Cmd_removeattackerstatus1(void);
 static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
+static void Cmd_fixedhealing(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -559,6 +560,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_removeattackerstatus1,                   //0xF5
     Cmd_finishaction,                            //0xF6
     Cmd_finishturn,                              //0xF7
+    Cmd_fixedhealing,                            //0xF8
 };
 
 struct StatFractions
@@ -9890,4 +9892,28 @@ static void Cmd_finishturn(void)
 {
     gCurrentActionFuncId = B_ACTION_FINISHED;
     gCurrentTurnActionNumber = gBattlersCount;
+}
+
+static void Cmd_fixedhealing(void)
+{
+    // BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_FIXED_HEAL_MOVE, gActiveBattler, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
+    // u8 taskId = gBattleCommunication[TASK_ID];
+    // ChooseMonForFixedHealing(taskId);
+    // gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+
+    const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+
+    if (gBattlescriptCurrInstr[5] == BS_ATTACKER)
+        gBattlerTarget = gBattlerAttacker;
+
+    // gBattleMoveDamage = gBattleMons[gBattlerTarget].moves[1];
+    gBattleMoveDamage = gBattleMoves[gCurrentMove].power;
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+    gBattleMoveDamage *= -1;
+
+    if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
+        gBattlescriptCurrInstr = failPtr;
+    else
+        gBattlescriptCurrInstr += 6;
 }

@@ -1713,18 +1713,19 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
 };
 
 static const struct FieldMoveMapping sFieldMoveMappings[] = {
-    [FIELD_MOVE_FLASH]      = {FLAG_CAN_FLASH,      {MOVE_FLASH, MOVE_EMBER, MOVE_FLAME_WHEEL}},
-    [FIELD_MOVE_CUT]        = {FLAG_CAN_CUT,        {MOVE_CUT, MOVE_SLASH, MOVE_SCRATCH}},
-    [FIELD_MOVE_FLY]        = {FLAG_CAN_FLY,        {MOVE_FLY}},
-    [FIELD_MOVE_STRENGTH]   = {FLAG_CAN_STRENGTH,   {MOVE_STRENGTH, MOVE_SEISMIC_TOSS}},
-    [FIELD_MOVE_SURF]       = {FLAG_CAN_SURF,       {MOVE_SURF, MOVE_WATERFALL}},
-    [FIELD_MOVE_ROCK_SMASH] = {0,                   {}},
-    [FIELD_MOVE_WATERFALL]  = {0,                   {}},
-    [FIELD_MOVE_TELEPORT]   = {FLAG_CAN_TELEPORT,   {MOVE_TELEPORT}},
-    [FIELD_MOVE_DIG]        = {FLAG_CAN_DIG,        {MOVE_DIG}},
-    [FIELD_MOVE_MILK_DRINK] = {0,                   {MOVE_MILK_DRINK}},
-    [FIELD_MOVE_SOFT_BOILED]= {0,                   {MOVE_SOFT_BOILED}},
-    [FIELD_MOVE_SWEET_SCENT]= {0,                   {MOVE_SWEET_SCENT}}
+    [FIELD_MOVE_FLASH]       = {FLAG_CAN_FLASH,      {MOVE_FLASH, MOVE_EMBER, MOVE_FLAME_WHEEL}},
+    [FIELD_MOVE_CUT]         = {FLAG_CAN_CUT,        {MOVE_CUT, MOVE_SLASH, MOVE_SCRATCH}},
+    [FIELD_MOVE_FLY]         = {FLAG_CAN_FLY,        {MOVE_FLY}},
+    [FIELD_MOVE_STRENGTH]    = {FLAG_CAN_STRENGTH,   {MOVE_STRENGTH, MOVE_SEISMIC_TOSS}},
+    [FIELD_MOVE_SURF]        = {FLAG_CAN_SURF,       {MOVE_SURF, MOVE_WATERFALL}},
+    [FIELD_MOVE_ROCK_SMASH]  = {0,                   {}},
+    [FIELD_MOVE_WATERFALL]   = {0,                   {}},
+    [FIELD_MOVE_TELEPORT]    = {FLAG_CAN_TELEPORT,   {MOVE_TELEPORT}},
+    [FIELD_MOVE_DIG]         = {FLAG_CAN_DIG,        {MOVE_DIG}},
+    [FIELD_MOVE_MILK_DRINK]  = {0,                   {MOVE_MILK_DRINK}},
+    [FIELD_MOVE_SOFT_BOILED] = {0,                   {MOVE_SOFT_BOILED}},
+    [FIELD_MOVE_SWEET_SCENT] = {0,                   {MOVE_SWEET_SCENT}},
+    [FIELD_MOVE_HEALING_SEED]= {0,                   {MOVE_HEALING_SEED}}
 };
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -6472,6 +6473,19 @@ bool8 CanMonUseFieldMove(struct Pokemon *mon, u8 fieldMove)
     {
         if (sFieldMoveMappings[fieldMove].moves[j] != MOVE_NONE && MonKnowsMove(mon, sFieldMoveMappings[fieldMove].moves[j]))
         {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 isMoveFieldMove(s16 fieldMove, u16 move) {
+    u8 i;
+
+    for (i = 0; i < MAX_MOVES_FOR_FIELD_MOVES; i++)
+    {
+        if (sFieldMoveMappings[fieldMove].moves[i] != MOVE_NONE && sFieldMoveMappings[fieldMove].moves[i] == move) {
             return TRUE;
         }
     }

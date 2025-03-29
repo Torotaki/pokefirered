@@ -43,7 +43,8 @@
 #define FIELD_MOVE_MILK_DRINK   9
 #define FIELD_MOVE_SOFT_BOILED  10
 #define FIELD_MOVE_SWEET_SCENT  11
-#define FIELD_MOVE_END          12
+#define FIELD_MOVE_HEALING_SEED 12
+#define FIELD_MOVE_END          13
 
 #define PARTY_LAYOUT_SINGLE          0
 #define PARTY_LAYOUT_DOUBLE          1
@@ -80,6 +81,7 @@
 #define PARTY_ACTION_MOVE_TUTOR         12
 #define PARTY_ACTION_MINIGAME           13
 #define PARTY_ACTION_REUSABLE_ITEM      14
+#define PARTY_ACTION_FIXED_HEAL_MOVE    15
 
 // IDs for DisplayPartyMenuStdMessage, to display the message at the bottom of the party menu
 #define PARTY_MSG_CHOOSE_MON                0
@@ -109,6 +111,7 @@
 #define PARTY_MSG_BOOST_PP_WHICH_MOVE       24
 #define PARTY_MSG_DO_WHAT_WITH_ITEM         25
 #define PARTY_MSG_DO_WHAT_WITH_MAIL         26
+#define PARTY_MSG_NOT_ENOUGH_PP             27
 #define PARTY_MSG_NONE                      127
 
 // IDs for DisplayPartyPokemonDescriptionText, to display a message in the party pokemon's box
