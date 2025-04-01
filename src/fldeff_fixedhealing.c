@@ -6,8 +6,13 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 #include "fldeff_softboiled.h"
+#include "battle_controllers.h"
+#include "battle_script_commands.h"
 
 void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex);
+void Task_DisplayHPRestoredMessageAndClose(u8 taskId);
+
+extern const u8 gText_PkmnHPRestoredByVar2[];
 
 bool8 SetUpFieldMove_FixedHealing(void)
 {
@@ -35,9 +40,11 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
     u8 recipientPartyId = gPartyMenu.slotId2;
     u16 curHp, healPower;
     u32 move;
+    TaskFunc closingTask;
+    bool8 isUsedInBattle = gPartyMenu.data[1]; 
     
     if (recipientPartyId > PARTY_SIZE)
-    {
+    { 
         gPartyMenu.action = PARTY_ACTION_CHOOSE_MON;
         DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
         gTasks[taskId].func = Task_HandleChooseMonInput;
@@ -47,6 +54,13 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
         u8 healMovePP, healMoveIndex;
         GetHealMove(userPartyId, &healMovePP, &healMoveIndex);
         curHp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_HP);
+
+        if (isUsedInBattle && userPartyId == recipientPartyId)
+        {
+            ApplyFixedHealToActiveMon();
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            return;
+        }
 
         if (curHp == 0
             || healMovePP < 1
@@ -59,7 +73,16 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
             move = GetMonData(&gPlayerParty[userPartyId], MON_DATA_MOVE1 + healMoveIndex);
             healPower = gBattleMoves[move].power;
             SetMonData(&gPlayerParty[userPartyId], MON_DATA_PP1 + healMoveIndex, &healMovePP);
-            PartyMenuModifyHP(taskId, recipientPartyId, 1, healPower, Task_DisplayHPRestoredMessage);
+
+            if (isUsedInBattle)
+            {
+                gBattlescriptCurrInstr += 6;
+                closingTask = Task_DisplayHPRestoredMessageAndClose;
+            } else {
+                closingTask = Task_DisplayHPRestoredMessage;
+            }
+
+            PartyMenuModifyHP(taskId, recipientPartyId, 1, healPower, closingTask);
         }
     }
 }
@@ -83,4 +106,13 @@ void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex)
             }
         }
     }
+}
+
+void Task_DisplayHPRestoredMessageAndClose(u8 taskId)
+{
+    GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 }

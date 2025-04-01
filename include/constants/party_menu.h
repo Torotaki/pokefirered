@@ -44,7 +44,8 @@
 #define FIELD_MOVE_SOFT_BOILED  10
 #define FIELD_MOVE_SWEET_SCENT  11
 #define FIELD_MOVE_HEALING_SEED 12
-#define FIELD_MOVE_END          13
+#define FIELD_MOVE_PATCH_UP     13
+#define FIELD_MOVE_END          14
 
 #define PARTY_LAYOUT_SINGLE          0
 #define PARTY_LAYOUT_DOUBLE          1
@@ -66,12 +67,13 @@
 #define PARTY_MENU_TYPE_SPIN_TRADE                10 // Unused beta for Gen IV's Spin Trade
 #define PARTY_MENU_TYPE_MINIGAME                  11
 
+// This appears to be the maximum number of Party Actions
 #define PARTY_ACTION_CHOOSE_MON         0
 #define PARTY_ACTION_SEND_OUT           1
 #define PARTY_ACTION_CANT_SWITCH        2
 #define PARTY_ACTION_USE_ITEM           3
 #define PARTY_ACTION_ABILITY_PREVENTS   4
-#define PARTY_ACTION_GIVE_ITEM          5  
+#define PARTY_ACTION_GIVE_ITEM          5 
 #define PARTY_ACTION_GIVE_PC_ITEM       6
 #define PARTY_ACTION_GIVE_MAILBOX_MAIL  7
 #define PARTY_ACTION_SWITCH             8

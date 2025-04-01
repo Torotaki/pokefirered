@@ -661,6 +661,7 @@ static const u8 *const sFieldMoveDescriptionTable[] =
     [FIELD_MOVE_SOFT_BOILED] = gText_ShareHp,
     [FIELD_MOVE_SWEET_SCENT] = gText_LureWildPokemon,
     [FIELD_MOVE_HEALING_SEED]= gText_HealPokemon,
+    [FIELD_MOVE_PATCH_UP]    = gText_HealPokemon,
 };
 
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/party_menu/hold_icons.4bpp");
@@ -1091,6 +1092,7 @@ static struct
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {gMoveNames[MOVE_SOFT_BOILED], CursorCB_FieldMove},
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMoveNames[MOVE_SWEET_SCENT], CursorCB_FieldMove},
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_HEALING_SEED]= {gMoveNames[MOVE_HEALING_SEED],CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_PATCH_UP]    = {gMoveNames[MOVE_PATCH_UP],    CursorCB_FieldMove},
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[]   = {CURSOR_OPTION_SUMMARY,  CURSOR_OPTION_SWITCH,    CURSOR_OPTION_CANCEL1};
@@ -1183,6 +1185,7 @@ static struct
     [FIELD_MOVE_SOFT_BOILED]  = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
     [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  PARTY_MSG_CANT_USE_HERE},
     [FIELD_MOVE_HEALING_SEED] = {SetUpFieldMove_FixedHealing,PARTY_MSG_NOT_ENOUGH_PP},
+    [FIELD_MOVE_PATCH_UP]     = {SetUpFieldMove_FixedHealing,PARTY_MSG_NOT_ENOUGH_PP},
 };
 
 static const u8 *const sUnionRoomTradeMessages[] =

@@ -376,6 +376,7 @@ gBattleAnims_Moves::
 	.4byte Move_DOOM_DESIRE
 	.4byte Move_PSYCHO_BOOST
 	.4byte Move_HEALING_SEED
+	.4byte Move_PATCH_UP
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10137,6 +10138,9 @@ WeatherBallIce:
 
 Move_HEALING_SEED:
 	goto General_HeldItemEffect
+
+Move_PATCH_UP:
+	goto Move_SOFT_BOILED
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

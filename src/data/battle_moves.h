@@ -4634,4 +4634,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_STATUS
     },
+    [MOVE_PATCH_UP] =
+    {
+        .effect = EFFECT_HEALING_SEED,
+        .power = 7,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_STATUS
+    },
 };

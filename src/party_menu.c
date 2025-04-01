@@ -241,7 +241,6 @@ static void Task_TryCreateSelectionWindow(u8 taskId);
 static void TryGiveItemOrMailToSelectedMon(u8 taskId);
 static void PartyMenuRemoveWindow(u8 *windowId);
 static void CB2_SetUpExitToBattleScreen(void);
-static void Task_ClosePartyMenuAfterText(u8 taskId);
 static void FinishTwoMonAction(u8 taskId);
 static void CancelParticipationPrompt(u8 taskId);
 static void DisplayCancelChooseMonYesNo(u8 taskId);
@@ -1239,6 +1238,13 @@ static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
         break;
     case PARTY_ACTION_SWITCH:
     case PARTY_ACTION_SOFTBOILED:
+    case PARTY_ACTION_FIXED_HEAL_MOVE:
+        if (gPartyMenu.data[1])
+        {
+            PlaySE(SE_FAILURE);
+            break;
+        }
+        
         PlaySE(SE_SELECT);
         FinishTwoMonAction(taskId);
         break;
@@ -3928,6 +3934,7 @@ static void CursorCB_FieldMove(u8 taskId)
         if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc == SetUpFieldMove_FixedHealing)
         {
             gPartyMenu.data[0] = fieldMove;
+            gPartyMenu.data[1] = FALSE;
         }
         
         if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc() == TRUE)
@@ -3939,6 +3946,7 @@ static void CursorCB_FieldMove(u8 taskId)
                 ChooseMonForSoftboiled(taskId);
                 break;
             case FIELD_MOVE_HEALING_SEED:
+            case FIELD_MOVE_PATCH_UP:
                 ChooseMonForFixedHealing(taskId);
                 break;
             case FIELD_MOVE_TELEPORT:
@@ -4538,7 +4546,7 @@ static void Task_DisplayHPRestoredMessage(u8 taskId)
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 }
 
-static void Task_ClosePartyMenuAfterText(u8 taskId)
+void Task_ClosePartyMenuAfterText(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {

@@ -1340,6 +1340,7 @@ extern const u8 gText_QuestLog_VictoryRoad[];
 extern const u8 gText_QuestLog_PokemonLeague[];
 extern const u8 gText_QuestLog_CeruleanCave[];
 extern const u8 gText_QuestLog_UsedHealingSeed[];
+extern const u8 gText_QuestLog_UsedPatchUp[];
 
 // clear_save_data_screen
 extern const u8 gText_ClearAllSaveData[];

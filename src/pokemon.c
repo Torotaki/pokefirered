@@ -1725,7 +1725,8 @@ static const struct FieldMoveMapping sFieldMoveMappings[] = {
     [FIELD_MOVE_MILK_DRINK]  = {0,                   {MOVE_MILK_DRINK}},
     [FIELD_MOVE_SOFT_BOILED] = {0,                   {MOVE_SOFT_BOILED}},
     [FIELD_MOVE_SWEET_SCENT] = {0,                   {MOVE_SWEET_SCENT}},
-    [FIELD_MOVE_HEALING_SEED]= {0,                   {MOVE_HEALING_SEED}}
+    [FIELD_MOVE_HEALING_SEED]= {0,                   {MOVE_HEALING_SEED}},
+    [FIELD_MOVE_PATCH_UP]    = {0,                   {MOVE_PATCH_UP}}
 };
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -6491,4 +6492,18 @@ bool8 isMoveFieldMove(s16 fieldMove, u16 move) {
     }
 
     return FALSE;
+}
+
+u8 getFieldMoveByMove(u16 move) {
+    u8 i;
+
+    for (i = 0; i < FIELD_MOVE_END; i++)
+    {
+        if (isMoveFieldMove(i, move))
+        {
+            return i;
+        }
+    }
+    
+    return FIELD_MOVE_END;
 }

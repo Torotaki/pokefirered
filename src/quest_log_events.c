@@ -445,7 +445,8 @@ static const u8 *const sUsedFieldMoveTexts[] =
     [FIELD_MOVE_MILK_DRINK]  = gText_QuestLog_UsedMilkDrink,
     [FIELD_MOVE_SOFT_BOILED] = gText_QuestLog_UsedSoftboiled,
     [FIELD_MOVE_SWEET_SCENT] = gText_QuestLog_UsedSweetScent,
-    [FIELD_MOVE_HEALING_SEED]= gText_QuestLog_UsedHealingSeed
+    [FIELD_MOVE_HEALING_SEED]= gText_QuestLog_UsedHealingSeed,
+    [FIELD_MOVE_PATCH_UP]    = gText_QuestLog_UsedPatchUp
 };
 
 static const u16 sWorldMapFlags[] =

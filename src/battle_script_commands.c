@@ -36,6 +36,8 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/maps.h"
+#include "fldeff.h"
+#include "pokemon.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -9896,22 +9898,41 @@ static void Cmd_finishturn(void)
 
 static void Cmd_fixedhealing(void)
 {
-    // BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_FIXED_HEAL_MOVE, gActiveBattler, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
-    // u8 taskId = gBattleCommunication[TASK_ID];
-    // ChooseMonForFixedHealing(taskId);
-    // gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    u8 battlerId;
+    const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    u8 fieldMove = getFieldMoveByMove(gCurrentMove);
 
+    if (fieldMove != FIELD_MOVE_END)
+    {        
+        battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~PARTY_SCREEN_OPTIONAL);
+        
+        gActiveBattler = battlerId;
+        *(gBattleStruct->battlerPartyIndexes + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
+        gPartyMenu.slotId = gActiveBattler;
+        gPartyMenu.slotId2 = gActiveBattler;
+        gPartyMenu.data[0] = fieldMove;
+        gPartyMenu.data[1] = TRUE;
+        
+        BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_FIXED_HEAL_MOVE, *(gBattleStruct->monToSwitchIntoId + (gActiveBattler ^ 2)), 0, gBattleStruct->battlerPartyOrders[gActiveBattler]);
+        MarkBattlerForControllerExec(gActiveBattler);
+    } else {
+        ApplyFixedHealToActiveMon();
+    }
+}
+
+void ApplyFixedHealToActiveMon(void)
+{
     const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 
     if (gBattlescriptCurrInstr[5] == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
-
-    // gBattleMoveDamage = gBattleMons[gBattlerTarget].moves[1];
+    
     gBattleMoveDamage = gBattleMoves[gCurrentMove].power;
+    
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
     gBattleMoveDamage *= -1;
-
+    
     if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
         gBattlescriptCurrInstr = failPtr;
     else
