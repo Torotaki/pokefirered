@@ -1242,6 +1242,8 @@ static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
         if (gPartyMenu.data[1])
         {
             PlaySE(SE_FAILURE);
+            ApplyFixedHealToActiveMon();
+            Task_ClosePartyMenu(taskId);
             break;
         }
         
