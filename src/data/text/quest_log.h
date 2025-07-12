@@ -125,3 +125,4 @@ const u8 gText_QuestLog_PokemonLeague[] = _("POKéMON LEAGUE");
 const u8 gText_QuestLog_CeruleanCave[] = _("CERULEAN CAVE");
 const u8 gText_QuestLog_UsedHealingSeed[] = _("{STR_VAR_1} healed an ally using the move\nHEALING SEED.");
 const u8 gText_QuestLog_UsedPatchUp[] = _("{STR_VAR_1} healed an ally using the move\nPATCH UP.");
+const u8 gText_QuestLog_UsedSing[] = _("{STR_VAR_1} put an ally to sleep using\nSING.");

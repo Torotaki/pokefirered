@@ -311,6 +311,7 @@ extern const u8 gText_EscapeFromHere[];
 extern const u8 gText_LureWildPokemon[];
 extern const u8 gText_ShareHp[];
 extern const u8 gText_HealPokemon[];
+extern const u8 gText_SleepPokemon[];
 extern const u8 gText_ReturnToAHealingSpot[];
 extern const u8 gText_Summary5[];
 extern const u8 gText_Switch2[];
@@ -363,6 +364,7 @@ extern const u8 gText_PkmnCuredOfParalysis[];
 extern const u8 gText_PkmnSnappedOutOfConfusion[];
 extern const u8 gText_PkmnGotOverInfatuation[];
 extern const u8 gText_PkmnBecameHealthy[];
+extern const u8 gText_PkmnFellAsleep[];
 extern const u8 gText_ItemEffect_HP[];
 extern const u8 gText_ItemEffect_Attack[];
 extern const u8 gText_ItemEffect_Defense[];
@@ -1341,6 +1343,7 @@ extern const u8 gText_QuestLog_PokemonLeague[];
 extern const u8 gText_QuestLog_CeruleanCave[];
 extern const u8 gText_QuestLog_UsedHealingSeed[];
 extern const u8 gText_QuestLog_UsedPatchUp[];
+extern const u8 gText_QuestLog_UsedSing[];
 
 // clear_save_data_screen
 extern const u8 gText_ClearAllSaveData[];

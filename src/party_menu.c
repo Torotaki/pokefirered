@@ -1162,7 +1162,7 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             break;
         case PARTY_ACTION_FIXED_HEAL_MOVE:
             if (IsSelectedMonNotEgg((u8 *)slotPtr))
-                Task_TryUseFixedHealingOnPartyMon(taskId);
+                Task_TryUseMoveOnPartyMon(taskId);
             break;
         case PARTY_ACTION_USE_ITEM:
             if (IsSelectedMonNotEgg((u8 *)slotPtr))
@@ -2930,6 +2930,12 @@ static void CreatePartyMonStatusSpriteParameterized(u16 species, u8 status, stru
     }
 }
 
+void UpdatePartyMonAilmentGfxBySlotId(u8 slotId)
+{
+    DisplayPartyPokemonData(slotId);
+    SetPartyMonAilmentGfx(&gPlayerParty[slotId], &sPartyMenuBoxes[slotId]);
+}
+
 static void SetPartyMonAilmentGfx(struct Pokemon *mon, struct PartyMenuBox *menuBox)
 {
     UpdatePartyMonAilmentGfx(GetMonAilment(mon), menuBox);
@@ -3949,6 +3955,7 @@ static void CursorCB_FieldMove(u8 taskId)
                 break;
             case FIELD_MOVE_HEALING_SEED:
             case FIELD_MOVE_PATCH_UP:
+            case FIELD_MOVE_SING:
                 ChooseMonForFixedHealing(taskId);
                 break;
             case FIELD_MOVE_TELEPORT:

@@ -13,6 +13,7 @@ void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex);
 void Task_DisplayHPRestoredMessageAndClose(u8 taskId);
 
 extern const u8 gText_PkmnHPRestoredByVar2[];
+extern const u8 gText_PkmnFellAsleep[];
 
 bool8 SetUpFieldMove_FixedHealing(void)
 {
@@ -87,6 +88,51 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
     }
 }
 
+void Task_TryUseSleepOnPartyMon(u8 taskId)
+{
+    u8 userPartyId = gPartyMenu.slotId;
+    u8 recipientPartyId = gPartyMenu.slotId2;
+    u32 move;
+    TaskFunc closingTask;
+    u8 recipientHp;
+    recipientHp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_HP);
+    
+    if (recipientPartyId > PARTY_SIZE)
+    { 
+        gPartyMenu.action = PARTY_ACTION_CHOOSE_MON;
+        DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+        gTasks[taskId].func = Task_HandleChooseMonInput;
+    }
+    else if (recipientHp == 0)
+    {
+        PlaySE(SE_FAILURE);
+    }    
+    else
+    {
+        u8 healMovePP, healMoveIndex;
+        u8 status = STATUS1_SLEEP;
+        GetHealMove(userPartyId, &healMovePP, &healMoveIndex);
+
+        if (healMovePP < 1)
+            CantUseSoftboiledOnMon(taskId);
+        else
+        {
+            PlaySE(SE_M_SING);
+            healMovePP -= 1;
+            SetMonData(&gPlayerParty[userPartyId], MON_DATA_PP1 + healMoveIndex, &healMovePP);
+            SetMonData(&gPlayerParty[recipientPartyId], MON_DATA_STATUS, &status);
+            
+            UpdatePartyMonAilmentGfxBySlotId(recipientPartyId);
+
+            GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_PkmnFellAsleep);
+            DisplayPartyMenuMessage(gStringVar4, FALSE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = Task_FinishSoftboiled;
+        }
+    }
+}
+
 void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex)
 {
     u8 i, j;
@@ -115,4 +161,20 @@ void Task_DisplayHPRestoredMessageAndClose(u8 taskId)
     DisplayPartyMenuMessage(gStringVar4, FALSE);
     ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+}
+
+void Task_TryUseMoveOnPartyMon(u8 taskId)
+{
+    switch (gPartyMenu.data[0])
+    {
+    case FIELD_MOVE_HEALING_SEED:
+    case FIELD_MOVE_PATCH_UP:
+        Task_TryUseFixedHealingOnPartyMon(taskId);
+        break;
+    case FIELD_MOVE_SING:
+        Task_TryUseSleepOnPartyMon(taskId);
+        break;
+    default:
+        break;
+    }
 }

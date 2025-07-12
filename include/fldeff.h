@@ -56,6 +56,7 @@ bool8 FldEff_SweetScent(void);
 // Fixed Health Healing
 bool8 SetUpFieldMove_FixedHealing(void);
 void ChooseMonForFixedHealing(u8 taskId);
+void Task_TryUseMoveOnPartyMon(u8 taskId);
 void Task_TryUseFixedHealingOnPartyMon(u8 taskId);
 
 #endif // GUARD_FLDEFF_H

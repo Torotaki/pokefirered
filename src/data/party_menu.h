@@ -662,6 +662,7 @@ static const u8 *const sFieldMoveDescriptionTable[] =
     [FIELD_MOVE_SWEET_SCENT] = gText_LureWildPokemon,
     [FIELD_MOVE_HEALING_SEED]= gText_HealPokemon,
     [FIELD_MOVE_PATCH_UP]    = gText_HealPokemon,
+    [FIELD_MOVE_SING]        = gText_SleepPokemon,
 };
 
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/party_menu/hold_icons.4bpp");
@@ -1093,6 +1094,7 @@ static struct
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMoveNames[MOVE_SWEET_SCENT], CursorCB_FieldMove},
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_HEALING_SEED]= {gMoveNames[MOVE_HEALING_SEED],CursorCB_FieldMove},
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_PATCH_UP]    = {gMoveNames[MOVE_PATCH_UP],    CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_SING]        = {gMoveNames[MOVE_SING],        CursorCB_FieldMove},
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[]   = {CURSOR_OPTION_SUMMARY,  CURSOR_OPTION_SWITCH,    CURSOR_OPTION_CANCEL1};
@@ -1169,23 +1171,25 @@ static const u16 sFieldMoves[] =
 static struct
 {
     bool8 (*fieldMoveFunc)(void);
+    void (*fieldMoveTryUseFunc)(u8 taskId);
     u8 msgId;
 } const sFieldMoveCursorCallbacks[] =
 {
-    [FIELD_MOVE_FLASH]        = {SetUpFieldMove_Flash,       PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_CUT]          = {SetUpFieldMove_Cut,         PARTY_MSG_NOTHING_TO_CUT},
-    [FIELD_MOVE_FLY]          = {SetUpFieldMove_Fly,         PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_STRENGTH]     = {SetUpFieldMove_Strength,    PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_SURF]         = {SetUpFieldMove_Surf,        PARTY_MSG_CANT_SURF_HERE},
-    [FIELD_MOVE_ROCK_SMASH]   = {SetUpFieldMove_RockSmash,   PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_WATERFALL]    = {SetUpFieldMove_Waterfall,   PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_TELEPORT]     = {SetUpFieldMove_Teleport,    PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_DIG]          = {SetUpFieldMove_Dig,         PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_MILK_DRINK]   = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
-    [FIELD_MOVE_SOFT_BOILED]  = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
-    [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_HEALING_SEED] = {SetUpFieldMove_FixedHealing,PARTY_MSG_NOT_ENOUGH_PP},
-    [FIELD_MOVE_PATCH_UP]     = {SetUpFieldMove_FixedHealing,PARTY_MSG_NOT_ENOUGH_PP},
+    [FIELD_MOVE_FLASH]        = {SetUpFieldMove_Flash,       NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_CUT]          = {SetUpFieldMove_Cut,         NULL,                              PARTY_MSG_NOTHING_TO_CUT},
+    [FIELD_MOVE_FLY]          = {SetUpFieldMove_Fly,         NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_STRENGTH]     = {SetUpFieldMove_Strength,    NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_SURF]         = {SetUpFieldMove_Surf,        NULL,                              PARTY_MSG_CANT_SURF_HERE},
+    [FIELD_MOVE_ROCK_SMASH]   = {SetUpFieldMove_RockSmash,   NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_WATERFALL]    = {SetUpFieldMove_Waterfall,   NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_TELEPORT]     = {SetUpFieldMove_Teleport,    NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_DIG]          = {SetUpFieldMove_Dig,         NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_MILK_DRINK]   = {SetUpFieldMove_SoftBoiled,  NULL,                              PARTY_MSG_NOT_ENOUGH_HP},
+    [FIELD_MOVE_SOFT_BOILED]  = {SetUpFieldMove_SoftBoiled,  NULL,                              PARTY_MSG_NOT_ENOUGH_HP},
+    [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  NULL,                              PARTY_MSG_CANT_USE_HERE},
+    [FIELD_MOVE_HEALING_SEED] = {SetUpFieldMove_FixedHealing,Task_TryUseFixedHealingOnPartyMon, PARTY_MSG_NOT_ENOUGH_PP},
+    [FIELD_MOVE_PATCH_UP]     = {SetUpFieldMove_FixedHealing,Task_TryUseFixedHealingOnPartyMon, PARTY_MSG_NOT_ENOUGH_PP},
+    [FIELD_MOVE_SING]         = {SetUpFieldMove_FixedHealing,NULL,                              PARTY_MSG_NOT_ENOUGH_PP}
 };
 
 static const u8 *const sUnionRoomTradeMessages[] =
