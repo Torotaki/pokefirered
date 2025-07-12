@@ -311,6 +311,7 @@ static void Cmd_removeattackerstatus1(void);
 static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
 static void Cmd_fixedhealing(void);
+static void Cmd_setaroma(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -563,6 +564,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_finishaction,                            //0xF6
     Cmd_finishturn,                              //0xF7
     Cmd_fixedhealing,                            //0xF8
+    Cmd_setaroma,                                //0xF9
 };
 
 struct StatFractions
@@ -3874,6 +3876,7 @@ static void Cmd_playanimation(void)
     else if (gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
+          || gBattlescriptCurrInstr[2] == B_ANIM_AROMA_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
@@ -3917,6 +3920,7 @@ static void Cmd_playanimation_var(void)
     else if (*animationIdPtr == B_ANIM_RAIN_CONTINUES
           || *animationIdPtr == B_ANIM_SUN_CONTINUES
           || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
+          || *animationIdPtr == B_ANIM_AROMA_CONTINUES
           || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animationIdPtr, *argumentPtr);
@@ -6416,9 +6420,23 @@ static void Cmd_setrain(void)
     }
     else
     {
-        gBattleWeather = B_WEATHER_RAIN_TEMPORARY;
+        gBattleWeather = B_WEATHER_RAIN;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
-        gWishFutureKnock.weatherDuration = 5;
+    }
+    gBattlescriptCurrInstr++;
+}
+
+static void Cmd_setaroma(void)
+{
+    if (gBattleWeather & B_WEATHER_AROMA)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
+    }
+    else
+    {
+        gBattleWeather = B_WEATHER_AROMA;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_AROMA;
     }
     gBattlescriptCurrInstr++;
 }

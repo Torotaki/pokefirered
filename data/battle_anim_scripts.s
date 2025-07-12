@@ -421,6 +421,7 @@ gBattleAnims_General::
 	.4byte General_SilphScoped              @ B_ANIM_SILPH_SCOPED
 	.4byte General_SafariRockThrow          @ B_ANIM_ROCK_THROW
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
+	.4byte General_Aroma		            @ B_ANIM_AROMA_CONTINUES
 
 	.align 2
 gBattleAnims_Special::
@@ -10137,10 +10138,31 @@ WeatherBallIce:
 	end
 
 Move_HEALING_SEED:
-	goto General_HeldItemEffect
+	loadspritegfx ANIM_TAG_BREAKING_EGG 
+	loadspritegfx ANIM_TAG_SPROUT 
+	loadspritegfx ANIM_TAG_THIN_RING
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	monbg ANIM_ATK_PARTNER
+	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 2, 6, 1
+	createsprite gSoftBoiledEggSpriteTemplate, ANIM_ATTACKER, 4, 0, 16, 0
+	createsprite gSoftBoiledEggSpriteTemplate, ANIM_ATTACKER, 4, 0, 16, 1
+	delay 120
+	delay 7
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_ATTACKER
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 3, 10, 0, RGB(12, 24, 30)
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 31, 16, 0, 1
+	delay 8
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 31, 16, 0, 1
+	delay 60
+	setarg 7, 0xFFFF
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER
+	call HealingEffect2
+	end
 
 Move_PATCH_UP:
-	goto Move_SOFT_BOILED
+	goto General_HeldItemEffect
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
@@ -10982,6 +11004,19 @@ General_SafariReaction:
 	jumpreteq B_MSG_MON_WATCHING, SafariReaction_WatchingCarefully
 	jumpreteq B_MSG_MON_ANGRY, SafariReaction_Angry
 	jumpreteq B_MSG_MON_EATING, SafariReaction_Eating
+	end
+
+General_Aroma:
+	loadspritegfx ANIM_TAG_PINK_PETAL
+	playsewithpan SE_M_SWEET_SCENT, SOUND_PAN_ATTACKER
+	createsprite gSweetScentPetalSpriteTemplate, ANIM_ATTACKER, 2, 100, 0, 100
+	delay 25
+	setpan 0
+	call SweetScentEffect
+	createsprite gSweetScentPetalSpriteTemplate, ANIM_ATTACKER, 2, 55, 0
+	setpan SOUND_PAN_TARGET
+	call SweetScentEffect
+	waitforvisualfinish
 	end
 
 SafariReaction_WatchingCarefully:

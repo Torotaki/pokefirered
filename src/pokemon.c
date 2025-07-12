@@ -2629,7 +2629,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (WEATHER_HAS_EFFECT2)
         {
             // Rain weakens Fire, boosts Water
-            if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
+            if (gBattleWeather & B_WEATHER_RAIN)
             {
                 switch (type)
                 {

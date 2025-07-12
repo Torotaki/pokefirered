@@ -236,6 +236,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDragonDance            @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
 	.4byte BattleScript_EffectHealingSeed            @ EFFECT_HEALING_SEED
+	.4byte BattleScript_EffectSweetScent             @ EFFECT_SWEET_SCENT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1751,6 +1752,13 @@ BattleScript_MoveWeatherChange::
 	call BattleScript_WeatherFormChanges
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectSweetScent::
+	attackcanceler
+	attackstring
+	ppreduce
+	setaroma
+	goto BattleScript_MoveWeatherChange
+
 BattleScript_EffectSunnyDay::
 	attackcanceler
 	attackstring
@@ -3163,6 +3171,12 @@ BattleScript_RainContinuesOrEnds::
 BattleScript_RainContinuesOrEndsEnd::
 	end2
 
+BattleScript_AromaContinues::
+	printfromtable gAromaStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_AROMA_CONTINUES
+	end2
+
 BattleScript_DamagingWeatherContinues::
 	printfromtable gSandstormHailContinuesStringIds
 	waitmessage B_WAIT_TIME_LONG
@@ -3727,6 +3741,11 @@ BattleScript_MoveUsedIsParalyzed::
 
 BattleScript_MoveUsedFlinched::
 	printstring STRINGID_PKMNFLINCHED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_MoveUsedDistracted::
+	printstring STRINGID_PKMNDISTRACTEDBYAROMA
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 

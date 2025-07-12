@@ -460,6 +460,7 @@ enum
     ENDTURN_SANDSTORM,
     ENDTURN_SUN,
     ENDTURN_HAIL,
+    ENDTURN_AROMA,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -624,21 +625,7 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_RAIN:
             if (gBattleWeather & B_WEATHER_RAIN)
             {
-                if (!(gBattleWeather & B_WEATHER_RAIN_PERMANENT))
-                {
-                    if (--gWishFutureKnock.weatherDuration == 0)
-                    {
-                        gBattleWeather &= ~B_WEATHER_RAIN_TEMPORARY;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_RAIN_STOPPED;
-                    }
-                    else
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_RAIN_CONTINUES;
-                }
-                else
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_RAIN_CONTINUES;
-                }
-
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_RAIN_CONTINUES;
                 BattleScriptExecute(BattleScript_RainContinuesOrEnds);
                 effect++;
             }
@@ -698,6 +685,15 @@ u8 DoFieldEndTurnEffects(void)
                 gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_HAIL;
                 BattleScriptExecute(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_AROMA:
+            if (gBattleWeather & B_WEATHER_AROMA)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_AROMA_CONTINUES;
+                BattleScriptExecute(BattleScript_AromaContinues);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
@@ -1240,6 +1236,7 @@ enum
     CANCELLER_IN_LOVE,
     CANCELLER_BIDE,
     CANCELLER_THAW,
+    CANCELLER_AROMA,
     CANCELLER_END,
 };
 
@@ -1517,6 +1514,22 @@ u8 AtkCanceller_UnableToUseMove(void)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
+        case CANCELLER_AROMA: // Aroma
+            
+            if (gBattleWeather == B_WEATHER_AROMA)
+            {   
+                if ((gBattleMons[gBattlerAttacker].type1 != TYPE_GRASS && gBattleMons[gBattlerAttacker].type2 != TYPE_GRASS) && (Random() % 4) == 0)
+                {
+                    gProtectStructs[gBattlerAttacker].prlzImmobility = 1;
+                    // This is removed in FRLG and Emerald for some reason
+                    //CancelMultiTurnMoves(gBattlerAttacker);
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedDistracted;
+                    gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                    effect = 1;
+                }
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
         case CANCELLER_END:
             break;
         }
@@ -1707,7 +1720,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case WEATHER_DOWNPOUR:
                     if (!(gBattleWeather & B_WEATHER_RAIN))
                     {
-                        gBattleWeather = (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_PERMANENT);
+                        gBattleWeather = B_WEATHER_RAIN;
                         gBattleScripting.animArg1 = B_ANIM_RAIN_CONTINUES;
                         gBattleScripting.battler = battler;
                         effect++;
@@ -1739,9 +1752,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITY_DRIZZLE:
-                if (!(gBattleWeather & B_WEATHER_RAIN_PERMANENT))
+                if (!(gBattleWeather & B_WEATHER_RAIN))
                 {
-                    gBattleWeather = (B_WEATHER_RAIN_PERMANENT | B_WEATHER_RAIN_TEMPORARY);
+                    gBattleWeather = B_WEATHER_RAIN;
                     BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
                     gBattleScripting.battler = battler;
                     effect++;

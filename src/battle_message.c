@@ -121,6 +121,7 @@ static const u8 sText_PkmnImmobilizedByLove[] = _("{B_ATK_NAME_WITH_PREFIX} is\n
 static const u8 sText_PkmnBlownAway[] = _("{B_DEF_NAME_WITH_PREFIX} was\nblown away!");
 static const u8 sText_PkmnChangedType[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
 static const u8 sText_PkmnFlinched[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!");
+static const u8 sText_PkmnDistractedByAroma[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndistracted by the aroma!");
 static const u8 sText_PkmnRegainedHealth[] = _("{B_DEF_NAME_WITH_PREFIX} regained\nhealth!");
 static const u8 sText_PkmnHPFull[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nHP is full!");
 static const u8 sText_PkmnRaisedSpDef[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF!");
@@ -342,6 +343,8 @@ static const u8 sText_DownpourStarted[] = _("A downpour started!"); // correspon
 static const u8 sText_RainContinues[] = _("Rain continues to fall.");
 static const u8 sText_DownpourContinues[] = _("The downpour continues."); // unused
 static const u8 sText_RainStopped[] = _("The rain stopped.");
+static const u8 sText_AromaContinues[] = _("A sweet aroma continues to fill the air.");
+static const u8 sText_AromaStarted[] = _("A sweet aroma fills the air.");
 static const u8 sText_SandstormBrewed[] = _("A sandstorm brewed!");
 static const u8 sText_SandstormRages[] = _("The sandstorm rages.");
 static const u8 sText_SandstormSubsided[] = _("The sandstorm subsided.");
@@ -890,7 +893,10 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TRAINER1MON1COMEBACK - BATTLESTRINGS_TABLE_START]          = sText_Trainer1RecallPkmn1,
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START]               = sText_Trainer1WinText,
     [STRINGID_TRAINER1MON2COMEBACK - BATTLESTRINGS_TABLE_START]          = sText_Trainer1RecallPkmn2,
-    [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth
+    [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth,
+    [STRINGID_STARTEDAROMA - BATTLESTRINGS_TABLE_START]                  = sText_AromaStarted,
+    [STRINGID_AROMACONTINUES - BATTLESTRINGS_TABLE_START]                = sText_AromaContinues,
+    [STRINGID_PKMNDISTRACTEDBYAROMA - BATTLESTRINGS_TABLE_START]         = sText_PkmnDistractedByAroma
 };
 
 const u16 gMissStringIds[] =
@@ -918,7 +924,8 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_WEATHER_FAILED]    = STRINGID_BUTITFAILED,
     [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
     [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
-    [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL
+    [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
+    [B_MSG_STARTED_AROMA]     = STRINGID_STARTEDAROMA
 };
 
 const u16 gSandstormHailContinuesStringIds[] =
@@ -944,6 +951,11 @@ const u16 gRainContinuesStringIds[] =
     [B_MSG_RAIN_CONTINUES]     = STRINGID_RAINCONTINUES,
     [B_MSG_DOWNPOUR_CONTINUES] = STRINGID_DOWNPOURCONTINUES,
     [B_MSG_RAIN_STOPPED]       = STRINGID_RAINSTOPPED
+};
+
+const u16 gAromaStringIds[] =
+{
+    [B_MSG_AROMA_CONTINUES]    = STRINGID_AROMACONTINUES
 };
 
 const u16 gProtectLikeUsedStringIds[] =
