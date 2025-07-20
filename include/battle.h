@@ -113,7 +113,7 @@ union TrainerMonPtr
     const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
     const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
     const struct TrainerMonItemCustomMoves *ItemCustomMoves;
-    const struct TrainerMonItemCustomMoves (*GetLeaderParty)[9][6];
+    const struct TrainerMonItemCustomMoves (*GetLeaderParty)[16][6];
 };
 
 struct Trainer

@@ -606,7 +606,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
         break;
     case F_TRAINER_PARTY_MULTIPLE:
         {
-            const struct TrainerMonItemCustomMoves (*partyList)[9][6];
+            const struct TrainerMonItemCustomMoves (*partyList)[16][6];
             const struct TrainerMonItemCustomMoves *party;
 
             partyList = gTrainers[opponentId].party.GetLeaderParty;
