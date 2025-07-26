@@ -290,7 +290,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_VINE_WHIP] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_POISON_SELF_HIT,
         .power = 35,
         .type = TYPE_GRASS,
         .accuracy = 100,

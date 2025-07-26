@@ -237,6 +237,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
 	.4byte BattleScript_EffectHealingSeed            @ EFFECT_HEALING_SEED
 	.4byte BattleScript_EffectSweetScent             @ EFFECT_SWEET_SCENT
+	.4byte BattleScript_EffectPoisonSelfHit          @ EFFECT_POISON_SELF_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -322,6 +323,10 @@ BattleScript_CantMakeAsleep::
 
 BattleScript_EffectPoisonHit::
 	setmoveeffect MOVE_EFFECT_POISON
+	goto BattleScript_EffectHit
+
+BattleScript_EffectPoisonSelfHit::
+	setmoveeffect MOVE_EFFECT_POISON | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAbsorb::
