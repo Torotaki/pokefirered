@@ -102,7 +102,12 @@ s32 DoPoisonFieldEffect(void)
         if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && GetAilmentFromStatus(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
         {
             hp = GetMonData(pokemon, MON_DATA_HP);
-            if (hp == 0 || --hp == 0)
+            if (GetMonAbility(pokemon) == ABILITY_RESYNTHESIS) {
+                if (hp < GetMonData(pokemon, MON_DATA_MAX_HP))
+                {
+                    hp++;
+                }
+            } else if (hp == 0 || --hp == 0)
                 numFainted++;
             SetMonData(pokemon, MON_DATA_HP, &hp);
             numPoisoned++;
