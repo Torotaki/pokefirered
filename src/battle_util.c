@@ -1693,6 +1693,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         u16 move;
         u8 side;
         u8 target1;
+        bool8 statWasChanged;
 
         if (special)
             gLastUsedAbility = special;
@@ -1887,6 +1888,24 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     break;
                 case ABILITY_TRUANT:
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
+                    break;
+                case ABILITY_SHELL_ARMOR:
+                    statWasChanged = FALSE;
+                    
+                    for (i = 0; i < NUM_BATTLE_STATS; i++) {
+                        if (gBattleMons[battler].statStages[i] != DEFAULT_STAT_STAGE)
+                        {
+                            gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
+                            statWasChanged = TRUE;
+                        }
+                    }
+
+                    if (statWasChanged) {
+                        BattleScriptPushCursorAndCallback(BattleScript_ShellArmorActivates);
+                        gBattleScripting.battler = battler;
+                        effect++;
+                    }
+
                     break;
                 }
             }
