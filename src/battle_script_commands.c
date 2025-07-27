@@ -736,7 +736,6 @@ static const u16 sMovesForbiddenToCopy[] =
 
 static const u8 sFlailHpScaleToPowerTable[] =
 {
-    1, 200,
     4, 150,
     9, 100,
     16, 80,
