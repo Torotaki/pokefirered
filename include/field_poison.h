@@ -2,6 +2,7 @@
 #define GUARD_FIELD_POISON_H
 
 #include "global.h"
+#include "constants/abilities.h"
 
 enum {
     FLDPSN_NONE,

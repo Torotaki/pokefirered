@@ -9920,7 +9920,7 @@ static void Cmd_fixedhealing(void)
     const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     u8 fieldMove = getFieldMoveByMove(gCurrentMove);
 
-    if (fieldMove != FIELD_MOVE_END)
+    if (fieldMove != FIELD_MOVE_END && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
     {        
         battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~PARTY_SCREEN_OPTIONAL);
         

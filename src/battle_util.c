@@ -797,6 +797,9 @@ u8 DoBattlerEndTurnEffects(void)
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
+                    if (gBattleMons[gActiveBattler].ability == ABILITY_RESYNTHESIS) {
+                        gBattleMoveDamage *= -1; // heal 1/8th instead
+                    }
                     BattleScriptExecute(BattleScript_PoisonTurnDmg);
                     effect++;
                 }
@@ -808,7 +811,9 @@ u8 DoBattlerEndTurnEffects(void)
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
-                    if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_COUNTER) != STATUS1_TOXIC_TURN(15)) // not 16 turns
+                    if (gBattleMons[gActiveBattler].ability == ABILITY_RESYNTHESIS) {
+                        gBattleMoveDamage *= -2; // heal 1/8th instead
+                    } else if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_COUNTER) != STATUS1_TOXIC_TURN(15)) // not 16 turns
                         gBattleMons[gActiveBattler].status1 += STATUS1_TOXIC_TURN(1);
                     gBattleMoveDamage *= (gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_COUNTER) >> 8;
                     BattleScriptExecute(BattleScript_PoisonTurnDmg);
@@ -1688,6 +1693,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         u16 move;
         u8 side;
         u8 target1;
+        bool8 statWasChanged;
 
         if (special)
             gLastUsedAbility = special;
@@ -1882,6 +1888,24 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     break;
                 case ABILITY_TRUANT:
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
+                    break;
+                case ABILITY_SHELL_ARMOR:
+                    statWasChanged = FALSE;
+                    
+                    for (i = 0; i < NUM_BATTLE_STATS; i++) {
+                        if (gBattleMons[battler].statStages[i] != DEFAULT_STAT_STAGE)
+                        {
+                            gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
+                            statWasChanged = TRUE;
+                        }
+                    }
+
+                    if (statWasChanged) {
+                        BattleScriptPushCursorAndCallback(BattleScript_ShellArmorActivates);
+                        gBattleScripting.battler = battler;
+                        effect++;
+                    }
+
                     break;
                 }
             }
