@@ -4537,7 +4537,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SIGNAL_BEAM] =
     {
-        .effect = EFFECT_CONFUSE_HIT,
+        .effect = EFFECT_BATON_PASS_HIT,
         .power = 50,
         .type = TYPE_BUG,
         .accuracy = 100,

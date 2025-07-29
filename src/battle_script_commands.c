@@ -2785,6 +2785,9 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
                 }
                 break;
+            case MOVE_EFFECT_BATON_PASS:
+                gBattlescriptCurrInstr = BattleScript_EndIfBatonPassCannotSwitch;
+                break;
             }
         }
     }
@@ -4267,7 +4270,8 @@ static void Cmd_moveend(void)
             }
             if (!(gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
                 && !(gBattleStruct->absentBattlerFlags & gBitTable[gBattlerAttacker])
-                && gBattleMoves[originallyUsedMove].effect != EFFECT_BATON_PASS)
+                && gBattleMoves[originallyUsedMove].effect != EFFECT_BATON_PASS
+                && gBattleMoves[originallyUsedMove].effect != EFFECT_BATON_PASS_HIT)
             {
                 if (gHitMarker & HITMARKER_OBEYS)
                 {
@@ -4512,7 +4516,7 @@ static void Cmd_switchindataupdate(void)
         gBattleMons[gActiveBattler].item = ITEM_NONE;
     }
 
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS || gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS_HIT)
     {
         for (i = 0; i < NUM_BATTLE_STATS; i++)
         {
