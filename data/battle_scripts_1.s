@@ -244,6 +244,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_Dive				         @ EFFECT_DIVE
 	.4byte BattleScript_Dig       					 @ EFFECT_DIG
 	.4byte BattleScript_EffectClearWeatherHit   	 @ EFFECT_CLEAR_WEATHER_HIT
+	.4byte BattleScript_EffectLockOnAndDef2Boost   	 @ EFFECT_LOCK_ON_AND_DEF_BOOST2
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1293,6 +1294,10 @@ BattleScript_EffectConversion2::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectLockOn::
+	call BattleScript_DoLockOn
+	goto BattleScript_MoveEnd
+
+BattleScript_DoLockOn::
 	attackcanceler
 	attackstring
 	ppreduce
@@ -1303,7 +1308,12 @@ BattleScript_EffectLockOn::
 	waitanimation
 	printstring STRINGID_PKMNTOOKAIM
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	return
+
+BattleScript_EffectLockOnAndDef2Boost::
+	call BattleScript_DoLockOn
+	setstatchanger STAT_DEF, 2, FALSE
+	goto BattleScript_EffectStatUp
 
 BattleScript_EffectSketch::
 	attackcanceler
