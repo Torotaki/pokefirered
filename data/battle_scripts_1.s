@@ -243,6 +243,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_Fly					         @ EFFECT_FLY
 	.4byte BattleScript_Dive				         @ EFFECT_DIVE
 	.4byte BattleScript_Dig       					 @ EFFECT_DIG
+	.4byte BattleScript_EffectClearWeatherHit   	 @ EFFECT_CLEAR_WEATHER_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1757,9 +1758,11 @@ BattleScript_EffectRainDance::
 BattleScript_MoveWeatherChange::
 	attackanimation
 	waitanimation
+BattleScript_PrintWeatherChange::
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_WeatherFormChanges
+	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSweetScent::
@@ -1775,6 +1778,12 @@ BattleScript_EffectClearWeather::
 	ppreduce
 	clearWeather
 	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectClearWeatherHit::
+	attackstring
+	ppreduce
+	setmoveeffect MOVE_EFFECT_CLEAR_WEATHER | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
 
 BattleScript_EffectAromatherapy::
 	attackcanceler

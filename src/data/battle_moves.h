@@ -2479,10 +2479,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AEROBLAST] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_CLEAR_WEATHER_HIT,
         .power = 70,
         .type = TYPE_FLYING,
-        .accuracy = 10,
+        .accuracy = 100,
         .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
