@@ -239,6 +239,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSweetScent             @ EFFECT_SWEET_SCENT
 	.4byte BattleScript_EffectPoisonSelfHit          @ EFFECT_POISON_SELF_HIT
 	.4byte BattleScript_EffectAromatherapy           @ EFFECT_AROMATHERAPY
+	.4byte BattleScript_EffectClearWeather           @ EFFECT_CLEAR_WEATHER
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1763,6 +1764,13 @@ BattleScript_EffectSweetScent::
 	attackstring
 	ppreduce
 	setaroma
+	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectClearWeather::
+	attackcanceler
+	attackstring
+	ppreduce
+	clearWeather
 	goto BattleScript_MoveWeatherChange
 
 BattleScript_EffectAromatherapy::

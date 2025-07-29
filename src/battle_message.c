@@ -345,6 +345,7 @@ static const u8 sText_DownpourContinues[] = _("The downpour continues."); // unu
 static const u8 sText_RainStopped[] = _("The rain stopped.");
 static const u8 sText_AromaContinues[] = _("A sweet aroma continues to fill the air.");
 static const u8 sText_AromaStarted[] = _("A sweet aroma fills the air.");
+static const u8 sText_WeatherCleared[] = _("The weather returned to normal.");
 static const u8 sText_SandstormBrewed[] = _("A sandstorm brewed!");
 static const u8 sText_SandstormRages[] = _("The sandstorm rages.");
 static const u8 sText_SandstormSubsided[] = _("The sandstorm subsided.");
@@ -896,7 +897,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth,
     [STRINGID_STARTEDAROMA - BATTLESTRINGS_TABLE_START]                  = sText_AromaStarted,
     [STRINGID_AROMACONTINUES - BATTLESTRINGS_TABLE_START]                = sText_AromaContinues,
-    [STRINGID_PKMNDISTRACTEDBYAROMA - BATTLESTRINGS_TABLE_START]         = sText_PkmnDistractedByAroma
+    [STRINGID_PKMNDISTRACTEDBYAROMA - BATTLESTRINGS_TABLE_START]         = sText_PkmnDistractedByAroma,
+    [STRINGID_CLEAREDWEATHER - BATTLESTRINGS_TABLE_START]                = sText_WeatherCleared
 };
 
 const u16 gMissStringIds[] =
@@ -925,7 +927,8 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
     [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
     [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
-    [B_MSG_STARTED_AROMA]     = STRINGID_STARTEDAROMA
+    [B_MSG_STARTED_AROMA]     = STRINGID_STARTEDAROMA,
+    [B_MSG_CLEARED_WEATHER]   = STRINGID_CLEAREDWEATHER
 };
 
 const u16 gSandstormHailContinuesStringIds[] =

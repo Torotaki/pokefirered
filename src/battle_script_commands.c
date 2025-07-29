@@ -312,6 +312,7 @@ static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
 static void Cmd_fixedhealing(void);
 static void Cmd_setaroma(void);
+static void Cmd_clearWeather(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -565,6 +566,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_finishturn,                              //0xF7
     Cmd_fixedhealing,                            //0xF8
     Cmd_setaroma,                                //0xF9
+    Cmd_clearWeather,                            //0xFA
 };
 
 struct StatFractions
@@ -6440,6 +6442,23 @@ static void Cmd_setaroma(void)
     }
     gBattlescriptCurrInstr++;
 }
+
+static void Cmd_clearWeather(void)
+{
+    if (gBattleWeather == 0)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
+    }
+    else
+    {
+        gBattleWeather = 0;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CLEARED_WEATHER;
+    }
+    gBattlescriptCurrInstr++;
+}
+
+
 
 static void Cmd_setreflect(void)
 {
