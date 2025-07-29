@@ -4369,8 +4369,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AROMATHERAPY] =
     {
-        .effect = EFFECT_HEAL_BELL,
-        .power = 0,
+        .effect = EFFECT_AROMATHERAPY,
+        .power = 30,
         .type = TYPE_GRASS,
         .accuracy = 0,
         .pp = 5,

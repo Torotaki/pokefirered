@@ -238,6 +238,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHealingSeed            @ EFFECT_HEALING_SEED
 	.4byte BattleScript_EffectSweetScent             @ EFFECT_SWEET_SCENT
 	.4byte BattleScript_EffectPoisonSelfHit          @ EFFECT_POISON_SELF_HIT
+	.4byte BattleScript_EffectAromatherapy           @ EFFECT_AROMATHERAPY
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1763,6 +1764,24 @@ BattleScript_EffectSweetScent::
 	ppreduce
 	setaroma
 	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectAromatherapy::
+	attackcanceler
+	attackstring
+	ppreduce
+	fixedhealing BattleScript_AlreadyAtFullHp, BS_TARGET
+	attackanimation
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+	setaroma
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSunnyDay::
 	attackcanceler
