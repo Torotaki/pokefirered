@@ -268,7 +268,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLY] =
     {
-        .effect = EFFECT_SEMI_INVULNERABLE,
+        .effect = EFFECT_FLY,
         .power = 30,
         .type = TYPE_FLYING,
         .accuracy = 100,
@@ -1276,7 +1276,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DIG] =
     {
-        .effect = EFFECT_SEMI_INVULNERABLE,
+        .effect = EFFECT_DIG,
         .power = 30,
         .type = TYPE_GROUND,
         .accuracy = 100,

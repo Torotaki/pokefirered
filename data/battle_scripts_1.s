@@ -240,6 +240,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPoisonSelfHit          @ EFFECT_POISON_SELF_HIT
 	.4byte BattleScript_EffectAromatherapy           @ EFFECT_AROMATHERAPY
 	.4byte BattleScript_EffectClearWeather           @ EFFECT_CLEAR_WEATHER
+	.4byte BattleScript_Fly					         @ EFFECT_FLY
+	.4byte BattleScript_Dive				         @ EFFECT_DIVE
+	.4byte BattleScript_Dig       					 @ EFFECT_DIG
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2013,6 +2016,26 @@ BattleScript_EffectSemiInvulnerable::
 	jumpifmove MOVE_FLY, BattleScript_FirstTurnFly
 	jumpifmove MOVE_DIVE, BattleScript_FirstTurnDive
 	jumpifmove MOVE_BOUNCE, BattleScript_FirstTurnBounce
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIG
+	goto BattleScript_FirstTurnSemiInvulnerable
+
+BattleScript_CheckSecondTurnSemiInvulnerable::
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_SecondTurnSemiInvulnerable
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_SecondTurnSemiInvulnerable
+	return
+
+BattleScript_Fly::
+	call BattleScript_CheckSecondTurnSemiInvulnerable
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_FLY
+	goto BattleScript_FirstTurnSemiInvulnerable
+
+BattleScript_Dive::
+	call BattleScript_CheckSecondTurnSemiInvulnerable
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIVE
+	goto BattleScript_FirstTurnSemiInvulnerable
+
+BattleScript_Dig::
+	call BattleScript_CheckSecondTurnSemiInvulnerable
 	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIG
 	goto BattleScript_FirstTurnSemiInvulnerable
 

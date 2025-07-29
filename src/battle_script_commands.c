@@ -8665,17 +8665,19 @@ static void Cmd_trydobeatup(void)
 
 static void Cmd_setsemiinvulnerablebit(void)
 {
-    switch (gCurrentMove)
+    switch (gBattleMoves[gCurrentMove].effect)
     {
-    case MOVE_FLY:
-    case MOVE_BOUNCE:
+    case EFFECT_FLY:
         gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         break;
-    case MOVE_DIG:
+    case EFFECT_DIG:
         gStatuses3[gBattlerAttacker] |= STATUS3_UNDERGROUND;
         break;
-    case MOVE_DIVE:
+    case EFFECT_DIVE:
         gStatuses3[gBattlerAttacker] |= STATUS3_UNDERWATER;
+        break;
+    default:
+        gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         break;
     }
 
@@ -8684,19 +8686,9 @@ static void Cmd_setsemiinvulnerablebit(void)
 
 static void Cmd_clearsemiinvulnerablebit(void)
 {
-    switch (gCurrentMove)
-    {
-    case MOVE_FLY:
-    case MOVE_BOUNCE:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_ON_AIR;
-        break;
-    case MOVE_DIG:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERGROUND;
-        break;
-    case MOVE_DIVE:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERWATER;
-        break;
-    }
+    gStatuses3[gBattlerAttacker] &= ~STATUS3_ON_AIR;
+    gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERGROUND;
+    gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERWATER;
 
     gBattlescriptCurrInstr++;
 }
