@@ -357,6 +357,7 @@ const u8 gMoveDescription_DoomDesire[] = _("A move that attacks\nthe foe with a\
 const u8 gMoveDescription_PsychoBoost[] = _("An intense attack\nthat also sharply\nreduces the user's\nSP. ATK stat.");
 const u8 gMoveDescription_HealingSeed[] = _("Sprout a seed that\nheals a POKéMON\nfor 5 HP");
 const u8 gMoveDescription_PatchUp[] = _("Apply bandages to\nheal a POKéMON\nfor 7 HP");
+const u8 gMoveDescription_ClearSkies[] = _("Removes weather \nconditions");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -715,4 +716,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_PSYCHO_BOOST  - 1] = gMoveDescription_PsychoBoost,
     [MOVE_HEALING_SEED  - 1] = gMoveDescription_HealingSeed,
     [MOVE_PATCH_UP      - 1] = gMoveDescription_PatchUp,
+    [MOVE_CLEAR_SKIES   - 1] = gMoveDescription_ClearSkies,
 };

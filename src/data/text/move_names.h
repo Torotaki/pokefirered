@@ -355,5 +355,6 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_DOOM_DESIRE]   = _("DOOM DESIRE"),
     [MOVE_PSYCHO_BOOST]  = _("PSYCHO BOOST"),
     [MOVE_HEALING_SEED]  = _("HEALING SEED"),
-    [MOVE_PATCH_UP]      = _("PATCH UP")
+    [MOVE_PATCH_UP]      = _("PATCH UP"),
+    [MOVE_CLEAR_SKIES]   = _("CLEAR SKIES")
 };

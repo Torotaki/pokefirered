@@ -377,6 +377,7 @@ gBattleAnims_Moves::
 	.4byte Move_PSYCHO_BOOST
 	.4byte Move_HEALING_SEED
 	.4byte Move_PATCH_UP
+	.4byte Move_CLEAR_SKIES
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10163,6 +10164,13 @@ Move_HEALING_SEED:
 
 Move_PATCH_UP:
 	goto General_HeldItemEffect
+
+Move_CLEAR_SKIES:
+	loopsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_TARGET, 10, 4
+	call SetSkyBgContest
+	delay 50
+	call UnsetSkyBg
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
