@@ -2932,6 +2932,14 @@ static void Cmd_tryfaintmon(void)
 
                 PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].moves[moveIndex])
             }
+            if (gBattleMons[gBattlerAttacker].hp != 0 && gBattleMons[gBattlerAttacker].ability == ABILITY_VICTORY_RUSH && gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] < MAX_STAT_STAGE)
+            {
+                gBattleMons[gBattlerAttacker].statStages[STAT_SPEED]++;
+                gBattleScripting.animArg1 = 14 + STAT_SPEED;
+                gBattleScripting.animArg2 = 0;
+                BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
+                gBattleScripting.battler = gBattlerAttacker;
+            }
         }
         else
         {

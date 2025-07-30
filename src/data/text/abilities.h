@@ -79,6 +79,7 @@ static const u8 sAirLockDescription[] = _("Negates weather effects.");
 static const u8 sSnowWarningDescription[] = _("Summons hail in battle.");
 static const u8 sResynthesisDescription[] = _("Being poisoned heals.");
 static const u8 sDraconicFlightDescription[] = _("Flies and boosts flying. Dislikes Weather.");
+static const u8 sVictoryRushDescription[] = _("KO's boosts SPEED.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -163,6 +164,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SNOW_WARNING] = sSnowWarningDescription,
     [ABILITY_RESYNTHESIS] = sResynthesisDescription,
     [ABILITY_DRAGONFLIGHT] = sDraconicFlightDescription,
+    [ABILITY_VICTORY_RUSH] = sVictoryRushDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -248,4 +250,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
     [ABILITY_RESYNTHESIS] = _("RESYNTHESIS"),
     [ABILITY_DRAGONFLIGHT] = _("DRAGONFLIGHT"),
+    [ABILITY_VICTORY_RUSH] = _("VICTORY RUSH"),
 };
