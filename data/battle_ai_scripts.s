@@ -63,6 +63,7 @@ AI_CBM_CheckIfNegatesType::
 	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
+	if_equal ABILITY_DRAGONFLIGHT, CheckIfLevitateCancelsGroundMove
 	goto AI_CheckBadMove_CheckSoundproof
 
 CheckIfVoltAbsorbCancelsElectric::
@@ -174,10 +175,12 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_SAFEGUARD, AI_CBM_Safeguard
 	if_effect EFFECT_MAGNITUDE, AI_CBM_Magnitude
 	if_effect EFFECT_BATON_PASS, AI_CBM_BatonPass
+	if_effect EFFECT_BATON_PASS_HIT, AI_CBM_BatonPass
 	if_effect EFFECT_SONICBOOM, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_RAIN_DANCE, AI_CBM_RainDance
 	if_effect EFFECT_SUNNY_DAY, AI_CBM_SunnyDay
 	if_effect EFFECT_BELLY_DRUM, AI_CBM_BellyDrum
+	if_effect EFFECT_OVERCLOCK, AI_CBM_BellyDrum
 	if_effect EFFECT_PSYCH_UP, AI_CBM_Haze
 	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_SKULL_BASH, AI_CBM_HighRiskForDamage
@@ -368,6 +371,7 @@ AI_CBM_OneHitKO::
 AI_CBM_Magnitude::
 	get_ability AI_TARGET
 	if_equal ABILITY_LEVITATE, Score_Minus10
+	if_equal ABILITY_DRAGONFLIGHT, Score_Minus10
 
 AI_CBM_HighRiskForDamage::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
@@ -726,7 +730,9 @@ AI_CheckViability::
 	if_effect EFFECT_PROTECT, AI_CV_Protect
 	if_effect EFFECT_FORESIGHT, AI_CV_Foresight
 	if_effect EFFECT_ENDURE, AI_CV_Endure
+	if_effect EFFECT_OUTLAST, AI_CV_Endure
 	if_effect EFFECT_BATON_PASS, AI_CV_BatonPass
+	if_effect EFFECT_BATON_PASS_HIT, AI_CV_BatonPass
 	if_effect EFFECT_PURSUIT, AI_CV_Pursuit
 	if_effect EFFECT_MORNING_SUN, AI_CV_HealWeather
 	if_effect EFFECT_SYNTHESIS, AI_CV_HealWeather
@@ -734,6 +740,7 @@ AI_CheckViability::
 	if_effect EFFECT_RAIN_DANCE, AI_CV_RainDance
 	if_effect EFFECT_SUNNY_DAY, AI_CV_SunnyDay
 	if_effect EFFECT_BELLY_DRUM, AI_CV_BellyDrum
+	if_effect EFFECT_OVERCLOCK, AI_CV_BellyDrum
 	if_effect EFFECT_PSYCH_UP, AI_CV_PsychUp
 	if_effect EFFECT_MIRROR_COAT, AI_CV_MirrorCoat
 	if_effect EFFECT_SKULL_BASH, AI_CV_ChargeUpMove
@@ -1872,6 +1879,8 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_WATER_SPORT
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_CAMOUFLAGE
+	.byte EFFECT_OUTLAST
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_CV_PainSplit::
@@ -2896,6 +2905,7 @@ AI_Risky_EffectsToEncourage::
 	.byte EFFECT_FOCUS_PUNCH
 	.byte EFFECT_REVENGE
 	.byte EFFECT_TEETER_DANCE
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_PreferBatonPass::
@@ -3010,6 +3020,7 @@ AI_HPAware_DiscouragedEffectsWhenHighHP::
 	.byte EFFECT_MEMENTO
 	.byte EFFECT_GRUDGE
 	.byte EFFECT_OVERHEAT
+	.byte EFFECT_OUTLAST
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenMediumHP::
@@ -3055,6 +3066,7 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenLowHP::
@@ -3105,6 +3117,7 @@ AI_HPAware_DiscouragedEffectsWhenLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetHighHP::
@@ -3231,6 +3244,7 @@ AI_Roaming::
 	if_equal ABILITY_SHADOW_TAG, AI_Roaming_End
 	get_ability AI_USER
 	if_equal ABILITY_LEVITATE, AI_Roaming_Flee
+	if_equal ABILITY_DRAGONFLIGHT, AI_Roaming_Flee
 	get_ability AI_TARGET
 	if_equal ABILITY_ARENA_TRAP, AI_Roaming_End
 

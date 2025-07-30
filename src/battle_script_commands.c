@@ -312,6 +312,8 @@ static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
 static void Cmd_fixedhealing(void);
 static void Cmd_setaroma(void);
+static void Cmd_clearWeather(void);
+static void Cmd_payhpboostattackandspeed(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -565,6 +567,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_finishturn,                              //0xF7
     Cmd_fixedhealing,                            //0xF8
     Cmd_setaroma,                                //0xF9
+    Cmd_clearWeather,                            //0xFA
+    Cmd_payhpboostattackandspeed,                //0xFB
 };
 
 struct StatFractions
@@ -736,7 +740,6 @@ static const u16 sMovesForbiddenToCopy[] =
 
 static const u8 sFlailHpScaleToPowerTable[] =
 {
-    1, 200,
     4, 150,
     9, 100,
     16, 80,
@@ -1291,13 +1294,13 @@ static void Cmd_typecalc(void)
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
     // check stab
-    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
+    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType) || (moveType == TYPE_FLYING && gBattleMons[gBattlerAttacker].ability == ABILITY_DRAGONFLIGHT))
     {
         gBattleMoveDamage = gBattleMoveDamage * 15;
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if ((gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE || gBattleMons[gBattlerTarget].ability == ABILITY_DRAGONFLIGHT) && moveType == TYPE_GROUND)
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
@@ -1359,7 +1362,7 @@ static void CheckWonderGuardAndLevitate(void)
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if ((gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE || gBattleMons[gBattlerTarget].ability == ABILITY_DRAGONFLIGHT) && moveType == TYPE_GROUND)
     {
         gLastUsedAbility = ABILITY_LEVITATE;
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
@@ -1476,7 +1479,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
-    if (gBattleMons[defender].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if ((gBattleMons[defender].ability == ABILITY_LEVITATE || gBattleMons[defender].ability == ABILITY_DRAGONFLIGHT) && moveType == TYPE_GROUND)
     {
         flags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
     }
@@ -1528,7 +1531,7 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 
     moveType = gBattleMoves[move].type;
 
-    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if ((targetAbility == ABILITY_LEVITATE || targetAbility == ABILITY_DRAGONFLIGHT) && moveType == TYPE_GROUND)
     {
         flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
     }
@@ -2771,6 +2774,21 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_SP_ATK_TWO_DOWN: // Overheat
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_SAtkDown2;
+                break;
+            case MOVE_EFFECT_CLEAR_WEATHER:
+                if (gBattleWeather == 0)
+                {
+                    gBattlescriptCurrInstr++;
+                }
+                else
+                {
+                    gBattleWeather = 0;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CLEARED_WEATHER;
+                    gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+                }
+                break;
+            case MOVE_EFFECT_BATON_PASS:
+                gBattlescriptCurrInstr = BattleScript_EndIfBatonPassCannotSwitch;
                 break;
             }
         }
@@ -4254,7 +4272,8 @@ static void Cmd_moveend(void)
             }
             if (!(gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
                 && !(gBattleStruct->absentBattlerFlags & gBitTable[gBattlerAttacker])
-                && gBattleMoves[originallyUsedMove].effect != EFFECT_BATON_PASS)
+                && gBattleMoves[originallyUsedMove].effect != EFFECT_BATON_PASS
+                && gBattleMoves[originallyUsedMove].effect != EFFECT_BATON_PASS_HIT)
             {
                 if (gHitMarker & HITMARKER_OBEYS)
                 {
@@ -4357,7 +4376,7 @@ static void Cmd_typecalc2(void)
     s32 i = 0;
     u8 moveType = gBattleMoves[gCurrentMove].type;
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if ((gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE || gBattleMons[gBattlerTarget].ability == ABILITY_DRAGONFLIGHT) && moveType == TYPE_GROUND)
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
@@ -4499,7 +4518,7 @@ static void Cmd_switchindataupdate(void)
         gBattleMons[gActiveBattler].item = ITEM_NONE;
     }
 
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS || gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS_HIT)
     {
         for (i = 0; i < NUM_BATTLE_STATS; i++)
         {
@@ -4979,7 +4998,8 @@ static void Cmd_switchineffects(void)
     if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
-        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
+        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+        && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT)
     {
         u8 spikesDmg;
 
@@ -6237,7 +6257,7 @@ static void Cmd_setprotectlike(void)
     bool8 notLastTurn = TRUE;
     u16 lastMove = gLastResultingMoves[gBattlerAttacker];
 
-    if (lastMove != MOVE_PROTECT && lastMove != MOVE_DETECT && lastMove != MOVE_ENDURE)
+    if (gBattleMoves[lastMove].effect != EFFECT_PROTECT && gBattleMoves[lastMove].effect != EFFECT_ENDURE && gBattleMoves[lastMove].effect != EFFECT_OUTLAST)
         gDisableStructs[gBattlerAttacker].protectUses = 0;
 
     if (gCurrentTurnActionNumber == (gBattlersCount - 1))
@@ -6253,6 +6273,12 @@ static void Cmd_setprotectlike(void)
         if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
         {
             gProtectStructs[gBattlerAttacker].endured = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
+        }
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_OUTLAST)
+        {
+            gProtectStructs[gBattlerAttacker].endured = 1;
+            gProtectStructs[gBattlerAttacker].outlasted = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
         }
         gDisableStructs[gBattlerAttacker].protectUses++;
@@ -6440,6 +6466,23 @@ static void Cmd_setaroma(void)
     }
     gBattlescriptCurrInstr++;
 }
+
+static void Cmd_clearWeather(void)
+{
+    if (gBattleWeather == 0)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
+    }
+    else
+    {
+        gBattleWeather = 0;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CLEARED_WEATHER;
+    }
+    gBattlescriptCurrInstr++;
+}
+
+
 
 static void Cmd_setreflect(void)
 {
@@ -8448,6 +8491,41 @@ static void Cmd_maxattackhalvehp(void)
     }
 }
 
+// Overclock
+static void Cmd_payhpboostattackandspeed(void)
+{
+    u32 hpCost = gBattleMons[gBattlerAttacker].maxHP * 2 / 3;
+
+    if (hpCost == 0)
+        hpCost = 1;
+
+    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE
+        && gBattleMons[gBattlerAttacker].hp > hpCost)
+    {
+        if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] + 2 > MAX_STAT_STAGE) {
+            gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = MAX_STAT_STAGE;
+        } else {
+            gBattleMons[gBattlerAttacker].statStages[STAT_ATK] += 2;
+        }
+
+        if (gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] + 2 > MAX_STAT_STAGE) {
+            gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] = MAX_STAT_STAGE;
+        } else {
+            gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] += 2;
+        }
+
+        gBattleMoveDamage = hpCost;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+
+        gBattlescriptCurrInstr += 5;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+}
+
 // Psych Up
 static void Cmd_copyfoestats(void)
 {
@@ -8646,17 +8724,19 @@ static void Cmd_trydobeatup(void)
 
 static void Cmd_setsemiinvulnerablebit(void)
 {
-    switch (gCurrentMove)
+    switch (gBattleMoves[gCurrentMove].effect)
     {
-    case MOVE_FLY:
-    case MOVE_BOUNCE:
+    case EFFECT_FLY:
         gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         break;
-    case MOVE_DIG:
+    case EFFECT_DIG:
         gStatuses3[gBattlerAttacker] |= STATUS3_UNDERGROUND;
         break;
-    case MOVE_DIVE:
+    case EFFECT_DIVE:
         gStatuses3[gBattlerAttacker] |= STATUS3_UNDERWATER;
+        break;
+    default:
+        gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         break;
     }
 
@@ -8665,19 +8745,9 @@ static void Cmd_setsemiinvulnerablebit(void)
 
 static void Cmd_clearsemiinvulnerablebit(void)
 {
-    switch (gCurrentMove)
-    {
-    case MOVE_FLY:
-    case MOVE_BOUNCE:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_ON_AIR;
-        break;
-    case MOVE_DIG:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERGROUND;
-        break;
-    case MOVE_DIVE:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERWATER;
-        break;
-    }
+    gStatuses3[gBattlerAttacker] &= ~STATUS3_ON_AIR;
+    gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERGROUND;
+    gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERWATER;
 
     gBattlescriptCurrInstr++;
 }

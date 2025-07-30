@@ -2366,7 +2366,7 @@ void SwitchInClearSetData(void)
     s32 i;
     u8 *ptr;
 
-    if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
+    if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS && gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS_HIT)
     {
         for (i = 0; i < NUM_BATTLE_STATS; i++)
             gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
@@ -2381,7 +2381,7 @@ void SwitchInClearSetData(void)
             }
         }
     }
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS || gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS_HIT)
     {
         gBattleMons[gActiveBattler].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
         gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
@@ -2417,7 +2417,7 @@ void SwitchInClearSetData(void)
     for (i = 0; i < sizeof(struct DisableStruct); i++)
         ptr[i] = 0;
 
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS || gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS_HIT)
     {
         gDisableStructs[gActiveBattler].substituteHP = disableStructCopy.substituteHP;
         gDisableStructs[gActiveBattler].battlerWithSureHit = disableStructCopy.battlerWithSureHit;
@@ -2511,6 +2511,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].flag2Unknown = FALSE;
     gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
+    gProtectStructs[gActiveBattler].outlasted = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -2996,6 +2997,7 @@ void BattleTurnPassed(void)
         if (DoBattlerEndTurnEffects())
             return;
     }
+    gProtectStructs[gActiveBattler].outlasted = FALSE;
     if (HandleFaintedMonActions())
         return;
     gBattleStruct->faintedActionsState = 0;
@@ -3061,6 +3063,7 @@ u8 IsRunningFromBattleImpossible(void)
         }
         if (side != GetBattlerSide(i)
          && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+         && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT
          && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
          && gBattleMons[i].ability == ABILITY_ARENA_TRAP)
         {
@@ -3236,7 +3239,8 @@ static void HandleTurnActionSelectionState(void)
                     else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
                           || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
                               && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
-                              && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
+                              && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+                              && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT)
                           || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
                               && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
                     {

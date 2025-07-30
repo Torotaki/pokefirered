@@ -140,6 +140,7 @@ extern const u8 BattleScript_Recoil33End[];
 extern const u8 BattleScript_ItemSteal[];
 extern const u8 BattleScript_DrizzleActivates[];
 extern const u8 BattleScript_SpeedBoostActivates[];
+extern const u8 BattleScript_OutlastSpeedBoost[];
 extern const u8 BattleScript_ShellArmorActivates[];
 extern const u8 BattleScript_TraceActivates[];
 extern const u8 BattleScript_RainDishActivates[];
@@ -233,6 +234,8 @@ extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 BattleScript_OldMan_Pokedude_CaughtMessage[];
 extern const u8 BattleScript_SilphScopeUnveiled[];
 extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
+extern const u8 BattleScript_PrintWeatherChange[];
+extern const u8 BattleScript_EndIfBatonPassCannotSwitch[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

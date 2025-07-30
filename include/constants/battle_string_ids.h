@@ -388,8 +388,11 @@
 #define STRINGID_STARTEDAROMA 387
 #define STRINGID_AROMACONTINUES 388
 #define STRINGID_PKMNDISTRACTEDBYAROMA 389
+#define STRINGID_CLEAREDWEATHER 390
+#define STRINGID_OUTLASTBOOST 391
+#define STRINGID_PKMNCUTHPFORATTACKANDSPEED 392
 
-#define BATTLESTRINGS_COUNT     390
+#define BATTLESTRINGS_COUNT     393
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -451,6 +454,7 @@
 #define B_MSG_STARTED_SUNLIGHT  4
 #define B_MSG_STARTED_HAIL      5
 #define B_MSG_STARTED_AROMA     6
+#define B_MSG_CLEARED_WEATHER   7
 
 // gRainContinuesStringIds
 #define B_MSG_RAIN_CONTINUES     0

@@ -208,6 +208,7 @@ static const u8 sText_PkmnBracedItself[] = _("{B_ATK_NAME_WITH_PREFIX} braced\ni
 static const u8 sText_PkmnEnduredHit[] = _("{B_DEF_NAME_WITH_PREFIX} ENDURED\nthe hit!");
 static const u8 sText_MagnitudeStrength[] = _("MAGNITUDE {B_BUFF1}!");
 static const u8 sText_PkmnCutHPMaxedAttack[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP\nand maximized ATTACK!");
+static const u8 sText_PkmnCutHPBoostAttackAndSpeed[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP\nand increased ATTACK and SPEED!");
 static const u8 sText_PkmnCopiedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s stat changes!");
 static const u8 sText_PkmnGotFree[] = _("{B_ATK_NAME_WITH_PREFIX} got free of\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
 static const u8 sText_PkmnShedLeechSeed[] = _("{B_ATK_NAME_WITH_PREFIX} shed\nLEECH SEED!");
@@ -263,6 +264,7 @@ static const u8 sText_PkmnCantUseMoveTaunt[] = _("{B_ACTIVE_NAME_WITH_PREFIX} ca
 static const u8 sText_PkmnCantUseMoveSealed[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the\nsealed {B_CURRENT_MOVE}!\p");
 static const u8 sText_PkmnMadeItRain[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it rain!");
 static const u8 sText_PkmnRaisedSpeed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SPEED!");
+static const u8 sText_OutlastBoost[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s OUTLAST\nraised its SPEED!");
 static const u8 sText_PkmnProtectedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was protected\nby {B_DEF_ABILITY}!");
 static const u8 sText_PkmnPreventsUsage[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents {B_ATK_NAME_WITH_PREFIX}\lfrom using {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnRestoredHPUsing[] = _("{B_DEF_NAME_WITH_PREFIX} restored HP\nusing its {B_DEF_ABILITY}!");
@@ -345,6 +347,7 @@ static const u8 sText_DownpourContinues[] = _("The downpour continues."); // unu
 static const u8 sText_RainStopped[] = _("The rain stopped.");
 static const u8 sText_AromaContinues[] = _("A sweet aroma continues to fill the air.");
 static const u8 sText_AromaStarted[] = _("A sweet aroma fills the air.");
+static const u8 sText_WeatherCleared[] = _("The weather returned to normal.");
 static const u8 sText_SandstormBrewed[] = _("A sandstorm brewed!");
 static const u8 sText_SandstormRages[] = _("The sandstorm rages.");
 static const u8 sText_SandstormSubsided[] = _("The sandstorm subsided.");
@@ -896,7 +899,10 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth,
     [STRINGID_STARTEDAROMA - BATTLESTRINGS_TABLE_START]                  = sText_AromaStarted,
     [STRINGID_AROMACONTINUES - BATTLESTRINGS_TABLE_START]                = sText_AromaContinues,
-    [STRINGID_PKMNDISTRACTEDBYAROMA - BATTLESTRINGS_TABLE_START]         = sText_PkmnDistractedByAroma
+    [STRINGID_PKMNDISTRACTEDBYAROMA - BATTLESTRINGS_TABLE_START]         = sText_PkmnDistractedByAroma,
+    [STRINGID_CLEAREDWEATHER - BATTLESTRINGS_TABLE_START]                = sText_WeatherCleared,
+    [STRINGID_OUTLASTBOOST - BATTLESTRINGS_TABLE_START]                  = sText_OutlastBoost,
+    [STRINGID_PKMNCUTHPFORATTACKANDSPEED - BATTLESTRINGS_TABLE_START]    = sText_PkmnCutHPBoostAttackAndSpeed
 };
 
 const u16 gMissStringIds[] =
@@ -925,7 +931,8 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
     [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
     [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
-    [B_MSG_STARTED_AROMA]     = STRINGID_STARTEDAROMA
+    [B_MSG_STARTED_AROMA]     = STRINGID_STARTEDAROMA,
+    [B_MSG_CLEARED_WEATHER]   = STRINGID_CLEAREDWEATHER
 };
 
 const u16 gSandstormHailContinuesStringIds[] =

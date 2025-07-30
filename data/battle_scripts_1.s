@@ -238,6 +238,16 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHealingSeed            @ EFFECT_HEALING_SEED
 	.4byte BattleScript_EffectSweetScent             @ EFFECT_SWEET_SCENT
 	.4byte BattleScript_EffectPoisonSelfHit          @ EFFECT_POISON_SELF_HIT
+	.4byte BattleScript_EffectAromatherapy           @ EFFECT_AROMATHERAPY
+	.4byte BattleScript_EffectClearWeather           @ EFFECT_CLEAR_WEATHER
+	.4byte BattleScript_Fly					         @ EFFECT_FLY
+	.4byte BattleScript_Dive				         @ EFFECT_DIVE
+	.4byte BattleScript_Dig       					 @ EFFECT_DIG
+	.4byte BattleScript_EffectClearWeatherHit   	 @ EFFECT_CLEAR_WEATHER_HIT
+	.4byte BattleScript_EffectLockOnAndDef2Boost   	 @ EFFECT_LOCK_ON_AND_DEF_BOOST2
+	.4byte BattleScript_EffectBatonPassHit		   	 @ EFFECT_BATON_PASS_HIT
+	.4byte BattleScript_EffectOutlast			   	 @ EFFECT_OUTLAST
+	.4byte BattleScript_EffectOverclock			   	 @ EFFECT_OVERCLOCK
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1287,6 +1297,10 @@ BattleScript_EffectConversion2::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectLockOn::
+	call BattleScript_DoLockOn
+	goto BattleScript_MoveEnd
+
+BattleScript_DoLockOn::
 	attackcanceler
 	attackstring
 	ppreduce
@@ -1297,7 +1311,12 @@ BattleScript_EffectLockOn::
 	waitanimation
 	printstring STRINGID_PKMNTOOKAIM
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	return
+
+BattleScript_EffectLockOnAndDef2Boost::
+	call BattleScript_DoLockOn
+	setstatchanger STAT_DEF, 2, FALSE
+	goto BattleScript_EffectStatUp
 
 BattleScript_EffectSketch::
 	attackcanceler
@@ -1532,6 +1551,7 @@ BattleScript_DoGhostCurse::
 	tryfaintmon BS_ATTACKER
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectOutlast::
 BattleScript_EffectProtect::
 BattleScript_EffectEndure::
 	attackcanceler
@@ -1701,6 +1721,7 @@ BattleScript_EffectBatonPass::
 	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
+BattleScript_DoBatonPassSwitch::
 	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
 	switchoutabilities BS_ATTACKER
 	waitstate
@@ -1714,6 +1735,14 @@ BattleScript_EffectBatonPass::
 	waitstate
 	switchineffects BS_ATTACKER
 	goto BattleScript_MoveEnd
+
+BattleScript_EndIfBatonPassCannotSwitch::
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_MoveEnd
+	goto BattleScript_DoBatonPassSwitch
+
+BattleScript_EffectBatonPassHit::
+	setmoveeffect MOVE_EFFECT_BATON_PASS | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
 
 BattleScript_EffectRapidSpin::
 	setmoveeffect MOVE_EFFECT_RAPIDSPIN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
@@ -1752,9 +1781,11 @@ BattleScript_EffectRainDance::
 BattleScript_MoveWeatherChange::
 	attackanimation
 	waitanimation
+BattleScript_PrintWeatherChange::
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_WeatherFormChanges
+	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSweetScent::
@@ -1763,6 +1794,37 @@ BattleScript_EffectSweetScent::
 	ppreduce
 	setaroma
 	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectClearWeather::
+	attackcanceler
+	attackstring
+	ppreduce
+	clearWeather
+	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectClearWeatherHit::
+	attackstring
+	ppreduce
+	setmoveeffect MOVE_EFFECT_CLEAR_WEATHER | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+
+BattleScript_EffectAromatherapy::
+	attackcanceler
+	attackstring
+	ppreduce
+	fixedhealing BattleScript_AlreadyAtFullHp, BS_TARGET
+	attackanimation
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+	setaroma
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSunnyDay::
 	attackcanceler
@@ -1794,6 +1856,20 @@ BattleScript_EffectBellyDrum::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNCUTHPMAXEDATTACK
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectOverclock::
+	attackcanceler
+	attackstring
+	ppreduce
+	payhpboostattackandspeed BattleScript_ButItFailed
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_PKMNCUTHPFORATTACKANDSPEED
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
@@ -1986,6 +2062,26 @@ BattleScript_EffectSemiInvulnerable::
 	jumpifmove MOVE_FLY, BattleScript_FirstTurnFly
 	jumpifmove MOVE_DIVE, BattleScript_FirstTurnDive
 	jumpifmove MOVE_BOUNCE, BattleScript_FirstTurnBounce
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIG
+	goto BattleScript_FirstTurnSemiInvulnerable
+
+BattleScript_CheckSecondTurnSemiInvulnerable::
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_SecondTurnSemiInvulnerable
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_SecondTurnSemiInvulnerable
+	return
+
+BattleScript_Fly::
+	call BattleScript_CheckSecondTurnSemiInvulnerable
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_FLY
+	goto BattleScript_FirstTurnSemiInvulnerable
+
+BattleScript_Dive::
+	call BattleScript_CheckSecondTurnSemiInvulnerable
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIVE
+	goto BattleScript_FirstTurnSemiInvulnerable
+
+BattleScript_Dig::
+	call BattleScript_CheckSecondTurnSemiInvulnerable
 	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIG
 	goto BattleScript_FirstTurnSemiInvulnerable
 
@@ -3958,6 +4054,12 @@ BattleScript_DrizzleActivates::
 BattleScript_SpeedBoostActivates::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNRAISEDSPEED
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_OutlastSpeedBoost::
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_OUTLASTBOOST
 	waitmessage B_WAIT_TIME_LONG
 	end3
 

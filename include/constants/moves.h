@@ -359,8 +359,10 @@
 #define MOVE_HEALING_SEED 355
 #define MOVE_PATCH_UP 356
 #define MOVE_STAGGER 357
+#define MOVE_CLEAR_SKIES 358
+#define MOVE_OVERCLOCK 359
 
-#define MOVES_COUNT 358
+#define MOVES_COUNT 360
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

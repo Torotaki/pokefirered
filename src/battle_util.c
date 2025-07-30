@@ -727,6 +727,7 @@ enum
     ENDTURN_TAUNT,
     ENDTURN_YAWN,
     ENDTURN_ITEMS2,
+    ENDTURN_OUTLAST,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -1039,6 +1040,20 @@ u8 DoBattlerEndTurnEffects(void)
                         BattleScriptExecute(BattleScript_YawnMakesAsleep);
                         effect++;
                     }
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_OUTLAST:
+                if (gBattleMons[gActiveBattler].statStages[STAT_SPEED] < MAX_STAT_STAGE
+                    && gProtectStructs[gActiveBattler].outlasted
+                    && gBattleMoves[gLastResultingMoves[gLastHitBy[gActiveBattler]]].category != CATEGORY_STATUS)
+                {
+                    gBattleMons[gActiveBattler].statStages[STAT_SPEED]++;
+                    gBattleScripting.animArg1 = 14 + STAT_SPEED;
+                    gBattleScripting.animArg2 = 0;
+                    BattleScriptPushCursorAndCallback(BattleScript_OutlastSpeedBoost);
+                    gBattleScripting.battler = gActiveBattler;
+                    effect++;
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;

@@ -268,7 +268,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLY] =
     {
-        .effect = EFFECT_SEMI_INVULNERABLE,
+        .effect = EFFECT_FLY,
         .power = 30,
         .type = TYPE_FLYING,
         .accuracy = 100,
@@ -1276,7 +1276,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DIG] =
     {
-        .effect = EFFECT_SEMI_INVULNERABLE,
+        .effect = EFFECT_DIG,
         .power = 30,
         .type = TYPE_GROUND,
         .accuracy = 100,
@@ -1542,15 +1542,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WITHDRAW] =
     {
-        .effect = EFFECT_DEFENSE_UP,
+        .effect = EFFECT_LOCK_ON_AND_DEF_BOOST2,
         .power = 0,
         .type = TYPE_WATER,
-        .accuracy = 0,
+        .accuracy = 100,
         .pp = 40,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_USER,
-        .priority = 0,
-        .flags = FLAG_SNATCH_AFFECTED,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 3,
+        .flags = FLAG_SNATCH_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_STATUS,
     },
 
@@ -2479,10 +2479,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AEROBLAST] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_CLEAR_WEATHER_HIT,
         .power = 70,
         .type = TYPE_FLYING,
-        .accuracy = 10,
+        .accuracy = 100,
         .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -4369,8 +4369,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AROMATHERAPY] =
     {
-        .effect = EFFECT_HEAL_BELL,
-        .power = 0,
+        .effect = EFFECT_AROMATHERAPY,
+        .power = 30,
         .type = TYPE_GRASS,
         .accuracy = 0,
         .pp = 5,
@@ -4537,7 +4537,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SIGNAL_BEAM] =
     {
-        .effect = EFFECT_CONFUSE_HIT,
+        .effect = EFFECT_BATON_PASS_HIT,
         .power = 50,
         .type = TYPE_BUG,
         .accuracy = 100,
@@ -5007,5 +5007,31 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_PHYSICAL,
+    },
+    [MOVE_CLEAR_SKIES] =
+    {
+        .effect = EFFECT_CLEAR_WEATHER,
+        .power = 0,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_STATUS
+    },
+    [MOVE_OVERCLOCK] =
+    {
+        .effect = EFFECT_OVERCLOCK,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .flags = FLAG_SNATCH_AFFECTED,
+        .category = CATEGORY_STATUS,
     },
 };
