@@ -3389,7 +3389,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CRUNCH] =
     {
-        .effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
+        .effect = EFFECT_FLINCH_HIT,
         .power = 70,
         .type = TYPE_DARK,
         .accuracy = 100,
@@ -4994,5 +4994,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_STATUS
+    },
+    [MOVE_STAGGER] =
+    {
+        .effect = EFFECT_FLINCH_HIT,
+        .power = 40,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 50,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
     },
 };

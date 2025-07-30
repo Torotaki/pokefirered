@@ -242,7 +242,7 @@ const u8 gMoveDescription_CrossChop[] = _("The foe is hit with\ndouble chops.\nI
 const u8 gMoveDescription_Twister[] = _("A vicious twister\nattacks the foe.\nIt may make the\nfoe flinch.");
 const u8 gMoveDescription_RainDance[] = _("A heavy rain falls\nfor five turns,\npowering up WATER-\ntype moves.");
 const u8 gMoveDescription_SunnyDay[] = _("The sun blazes for\nfive turns, powering\nup FIRE-type\nmoves.");
-const u8 gMoveDescription_Crunch[] = _("The foe is crunched\nwith sharp fangs.\nIt may lower the\nfoe's SP. DEF.");
+const u8 gMoveDescription_Crunch[] = _("The foe is crunched\nwith sharp fangs.\nIt may make the\nfoe flinch.");
 const u8 gMoveDescription_MirrorCoat[] = _("A retaliation move\nthat pays back the\nfoe's special attack\ndouble.");
 const u8 gMoveDescription_PsychUp[] = _("The user hypnotizes\nitself into copying\nany stat change\nmade by the foe.");
 const u8 gMoveDescription_ExtremeSpeed[] = _("A blindingly speedy\ncharge attack that\nalways goes before\nany other.");
@@ -357,6 +357,7 @@ const u8 gMoveDescription_DoomDesire[] = _("A move that attacks\nthe foe with a\
 const u8 gMoveDescription_PsychoBoost[] = _("An intense attack\nthat also sharply\nreduces the user's\nSP. ATK stat.");
 const u8 gMoveDescription_HealingSeed[] = _("Sprout a seed that\nheals a POKéMON\nfor 5 HP");
 const u8 gMoveDescription_PatchUp[] = _("Apply bandages to\nheal a POKéMON\nfor 7 HP");
+const u8 gMoveDescription_Stagger[] = _("The foe is Struck\nquick and hard.\nIt is likely to\nmake foe flinch.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -715,4 +716,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_PSYCHO_BOOST  - 1] = gMoveDescription_PsychoBoost,
     [MOVE_HEALING_SEED  - 1] = gMoveDescription_HealingSeed,
     [MOVE_PATCH_UP      - 1] = gMoveDescription_PatchUp,
+    [MOVE_STAGGER       - 1] = gMoveDescription_Stagger,
 };
