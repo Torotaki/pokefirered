@@ -6255,7 +6255,7 @@ static void Cmd_setprotectlike(void)
     bool8 notLastTurn = TRUE;
     u16 lastMove = gLastResultingMoves[gBattlerAttacker];
 
-    if (lastMove != MOVE_PROTECT && lastMove != MOVE_DETECT && lastMove != MOVE_ENDURE)
+    if (gBattleMoves[lastMove].effect != EFFECT_PROTECT && gBattleMoves[lastMove].effect != EFFECT_ENDURE && gBattleMoves[lastMove].effect != EFFECT_OUTLAST)
         gDisableStructs[gBattlerAttacker].protectUses = 0;
 
     if (gCurrentTurnActionNumber == (gBattlersCount - 1))
@@ -6271,6 +6271,12 @@ static void Cmd_setprotectlike(void)
         if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
         {
             gProtectStructs[gBattlerAttacker].endured = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
+        }
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_OUTLAST)
+        {
+            gProtectStructs[gBattlerAttacker].endured = 1;
+            gProtectStructs[gBattlerAttacker].outlasted = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
         }
         gDisableStructs[gBattlerAttacker].protectUses++;

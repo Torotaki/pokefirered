@@ -263,6 +263,7 @@ static const u8 sText_PkmnCantUseMoveTaunt[] = _("{B_ACTIVE_NAME_WITH_PREFIX} ca
 static const u8 sText_PkmnCantUseMoveSealed[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the\nsealed {B_CURRENT_MOVE}!\p");
 static const u8 sText_PkmnMadeItRain[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it rain!");
 static const u8 sText_PkmnRaisedSpeed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SPEED!");
+static const u8 sText_OutlastBoost[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s OUTLAST\nraised its SPEED!");
 static const u8 sText_PkmnProtectedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was protected\nby {B_DEF_ABILITY}!");
 static const u8 sText_PkmnPreventsUsage[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents {B_ATK_NAME_WITH_PREFIX}\lfrom using {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnRestoredHPUsing[] = _("{B_DEF_NAME_WITH_PREFIX} restored HP\nusing its {B_DEF_ABILITY}!");
@@ -898,7 +899,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_STARTEDAROMA - BATTLESTRINGS_TABLE_START]                  = sText_AromaStarted,
     [STRINGID_AROMACONTINUES - BATTLESTRINGS_TABLE_START]                = sText_AromaContinues,
     [STRINGID_PKMNDISTRACTEDBYAROMA - BATTLESTRINGS_TABLE_START]         = sText_PkmnDistractedByAroma,
-    [STRINGID_CLEAREDWEATHER - BATTLESTRINGS_TABLE_START]                = sText_WeatherCleared
+    [STRINGID_CLEAREDWEATHER - BATTLESTRINGS_TABLE_START]                = sText_WeatherCleared,
+    [STRINGID_OUTLASTBOOST - BATTLESTRINGS_TABLE_START]                  = sText_OutlastBoost
 };
 
 const u16 gMissStringIds[] =

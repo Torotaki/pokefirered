@@ -729,6 +729,7 @@ AI_CheckViability::
 	if_effect EFFECT_PROTECT, AI_CV_Protect
 	if_effect EFFECT_FORESIGHT, AI_CV_Foresight
 	if_effect EFFECT_ENDURE, AI_CV_Endure
+	if_effect EFFECT_OUTLAST, AI_CV_Endure
 	if_effect EFFECT_BATON_PASS, AI_CV_BatonPass
 	if_effect EFFECT_BATON_PASS_HIT, AI_CV_BatonPass
 	if_effect EFFECT_PURSUIT, AI_CV_Pursuit
@@ -1876,6 +1877,7 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_WATER_SPORT
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_CAMOUFLAGE
+	.byte EFFECT_OUTLAST
 	.byte -1
 
 AI_CV_PainSplit::
@@ -3014,6 +3016,7 @@ AI_HPAware_DiscouragedEffectsWhenHighHP::
 	.byte EFFECT_MEMENTO
 	.byte EFFECT_GRUDGE
 	.byte EFFECT_OVERHEAT
+	.byte EFFECT_OUTLAST
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenMediumHP::

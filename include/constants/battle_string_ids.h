@@ -389,8 +389,9 @@
 #define STRINGID_AROMACONTINUES 388
 #define STRINGID_PKMNDISTRACTEDBYAROMA 389
 #define STRINGID_CLEAREDWEATHER 390
+#define STRINGID_OUTLASTBOOST 391
 
-#define BATTLESTRINGS_COUNT     391
+#define BATTLESTRINGS_COUNT     392
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
