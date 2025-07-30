@@ -180,6 +180,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_RAIN_DANCE, AI_CBM_RainDance
 	if_effect EFFECT_SUNNY_DAY, AI_CBM_SunnyDay
 	if_effect EFFECT_BELLY_DRUM, AI_CBM_BellyDrum
+	if_effect EFFECT_OVERCLOCK, AI_CBM_BellyDrum
 	if_effect EFFECT_PSYCH_UP, AI_CBM_Haze
 	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_SKULL_BASH, AI_CBM_HighRiskForDamage
@@ -739,6 +740,7 @@ AI_CheckViability::
 	if_effect EFFECT_RAIN_DANCE, AI_CV_RainDance
 	if_effect EFFECT_SUNNY_DAY, AI_CV_SunnyDay
 	if_effect EFFECT_BELLY_DRUM, AI_CV_BellyDrum
+	if_effect EFFECT_OVERCLOCK, AI_CV_BellyDrum
 	if_effect EFFECT_PSYCH_UP, AI_CV_PsychUp
 	if_effect EFFECT_MIRROR_COAT, AI_CV_MirrorCoat
 	if_effect EFFECT_SKULL_BASH, AI_CV_ChargeUpMove
@@ -1878,6 +1880,7 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_CAMOUFLAGE
 	.byte EFFECT_OUTLAST
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_CV_PainSplit::
@@ -2902,6 +2905,7 @@ AI_Risky_EffectsToEncourage::
 	.byte EFFECT_FOCUS_PUNCH
 	.byte EFFECT_REVENGE
 	.byte EFFECT_TEETER_DANCE
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_PreferBatonPass::
@@ -3062,6 +3066,7 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenLowHP::
@@ -3112,6 +3117,7 @@ AI_HPAware_DiscouragedEffectsWhenLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_OVERCLOCK
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetHighHP::

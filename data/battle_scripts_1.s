@@ -247,6 +247,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectLockOnAndDef2Boost   	 @ EFFECT_LOCK_ON_AND_DEF_BOOST2
 	.4byte BattleScript_EffectBatonPassHit		   	 @ EFFECT_BATON_PASS_HIT
 	.4byte BattleScript_EffectOutlast			   	 @ EFFECT_OUTLAST
+	.4byte BattleScript_EffectOverclock			   	 @ EFFECT_OVERCLOCK
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1855,6 +1856,20 @@ BattleScript_EffectBellyDrum::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNCUTHPMAXEDATTACK
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectOverclock::
+	attackcanceler
+	attackstring
+	ppreduce
+	payhpboostattackandspeed BattleScript_ButItFailed
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_PKMNCUTHPFORATTACKANDSPEED
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 

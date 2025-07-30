@@ -378,6 +378,7 @@ gBattleAnims_Moves::
 	.4byte Move_HEALING_SEED
 	.4byte Move_PATCH_UP
 	.4byte Move_CLEAR_SKIES
+	.4byte Move_OVERCLOCK
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10171,6 +10172,9 @@ Move_CLEAR_SKIES:
 	delay 50
 	call UnsetSkyBg
 	end
+
+Move_OVERCLOCK:
+	goto Move_TORMENT
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

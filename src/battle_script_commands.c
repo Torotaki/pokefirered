@@ -313,6 +313,7 @@ static void Cmd_finishturn(void);
 static void Cmd_fixedhealing(void);
 static void Cmd_setaroma(void);
 static void Cmd_clearWeather(void);
+static void Cmd_payhpboostattackandspeed(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -567,6 +568,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_fixedhealing,                            //0xF8
     Cmd_setaroma,                                //0xF9
     Cmd_clearWeather,                            //0xFA
+    Cmd_payhpboostattackandspeed,                //0xFB
 };
 
 struct StatFractions
@@ -8478,6 +8480,41 @@ static void Cmd_maxattackhalvehp(void)
     {
         gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = MAX_STAT_STAGE;
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+
+        gBattlescriptCurrInstr += 5;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+}
+
+// Overclock
+static void Cmd_payhpboostattackandspeed(void)
+{
+    u32 hpCost = gBattleMons[gBattlerAttacker].maxHP * 2 / 3;
+
+    if (hpCost == 0)
+        hpCost = 1;
+
+    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE
+        && gBattleMons[gBattlerAttacker].hp > hpCost)
+    {
+        if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] + 2 > MAX_STAT_STAGE) {
+            gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = MAX_STAT_STAGE;
+        } else {
+            gBattleMons[gBattlerAttacker].statStages[STAT_ATK] += 2;
+        }
+
+        if (gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] + 2 > MAX_STAT_STAGE) {
+            gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] = MAX_STAT_STAGE;
+        } else {
+            gBattleMons[gBattlerAttacker].statStages[STAT_SPEED] += 2;
+        }
+
+        gBattleMoveDamage = hpCost;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
