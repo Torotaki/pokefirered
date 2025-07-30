@@ -3435,6 +3435,19 @@ void SwapTurnOrder(u8 id1, u8 id2)
     SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
 
+// Cannot return 0.5 so returning double and having it divide by 2 in calculation
+u8 GetWeatherDoubleSpeedMultiplierForBattler(u8 battler) {
+    if ((gBattleMons[battler].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
+        || (gBattleMons[battler].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
+        return 4;
+    
+    if ((gBattleMons[battler].type1 == TYPE_FLYING || gBattleMons[battler].type2 == TYPE_FLYING || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
+        && gBattleWeather & B_WEATHER_RAIN)
+        return 1;
+    
+    return 2;
+}
+
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
     u8 strikesFirst = 0;
@@ -3446,16 +3459,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 
     if (WEATHER_HAS_EFFECT)
     {
-        if ((gBattleMons[battler1].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
-            || (gBattleMons[battler1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
-            speedMultiplierBattler1 = 2;
-        else
-            speedMultiplierBattler1 = 1;
-        if ((gBattleMons[battler2].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
-            || (gBattleMons[battler2].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
-            speedMultiplierBattler2 = 2;
-        else
-            speedMultiplierBattler2 = 1;
+        speedMultiplierBattler1 = GetWeatherDoubleSpeedMultiplierForBattler(battler1);
+        speedMultiplierBattler2 = GetWeatherDoubleSpeedMultiplierForBattler(battler2);
     }
     else
     {
@@ -3463,7 +3468,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         speedMultiplierBattler2 = 1;
     }
 
-    speedBattler1 = (gBattleMons[battler1].speed * speedMultiplierBattler1)
+    speedBattler1 = (gBattleMons[battler1].speed * speedMultiplierBattler1 / 2)
                 * (gStatStageRatios[gBattleMons[battler1].statStages[STAT_SPEED]][0])
                 / (gStatStageRatios[gBattleMons[battler1].statStages[STAT_SPEED]][1]);
 
@@ -3489,7 +3494,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
         speedBattler1 = UINT_MAX;
     // check second battlerId's speed
-    speedBattler2 = (gBattleMons[battler2].speed * speedMultiplierBattler2)
+    speedBattler2 = (gBattleMons[battler2].speed * speedMultiplierBattler2 / 2)
                     * (gStatStageRatios[gBattleMons[battler2].statStages[STAT_SPEED]][0])
                     / (gStatStageRatios[gBattleMons[battler2].statStages[STAT_SPEED]][1]);
     if (gBattleMons[battler2].item == ITEM_ENIGMA_BERRY)
