@@ -2775,16 +2775,18 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_SAtkDown2;
                 break;
-            case MOVE_EFFECT_CLEAR_WEATHER:
-                if (gBattleWeather == 0)
-                {
-                    gBattlescriptCurrInstr++;
-                }
-                else
-                {
-                    gBattleWeather = 0;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CLEARED_WEATHER;
-                    gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+            case MOVE_EFFECT_CHANGE_WEATHER:
+                if (gBattleMoves[gCurrentMove].effect == EFFECT_CLEAR_WEATHER_HIT) {
+                    if (gBattleWeather == 0)
+                    {
+                        gBattlescriptCurrInstr++;
+                    }
+                    else
+                    {
+                        gBattleWeather = 0;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CLEARED_WEATHER;
+                        gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+                    }
                 }
                 break;
             case MOVE_EFFECT_BATON_PASS:

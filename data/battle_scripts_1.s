@@ -1803,9 +1803,7 @@ BattleScript_EffectClearWeather::
 	goto BattleScript_MoveWeatherChange
 
 BattleScript_EffectClearWeatherHit::
-	attackstring
-	ppreduce
-	setmoveeffect MOVE_EFFECT_CLEAR_WEATHER | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	setmoveeffect MOVE_EFFECT_CHANGE_WEATHER | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAromatherapy::

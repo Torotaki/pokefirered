@@ -272,7 +272,7 @@
 #define MOVE_EFFECT_EVS_MINUS_2         52
 #define MOVE_EFFECT_THRASH              53
 #define MOVE_EFFECT_KNOCK_OFF           54
-#define MOVE_EFFECT_CLEAR_WEATHER       55
+#define MOVE_EFFECT_CHANGE_WEATHER      55
 #define MOVE_EFFECT_BATON_PASS          56
 #define MOVE_EFFECT_NOTHING_39          57
 #define MOVE_EFFECT_NOTHING_3A          58
