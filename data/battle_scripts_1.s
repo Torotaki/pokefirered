@@ -1912,9 +1912,15 @@ BattleScript_SkullBashEnd::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTwister::
-	jumpifnostatus3 BS_TARGET, STATUS3_ON_AIR, BattleScript_FlinchEffect
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN, BattleScript_HitDoubleDamageOnAir
+	jumpifstatus3 BS_TARGET, STATUS3_ON_AIR, BattleScript_HitDoubleDamageOnAir
+	goto BattleScript_EffectHit
+
+BattleScript_HitDoubleDamageOnAir::
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
 	setbyte sDMG_MULTIPLIER, 2
+	goto BattleScript_EffectHit
+
 BattleScript_FlinchEffect::
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
