@@ -243,11 +243,15 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_Fly					         @ EFFECT_FLY
 	.4byte BattleScript_Dive				         @ EFFECT_DIVE
 	.4byte BattleScript_Dig       					 @ EFFECT_DIG
-	.4byte BattleScript_EffectClearWeatherHit   	 @ EFFECT_CLEAR_WEATHER_HIT
+	.4byte BattleScript_EffectChangeWeatherHit   	 @ EFFECT_CLEAR_WEATHER_HIT
 	.4byte BattleScript_EffectLockOnAndDef2Boost   	 @ EFFECT_LOCK_ON_AND_DEF_BOOST2
 	.4byte BattleScript_EffectBatonPassHit		   	 @ EFFECT_BATON_PASS_HIT
 	.4byte BattleScript_EffectOutlast			   	 @ EFFECT_OUTLAST
 	.4byte BattleScript_EffectOverclock			   	 @ EFFECT_OVERCLOCK
+	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_RAIN_DANCE_HIT
+	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SUNNY_DAY_HIT
+	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SANDSTORM_HIT
+	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SWEET_SCENT_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1802,7 +1806,7 @@ BattleScript_EffectClearWeather::
 	clearWeather
 	goto BattleScript_MoveWeatherChange
 
-BattleScript_EffectClearWeatherHit::
+BattleScript_EffectChangeWeatherHit::
 	setmoveeffect MOVE_EFFECT_CHANGE_WEATHER | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 

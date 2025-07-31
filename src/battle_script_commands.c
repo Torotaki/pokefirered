@@ -2776,17 +2776,60 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 gBattlescriptCurrInstr = BattleScript_SAtkDown2;
                 break;
             case MOVE_EFFECT_CHANGE_WEATHER:
-                if (gBattleMoves[gCurrentMove].effect == EFFECT_CLEAR_WEATHER_HIT) {
+                switch (gBattleMoves[gCurrentMove].effect)
+                {
+                case EFFECT_CLEAR_WEATHER_HIT:
                     if (gBattleWeather == 0)
-                    {
                         gBattlescriptCurrInstr++;
-                    }
                     else
                     {
                         gBattleWeather = 0;
                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CLEARED_WEATHER;
                         gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
                     }
+                    break;
+                case EFFECT_RAIN_DANCE_HIT:
+                    if (gBattleWeather & B_WEATHER_RAIN)
+                        gBattlescriptCurrInstr++;
+                    else
+                    {
+                        gBattleWeather = B_WEATHER_RAIN;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
+                        gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+                    }
+                    break;
+                case EFFECT_SUNNY_DAY_HIT:
+                    if (gBattleWeather & B_WEATHER_SUN)
+                        gBattlescriptCurrInstr++;
+                    else
+                    {
+                        gBattleWeather = B_WEATHER_SUN_PERMANENT;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
+                        gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+                    }
+                    break;
+                case EFFECT_SANDSTORM_HIT:
+                    if (gBattleWeather & B_WEATHER_SANDSTORM)
+                        gBattlescriptCurrInstr++;
+                    else
+                    {
+                        gBattleWeather = B_WEATHER_SANDSTORM_PERMANENT;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
+                        gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+                    }
+                    break;
+                case EFFECT_SWEET_SCENT_HIT:
+                    if (gBattleWeather & B_WEATHER_AROMA)
+                        gBattlescriptCurrInstr++;
+                    else
+                    {
+                        gBattleWeather = B_WEATHER_AROMA;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_AROMA;
+                        gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+                    }
+                    break;
+                default:
+                    break;
                 }
                 break;
             case MOVE_EFFECT_BATON_PASS:
@@ -7288,9 +7331,8 @@ static void Cmd_setsandstorm(void)
     }
     else
     {
-        gBattleWeather = B_WEATHER_SANDSTORM_TEMPORARY;
+        gBattleWeather = B_WEATHER_SANDSTORM_PERMANENT;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
-        gWishFutureKnock.weatherDuration = 5;
     }
     gBattlescriptCurrInstr++;
 }
@@ -8469,9 +8511,8 @@ static void Cmd_setsunny(void)
     }
     else
     {
-        gBattleWeather = B_WEATHER_SUN_TEMPORARY;
+        gBattleWeather = B_WEATHER_SUN_PERMANENT;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
-        gWishFutureKnock.weatherDuration = 5;
     }
 
     gBattlescriptCurrInstr++;
