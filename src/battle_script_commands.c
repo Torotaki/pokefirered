@@ -7355,14 +7355,20 @@ static void Cmd_weatherdamage(void)
             if (gBattleMons[gBattlerAttacker].type1 != TYPE_ROCK
                 && gBattleMons[gBattlerAttacker].type1 != TYPE_STEEL
                 && gBattleMons[gBattlerAttacker].type1 != TYPE_GROUND
+                && gBattleMons[gBattlerAttacker].type1 != TYPE_ICE
                 && gBattleMons[gBattlerAttacker].type2 != TYPE_ROCK
                 && gBattleMons[gBattlerAttacker].type2 != TYPE_STEEL
                 && gBattleMons[gBattlerAttacker].type2 != TYPE_GROUND
+                && gBattleMons[gBattlerAttacker].type2 != TYPE_ICE
                 && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_VEIL
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                if (gBattleMons[gBattlerAttacker].type1 == TYPE_FLYING || gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING || gBattleMons[gBattlerAttacker].ability == ABILITY_DRAGONFLIGHT)
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                else
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
             }

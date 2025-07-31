@@ -2644,7 +2644,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // Are effects of weather negated with cloud nine or air lock
         if (WEATHER_HAS_EFFECT2)
         {
-            // Rain weakens Fire, boosts Water
+            // Rain weakens Fire, boosts Water and Electric
             if (gBattleWeather & B_WEATHER_RAIN)
             {
                 switch (type)
@@ -2658,6 +2658,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                     break;
                 }
             }
+
+            // Sandstorm weakens Grass
+            if (gBattleWeather & B_WEATHER_SANDSTORM)
+                if (type == TYPE_GRASS)
+                    damage /= 2;
 
             // Any weather except sun weakens solar beam
             if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
