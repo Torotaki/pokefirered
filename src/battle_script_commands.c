@@ -1000,6 +1000,8 @@ static bool8 AccuracyCalcHelper(u16 move)
     gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
 
     if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)
+     || (gStatuses3[gBattlerTarget] & STATUS3_ON_AIR && gBattleMoves[move].effect == EFFECT_THUNDER)
+     || (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS && gBattleMoves[move].effect == EFFECT_THUNDER)
      || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
     {
         JumpIfMoveFailed(7, move);
@@ -1070,7 +1072,7 @@ static void Cmd_accuracycheck(void)
         moveAcc = gBattleMoves[move].accuracy;
         // check Thunder on sunny weather
         if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN && gBattleMoves[move].effect == EFFECT_THUNDER)
-            moveAcc = 50;
+            moveAcc = 0;
 
         calc = sAccuracyStageRatios[buff].dividend * moveAcc;
         calc /= sAccuracyStageRatios[buff].divisor;

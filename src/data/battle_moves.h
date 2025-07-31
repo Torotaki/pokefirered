@@ -1221,11 +1221,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_THUNDER] =
     {
         .effect = EFFECT_THUNDER,
-        .power = 110,
+        .power = 90,
         .type = TYPE_ELECTRIC,
-        .accuracy = 50,
-        .pp = 10,
-        .secondaryEffectChance = 50,
+        .accuracy = 5,
+        .pp = 15,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,

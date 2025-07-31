@@ -2006,8 +2006,9 @@ BattleScript_SolarBeamOnFirstTurn::
 	goto BattleScript_TwoTurnMovesSecondTurn
 
 BattleScript_EffectThunder::
-	setmoveeffect MOVE_EFFECT_PARALYSIS
+	jumpifnostatus3 BS_TARGET, STATUS3_ON_AIR, BattleScript_EffectHit
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
+	setbyte sDMG_MULTIPLIER, 2
 	goto BattleScript_EffectHit
 
 BattleScript_EffectTeleport::
