@@ -33,7 +33,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMirrorMove             @ EFFECT_MIRROR_MOVE
 	.4byte BattleScript_EffectAttackUp               @ EFFECT_ATTACK_UP
 	.4byte BattleScript_EffectDefenseUp              @ EFFECT_DEFENSE_UP
-	.4byte BattleScript_EffectHit                    @ EFFECT_SPEED_UP
+	.4byte BattleScript_EffectSpeedUp                @ EFFECT_SPEED_UP
 	.4byte BattleScript_EffectSpecialAttackUp        @ EFFECT_SPECIAL_ATTACK_UP
 	.4byte BattleScript_EffectSpecialDefenseUp       @ EFFECT_SPECIAL_DEFENSE_UP
 	.4byte BattleScript_EffectHit                    @ EFFECT_ACCURACY_UP
@@ -509,6 +509,10 @@ BattleScript_EffectSpecialAttackUp::
 
 BattleScript_EffectSpecialDefenseUp::
 	setstatchanger STAT_SPDEF, 1, FALSE
+	goto BattleScript_EffectStatUp
+
+BattleScript_EffectSpeedUp::
+	setstatchanger STAT_SPEED, 1, FALSE
 	goto BattleScript_EffectStatUp
 
 BattleScript_EffectEvasionUp::
