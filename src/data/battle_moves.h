@@ -5034,4 +5034,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_SNATCH_AFFECTED,
         .category = CATEGORY_STATUS,
     },
+    [MOVE_POISON_BLOOM] =
+    {
+        .effect = EFFECT_POISON_SELF_HIT,
+        .power = 70,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_SPECIAL,
+    },
 };

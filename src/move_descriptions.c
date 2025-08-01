@@ -360,6 +360,7 @@ const u8 gMoveDescription_PatchUp[] = _("Apply bandages to\nheal a POKéMON\nfor
 const u8 gMoveDescription_Stagger[] = _("The foe is Struck\nquick and hard.\nIt is likely to\nmake foe flinch.");
 const u8 gMoveDescription_ClearSkies[] = _("Removes weather \nconditions.");
 const u8 gMoveDescription_Overclock[] = _("Pays 2/3 of Max HP\nto boost ATTACK\nand SPEED.");
+const u8 gMoveDescription_PoisonBloom[] = _("The foe is Struck\nwith poison.\nIt will poison\nthe user.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -721,4 +722,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_STAGGER       - 1] = gMoveDescription_Stagger,
     [MOVE_CLEAR_SKIES   - 1] = gMoveDescription_ClearSkies,
     [MOVE_OVERCLOCK     - 1] = gMoveDescription_Overclock,
+    [MOVE_POISON_BLOOM  - 1] = gMoveDescription_PoisonBloom,
 };

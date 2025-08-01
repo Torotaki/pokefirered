@@ -359,4 +359,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_STAGGER]       = _("STAGGER"),
     [MOVE_CLEAR_SKIES]   = _("CLEAR SKIES"),
     [MOVE_OVERCLOCK]     = _("OVERCLOCK")
+    [MOVE_POISON_BLOOM]  = _("POISON BLOOM"),
 };

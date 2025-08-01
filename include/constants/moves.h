@@ -361,8 +361,9 @@
 #define MOVE_STAGGER 357
 #define MOVE_CLEAR_SKIES 358
 #define MOVE_OVERCLOCK 359
+#define MOVE_POISON_BLOOM 360
 
-#define MOVES_COUNT 360
+#define MOVES_COUNT 361
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
