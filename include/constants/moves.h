@@ -363,8 +363,9 @@
 #define MOVE_OVERCLOCK 359
 #define MOVE_POISON_BLOOM 360
 #define MOVE_POISON_LEAF 361
+#define MOVE_EXPLOIT 362
 
-#define MOVES_COUNT 362
+#define MOVES_COUNT 363
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

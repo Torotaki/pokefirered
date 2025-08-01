@@ -382,6 +382,7 @@ gBattleAnims_Moves::
 	.4byte Move_OVERCLOCK
 	.4byte Move_POISON_BLOOM
 	.4byte Move_POISON_LEAF
+	.4byte Move_EXPLOIT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10186,7 +10187,10 @@ Move_POISON_BLOOM:
 	goto Move_SLUDGE_BOMB
 
 Move_POISON_LEAF:
-goto Move_MAGICAL_LEAF
+	goto Move_MAGICAL_LEAF
+
+Move_EXPLOIT:
+	goto Move_FAINT_ATTACK
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

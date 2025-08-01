@@ -252,6 +252,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SUNNY_DAY_HIT
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SANDSTORM_HIT
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SWEET_SCENT_HIT
+	.4byte BattleScript_EffectExploit				 @ EFFECT_EXPLOIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2394,6 +2395,11 @@ BattleScript_EffectSmellingsalt::
 	goto BattleScript_EffectHit
 BattleScript_SmellingsaltDoubleDmg::
 	setbyte sDMG_MULTIPLIER, 2
+	goto BattleScript_EffectHit
+
+BattleScript_EffectExploit::
+	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_SmellingsaltDoubleDmg
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_SmellingsaltDoubleDmg
 	goto BattleScript_EffectHit
 
 BattleScript_EffectFollowMe::
