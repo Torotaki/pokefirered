@@ -1724,8 +1724,8 @@ static const struct FieldMoveMapping sFieldMoveMappings[] = {
     [FIELD_MOVE_DIG]         = {FLAG_CAN_DIG,        {MOVE_DIG}},
     [FIELD_MOVE_MILK_DRINK]  = {0,                   {MOVE_MILK_DRINK}},
     [FIELD_MOVE_SOFT_BOILED] = {0,                   {MOVE_SOFT_BOILED}},
-    [FIELD_MOVE_SWEET_SCENT] = {0,                   {MOVE_SWEET_SCENT}},
-    [FIELD_MOVE_HEALING_SEED]= {0,                   {MOVE_HEALING_SEED}},
+    [FIELD_MOVE_SWEET_SCENT] = {0,                   {MOVE_SWEET_SCENT, MOVE_AROMATHERAPY}},
+    [FIELD_MOVE_HEALING_SEED]= {0,                   {MOVE_HEALING_SEED, MOVE_AROMATHERAPY}},
     [FIELD_MOVE_PATCH_UP]    = {0,                   {MOVE_PATCH_UP}},
     [FIELD_MOVE_SING]        = {0,                   {MOVE_SING}}
 };

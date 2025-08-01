@@ -2843,7 +2843,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ENDURE] =
     {
-        .effect = EFFECT_ENDURE,
+        .effect = EFFECT_OUTLAST,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
