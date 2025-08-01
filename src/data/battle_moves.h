@@ -310,7 +310,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_VINE_WHIP] =
     {
-        .effect = EFFECT_POISON_SELF_HIT,
+        .effect = EFFECT_HIT,
         .power = 30,
         .type = TYPE_GRASS,
         .accuracy = 100,
@@ -319,7 +319,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .category = CATEGORY_SPECIAL
+        .category = CATEGORY_PHYSICAL
     },
 
     [MOVE_STOMP] =
@@ -1038,7 +1038,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GROWTH] =
     {
-        .effect = EFFECT_SPECIAL_ATTACK_UP,
+        .effect = EFFECT_SPECIAL_DEFENSE_UP,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 0,
@@ -1052,7 +1052,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RAZOR_LEAF] =
     {
-        .effect = EFFECT_HIGH_CRITICAL,
+        .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_GRASS,
         .accuracy = 100,
@@ -4733,11 +4733,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FRENZY_PLANT] =
     {
-        .effect = EFFECT_RECHARGE,
-        .power = 110,
+        .effect = EFFECT_HIT,
+        .power = 70,
         .type = TYPE_GRASS,
         .accuracy = 100,
-        .pp = 5,
+        .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -5037,14 +5037,27 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_POISON_BLOOM] =
     {
         .effect = EFFECT_POISON_SELF_HIT,
-        .power = 70,
+        .power = 80,
         .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 30,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
-        .category = CATEGORY_SPECIAL,
+        .category = CATEGORY_PHYSICAL,
+    },
+    [MOVE_POISON_LEAF] =
+    {
+        .effect = EFFECT_POISON_SELF_HIT,
+        .power = 60,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
     },
 };

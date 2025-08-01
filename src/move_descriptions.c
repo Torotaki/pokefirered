@@ -723,4 +723,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_CLEAR_SKIES   - 1] = gMoveDescription_ClearSkies,
     [MOVE_OVERCLOCK     - 1] = gMoveDescription_Overclock,
     [MOVE_POISON_BLOOM  - 1] = gMoveDescription_PoisonBloom,
+    [MOVE_POISON_LEAF   - 1] = gMoveDescription_PoisonBloom,
 };
