@@ -253,6 +253,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SANDSTORM_HIT
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SWEET_SCENT_HIT
 	.4byte BattleScript_EffectExploit				 @ EFFECT_EXPLOIT
+	.4byte BattleScript_EffectChallenge				 @ EFFECT_CHALLENGE
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1650,6 +1651,7 @@ BattleScript_EffectSwagger::
 	jumpifconfusedandstatmaxed STAT_ATK, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
+BattleScript_DoSwagger::
 	setstatchanger STAT_ATK, 2, FALSE
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_SwaggerTryConfuse
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_SwaggerTryConfuse
@@ -1663,6 +1665,45 @@ BattleScript_SwaggerTryConfuse::
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	seteffectprimary
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectChallenge::
+	attackcanceler
+	attackstring
+	attackanimation
+	waitanimation
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_ChallengeTryConfuse
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_ChallengeTryConfuse
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_ChallengeTryConfuse::
+	jumpifability BS_ATTACKER, ABILITY_OWN_TEMPO, BattleScript_ChallengeShowOwnTempoMessage
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_SAFEGUARD, BattleScript_ChallengeShowSafeguardMessage
+	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
+	seteffectprimary
+BattleScript_ChallengePrepareSwagger::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MakeMoveMissed
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifconfusedandstatmaxed STAT_ATK, BattleScript_ButItFailed
+	goto BattleScript_DoSwagger
+
+BattleScript_ChallengeShowOwnTempoMessage::
+	copybyte gEffectBattler, gBattlerTarget
+	setbyte gBattlerTarget, 0
+	call BattleScript_OwnTempoPreventsWithReturn
+	copybyte gBattlerTarget, gEffectBattler
+	goto BattleScript_ChallengePrepareSwagger
+
+BattleScript_ChallengeShowSafeguardMessage::
+	copybyte gEffectBattler, gBattlerTarget
+	setbyte gBattlerTarget, 0
+	call BattleScript_SafeguardProtectedReturns
+	copybyte gBattlerTarget, gEffectBattler
+	goto BattleScript_ChallengePrepareSwagger
 
 BattleScript_EffectFuryCutter::
 	attackcanceler
@@ -2722,15 +2763,11 @@ BattleScript_TeeterDanceLoopIncrement::
 	end
 
 BattleScript_TeeterDanceOwnTempoPrevents::
-	pause B_WAIT_TIME_SHORT
-	printstring STRINGID_PKMNPREVENTSCONFUSIONWITH
-	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_OwnTempoPreventsWithReturn
 	goto BattleScript_TeeterDanceLoopIncrement
 
 BattleScript_TeeterDanceSafeguardProtected::
-	pause B_WAIT_TIME_SHORT
-	printstring STRINGID_PKMNUSEDSAFEGUARD
-	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_SafeguardProtectedReturns
 	goto BattleScript_TeeterDanceLoopIncrement
 
 BattleScript_TeeterDanceSubstitutePrevents::
@@ -3355,10 +3392,14 @@ BattleScript_SideStatusWoreOff::
 	end2
 
 BattleScript_SafeguardProtected::
+	call BattleScript_SafeguardProtectedReturns
+	end2
+
+BattleScript_SafeguardProtectedReturns::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNUSEDSAFEGUARD
 	waitmessage B_WAIT_TIME_LONG
-	end2
+	return
 
 BattleScript_SafeguardEnds::
 	pause B_WAIT_TIME_SHORT
@@ -4284,10 +4325,14 @@ BattleScript_FlinchPrevention::
 	goto BattleScript_MoveEnd
 
 BattleScript_OwnTempoPrevents::
+	call BattleScript_OwnTempoPreventsWithReturn
+	goto BattleScript_MoveEnd
+
+BattleScript_OwnTempoPreventsWithReturn::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNPREVENTSCONFUSIONWITH
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	return
 
 BattleScript_SoundproofProtected::
 	attackstring

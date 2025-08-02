@@ -148,7 +148,7 @@ static const u16 sEasyChatGroup_Move2[] = {
     MOVE_SECRET_POWER,
     MOVE_SEISMIC_TOSS,
     MOVE_SHOCK_WAVE,
-    MOVE_SKULL_BASH,
+    MOVE_SHELL_BASH,
     MOVE_SLACK_OFF,
     MOVE_SLAM,
     MOVE_SLEEP_POWDER,

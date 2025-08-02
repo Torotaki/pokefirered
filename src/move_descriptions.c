@@ -362,6 +362,7 @@ const u8 gMoveDescription_ClearSkies[] = _("Removes weather \nconditions.");
 const u8 gMoveDescription_Overclock[] = _("Pays 2/3 of Max HP\nto boost ATTACK\nand SPEED.");
 const u8 gMoveDescription_PoisonBloom[] = _("The foe is Struck\nwith poison.\nIt will poison\nthe user.");
 const u8 gMoveDescription_Exploit[] = _("An attack with\nincreased damage\nto poisoned and\nsleeping foes.");
+const u8 gMoveDescription_Challenge[] = _("Issues a challenge.\nIncreases attack\nand confuses the\nuser and the foe.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -727,5 +728,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POISON_LEAF   - 1] = gMoveDescription_PoisonBloom,
     [MOVE_EXPLOIT       - 1] = gMoveDescription_Exploit,
     [MOVE_TAKE_FLIGHT   - 1] = gMoveDescription_Fly,
-    [MOVE_QUICK_WING   - 1] = gMoveDescription_FakeOut,
+    [MOVE_QUICK_WING    - 1] = gMoveDescription_FakeOut,
+    [MOVE_CHALLENGE     - 1] = gMoveDescription_Challenge,
 };

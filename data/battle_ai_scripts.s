@@ -168,6 +168,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_PERISH_SONG, AI_CBM_PerishSong
 	if_effect EFFECT_SANDSTORM, AI_CBM_Sandstorm
 	if_effect EFFECT_SWAGGER, AI_CBM_Confuse
+	if_effect EFFECT_CHALLENGE, AI_CBM_Confuse
 	if_effect EFFECT_ATTRACT, AI_CBM_Attract
 	if_effect EFFECT_RETURN, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_PRESENT, AI_CBM_HighRiskForDamage
@@ -707,6 +708,7 @@ AI_CheckViability::
 	if_effect EFFECT_POISON, AI_CV_Poison
 	if_effect EFFECT_PARALYZE, AI_CV_Paralyze
 	@ if_effect EFFECT_SWAGGER, AI_CV_Swagger  @ Improvement in Emerald
+	@ if_effect EFFECT_CHALLENGE, AI_CV_Swagger  @ Improvement in Emerald
 	if_effect EFFECT_SPEED_DOWN_HIT, AI_CV_SpeedDownFromChance
 	if_effect EFFECT_SKY_ATTACK, AI_CV_ChargeUpMove
 	if_effect EFFECT_VITAL_THROW, AI_CV_VitalThrow
@@ -1881,6 +1883,7 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_CAMOUFLAGE
 	.byte EFFECT_OUTLAST
 	.byte EFFECT_OVERCLOCK
+	.byte EFFECT_CHALLENGE
 	.byte -1
 
 AI_CV_PainSplit::
@@ -2865,6 +2868,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_CAMOUFLAGE
+	.byte EFFECT_CHALLENGE
 	.byte -1
 
 AI_PreferStrongestMove::
@@ -2906,6 +2910,7 @@ AI_Risky_EffectsToEncourage::
 	.byte EFFECT_REVENGE
 	.byte EFFECT_TEETER_DANCE
 	.byte EFFECT_OVERCLOCK
+	.byte EFFECT_CHALLENGE
 	.byte -1
 
 AI_PreferBatonPass::
@@ -3225,6 +3230,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_CHALLENGE
 	.byte -1
 
 AI_Unknown::

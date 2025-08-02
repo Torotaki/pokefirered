@@ -385,6 +385,7 @@ gBattleAnims_Moves::
 	.4byte Move_EXPLOIT
 	.4byte Move_TAKE_FLIGHT
 	.4byte Move_QUICK_WING
+	.4byte Move_CHALLENGE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10200,8 +10201,28 @@ Move_AQUAJET:
 Move_TAKE_FLIGHT:
 	goto Move_FLY
 	
-Move_TAKE_FLIGHT:
+Move_QUICK_WING:
 	goto Move_WING_ATTACK
+
+Move_CHALLENGE:
+	loadspritegfx ANIM_TAG_FINGER_2
+	loadspritegfx ANIM_TAG_ANGER
+	createvisualtask AnimTask_GrowAndShrink, 2
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createsprite gTauntFingerSpriteTemplate, ANIM_ATTACKER, 12, 0
+	delay 4
+	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER, 16, 2
+	waitforvisualfinish
+	delay 8
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, -20, -28
+	createsprite gAngerMarkSpriteTemplate, ANIM_ATTACKER, 2, 0, 20, -28
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	delay 12
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, 20, -28
+	createsprite gAngerMarkSpriteTemplate, ANIM_ATTACKER, 2, 0, -20, -28
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

@@ -435,7 +435,7 @@ const struct BattleTowerPokemonTemplate gBattleTowerLevel50Mons[] =
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_BITE,
-			MOVE_SKULL_BASH,
+			MOVE_SHELL_BASH,
 			MOVE_RAIN_DANCE,
 			MOVE_SURF
 		},

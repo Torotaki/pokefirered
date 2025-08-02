@@ -1131,7 +1131,7 @@ static const u16 sEasyChatWordsByLetter_N[] = {
 
 static const u16 sEasyChatWordsByLetter_O[] = {
     EC_WORD_OBLIVIOUS,
-    EC_MOVE(OCTAZOOKA),
+    EC_MOVE(AQUAJET),
     EC_POKEMON(OCTILLERY),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(ODDISH),
@@ -1473,7 +1473,7 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_WORD_SKILLED,
     EC_POKEMON(SKIPLOOM),
     EC_POKEMON2(SKITTY),
-    EC_MOVE2(SKULL_BASH),
+    EC_MOVE2(SHELL_BASH),
     EC_MOVE(SKY_ATTACK),
     EC_MOVE(SKY_UPPERCUT),
     EC_MOVE2(SLACK_OFF),
