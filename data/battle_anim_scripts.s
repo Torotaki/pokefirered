@@ -386,6 +386,7 @@ gBattleAnims_Moves::
 	.4byte Move_TAKE_FLIGHT
 	.4byte Move_QUICK_WING
 	.4byte Move_CHALLENGE
+	.4byte Move_HUNT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10223,6 +10224,9 @@ Move_CHALLENGE:
 	createsprite gAngerMarkSpriteTemplate, ANIM_ATTACKER, 2, 0, -20, -28
 	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
 	end
+
+Move_HUNT:
+	goto Move_PURSUIT
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

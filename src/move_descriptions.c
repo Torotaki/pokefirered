@@ -730,4 +730,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_TAKE_FLIGHT   - 1] = gMoveDescription_Fly,
     [MOVE_QUICK_WING    - 1] = gMoveDescription_FakeOut,
     [MOVE_CHALLENGE     - 1] = gMoveDescription_Challenge,
+    [MOVE_HUNT          - 1] = gMoveDescription_Pursuit,
 };
