@@ -727,5 +727,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POISON_LEAF   - 1] = gMoveDescription_PoisonBloom,
     [MOVE_EXPLOIT       - 1] = gMoveDescription_Exploit,
     [MOVE_TAKE_FLIGHT   - 1] = gMoveDescription_Fly,
-    [MOVE_QUICK_WING   - 1] = gMoveDescription_FakeOut,
+    [MOVE_QUICK_WING    - 1] = gMoveDescription_FakeOut,
+    [MOVE_HUNT          - 1] = gMoveDescription_Pursuit,
 };

@@ -385,6 +385,7 @@ gBattleAnims_Moves::
 	.4byte Move_EXPLOIT
 	.4byte Move_TAKE_FLIGHT
 	.4byte Move_QUICK_WING
+	.4byte Move_HUNT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10202,6 +10203,9 @@ Move_TAKE_FLIGHT:
 	
 Move_TAKE_FLIGHT:
 	goto Move_WING_ATTACK
+
+Move_HUNT:
+	goto Move_PURSUIT
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
