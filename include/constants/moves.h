@@ -131,7 +131,7 @@
 #define MOVE_WATERFALL 127
 #define MOVE_CLAMP 128
 #define MOVE_SWIFT 129
-#define MOVE_SKULL_BASH 130
+#define MOVE_SHELL_BASH 130
 #define MOVE_SPIKE_CANNON 131
 #define MOVE_CONSTRICT 132
 #define MOVE_AMNESIA 133
@@ -191,7 +191,7 @@
 #define MOVE_BELLY_DRUM 187
 #define MOVE_SLUDGE_BOMB 188
 #define MOVE_MUD_SLAP 189
-#define MOVE_OCTAZOOKA 190
+#define MOVE_AQUAJET 190
 #define MOVE_SPIKES 191
 #define MOVE_ZAP_CANNON 192
 #define MOVE_FORESIGHT 193
@@ -364,8 +364,10 @@
 #define MOVE_POISON_BLOOM 360
 #define MOVE_POISON_LEAF 361
 #define MOVE_EXPLOIT 362
+#define MOVE_TAKE_FLIGHT 363
+#define MOVE_QUICK_WING 364
 
-#define MOVES_COUNT 363
+#define MOVES_COUNT 365
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

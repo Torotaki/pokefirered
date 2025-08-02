@@ -254,16 +254,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WHIRLWIND] =
     {
-        .effect = EFFECT_ROAR,
-        .power = 0,
+        .effect = EFFECT_CLEAR_WEATHER_HIT,
+        .power = 50,
         .type = TYPE_FLYING,
         .accuracy = 100,
-        .pp = 20,
+        .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
-        .priority = -6,
+        .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
-        .category = CATEGORY_STATUS,
+        .category = CATEGORY_SPECIAL,
     },
 
     [MOVE_FLY] =
@@ -1332,7 +1332,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HYPNOSIS] =
     {
-        .effect = EFFECT_SLEEP,
+        .effect = EFFECT_CONFUSE,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 75,
@@ -1458,11 +1458,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DOUBLE_TEAM] =
     {
-        .effect = EFFECT_EVASION_UP,
+        .effect = EFFECT_SPEED_UP,
         .power = 0,
         .type = TYPE_FLYING,
         .accuracy = 0,
-        .pp = 15,
+        .pp = 20,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -1544,7 +1544,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_LOCK_ON_AND_DEF_BOOST2,
         .power = 0,
-        .type = TYPE_WATER,
+        .type = TYPE_STEEL,
         .accuracy = 100,
         .pp = 40,
         .secondaryEffectChance = 0,
@@ -1819,14 +1819,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_SPECIAL,
     },
 
-    [MOVE_SKULL_BASH] =
+    [MOVE_SHELL_BASH] =
     {
-        .effect = EFFECT_SKULL_BASH,
-        .power = 100,
+        .effect = EFFECT_DEFENSE_UP_HIT,
+        .power = 70,
         .type = TYPE_STEEL,
         .accuracy = 100,
-        .pp = 15,
-        .secondaryEffectChance = 0,
+        .pp = 25,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -2659,14 +2659,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_SPECIAL,
     },
 
-    [MOVE_OCTAZOOKA] =
+    [MOVE_AQUAJET] =
     {
-        .effect = EFFECT_ACCURACY_DOWN_HIT,
-        .power = 70,
+        .effect = EFFECT_HIT,
+        .power = 30,
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 30,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
@@ -2845,7 +2845,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_OUTLAST,
         .power = 0,
-        .type = TYPE_NORMAL,
+        .type = TYPE_BUG,
         .accuracy = 0,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -4021,7 +4021,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_REFRESH,
         .power = 0,
-        .type = TYPE_NORMAL,
+        .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -4972,7 +4972,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_HEALING_SEED] =
     {
         .effect = EFFECT_HEALING_SEED,
-        .power = 5,
+        .power = 10,
         .type = TYPE_GRASS,
         .accuracy = 100,
         .pp = 5,
@@ -5025,7 +5025,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_OVERCLOCK,
         .power = 0,
-        .type = TYPE_NORMAL,
+        .type = TYPE_BUG,
         .accuracy = 0,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -5070,6 +5070,32 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
+    },
+        [MOVE_TAKE_FLIGHT] =
+    {
+        .effect = EFFECT_FLY,
+        .power = 70,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
+    },
+    [MOVE_QUICK_WING] =
+    {
+        .effect = EFFECT_FAKE_OUT,
+        .power = 30,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 1,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_PHYSICAL,
     },

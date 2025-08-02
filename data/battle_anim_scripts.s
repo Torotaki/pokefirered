@@ -150,7 +150,7 @@ gBattleAnims_Moves::
 	.4byte Move_WATERFALL
 	.4byte Move_CLAMP
 	.4byte Move_SWIFT
-	.4byte Move_SKULL_BASH
+	.4byte Move_SHELL_BASH
 	.4byte Move_SPIKE_CANNON
 	.4byte Move_CONSTRICT
 	.4byte Move_AMNESIA
@@ -210,7 +210,7 @@ gBattleAnims_Moves::
 	.4byte Move_BELLY_DRUM
 	.4byte Move_SLUDGE_BOMB
 	.4byte Move_MUD_SLAP
-	.4byte Move_OCTAZOOKA
+	.4byte Move_AQUAJET
 	.4byte Move_SPIKES
 	.4byte Move_ZAP_CANNON
 	.4byte Move_FORESIGHT
@@ -383,6 +383,8 @@ gBattleAnims_Moves::
 	.4byte Move_POISON_BLOOM
 	.4byte Move_POISON_LEAF
 	.4byte Move_EXPLOIT
+	.4byte Move_TAKE_FLIGHT
+	.4byte Move_QUICK_WING
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -2886,7 +2888,7 @@ Move_METRONOME:
 	waitforvisualfinish
 	end
 
-Move_SKULL_BASH:
+Move_SHELL_BASH:
 	choosetwoturnanim SkullBashSetUp, SkullBashAttack
 SkullBashEnd:
 	end
@@ -10191,6 +10193,15 @@ Move_POISON_LEAF:
 
 Move_EXPLOIT:
 	goto Move_FAINT_ATTACK
+
+Move_AQUAJET:
+	goto Move_QUICK_ATTACK
+
+Move_TAKE_FLIGHT:
+	goto Move_FLY
+	
+Move_TAKE_FLIGHT:
+	goto Move_WING_ATTACK
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

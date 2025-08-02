@@ -3906,7 +3906,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_8 = {
 				{
 					.species = SPECIES_KINGDRA,
 					.heldItem = ITEM_SALAC_BERRY,
-					.moves = {MOVE_TWISTER, MOVE_OCTAZOOKA, MOVE_AURORA_BEAM, MOVE_RETURN},
+					.moves = {MOVE_TWISTER, MOVE_AQUAJET, MOVE_AURORA_BEAM, MOVE_RETURN},
 					.hpEV = 255,
 					.attackEV = 0,
 					.defenseEV = 0,
@@ -5997,7 +5997,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_7 = {
 				{
 					.species = SPECIES_OCTILLERY,
 					.heldItem = ITEM_SITRUS_BERRY,
-					.moves = {MOVE_OCTAZOOKA, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_FLAMETHROWER},
+					.moves = {MOVE_AQUAJET, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_FLAMETHROWER},
 					.hpEV = 55,
 					.attackEV = 0,
 					.defenseEV = 100,
@@ -6085,7 +6085,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_7 = {
 				{
 					.species = SPECIES_OCTILLERY,
 					.heldItem = ITEM_FOCUS_BAND,
-					.moves = {MOVE_OCTAZOOKA, MOVE_SLUDGE_BOMB, MOVE_THUNDER_WAVE, MOVE_HYPER_BEAM},
+					.moves = {MOVE_AQUAJET, MOVE_SLUDGE_BOMB, MOVE_THUNDER_WAVE, MOVE_HYPER_BEAM},
 					.hpEV = 155,
 					.attackEV = 100,
 					.defenseEV = 0,

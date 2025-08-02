@@ -5,7 +5,6 @@
 const u16 gEggMoves[] = {
     egg_moves(BULBASAUR,
               MOVE_LIGHT_SCREEN,
-              MOVE_SKULL_BASH,
               MOVE_SAFEGUARD,
               MOVE_CHARM,
               MOVE_PETAL_DANCE,
@@ -338,7 +337,7 @@ const u16 gEggMoves[] = {
               MOVE_ANCIENT_POWER,
               MOVE_BELLY_DRUM,
               MOVE_SCREECH,
-              MOVE_SKULL_BASH,
+              MOVE_SHELL_BASH,
               MOVE_PERISH_SONG,
               MOVE_SWORDS_DANCE),
 
@@ -399,7 +398,7 @@ const u16 gEggMoves[] = {
     egg_moves(HORSEA,
               MOVE_FLAIL,
               MOVE_AURORA_BEAM,
-              MOVE_OCTAZOOKA,
+              MOVE_AQUAJET,
               MOVE_DISABLE,
               MOVE_SPLASH,
               MOVE_DRAGON_RAGE,
@@ -795,7 +794,7 @@ const u16 gEggMoves[] = {
 
     egg_moves(REMORAID,
               MOVE_AURORA_BEAM,
-              MOVE_OCTAZOOKA,
+              MOVE_AQUAJET,
               MOVE_SUPERSONIC,
               MOVE_HAZE,
               MOVE_SCREECH,
@@ -1248,7 +1247,7 @@ const u16 gEggMoves[] = {
 
     egg_moves(RELICANTH,
               MOVE_MAGNITUDE,
-              MOVE_SKULL_BASH,
+              MOVE_SHELL_BASH,
               MOVE_WATER_SPORT,
               MOVE_AMNESIA,
               MOVE_SLEEP_TALK,

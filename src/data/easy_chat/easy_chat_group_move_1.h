@@ -77,7 +77,7 @@ static const u16 sEasyChatGroup_Move1[] = {
     MOVE_MORNING_SUN,
     MOVE_NATURE_POWER,
     MOVE_NIGHTMARE,
-    MOVE_OCTAZOOKA,
+    MOVE_AQUAJET,
     MOVE_ODOR_SLEUTH,
     MOVE_OUTRAGE,
     MOVE_OVERHEAT,
