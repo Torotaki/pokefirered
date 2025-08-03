@@ -314,6 +314,7 @@ static void Cmd_fixedhealing(void);
 static void Cmd_setaroma(void);
 static void Cmd_clearWeather(void);
 static void Cmd_payhpboostattackandspeed(void);
+static void Cmd_setsandtrap(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -569,6 +570,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setaroma,                                //0xF9
     Cmd_clearWeather,                            //0xFA
     Cmd_payhpboostattackandspeed,                //0xFB
+    Cmd_setsandtrap,                             //0xFC
 };
 
 struct StatFractions
@@ -811,6 +813,7 @@ static const u8 sTerrainToType[] =
     [BATTLE_TERRAIN_CAVE]       = TYPE_ROCK,
     [BATTLE_TERRAIN_BUILDING]   = TYPE_NORMAL,
     [BATTLE_TERRAIN_PLAIN]      = TYPE_NORMAL,
+    [BATTLE_TERRAIN_SAND_TRAP]  = TYPE_GROUND,
 };
 
 // - ITEM_ULTRA_BALL skips Master Ball and ITEM_NONE
@@ -6537,8 +6540,6 @@ static void Cmd_clearWeather(void)
     gBattlescriptCurrInstr++;
 }
 
-
-
 static void Cmd_setreflect(void)
 {
     if (gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] & SIDE_STATUS_REFLECT)
@@ -10084,4 +10085,20 @@ void ApplyFixedHealToActiveMon(void)
         gBattlescriptCurrInstr = failPtr;
     else
         gBattlescriptCurrInstr += 6;
+}
+
+static void Cmd_setsandtrap(void)
+{
+    if (gBattleTerrainEffect == B_TERRAIN_EFFECT_SAND_TRAP)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_FAILED;
+    }
+    else
+    {
+        gBattleTerrainEffect = B_TERRAIN_EFFECT_SAND_TRAP;
+        gBattleTerrain = BATTLE_TERRAIN_SAND_TRAP;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAND_TRAP;
+    }
+    gBattlescriptCurrInstr++;
 }

@@ -363,6 +363,7 @@ const u8 gMoveDescription_Overclock[] = _("Pays 2/3 of Max HP\nto boost ATTACK\n
 const u8 gMoveDescription_PoisonBloom[] = _("The foe is Struck\nwith poison.\nIt will poison\nthe user.");
 const u8 gMoveDescription_Exploit[] = _("An attack with\nincreased damage\nto poisoned and\nsleeping foes.");
 const u8 gMoveDescription_Challenge[] = _("Issues a challenge.\nIncreases attack\nand confuses the\nuser and the foe.");
+const u8 gMoveDescription_SandTrap[] = _("Sets SAND PIT.\nPrevents switching\nunless flying or\nground type.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -731,4 +732,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_QUICK_WING    - 1] = gMoveDescription_FakeOut,
     [MOVE_CHALLENGE     - 1] = gMoveDescription_Challenge,
     [MOVE_HUNT          - 1] = gMoveDescription_Pursuit,
+    [MOVE_SAND_TRAP     - 1] = gMoveDescription_SandTrap,
 };

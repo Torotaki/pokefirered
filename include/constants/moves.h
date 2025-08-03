@@ -368,8 +368,9 @@
 #define MOVE_QUICK_WING 364
 #define MOVE_CHALLENGE 365
 #define MOVE_HUNT 366
+#define MOVE_SAND_TRAP 367
 
-#define MOVES_COUNT 367
+#define MOVES_COUNT 368
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

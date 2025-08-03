@@ -391,8 +391,9 @@
 #define STRINGID_CLEAREDWEATHER 390
 #define STRINGID_OUTLASTBOOST 391
 #define STRINGID_PKMNCUTHPFORATTACKANDSPEED 392
+#define STRINGID_SETSANDTRAP 393
 
-#define BATTLESTRINGS_COUNT     393
+#define BATTLESTRINGS_COUNT     394
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -599,5 +600,9 @@
 #define B_MSG_DEFROSTED_BY_MOVE 1
 
 #define NUM_TRAPPING_MOVES 6
+
+// gMoveTerrainChangeStringIds
+#define B_MSG_TERRAIN_FAILED    0
+#define B_MSG_SET_SAND_TRAP     1
 
 #endif // GUARD_BATTLE_STRING_IDS_H

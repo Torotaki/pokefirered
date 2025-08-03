@@ -357,6 +357,7 @@ static const u8 sText_SunlightFaded[] = _("The sunlight faded.");
 static const u8 sText_StartedHail[] = _("It started to hail!");
 static const u8 sText_HailContinues[] = _("Hail continues to fall.");
 static const u8 sText_HailStopped[] = _("The hail stopped.");
+static const u8 sText_SetSandTrap[] = _("The battlers are\ntrapped in a sand pit!");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
 static const u8 sText_FailedToSwallow[] = _("But it failed to SWALLOW\na thing!");
 static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!");
@@ -902,7 +903,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNDISTRACTEDBYAROMA - BATTLESTRINGS_TABLE_START]         = sText_PkmnDistractedByAroma,
     [STRINGID_CLEAREDWEATHER - BATTLESTRINGS_TABLE_START]                = sText_WeatherCleared,
     [STRINGID_OUTLASTBOOST - BATTLESTRINGS_TABLE_START]                  = sText_OutlastBoost,
-    [STRINGID_PKMNCUTHPFORATTACKANDSPEED - BATTLESTRINGS_TABLE_START]    = sText_PkmnCutHPBoostAttackAndSpeed
+    [STRINGID_PKMNCUTHPFORATTACKANDSPEED - BATTLESTRINGS_TABLE_START]    = sText_PkmnCutHPBoostAttackAndSpeed,
+    [STRINGID_SETSANDTRAP - BATTLESTRINGS_TABLE_START]                   = sText_SetSandTrap
 };
 
 const u16 gMissStringIds[] =
@@ -933,6 +935,12 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
     [B_MSG_STARTED_AROMA]     = STRINGID_STARTEDAROMA,
     [B_MSG_CLEARED_WEATHER]   = STRINGID_CLEAREDWEATHER
+};
+
+const u16 gMoveTerrainChangeStringIds[] =
+{
+    [B_MSG_TERRAIN_FAILED]    = STRINGID_BUTITFAILED,
+    [B_MSG_SET_SAND_TRAP]     = STRINGID_SETSANDTRAP
 };
 
 const u16 gSandstormHailContinuesStringIds[] =

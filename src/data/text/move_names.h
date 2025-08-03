@@ -366,4 +366,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_QUICK_WING]    = _("QUICK WING"),
     [MOVE_CHALLENGE]     = _("CHALLENGE"),
     [MOVE_HUNT]          = _("HUNT"),
+    [MOVE_SAND_TRAP]     = _("SAND TRAP"),
 };

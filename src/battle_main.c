@@ -219,6 +219,7 @@ EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
 EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattleTerrainEffect = 0;
 
 COMMON_DATA void (*gPreBattleCallback1)(void) = NULL;
 COMMON_DATA void (*gBattleMainFunc)(void) = NULL;
@@ -2283,6 +2284,7 @@ static void BattleStartClearSetData(void)
     gBattlerAttacker = 0;
     gBattlerTarget = 0;
     gBattleWeather = 0;
+    gBattleTerrainEffect = 0;
 
     dataPtr = (u8 *)&gWishFutureKnock;
     for (i = 0; i < sizeof(struct WishFutureKnock); i++)
@@ -3081,6 +3083,15 @@ u8 IsRunningFromBattleImpossible(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         return BATTLE_RUN_FAILURE;
     }
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP
+        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+        && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT
+        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
+        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GROUND))
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        return BATTLE_RUN_FORBIDDEN;
+    }
     if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
      || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
     {
@@ -3232,7 +3243,13 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_SWITCH:
                     *(gBattleStruct->battlerPartyIndexes + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
-                    if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION) || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
+                    if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
+                     || gStatuses3[gActiveBattler] & STATUS3_ROOTED
+                     || (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP
+                        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
+                        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GROUND)
+                        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+                        && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT))
                     {
                         BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_CANT_SWITCH, 6, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }

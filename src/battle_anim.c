@@ -104,59 +104,61 @@ static void Cmd_visible(void);
 static void Cmd_teamattack_moveback(void);
 static void Cmd_teamattack_movefwd(void);
 static void Cmd_stopsound(void);
+static void Cmd_setbattleterrainbackground(void);
 
 #include "data/battle_anim.h"
 
 static void (*const sScriptCmdTable[])(void) =
 {
-    Cmd_loadspritegfx,        // 0x00
-    Cmd_unloadspritegfx,      // 0x01
-    Cmd_createsprite,         // 0x02
-    Cmd_createvisualtask,     // 0x03
-    Cmd_delay,                // 0x04
-    Cmd_waitforvisualfinish,  // 0x05
-    Cmd_nop,                  // 0x06
-    Cmd_nop2,                 // 0x07
-    Cmd_end,                  // 0x08
-    Cmd_playse,               // 0x09
-    Cmd_monbg,                // 0x0A
-    Cmd_clearmonbg,           // 0x0B
-    Cmd_setalpha,             // 0x0C
-    Cmd_blendoff,             // 0x0D
-    Cmd_call,                 // 0x0E
-    Cmd_return,               // 0x0F
-    Cmd_setarg,               // 0x10
-    Cmd_choosetwoturnanim,    // 0x11
-    Cmd_jumpifmoveturn,       // 0x12
-    Cmd_goto,                 // 0x13
-    Cmd_fadetobg,             // 0x14
-    Cmd_restorebg,            // 0x15
-    Cmd_waitbgfadeout,        // 0x16
-    Cmd_waitbgfadein,         // 0x17
-    Cmd_changebg,             // 0x18
-    Cmd_playsewithpan,        // 0x19
-    Cmd_setpan,               // 0x1A
-    Cmd_panse,                // 0x1B
-    Cmd_loopsewithpan,        // 0x1C
-    Cmd_waitplaysewithpan,    // 0x1D
-    Cmd_setbldcnt,            // 0x1E
-    Cmd_createsoundtask,      // 0x1F
-    Cmd_waitsound,            // 0x20
-    Cmd_jumpargeq,            // 0x21
-    Cmd_monbg_static,         // 0x22
-    Cmd_clearmonbg_static,    // 0x23
-    Cmd_jumpifcontest,        // 0x24
-    Cmd_fadetobgfromset,      // 0x25
-    Cmd_panse_adjustnone,     // 0x26
-    Cmd_panse_adjustall,      // 0x27
-    Cmd_splitbgprio,          // 0x28
-    Cmd_splitbgprio_all,      // 0x29
-    Cmd_splitbgprio_foes,     // 0x2A
-    Cmd_invisible,            // 0x2B
-    Cmd_visible,              // 0x2C
-    Cmd_teamattack_moveback,  // 0x2D
-    Cmd_teamattack_movefwd,   // 0x2E
-    Cmd_stopsound,            // 0x2F
+    Cmd_loadspritegfx,              // 0x00
+    Cmd_unloadspritegfx,            // 0x01
+    Cmd_createsprite,               // 0x02
+    Cmd_createvisualtask,           // 0x03
+    Cmd_delay,                      // 0x04
+    Cmd_waitforvisualfinish,        // 0x05
+    Cmd_nop,                        // 0x06
+    Cmd_nop2,                       // 0x07
+    Cmd_end,                        // 0x08
+    Cmd_playse,                     // 0x09
+    Cmd_monbg,                      // 0x0A
+    Cmd_clearmonbg,                 // 0x0B
+    Cmd_setalpha,                   // 0x0C
+    Cmd_blendoff,                   // 0x0D
+    Cmd_call,                       // 0x0E
+    Cmd_return,                     // 0x0F
+    Cmd_setarg,                     // 0x10
+    Cmd_choosetwoturnanim,          // 0x11
+    Cmd_jumpifmoveturn,             // 0x12
+    Cmd_goto,                       // 0x13
+    Cmd_fadetobg,                   // 0x14
+    Cmd_restorebg,                  // 0x15
+    Cmd_waitbgfadeout,              // 0x16
+    Cmd_waitbgfadein,               // 0x17
+    Cmd_changebg,                   // 0x18
+    Cmd_playsewithpan,              // 0x19
+    Cmd_setpan,                     // 0x1A
+    Cmd_panse,                      // 0x1B
+    Cmd_loopsewithpan,              // 0x1C
+    Cmd_waitplaysewithpan,          // 0x1D
+    Cmd_setbldcnt,                  // 0x1E
+    Cmd_createsoundtask,            // 0x1F
+    Cmd_waitsound,                  // 0x20
+    Cmd_jumpargeq,                  // 0x21
+    Cmd_monbg_static,               // 0x22
+    Cmd_clearmonbg_static,          // 0x23
+    Cmd_jumpifcontest,              // 0x24
+    Cmd_fadetobgfromset,            // 0x25
+    Cmd_panse_adjustnone,           // 0x26
+    Cmd_panse_adjustall,            // 0x27
+    Cmd_splitbgprio,                // 0x28
+    Cmd_splitbgprio_all,            // 0x29
+    Cmd_splitbgprio_foes,           // 0x2A
+    Cmd_invisible,                  // 0x2B
+    Cmd_visible,                    // 0x2C
+    Cmd_teamattack_moveback,        // 0x2D
+    Cmd_teamattack_movefwd,         // 0x2E
+    Cmd_stopsound,                  // 0x2F
+    Cmd_setbattleterrainbackground, // 0x30
 };
 
 void ClearBattleAnimationVars(void)
@@ -1721,5 +1723,11 @@ static void Cmd_stopsound(void)
 {
     m4aMPlayStop(&gMPlayInfo_SE1);
     m4aMPlayStop(&gMPlayInfo_SE2);
+    sBattleAnimScriptPtr++;
+}
+
+static void Cmd_setbattleterrainbackground(void)
+{
+    LoadBattleTerrainGfx(gBattleTerrain);
     sBattleAnimScriptPtr++;
 }

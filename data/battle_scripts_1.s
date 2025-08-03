@@ -254,6 +254,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SWEET_SCENT_HIT
 	.4byte BattleScript_EffectExploit				 @ EFFECT_EXPLOIT
 	.4byte BattleScript_EffectChallenge				 @ EFFECT_CHALLENGE
+	.4byte BattleScript_EffectSandTrap				 @ EFFECT_SAND_TRAP
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1884,6 +1885,18 @@ BattleScript_EffectSunnyDay::
 	ppreduce
 	setsunny
 	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectSandTrap::
+	attackcanceler
+	attackstring
+	ppreduce
+	setsandtrap
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectDefenseUpHit::
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER

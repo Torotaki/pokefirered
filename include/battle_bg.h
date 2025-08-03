@@ -12,5 +12,6 @@ void LoadBattleMenuWindowGfx(void);
 void LoadBattleTextboxAndBackground(void);
 void BattleInitBgsAndWindows(void);
 void DrawMainBattleBackground(void);
+void LoadBattleTerrainGfx(u16 terrain);
 
 #endif // GUARD_BATTLE_BG_H

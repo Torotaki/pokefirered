@@ -387,6 +387,7 @@ gBattleAnims_Moves::
 	.4byte Move_QUICK_WING
 	.4byte Move_CHALLENGE
 	.4byte Move_HUNT
+	.4byte Move_SAND_TRAP
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10227,6 +10228,35 @@ Move_CHALLENGE:
 
 Move_HUNT:
 	goto Move_PURSUIT
+
+Move_SAND_TRAP:
+	loadspritegfx ANIM_TAG_MUD_SAND
+	call SandTrapDirtPlumes
+	delay 12
+	createvisualtask AnimTask_ShakeAndSinkMon, 5, ANIM_TARGET, 2, 1, 96, 30
+	createvisualtask AnimTask_ShakeAndSinkMon, 5, ANIM_ATTACKER, 2, 0, 96, 30
+	call SandTrapDirtPlumes
+	delay 12
+	call SandTrapDirtPlumes
+	setbattleterrainbackground
+	waitforvisualfinish
+	delay 16
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_TARGET, 2, 1, 0, 4
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 4
+	waitforvisualfinish
+	end
+
+SandTrapDirtPlumes:
+	createsprite gDirtPlumeSpriteTemplate, ANIM_TARGET, 2, 1, 0, 12, -48, -16, 24
+	createsprite gDirtPlumeSpriteTemplate, ANIM_TARGET, 2, 1, 0, 16, -16, -10, 24
+	createsprite gDirtPlumeSpriteTemplate, ANIM_TARGET, 2, 1, 1, 14, -52, -18, 24
+	createsprite gDirtPlumeSpriteTemplate, ANIM_TARGET, 2, 1, 1, 12, -32, -16, 24
+	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 12, -48, -16, 24
+	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 16, -16, -10, 24
+	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 14, -52, -18, 24
+	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 12, -32, -16, 24
+	playsewithpan SE_M_DIG, SOUND_PAN_TARGET
+	return
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

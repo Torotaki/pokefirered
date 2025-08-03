@@ -5125,4 +5125,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_PHYSICAL,
     },
+    [MOVE_SAND_TRAP] =
+    {
+        .effect = EFFECT_SAND_TRAP,
+        .power = 0,
+        .type = TYPE_GROUND,
+        .accuracy = 0,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .flags = 0,
+        .category = CATEGORY_STATUS,
+    },
 };

@@ -270,6 +270,10 @@
 	.macro stopsound
 	.byte 0x2f
 	.endm
+
+	.macro setbattleterrainbackground
+	.byte 0x30
+	.endm
 	
 @ useful macros
 	.macro jumpreteq value:req, ptr:req

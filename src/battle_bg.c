@@ -436,6 +436,12 @@ static const u32 sBattleTerrainPalette_Plain[] = INCBIN_U32("graphics/battle_ter
 static const u32 sBattleTerrainTiles_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.4bpp.lz");
 static const u32 sBattleTerrainTilemap_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.bin.lz");
 
+static const u32 sBattleTerrainPalette_uBuilding[] = INCBIN_U32("graphics/battle_terrain/unused/building/palette3.gbapal.lz");
+static const u32 sBattleTerrainTiles_uBuilding[] = INCBIN_U32("graphics/battle_terrain/unused/building/tiles.4bpp.lz");
+static const u32 sBattleTerrainTilemap_uBuilding[] = INCBIN_U32("graphics/battle_terrain/unused/building/map.bin.lz");
+static const u32 sBattleTerrainAnimTiles_uBuilding[] = INCBIN_U32("graphics/battle_terrain/unused/building/anim_tiles.4bpp.lz");
+static const u32 sBattleTerrainAnimTilemap_uBuilding[] = INCBIN_U32("graphics/battle_terrain/unused/building/anim_map.bin.lz");
+
 static const struct BattleBackground sBattleTerrainTable[] = {
     [BATTLE_TERRAIN_GRASS] =
     {
@@ -596,6 +602,14 @@ static const struct BattleBackground sBattleTerrainTable[] = {
         .entryTileset = sBattleTerrainAnimTiles_Building,
         .entryTilemap = sBattleTerrainAnimTilemap_Building,
         .palette = sBattleTerrainPalette_Champion
+    },
+    [BATTLE_TERRAIN_SAND_TRAP] =
+    {
+        .tileset = sBattleTerrainTiles_uBuilding,
+        .tilemap = sBattleTerrainTilemap_uBuilding,
+        .entryTileset = sBattleTerrainAnimTiles_uBuilding,
+        .entryTilemap = sBattleTerrainAnimTilemap_uBuilding,
+        .palette = sBattleTerrainPalette_uBuilding
     }
 };
 
@@ -641,7 +655,7 @@ static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
     return BATTLE_TERRAIN_PLAIN;
 }
 
-static void LoadBattleTerrainGfx(u16 terrain)
+void LoadBattleTerrainGfx(u16 terrain)
 {
     if (terrain >= NELEMS(sBattleTerrainTable))
         terrain = BATTLE_TERRAIN_PLAIN;
