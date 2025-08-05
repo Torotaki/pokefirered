@@ -6044,6 +6044,19 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
 
 void SetMonPreventsSwitchingString(void)
 {
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP
+        && gBattleMons[gActiveBattler].type1 != TYPE_FLYING
+        && gBattleMons[gActiveBattler].type2 != TYPE_FLYING
+        && gBattleMons[gActiveBattler].type1 != TYPE_GROUND
+        && gBattleMons[gActiveBattler].type2 != TYPE_GROUND
+        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+        && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT)
+    {
+        StringCopy_Nickname(gStringVar1, gPlayerParty[0].box.nickname);
+        BattleStringExpandPlaceholders(gText_TerrainPreventsSwitching, gStringVar4);
+        return;
+    }
+
     gLastUsedAbility = gBattleStruct -> abilityPreventingSwitchout;
     gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
     gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;

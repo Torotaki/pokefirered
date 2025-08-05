@@ -392,8 +392,9 @@
 #define STRINGID_OUTLASTBOOST 391
 #define STRINGID_PKMNCUTHPFORATTACKANDSPEED 392
 #define STRINGID_SETSANDTRAP 393
+#define STRINGID_TERRAIN_CANT_ESCAPE 394
 
-#define BATTLESTRINGS_COUNT     394
+#define BATTLESTRINGS_COUNT     395
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -584,6 +585,7 @@
 #define B_MSG_PREVENTS_ESCAPE      2
 #define B_MSG_CANT_ESCAPE_2        3
 #define B_MSG_ATTACKER_CANT_ESCAPE 4
+#define B_MSG_TERRAIN_CANT_ESCAPE  5
 
 // gGotPoisonedStringIds / gGotParalyzedStringIds / gFellAsleepStringIds
 // gGotBurnedStringIds / gGotFrozenStringIds / gAttractUsedStringIds

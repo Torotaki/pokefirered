@@ -79,6 +79,7 @@ static const u8 sText_PlayerWhiteout2[] = _("{B_PLAYER_NAME} whited out!{PAUSE_U
 static const u8 sText_PreventsEscape[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\nescape with {B_SCR_ACTIVE_ABILITY}!\p");
 static const u8 sText_CantEscape2[] = _("Can't escape!\p");
 static const u8 sText_AttackerCantEscape[] = _("{B_ATK_NAME_WITH_PREFIX} can't escape!");
+static const u8 sText_TerrainCantEscape[] = _("{B_ATK_NAME_WITH_PREFIX} is prevented from\nescaping by the SAND TRAP!\p");
 static const u8 sText_HitXTimes[] = _("Hit {B_BUFF1} time(s)!");
 static const u8 sText_PkmnFellAsleep[] = _("{B_EFF_NAME_WITH_PREFIX}\nfell asleep!");
 static const u8 sText_PkmnMadeSleep[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade {B_EFF_NAME_WITH_PREFIX} sleep!");
@@ -295,6 +296,7 @@ static const u8 sText_ItSuckedLiquidOoze[] = _("It sucked up the\nLIQUID OOZE!")
 static const u8 sText_PkmnTransformed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} transformed!");
 static const u8 sText_PkmnsXTookAttack[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ntook the attack!");
 const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}'s {B_LAST_ABILITY}\nprevents switching!\p");
+const u8 gText_TerrainPreventsSwitching[] = _("SAND TRAP prevents {B_COPY_VAR_1}\nfrom switching!\p");
 static const u8 sText_PreventedFromWorking[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s\l{B_BUFF1} from working!");
 static const u8 sText_PkmnsXMadeItIneffective[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it ineffective!");
 static const u8 sText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents flinching!");
@@ -904,7 +906,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_CLEAREDWEATHER - BATTLESTRINGS_TABLE_START]                = sText_WeatherCleared,
     [STRINGID_OUTLASTBOOST - BATTLESTRINGS_TABLE_START]                  = sText_OutlastBoost,
     [STRINGID_PKMNCUTHPFORATTACKANDSPEED - BATTLESTRINGS_TABLE_START]    = sText_PkmnCutHPBoostAttackAndSpeed,
-    [STRINGID_SETSANDTRAP - BATTLESTRINGS_TABLE_START]                   = sText_SetSandTrap
+    [STRINGID_SETSANDTRAP - BATTLESTRINGS_TABLE_START]                   = sText_SetSandTrap,
+    [STRINGID_TERRAIN_CANT_ESCAPE - BATTLESTRINGS_TABLE_START]           = sText_TerrainCantEscape
 };
 
 const u16 gMissStringIds[] =
@@ -922,7 +925,8 @@ const u16 gNoEscapeStringIds[] =
     [B_MSG_DONT_LEAVE_BIRCH]     = STRINGID_DONTLEAVEBIRCH,
     [B_MSG_PREVENTS_ESCAPE]      = STRINGID_PREVENTSESCAPE,
     [B_MSG_CANT_ESCAPE_2]        = STRINGID_CANTESCAPE2,
-    [B_MSG_ATTACKER_CANT_ESCAPE] = STRINGID_ATTACKERCANTESCAPE
+    [B_MSG_ATTACKER_CANT_ESCAPE] = STRINGID_ATTACKERCANTESCAPE,
+    [B_MSG_TERRAIN_CANT_ESCAPE]  = STRINGID_TERRAIN_CANT_ESCAPE
 };
 
 const u16 gMoveWeatherChangeStringIds[] =

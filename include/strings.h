@@ -190,6 +190,7 @@ extern const u8 gBattleText_GetPumped[];
 extern const u8 gBattleText_MistShroud[];
 extern const u8 gText_BadEgg[];
 extern const u8 gText_PkmnsXPreventsSwitching[];
+extern const u8 gText_TerrainPreventsSwitching[];
 extern const u8 *const gStatNamesTable[];
 
 // diploma

@@ -3089,8 +3089,8 @@ u8 IsRunningFromBattleImpossible(void)
         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GROUND))
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        return BATTLE_RUN_FORBIDDEN;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_CANT_ESCAPE;
+        return BATTLE_RUN_FAILURE;
     }
     if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
      || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
@@ -3251,7 +3251,7 @@ static void HandleTurnActionSelectionState(void)
                         && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
                         && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT))
                     {
-                        BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_CANT_SWITCH, 6, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
+                        BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_ABILITY_PREVENTS, 6, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }
                     else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
                           || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
