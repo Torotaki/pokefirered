@@ -388,6 +388,7 @@ gBattleAnims_Moves::
 	.4byte Move_CHALLENGE
 	.4byte Move_HUNT
 	.4byte Move_SAND_TRAP
+	.4byte Move_RAIN_FRONT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10257,6 +10258,9 @@ SandTrapDirtPlumes:
 	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 12, -32, -16, 24
 	playsewithpan SE_M_DIG, SOUND_PAN_TARGET
 	return
+
+Move_RAIN_FRONT:
+	goto Move_RAIN_DANCE
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
