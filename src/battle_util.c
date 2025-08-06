@@ -1847,6 +1847,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                 }
                 break;
+            case ABILITY_SAND_TRAPPER:
+                if (!(gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP))
+                {
+                    gBattleTerrainEffect = B_TERRAIN_EFFECT_SAND_TRAP;
+                    gBattleTerrain = BATTLE_TERRAIN_SAND_TRAP;
+                    BattleScriptPushCursorAndCallback(BattleScript_SandTrapperActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1

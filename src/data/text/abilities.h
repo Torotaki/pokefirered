@@ -80,6 +80,7 @@ static const u8 sSnowWarningDescription[] = _("Summons hail in battle.");
 static const u8 sResynthesisDescription[] = _("Being poisoned heals.");
 static const u8 sDraconicFlightDescription[] = _("Flies and boosts flying. Dislikes Weather.");
 static const u8 sVictoryRushDescription[] = _("KO's boosts SPEED.");
+static const u8 sSandTrapperDescription[] = _("Sets SAND TRAP on entry.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -165,6 +166,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_RESYNTHESIS] = sResynthesisDescription,
     [ABILITY_DRAGONFLIGHT] = sDraconicFlightDescription,
     [ABILITY_VICTORY_RUSH] = sVictoryRushDescription,
+    [ABILITY_SAND_TRAPPER] = sSandTrapperDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -251,4 +253,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_RESYNTHESIS] = _("RESYNTHESIS"),
     [ABILITY_DRAGONFLIGHT] = _("DRAGONFLIGHT"),
     [ABILITY_VICTORY_RUSH] = _("VICTORY RUSH"),
+    [ABILITY_SAND_TRAPPER] = _("SAND TRAPPER"),
 };

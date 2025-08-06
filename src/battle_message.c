@@ -360,6 +360,7 @@ static const u8 sText_StartedHail[] = _("It started to hail!");
 static const u8 sText_HailContinues[] = _("Hail continues to fall.");
 static const u8 sText_HailStopped[] = _("The hail stopped.");
 static const u8 sText_SetSandTrap[] = _("The battlers are\ntrapped in a sand pit!");
+static const u8 sText_PkmnsXSetSandTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncreated a sand pit!");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
 static const u8 sText_FailedToSwallow[] = _("But it failed to SWALLOW\na thing!");
 static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!");
@@ -907,7 +908,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_OUTLASTBOOST - BATTLESTRINGS_TABLE_START]                  = sText_OutlastBoost,
     [STRINGID_PKMNCUTHPFORATTACKANDSPEED - BATTLESTRINGS_TABLE_START]    = sText_PkmnCutHPBoostAttackAndSpeed,
     [STRINGID_SETSANDTRAP - BATTLESTRINGS_TABLE_START]                   = sText_SetSandTrap,
-    [STRINGID_TERRAIN_CANT_ESCAPE - BATTLESTRINGS_TABLE_START]           = sText_TerrainCantEscape
+    [STRINGID_TERRAIN_CANT_ESCAPE - BATTLESTRINGS_TABLE_START]           = sText_TerrainCantEscape,
+    [STRINGID_PKMNSXSETSSANDTRAP - BATTLESTRINGS_TABLE_START]            = sText_PkmnsXSetSandTrap,
 };
 
 const u16 gMissStringIds[] =

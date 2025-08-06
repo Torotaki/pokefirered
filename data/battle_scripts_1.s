@@ -4243,6 +4243,13 @@ BattleScript_SnowWarningActivates::
 	call BattleScript_WeatherFormChanges
 	end3
 
+BattleScript_SandTrapperActivates::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNSXSETSSANDTRAP
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SET_SAND_TRAP
+	end3
+
 BattleScript_TookAttack::
 	attackstring
 	pause B_WAIT_TIME_SHORT

@@ -433,6 +433,7 @@ gBattleAnims_General::
 	.4byte General_SafariRockThrow          @ B_ANIM_ROCK_THROW
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
 	.4byte General_Aroma		            @ B_ANIM_AROMA_CONTINUES
+	.4byte General_SandTrap                 @ B_ANIM_SET_SAND_TRAP
 
 	.align 2
 gBattleAnims_Special::
@@ -10869,6 +10870,9 @@ General_Sandstorm:
 
 General_Hail:
 	goto Move_HAIL
+	
+General_SandTrap:
+	goto Move_SAND_TRAP
 
 General_LeechSeedDrain:
 	createvisualtask AnimTask_GetBattlersFromArg, 5
