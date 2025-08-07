@@ -370,8 +370,10 @@
 #define MOVE_HUNT 366
 #define MOVE_SAND_TRAP 367
 #define MOVE_RAIN_FRONT 368
+#define MOVE_TUNNELER 369
+#define MOVE_DESERT_RUSH 370
 
-#define MOVES_COUNT 369
+#define MOVES_COUNT 371
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

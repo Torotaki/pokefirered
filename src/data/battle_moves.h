@@ -450,8 +450,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HORN_DRILL] =
     {
-        .effect = EFFECT_SEMI_INVULNERABLE,
-        .power = 70,
+        .effect = EFFECT_DIG,
+        .power = 100,
         .type = TYPE_GROUND,
         .accuracy = 30,
         .pp = 25,
@@ -1277,7 +1277,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_DIG] =
     {
         .effect = EFFECT_DIG,
-        .power = 30,
+        .power = 40,
         .type = TYPE_GROUND,
         .accuracy = 100,
         .pp = 25,
@@ -5150,5 +5150,31 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED,
         .category = CATEGORY_SPECIAL,
+    },
+    [MOVE_TUNNELER] =
+    {
+        .effect = EFFECT_DIG,
+        .power = 70,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
+    },
+    [MOVE_DESERT_RUSH] =
+    {
+        .effect = EFFECT_SANDSTORM_HIT,
+        .power = 50,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
     },
 };
