@@ -10073,7 +10073,16 @@ void ApplyFixedHealToActiveMon(void)
     if (gBattlescriptCurrInstr[5] == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
     
-    gBattleMoveDamage = gBattleMoves[gCurrentMove].power;
+    switch (gBattleMoves[gCurrentMove].effect)
+    {
+    case EFFECT_HEAL_ALLY_PERCENT:
+        gBattleMoveDamage = gBattleMoves[gCurrentMove].power * gBattleMons[gBattlerTarget].maxHP / 100;
+        break;
+    case EFFECT_HEAL_ALLY_FIXED:
+    default:
+        gBattleMoveDamage = gBattleMoves[gCurrentMove].power;
+        break;
+    }
     
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
