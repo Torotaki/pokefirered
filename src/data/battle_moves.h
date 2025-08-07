@@ -4971,7 +4971,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HEALING_SEED] =
     {
-        .effect = EFFECT_HEALING_SEED,
+        .effect = EFFECT_HEAL_ALLY_FIXED,
         .power = 10,
         .type = TYPE_GRASS,
         .accuracy = 100,
@@ -4984,8 +4984,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     },
     [MOVE_PATCH_UP] =
     {
-        .effect = EFFECT_HEALING_SEED,
-        .power = 7,
+        .effect = EFFECT_HEAL_ALLY_PERCENT,
+        .power = 13,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 5,

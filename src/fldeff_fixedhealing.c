@@ -8,6 +8,7 @@
 #include "fldeff_softboiled.h"
 #include "battle_controllers.h"
 #include "battle_script_commands.h"
+#include "../include/constants/battle_move_effects.h"
 
 void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex);
 void Task_DisplayHPRestoredMessageAndClose(u8 taskId);
@@ -39,7 +40,7 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
 {
     u8 userPartyId = gPartyMenu.slotId;
     u8 recipientPartyId = gPartyMenu.slotId2;
-    u16 curHp, healPower;
+    u16 curHp, maxHp, healPower;
     u32 move;
     TaskFunc closingTask;
     bool8 isUsedInBattle = gPartyMenu.data[1]; 
@@ -51,35 +52,48 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
         gTasks[taskId].func = Task_HandleChooseMonInput;
     }
     else
-    {
-        u8 healMovePP, healMoveIndex;
-        GetHealMove(userPartyId, &healMovePP, &healMoveIndex);
-        curHp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_HP);
-
-        if (isUsedInBattle && userPartyId == recipientPartyId)
+    {        
+        if (isUsedInBattle && userPartyId == recipientPartyId) 
         {
             ApplyFixedHealToActiveMon();
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
             return;
         }
-
+        
+        curHp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_HP);
+        maxHp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_MAX_HP);
+        
         if (curHp == 0
-            || GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_MAX_HP) == curHp)
+            || maxHp == curHp)
             CantUseSoftboiledOnMon(taskId);
         else
         {
             PlaySE(SE_USE_ITEM);
-            healMovePP -= 1;
-            move = GetMonData(&gPlayerParty[userPartyId], MON_DATA_MOVE1 + healMoveIndex);
-            healPower = gBattleMoves[move].power;
-            SetMonData(&gPlayerParty[userPartyId], MON_DATA_PP1 + healMoveIndex, &healMovePP);
+            if (isUsedInBattle) {
+                move = gCurrentMove;
 
-            if (isUsedInBattle)
-            {
                 gBattlescriptCurrInstr += 6;
                 closingTask = Task_DisplayHPRestoredMessageAndClose;
             } else {
+                u8 healMovePP, healMoveIndex;
+
+                GetHealMove(userPartyId, &healMovePP, &healMoveIndex);
+                healMovePP -= 1;
+                move = GetMonData(&gPlayerParty[userPartyId], MON_DATA_MOVE1 + healMoveIndex);
+                SetMonData(&gPlayerParty[userPartyId], MON_DATA_PP1 + healMoveIndex, &healMovePP);
+
                 closingTask = Task_DisplayHPRestoredMessage;
+            }
+            
+            switch (gBattleMoves[move].effect)
+            {
+            case EFFECT_HEAL_ALLY_PERCENT:
+                healPower = gBattleMoves[move].power * maxHp / 100;
+                break;
+            case EFFECT_HEAL_ALLY_FIXED:
+            default:
+                healPower = gBattleMoves[move].power;
+                break;
             }
 
             PartyMenuModifyHP(taskId, recipientPartyId, 1, healPower, closingTask);
@@ -136,13 +150,6 @@ void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex)
 {
     u8 i, j;
     s16 fieldMove = gPartyMenu.data[0];
-
-    if (gPartyMenu.data[1])
-    {
-        *moveIndex = gCurrentMove;
-        *pp = GetMonData(&gPlayerParty[userPartyId], MON_DATA_PP1 + moveIndex);
-        return;
-    }
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {

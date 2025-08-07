@@ -235,7 +235,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCalmMind               @ EFFECT_CALM_MIND
 	.4byte BattleScript_EffectDragonDance            @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
-	.4byte BattleScript_EffectHealingSeed            @ EFFECT_HEALING_SEED
+	.4byte BattleScript_EffectHealingSeed            @ EFFECT_HEAL_ALLY_FIXED
 	.4byte BattleScript_EffectSweetScent             @ EFFECT_SWEET_SCENT
 	.4byte BattleScript_EffectPoisonSelfHit          @ EFFECT_POISON_SELF_HIT
 	.4byte BattleScript_EffectAromatherapy           @ EFFECT_AROMATHERAPY
@@ -255,6 +255,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectExploit				 @ EFFECT_EXPLOIT
 	.4byte BattleScript_EffectChallenge				 @ EFFECT_CHALLENGE
 	.4byte BattleScript_EffectSandTrap				 @ EFFECT_SAND_TRAP
+	.4byte BattleScript_EffectHealingSeed			 @ EFFECT_HEAL_ALLY_PERCENT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
