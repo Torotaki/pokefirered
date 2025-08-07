@@ -4977,7 +4977,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .accuracy = 100,
         .pp = 5,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_USER,
+        .target = MOVE_TARGET_PARTY,
         .priority = 0,
         .flags = FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_STATUS
@@ -5138,7 +5138,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
-        [MOVE_RAIN_FRONT] =
+    [MOVE_RAIN_FRONT] =
     {
         .effect = EFFECT_RAIN_DANCE_HIT,
         .power = 50,

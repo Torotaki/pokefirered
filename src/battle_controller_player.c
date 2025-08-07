@@ -457,7 +457,7 @@ void HandleInputChooseMove(void)
             moveTarget = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
         }
 
-        if (moveTarget & MOVE_TARGET_USER)
+        if (moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_PARTY))
             gMultiUsePlayerCursor = gActiveBattler;
         else
             gMultiUsePlayerCursor = GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) & BIT_SIDE) ^ BIT_SIDE);
@@ -469,13 +469,13 @@ void HandleInputChooseMove(void)
         }
         else // double battle
         {
-            if (!(moveTarget & (MOVE_TARGET_RANDOM | MOVE_TARGET_BOTH | MOVE_TARGET_DEPENDS | MOVE_TARGET_FOES_AND_ALLY | MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_USER)))
+            if (!(moveTarget & (MOVE_TARGET_RANDOM | MOVE_TARGET_BOTH | MOVE_TARGET_DEPENDS | MOVE_TARGET_FOES_AND_ALLY | MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_USER | MOVE_TARGET_PARTY)))
                 ++canSelectTarget; // either selected or user
             if (moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]] == 0)
             {
                 canSelectTarget = FALSE;
             }
-            else if (!(moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED)) && CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) <= 1)
+            else if (!(moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_PARTY)) && CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) <= 1)
             {
                 gMultiUsePlayerCursor = GetDefaultMoveTarget(gActiveBattler);
                 canSelectTarget = FALSE;
@@ -491,7 +491,7 @@ void HandleInputChooseMove(void)
         else
         {
             gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseTarget;
-            if (moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
+            if (moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_PARTY))
                 gMultiUsePlayerCursor = gActiveBattler;
             else if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)])
                 gMultiUsePlayerCursor = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
@@ -2917,6 +2917,7 @@ static void PreviewDeterminativeMoveTargets(void)
                      | gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]) << 16;
             startY = 8;
             break;
+        case MOVE_TARGET_PARTY:
         case MOVE_TARGET_USER:
             switch (move)
             {

@@ -10048,9 +10048,8 @@ static void Cmd_fixedhealing(void)
 {
     u8 battlerId;
     const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-    u8 fieldMove = getFieldMoveByMove(gCurrentMove);
-
-    if (fieldMove != FIELD_MOVE_END && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+ 
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER && gBattleMoves[gCurrentMove].target == MOVE_TARGET_PARTY)
     {        
         battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~PARTY_SCREEN_OPTIONAL);
         
@@ -10058,7 +10057,6 @@ static void Cmd_fixedhealing(void)
         *(gBattleStruct->battlerPartyIndexes + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
         gPartyMenu.slotId = gActiveBattler;
         gPartyMenu.slotId2 = gActiveBattler;
-        gPartyMenu.data[0] = fieldMove;
         gPartyMenu.data[1] = TRUE;
         
         BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_FIXED_HEAL_MOVE, *(gBattleStruct->monToSwitchIntoId + (gActiveBattler ^ 2)), 0, gBattleStruct->battlerPartyOrders[gActiveBattler]);

@@ -4094,7 +4094,8 @@ static void HandleAction_UseMove(void)
     else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
           && gSideTimers[side].followmeTimer == 0
           && (gBattleMoves[gCurrentMove].power != 0
-             || gBattleMoves[gCurrentMove].target != MOVE_TARGET_USER)
+             || (gBattleMoves[gCurrentMove].target != MOVE_TARGET_USER
+                && gBattleMoves[gCurrentMove].target != MOVE_TARGET_PARTY))
           && gBattleMons[*(gBattleStruct->moveTarget + gBattlerAttacker)].ability != ABILITY_LIGHTNING_ROD
           && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
     {

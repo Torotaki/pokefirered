@@ -64,7 +64,6 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
         }
 
         if (curHp == 0
-            || healMovePP < 1
             || GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_MAX_HP) == curHp)
             CantUseSoftboiledOnMon(taskId);
         else
@@ -138,6 +137,13 @@ void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex)
     u8 i, j;
     s16 fieldMove = gPartyMenu.data[0];
 
+    if (gPartyMenu.data[1])
+    {
+        *moveIndex = gCurrentMove;
+        *pp = GetMonData(&gPlayerParty[userPartyId], MON_DATA_PP1 + moveIndex);
+        return;
+    }
+
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         u16 move = GetMonData(&gPlayerParty[userPartyId], MON_DATA_MOVE1 + i);        
@@ -165,6 +171,13 @@ void Task_DisplayHPRestoredMessageAndClose(u8 taskId)
 
 void Task_TryUseMoveOnPartyMon(u8 taskId)
 {
+    if (gPartyMenu.data[1])
+    {
+        // We are in battle
+        Task_TryUseFixedHealingOnPartyMon(taskId);
+        return;
+    }
+
     switch (gPartyMenu.data[0])
     {
     case FIELD_MOVE_HEALING_SEED:
