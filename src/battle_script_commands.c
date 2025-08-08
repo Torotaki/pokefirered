@@ -9057,6 +9057,8 @@ static void Cmd_trycopyability(void)
 
 static void Cmd_trywish(void)
 {
+    u32 userMaxHP;
+
     switch (gBattlescriptCurrInstr[1])
     {
     case 0: // use wish
@@ -9073,8 +9075,14 @@ static void Cmd_trywish(void)
         break;
     case 1: // heal effect
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattlerTarget, gWishFutureKnock.wishMonId[gBattlerTarget])
+        userMaxHP = GetMonData(&gPlayerParty[gWishFutureKnock.wishMonId[gBattlerTarget]], MON_DATA_MAX_HP);
 
-        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+        gBattleMoveDamage = userMaxHP / 2;
+        if (gWishFutureKnock.wishMonId[gBattlerTarget] != gBattlerPartyIndexes[gBattlerTarget]
+            && GetMonAbility(&gPlayerParty[gWishFutureKnock.wishMonId[gBattlerTarget]]) == ABILITY_MEDIC) {
+            gBattleMoveDamage += userMaxHP / 8;
+        }
+
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         gBattleMoveDamage *= -1;

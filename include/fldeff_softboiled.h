@@ -2,6 +2,7 @@
 #define GUARD_FLDEFF_SOFTBOILED_H
 
 #include "global.h"
+#include "constants/abilities.h"
 
 void Task_SoftboiledRestoreHealth(u8 taskId);
 void Task_DisplayHPRestoredMessage(u8 taskId);

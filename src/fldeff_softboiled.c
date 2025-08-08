@@ -58,8 +58,19 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
 
 void Task_SoftboiledRestoreHealth(u8 taskId)
 {
+    u8 userPartyId = gPartyMenu.slotId;
+    u16 healPower;
+    u32 userMaxHp;
+
+    userMaxHp = GetMonData(&gPlayerParty[userPartyId], MON_DATA_MAX_HP);
+    healPower = userMaxHp / 5;
+    if (GetMonAbility(&gPlayerParty[userPartyId]) == ABILITY_MEDIC)
+    {
+        healPower += userMaxHp / 8;
+    }
+
     PlaySE(SE_USE_ITEM);
-    PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MAX_HP) / 5, Task_DisplayHPRestoredMessage);
+    PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, healPower, Task_DisplayHPRestoredMessage);
 }
 
 void Task_DisplayHPRestoredMessage(u8 taskId)

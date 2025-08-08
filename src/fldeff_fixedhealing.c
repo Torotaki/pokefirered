@@ -96,6 +96,11 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
                 break;
             }
 
+            if (GetMonAbility(&gPlayerParty[userPartyId]) == ABILITY_MEDIC)
+            {
+                healPower += GetMonData(&gPlayerParty[userPartyId], MON_DATA_MAX_HP) / 8;
+            }
+
             PartyMenuModifyHP(taskId, recipientPartyId, 1, healPower, closingTask);
         }
     }
