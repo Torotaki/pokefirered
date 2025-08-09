@@ -1816,6 +1816,12 @@ BattleScript_EffectSonicboom::
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectMorningSun::
+	attackcanceler
+	attackstring
+	ppreduce
+	recoverpartybasedonsunlight BattleScript_AlreadyAtFullHp
+	goto BattleScript_PresentHealTarget
+
 BattleScript_EffectSynthesis::
 BattleScript_EffectMoonlight::
 	attackcanceler

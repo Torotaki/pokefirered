@@ -315,6 +315,7 @@ static void Cmd_setaroma(void);
 static void Cmd_clearWeather(void);
 static void Cmd_payhpboostattackandspeed(void);
 static void Cmd_setsandtrap(void);
+static void Cmd_recoverpartybasedonsunlight(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -571,6 +572,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_clearWeather,                            //0xFA
     Cmd_payhpboostattackandspeed,                //0xFB
     Cmd_setsandtrap,                             //0xFC
+    Cmd_recoverpartybasedonsunlight,             //0xFD
 };
 
 struct StatFractions
@@ -10116,4 +10118,60 @@ static void Cmd_setsandtrap(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAND_TRAP;
     }
     gBattlescriptCurrInstr++;
+}
+
+static void Cmd_recoverpartybasedonsunlight(void)
+{
+    u16 species, i;
+    u32 currHp, maxHp, partyHealPower;
+
+    gBattlerTarget = gBattlerAttacker;
+
+    if (gBattleWeather == 0 || !WEATHER_HAS_EFFECT)
+        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+    else if (gBattleWeather & B_WEATHER_SUN)
+        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+    else // not sunny weather
+        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+
+    partyHealPower = gBattleMoveDamage;
+
+    if (gBattleMons[gBattlerAttacker].ability == ABILITY_MEDIC)
+    {
+        partyHealPower += gBattleMons[gBattlerAttacker].maxHP / 8;
+    }    
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (gBattlerPartyIndexes[gBattlerAttacker] != i)
+        {            
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+            if (species != SPECIES_NONE && species != SPECIES_EGG) {
+                currHp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+                if ((currHp + partyHealPower) > maxHp)
+                {
+                    currHp = maxHp;
+                } else {
+                    currHp += partyHealPower;
+                }
+
+                SetMonData(&gPlayerParty[i], MON_DATA_HP, &currHp);
+            }
+        }
+    }
+
+    gBattleMoveDamage *= -1;
+
+    if (gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP)
+    {
+        gBattlescriptCurrInstr += 5;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
 }
