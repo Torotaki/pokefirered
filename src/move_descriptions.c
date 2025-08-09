@@ -366,6 +366,7 @@ const u8 gMoveDescription_Challenge[] = _("Issues a challenge.\nIncreases attack
 const u8 gMoveDescription_SandTrap[] = _("Sets SAND PIT.\nPrevents switching\nunless flying or\nground type.");
 const u8 gMoveDescription_RainFront[] = _("Summons Rain.\nto strike the target.");
 const u8 gMoveDescription_DesertRush[] = _("Summons a\nSandstorm to strike\nthe foe.");
+const u8 gMoveDescription_Mirage[] = _("Inflicts Confusion.\nAlso burns the foe\nduring harsh\nsunlight.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -738,4 +739,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_RAIN_FRONT    - 1] = gMoveDescription_RainFront,
     [MOVE_TUNNELER      - 1] = gMoveDescription_Dig,
     [MOVE_DESERT_RUSH   - 1] = gMoveDescription_DesertRush,
+    [MOVE_MIRAGE        - 1] = gMoveDescription_Mirage,
 };

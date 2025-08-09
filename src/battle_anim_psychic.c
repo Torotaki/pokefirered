@@ -894,6 +894,8 @@ void AnimTask_ExtrasensoryDistortion(u8 taskId)
     u8 yOffset;
     struct ScanlineEffectParams scanlineParams;
     struct Task *task = &gTasks[taskId];
+
+    gBattleAnimTarget = gBattleAnimArgs[1];
     
     yOffset = GetBattlerYCoordWithElevation(gBattleAnimTarget);
     task->data[14] = yOffset - 32;

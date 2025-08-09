@@ -256,6 +256,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectChallenge				 @ EFFECT_CHALLENGE
 	.4byte BattleScript_EffectSandTrap				 @ EFFECT_SAND_TRAP
 	.4byte BattleScript_EffectHealingSeed			 @ EFFECT_HEAL_ALLY_PERCENT
+	.4byte BattleScript_EffectMirage			     @ EFFECT_MIRAGE
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -949,11 +950,53 @@ BattleScript_EffectConfuse::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectMirage::
+	attackcanceler
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_MirageOwnTempoPrevents
+	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_MirageAlreadyConfused
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	setmoveeffect MOVE_EFFECT_CONFUSION
+	seteffectprimary
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_MirageCheckSun::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_AddBurn
+	goto BattleScript_MoveEnd
+
+BattleScript_MirageOwnTempoPrevents::
+	call BattleScript_OwnTempoPreventsWithReturn
+	goto BattleScript_MirageCheckSun
+
+BattleScript_MirageAlreadyConfused::
+	call BattleScript_AlreadyConfusedWithReturn
+	goto BattleScript_MirageCheckSun
+
+BattleScript_AddBurn::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
+	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_MoveEnd
+	setmoveeffect MOVE_EFFECT_BURN
+	seteffectprimary
+	goto BattleScript_MoveEnd
+
 BattleScript_AlreadyConfused::
+	call BattleScript_AlreadyConfusedWithReturn
+	goto BattleScript_MoveEnd
+
+BattleScript_AlreadyConfusedWithReturn::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNALREADYCONFUSED
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	return
 
 BattleScript_EffectAttackUp2::
 	setstatchanger STAT_ATK, 2, FALSE

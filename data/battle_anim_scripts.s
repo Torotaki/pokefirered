@@ -391,6 +391,7 @@ gBattleAnims_Moves::
 	.4byte Move_RAIN_FRONT
 	.4byte Move_TUNNELER
 	.4byte Move_DESERT_RUSH
+	.4byte Move_MIRAGE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -4417,15 +4418,15 @@ Move_EXTRASENSORY:
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
-	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 0
+	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 0, ANIM_TARGET
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
-	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 1
+	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 1, ANIM_TARGET
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createvisualtask AnimTask_TransparentCloneGrowAndShrink, 5, ANIM_ATTACKER
-	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 2
+	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 2, ANIM_TARGET
 	playsewithpan SE_M_LEER, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	blendoff
@@ -10270,6 +10271,29 @@ Move_TUNNELER:
 
 Move_DESERT_RUSH:
 	goto Move_SAND_TOMB
+
+Move_MIRAGE:
+	monbg ANIM_ATK_PARTNER
+	setalpha 12, 8
+	createvisualtask AnimTask_BlendMonInAndOut, 4, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
+	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 0, ANIM_ATTACKER
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendMonInAndOut, 4, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
+	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 1, ANIM_ATTACKER
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendMonInAndOut, 4, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
+	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 0, ANIM_ATTACKER
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendMonInAndOut, 4, ANIM_ATTACKER, RGB(27, 27, 0), 12, 1, 1
+	createvisualtask AnimTask_ExtrasensoryDistortion, 5, 1, ANIM_ATTACKER
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	blendoff
+	clearmonbg ANIM_ATK_PARTNER
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
