@@ -3461,6 +3461,10 @@ u8 GetWeatherDoubleSpeedMultiplierForBattler(u8 battler) {
     if ((gBattleMons[battler].type1 == TYPE_FLYING || gBattleMons[battler].type2 == TYPE_FLYING || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
         && gBattleWeather & B_WEATHER_RAIN)
         return 1;
+
+    if ((gBattleMons[battler].type1 == TYPE_GRASS || gBattleMons[battler].type2 == TYPE_GRASS)
+        && gBattleWeather & B_WEATHER_SUN)
+        return 1;
     
     return 2;
 }

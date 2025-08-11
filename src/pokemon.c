@@ -2533,6 +2533,18 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 defense = 15 * defense / 10;
             }
         }
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            if (defender->type1 == TYPE_ROCK || defender->type2 == TYPE_ROCK)
+            {
+                spDefense = 15 * spDefense / 10;
+            }
+            if (defender->type1 == TYPE_FLYING || defender->type2 == TYPE_FLYING)
+            {
+                spDefense = 2 * spDefense / 3;
+                defense = 2 * defense / 3;
+            }
+        }
     }
     
 
@@ -2674,9 +2686,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 switch (type)
                 {
                 case TYPE_FIRE:
+                case TYPE_GRASS:
                     damage = (15 * damage) / 10;
                     break;
                 case TYPE_WATER:
+                case TYPE_ICE:
                     damage /= 2;
                     break;
                 }
