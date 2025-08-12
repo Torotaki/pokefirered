@@ -257,6 +257,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSandTrap				 @ EFFECT_SAND_TRAP
 	.4byte BattleScript_EffectHealingSeed			 @ EFFECT_HEAL_ALLY_PERCENT
 	.4byte BattleScript_EffectMirage			     @ EFFECT_MIRAGE
+	.4byte BattleScript_EffectWakeUpSlap			 @ EFFECT_WAKE_UP_SLAP
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2492,9 +2493,15 @@ BattleScript_EffectFocusPunch::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectWakeUpSlap::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
+	setmoveeffect MOVE_EFFECT_REMOVE_STATUS | MOVE_EFFECT_CERTAIN
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_SmellingsaltDoubleDmg
+	goto BattleScript_EffectHit
+
 BattleScript_EffectSmellingsalt::
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
-	setmoveeffect MOVE_EFFECT_REMOVE_PARALYSIS | MOVE_EFFECT_CERTAIN
+	setmoveeffect MOVE_EFFECT_REMOVE_STATUS | MOVE_EFFECT_CERTAIN
 	jumpifstatus BS_TARGET, STATUS1_PARALYSIS, BattleScript_SmellingsaltDoubleDmg
 	goto BattleScript_EffectHit
 BattleScript_SmellingsaltDoubleDmg::
@@ -4057,6 +4064,12 @@ BattleScript_CurseTurnDmg::
 
 BattleScript_TargetPRLZHeal::
 	printstring STRINGID_PKMNHEALEDPARALYSIS
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_TARGET
+	return
+
+BattleScript_TargetWokeUp::
+	printstring STRINGID_PKMNWOKEUPTARGET
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_TARGET
 	return

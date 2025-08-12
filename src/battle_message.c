@@ -163,6 +163,7 @@ static const u8 sText_PkmnEvadedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} evaded\nt
 static const u8 sText_PkmnSappedByLeechSeed[] = _("{B_ATK_NAME_WITH_PREFIX}'s health is\nsapped by LEECH SEED!");
 static const u8 sText_PkmnFastAsleep[] = _("{B_ATK_NAME_WITH_PREFIX} is fast\nasleep.");
 static const u8 sText_PkmnWokeUp[] = _("{B_ATK_NAME_WITH_PREFIX} woke up!");
+static const u8 sText_PkmnWokeUpTarget[] = _("{B_DEF_NAME_WITH_PREFIX} woke up!");
 static const u8 sText_PkmnUproarKeptAwake[] = _("But {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s UPROAR\nkept it awake!");
 static const u8 sText_PkmnWokeUpInUproar[] = _("{B_ATK_NAME_WITH_PREFIX} woke up\nin the UPROAR!");
 static const u8 sText_PkmnCausedUproar[] = _("{B_ATK_NAME_WITH_PREFIX} caused\nan UPROAR!");
@@ -910,6 +911,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_SETSANDTRAP - BATTLESTRINGS_TABLE_START]                   = sText_SetSandTrap,
     [STRINGID_TERRAIN_CANT_ESCAPE - BATTLESTRINGS_TABLE_START]           = sText_TerrainCantEscape,
     [STRINGID_PKMNSXSETSSANDTRAP - BATTLESTRINGS_TABLE_START]            = sText_PkmnsXSetSandTrap,
+    [STRINGID_PKMNWOKEUPTARGET - BATTLESTRINGS_TABLE_START]              = sText_PkmnWokeUpTarget,
 };
 
 const u16 gMissStringIds[] =
@@ -1026,7 +1028,8 @@ const u16 gStockpileUsedStringIds[] =
 const u16 gWokeUpStringIds[] =
 {
     [B_MSG_WOKE_UP]        = STRINGID_PKMNWOKEUP,
-    [B_MSG_WOKE_UP_UPROAR] = STRINGID_PKMNWOKEUPINUPROAR
+    [B_MSG_WOKE_UP_UPROAR] = STRINGID_PKMNWOKEUPINUPROAR,
+    [B_MSG_WOKE_UP_TARGET] = STRINGID_PKMNWOKEUPTARGET
 };
 
 const u16 gSwallowFailStringIds[] =

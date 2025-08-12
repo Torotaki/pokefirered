@@ -392,6 +392,7 @@ gBattleAnims_Moves::
 	.4byte Move_TUNNELER
 	.4byte Move_DESERT_RUSH
 	.4byte Move_MIRAGE
+	.4byte Move_WAKE_UP_SLAP
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10294,6 +10295,9 @@ Move_MIRAGE:
 	blendoff
 	clearmonbg ANIM_ATK_PARTNER
 	end
+
+Move_WAKE_UP_SLAP:
+	goto Move_SMELLING_SALT
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
