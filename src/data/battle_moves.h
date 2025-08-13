@@ -3095,12 +3095,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SACRED_FIRE] =
     {
-        .effect = EFFECT_THAW_HIT,
-        .power = 70,
+        .effect = EFFECT_SUNNY_DAY_HIT,
+        .power = 50,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 50,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
