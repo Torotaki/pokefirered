@@ -478,7 +478,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BODY_SLAM] =
     {
-        .effect = EFFECT_PARALYZE_HIT,
+        .effect = EFFECT_HIT,
         .power = 70,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -3305,7 +3305,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MOONLIGHT] =
     {
-        .effect = EFFECT_MOONLIGHT,
+        .effect = EFFECT_MORNING_SUN,
         .power = 0,
         .type = TYPE_ROCK,
         .accuracy = 0,
