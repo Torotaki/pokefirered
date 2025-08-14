@@ -368,6 +368,7 @@ const u8 gMoveDescription_RainFront[] = _("Summons Rain.\nto strike the target."
 const u8 gMoveDescription_DesertRush[] = _("Summons a\nSandstorm to strike\nthe foe.");
 const u8 gMoveDescription_Mirage[] = _("Inflicts Confusion.\nAlso burns the foe\nduring harsh\nsunlight.");
 const u8 gMoveDescription_WakeUpSlap[] = _("Doubly effective on\na sleeping foe,\nbut it also cures\nthe foe's sleep.");
+const u8 gMoveDescription_Lullaby[] = _("Puts both the user\nand the foe to\nsleep.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -742,4 +743,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_DESERT_RUSH   - 1] = gMoveDescription_DesertRush,
     [MOVE_MIRAGE        - 1] = gMoveDescription_Mirage,
     [MOVE_WAKE_UP_SLAP  - 1] = gMoveDescription_WakeUpSlap,
+    [MOVE_LULLABY       - 1] = gMoveDescription_WakeUpSlap,
 };

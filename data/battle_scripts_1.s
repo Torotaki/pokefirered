@@ -258,6 +258,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHealingSeed			 @ EFFECT_HEAL_ALLY_PERCENT
 	.4byte BattleScript_EffectMirage			     @ EFFECT_MIRAGE
 	.4byte BattleScript_EffectWakeUpSlap			 @ EFFECT_WAKE_UP_SLAP
+	.4byte BattleScript_EffectDoubleSleep			 @ EFFECT_DOUBLE_SLEEP
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2856,6 +2857,58 @@ BattleScript_TeeterDanceMissed::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_TeeterDanceLoopIncrement
+
+BattleScript_EffectDoubleSleep::
+	attackcanceler
+	attackstring
+	ppreduce
+	setbyte gBattlerTarget, 0
+	attackanimation
+	waitanimation
+BattleScript_DoubleSleepDanceLoop::
+	movevaluescleanup
+	setmoveeffect MOVE_EFFECT_SLEEP
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_DoubleSleepButItFailed
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_DoubleSleepAlreadyAsleep
+	jumpifcantmakeasleep BattleScript_DoubleSleepCantMakeAsleep
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_DoubleSleepButItFailed
+	accuracycheck BattleScript_DoubleSleepMissed, ACC_CURR_MOVE
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_DoubleSleepSafeguardProtected
+	seteffectprimary
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_DoubleSleepDanceLoopIncrement::
+	moveendto MOVEEND_NEXT_TARGET
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_DoubleSleepDanceLoop
+	end
+
+BattleScript_DoubleSleepCantMakeAsleep::
+	pause B_WAIT_TIME_SHORT
+	printfromtable gUproarAwakeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoubleSleepDanceLoopIncrement
+
+BattleScript_DoubleSleepButItFailed::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_BUTITFAILED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoubleSleepDanceLoopIncrement
+
+BattleScript_DoubleSleepAlreadyAsleep::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNALREADYASLEEP
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoubleSleepDanceLoopIncrement
+
+BattleScript_DoubleSleepMissed::
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoubleSleepDanceLoopIncrement
+
+BattleScript_DoubleSleepSafeguardProtected::
+	call BattleScript_SafeguardProtectedReturns
+	goto BattleScript_DoubleSleepDanceLoopIncrement
 
 BattleScript_EffectMudSport::
 BattleScript_EffectWaterSport::
