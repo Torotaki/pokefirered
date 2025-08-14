@@ -259,6 +259,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMirage			     @ EFFECT_MIRAGE
 	.4byte BattleScript_EffectWakeUpSlap			 @ EFFECT_WAKE_UP_SLAP
 	.4byte BattleScript_EffectDoubleSleep			 @ EFFECT_DOUBLE_SLEEP
+	.4byte BattleScript_EffectSetFog				 @ EFFECT_SET_FOG
+	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SET_FOG_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1902,6 +1904,13 @@ BattleScript_EffectSweetScent::
 	setaroma
 	goto BattleScript_MoveWeatherChange
 
+BattleScript_EffectSetFog::
+	attackcanceler
+	attackstring
+	ppreduce
+	setfog
+	goto BattleScript_MoveWeatherChange
+
 BattleScript_EffectClearWeather::
 	attackcanceler
 	attackstring
@@ -3459,6 +3468,12 @@ BattleScript_AromaContinues::
 	printfromtable gAromaStringIds
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_ATTACKER, B_ANIM_AROMA_CONTINUES
+	end2
+
+BattleScript_FogContinues::
+	printfromtable gAromaStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_FOG_CONTINUES
 	end2
 
 BattleScript_DamagingWeatherContinues::

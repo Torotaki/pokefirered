@@ -461,6 +461,7 @@ enum
     ENDTURN_SUN,
     ENDTURN_HAIL,
     ENDTURN_AROMA,
+    ENDTURN_FOG,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -633,17 +634,8 @@ u8 DoFieldEndTurnEffects(void)
             break;
         case ENDTURN_SANDSTORM:
             if (gBattleWeather & B_WEATHER_SANDSTORM)
-            {
-                if (!(gBattleWeather & B_WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
-                {
-                    gBattleWeather &= ~B_WEATHER_SANDSTORM_TEMPORARY;
-                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
-                }
-                else
-                {
-                    gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
-                }
-
+            {                
+                gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
                 gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SANDSTORM;
                 BattleScriptExecute(gBattlescriptCurrInstr);
@@ -694,6 +686,15 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_AROMA_CONTINUES;
                 BattleScriptExecute(BattleScript_AromaContinues);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_FOG:
+            if (gBattleWeather & B_WEATHER_FOG)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FOG_CONTINUES;
+                BattleScriptExecute(BattleScript_FogContinues);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
@@ -1788,7 +1789,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITY_SAND_STREAM:
-                if (!(gBattleWeather & B_WEATHER_SANDSTORM_PERMANENT))
+                if (!(gBattleWeather & B_WEATHER_SANDSTORM))
                 {
                     gBattleWeather = B_WEATHER_SANDSTORM;
                     BattleScriptPushCursorAndCallback(BattleScript_SandstreamActivates);

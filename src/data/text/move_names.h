@@ -373,4 +373,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_MIRAGE]        = _("MIRAGE"),
     [MOVE_WAKE_UP_SLAP]  = _("WAKE UP SLAP"),
     [MOVE_LULLABY]       = _("LULLABY"),
+    [MOVE_FOG]           = _("FOG"),
 };

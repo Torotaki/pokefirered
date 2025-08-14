@@ -316,6 +316,7 @@ static void Cmd_clearWeather(void);
 static void Cmd_payhpboostattackandspeed(void);
 static void Cmd_setsandtrap(void);
 static void Cmd_recoverpartybasedonsunlight(void);
+static void Cmd_setfog(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -573,6 +574,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_payhpboostattackandspeed,                //0xFB
     Cmd_setsandtrap,                             //0xFC
     Cmd_recoverpartybasedonsunlight,             //0xFD
+    Cmd_setfog,                                  //0xFE
 };
 
 struct StatFractions
@@ -1088,6 +1090,12 @@ static void Cmd_accuracycheck(void)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(gBattleMoves[move]))
             calc = (calc * 80) / 100; // 1.2 hustle loss
+        if ((WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_FOG)
+            && (gBattleMons[gBattlerAttacker].type1 != TYPE_GHOST && gBattleMons[gBattlerAttacker].type2 != TYPE_GHOST)
+            && gBattleMons[gBattlerAttacker].ability != ABILITY_ECHOLOCATION)
+        {
+                calc = (calc * 50) / 100; // Acc halved in FOG
+        }
 
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
         {
@@ -2844,7 +2852,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         gBattlescriptCurrInstr++;
                     else
                     {
-                        gBattleWeather = B_WEATHER_SANDSTORM_PERMANENT;
+                        gBattleWeather = B_WEATHER_SANDSTORM;
                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
                         gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
                     }
@@ -2856,6 +2864,16 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     {
                         gBattleWeather = B_WEATHER_AROMA;
                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_AROMA;
+                        gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
+                    }
+                    break;
+                case EFFECT_SET_FOG_HIT:
+                    if (gBattleWeather & B_WEATHER_FOG)
+                        gBattlescriptCurrInstr++;
+                    else
+                    {
+                        gBattleWeather = B_WEATHER_FOG;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_FOG;
                         gBattlescriptCurrInstr = BattleScript_PrintWeatherChange;
                     }
                     break;
@@ -3979,6 +3997,7 @@ static void Cmd_playanimation(void)
           || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_AROMA_CONTINUES
+          || gBattlescriptCurrInstr[2] == B_ANIM_FOG_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
@@ -4023,6 +4042,7 @@ static void Cmd_playanimation_var(void)
           || *animationIdPtr == B_ANIM_SUN_CONTINUES
           || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
           || *animationIdPtr == B_ANIM_AROMA_CONTINUES
+          || *animationIdPtr == B_ANIM_FOG_CONTINUES
           || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animationIdPtr, *argumentPtr);
@@ -6551,6 +6571,21 @@ static void Cmd_setaroma(void)
     gBattlescriptCurrInstr++;
 }
 
+static void Cmd_setfog(void)
+{
+    if (gBattleWeather & B_WEATHER_FOG)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
+    }
+    else
+    {
+        gBattleWeather = B_WEATHER_FOG;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_FOG;
+    }
+    gBattlescriptCurrInstr++;
+}
+
 static void Cmd_clearWeather(void)
 {
     if (gBattleWeather == 0)
@@ -7360,7 +7395,7 @@ static void Cmd_setsandstorm(void)
     }
     else
     {
-        gBattleWeather = B_WEATHER_SANDSTORM_PERMANENT;
+        gBattleWeather = B_WEATHER_SANDSTORM;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
     }
     gBattlescriptCurrInstr++;

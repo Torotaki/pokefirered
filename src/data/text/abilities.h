@@ -82,6 +82,7 @@ static const u8 sDraconicFlightDescription[] = _("Flies and boosts flying. Disli
 static const u8 sVictoryRushDescription[] = _("KO's boosts SPEED.");
 static const u8 sSandTrapperDescription[] = _("Sets SAND TRAP on entry.");
 static const u8 sMedicDescription[] = _("Add 1/8 of your max HP to ally heals.");
+static const u8 sEcholocationDescription[] = _("Negates the effects of FOG.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -169,6 +170,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_VICTORY_RUSH] = sVictoryRushDescription,
     [ABILITY_SAND_TRAPPER] = sSandTrapperDescription,
     [ABILITY_MEDIC] = sMedicDescription,
+    [ABILITY_ECHOLOCATION] = sEcholocationDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -257,4 +259,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_VICTORY_RUSH] = _("VICTORY RUSH"),
     [ABILITY_SAND_TRAPPER] = _("SAND TRAPPER"),
     [ABILITY_MEDIC] = _("MEDIC"),
+    [ABILITY_ECHOLOCATION] = _("ECHOLOCATION"),
 };

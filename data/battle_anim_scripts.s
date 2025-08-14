@@ -395,6 +395,7 @@ gBattleAnims_Moves::
 	.4byte Move_MIRAGE
 	.4byte Move_WAKE_UP_SLAP
 	.4byte Move_LULLABY
+	.4byte Move_FOG
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -441,6 +442,7 @@ gBattleAnims_General::
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
 	.4byte General_Aroma		            @ B_ANIM_AROMA_CONTINUES
 	.4byte General_SandTrap                 @ B_ANIM_SET_SAND_TRAP
+	.4byte General_Fog 		                @ B_ANIM_FOG_CONTINUES
 
 	.align 2
 gBattleAnims_Special::
@@ -10324,6 +10326,9 @@ Move_LULLABY:
 	waitforvisualfinish
 	end
 
+Move_FOG:
+	goto General_Fog
+
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -11181,6 +11186,9 @@ General_Aroma:
 	call SweetScentEffect
 	waitforvisualfinish
 	end
+
+General_Fog:
+	goto Move_HAZE
 
 SafariReaction_WatchingCarefully:
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET

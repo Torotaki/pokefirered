@@ -2676,8 +2676,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 if (type == TYPE_GRASS)
                     damage /= 2;
 
+            // Fog weakens Flying
+            if (gBattleWeather & B_WEATHER_FOG)
+                if (type == TYPE_FLYING && attacker->ability != ABILITY_ECHOLOCATION)
+                    damage /= 2;
+                    
             // Any weather except sun weakens solar beam
-            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL | B_WEATHER_FOG | B_WEATHER_AROMA)) && gCurrentMove == MOVE_SOLAR_BEAM)
                 damage /= 2;
 
             // Sun boosts Fire, weakens Water

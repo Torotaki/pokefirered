@@ -395,8 +395,10 @@
 #define STRINGID_TERRAIN_CANT_ESCAPE 394
 #define STRINGID_PKMNSXSETSSANDTRAP 395
 #define STRINGID_PKMNWOKEUPTARGET 396
+#define STRINGID_STARTEDFOG 397
+#define STRINGID_FOGCONTINUES 398
 
-#define BATTLESTRINGS_COUNT     397
+#define BATTLESTRINGS_COUNT     399
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -459,6 +461,7 @@
 #define B_MSG_STARTED_HAIL      5
 #define B_MSG_STARTED_AROMA     6
 #define B_MSG_CLEARED_WEATHER   7
+#define B_MSG_STARTED_FOG       8
 
 // gRainContinuesStringIds
 #define B_MSG_RAIN_CONTINUES     0
@@ -467,6 +470,7 @@
 
 // gAromaStringIds
 #define B_MSG_AROMA_CONTINUES   0
+#define B_MSG_FOG_CONTINUES     1
 
 // gSandStormHailContinuesStringIds / gSandStormHailDmgStringIds/ gSandStormHailEndStringIds
 #define B_MSG_SANDSTORM  0

@@ -43,6 +43,7 @@ extern const u8 BattleScript_Pausex20[];
 extern const u8 BattleScript_LevelUp[];
 extern const u8 BattleScript_RainContinuesOrEnds[];
 extern const u8 BattleScript_AromaContinues[];
+extern const u8 BattleScript_FogContinues[];
 extern const u8 BattleScript_DamagingWeatherContinues[];
 extern const u8 BattleScript_SandStormHailEnds[];
 extern const u8 BattleScript_SunlightContinues[];
