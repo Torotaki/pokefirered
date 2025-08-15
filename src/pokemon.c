@@ -2653,58 +2653,58 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
-        // Are effects of weather negated with cloud nine or air lock
-        if (WEATHER_HAS_EFFECT2)
-        {
-            // Rain weakens Fire, boosts Water and Electric
-            if (gBattleWeather & B_WEATHER_RAIN)
-            {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage /= 2;
-                    break;
-                case TYPE_ELECTRIC:
-                case TYPE_WATER:
-                    damage = (15 * damage) / 10;
-                    break;
-                }
-            }
-
-            // Sandstorm weakens Grass
-            if (gBattleWeather & B_WEATHER_SANDSTORM)
-                if (type == TYPE_GRASS)
-                    damage /= 2;
-
-            // Fog weakens Flying
-            if (gBattleWeather & B_WEATHER_FOG)
-                if (type == TYPE_FLYING && attacker->ability != ABILITY_ECHOLOCATION)
-                    damage /= 2;
-                    
-            // Any weather except sun weakens solar beam
-            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL | B_WEATHER_FOG | B_WEATHER_AROMA)) && gCurrentMove == MOVE_SOLAR_BEAM)
-                damage /= 2;
-
-            // Sun boosts Fire, weakens Water
-            if (gBattleWeather & B_WEATHER_SUN)
-            {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                case TYPE_GRASS:
-                    damage = (15 * damage) / 10;
-                    break;
-                case TYPE_WATER:
-                case TYPE_ICE:
-                    damage /= 2;
-                    break;
-                }
-            }
-        }
-
         // Flash fire triggered
         if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
+    }
+
+    // Are effects of weather negated with cloud nine or air lock
+    if (WEATHER_HAS_EFFECT2)
+    {
+        // Rain weakens Fire, boosts Water and Electric
+        if (gBattleWeather & B_WEATHER_RAIN)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage /= 2;
+                break;
+            case TYPE_ELECTRIC:
+            case TYPE_WATER:
+                damage = (15 * damage) / 10;
+                break; 
+            }
+        } 
+
+        // Sandstorm weakens Grass
+        if (gBattleWeather & B_WEATHER_SANDSTORM)
+            if (type == TYPE_GRASS)
+                damage /= 2;
+
+        // Fog weakens Flying
+        if (gBattleWeather & B_WEATHER_FOG)
+            if ((type == TYPE_FLYING) && (attacker->ability != ABILITY_ECHOLOCATION))
+                damage /= 2;
+                
+        // Any weather except sun weakens solar beam
+        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL | B_WEATHER_FOG | B_WEATHER_AROMA)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            damage /= 2;
+
+        // Sun boosts Fire, weakens Water
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+            case TYPE_GRASS:
+                damage = (15 * damage) / 10;
+                break;
+            case TYPE_WATER:
+            case TYPE_ICE:
+                damage /= 2;
+                break;
+            }
+        }
     }
 
     return damage + 2;
