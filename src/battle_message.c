@@ -352,6 +352,7 @@ static const u8 sText_AromaContinues[] = _("A sweet aroma continues to fill the 
 static const u8 sText_AromaStarted[] = _("A sweet aroma fills the air.");
 static const u8 sText_WeatherCleared[] = _("The weather returned to normal.");
 static const u8 sText_FogStarted[] = _("A thick fog blanketed the battlefield.");
+static const u8 sText_FogContinues[] = _("The battlefield is covered in fog.");
 static const u8 sText_SandstormBrewed[] = _("A sandstorm brewed!");
 static const u8 sText_SandstormRages[] = _("The sandstorm rages.");
 static const u8 sText_SandstormSubsided[] = _("The sandstorm subsided.");
@@ -914,7 +915,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSXSETSSANDTRAP - BATTLESTRINGS_TABLE_START]            = sText_PkmnsXSetSandTrap,
     [STRINGID_PKMNWOKEUPTARGET - BATTLESTRINGS_TABLE_START]              = sText_PkmnWokeUpTarget,
     [STRINGID_STARTEDFOG - BATTLESTRINGS_TABLE_START]                    = sText_FogStarted,
-    [STRINGID_FOGCONTINUES - BATTLESTRINGS_TABLE_START]                  = sText_FogStarted,
+    [STRINGID_FOGCONTINUES - BATTLESTRINGS_TABLE_START]                  = sText_FogContinues,
 };
 
 const u16 gMissStringIds[] =
