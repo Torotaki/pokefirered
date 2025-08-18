@@ -376,8 +376,9 @@
 #define MOVE_WAKE_UP_SLAP 372
 #define MOVE_LULLABY 373
 #define MOVE_FOG 374
+#define MOVE_DRAIN_LIFE 375
 
-#define MOVES_COUNT 375
+#define MOVES_COUNT 376
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
