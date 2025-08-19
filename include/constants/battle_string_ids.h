@@ -397,8 +397,9 @@
 #define STRINGID_PKMNWOKEUPTARGET 396
 #define STRINGID_STARTEDFOG 397
 #define STRINGID_FOGCONTINUES 398
+#define STRINGID_PKMNSXSUMMONEDAROMA 399
 
-#define BATTLESTRINGS_COUNT     399
+#define BATTLESTRINGS_COUNT     400
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

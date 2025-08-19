@@ -1815,6 +1815,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_FLORAL_SCENT:
+                if (!(gBattleWeather & B_WEATHER_AROMA))
+                {
+                    gBattleWeather = B_WEATHER_AROMA;
+                    BattleScriptPushCursorAndCallback(BattleScript_FloralScentActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
             case ABILITY_INTIMIDATE:
                 if (!(gSpecialStatuses[battler].intimidatedMon))
                 {

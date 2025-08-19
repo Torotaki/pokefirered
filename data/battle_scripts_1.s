@@ -4374,6 +4374,14 @@ BattleScript_SnowWarningActivates::
 	call BattleScript_WeatherFormChanges
 	end3
 
+BattleScript_FloralScentActivates::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNSXSUMMONEDAROMA
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_AROMA_CONTINUES
+	call BattleScript_WeatherFormChanges
+	end3
+
 BattleScript_SandTrapperActivates::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSXSETSSANDTRAP

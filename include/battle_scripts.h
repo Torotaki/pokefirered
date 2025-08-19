@@ -153,6 +153,7 @@ extern const u8 BattleScript_WeatherFormChangesLoop[];
 extern const u8 BattleScript_CastformChange[];
 extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_SnowWarningActivates[];
+extern const u8 BattleScript_FloralScentActivates[];
 extern const u8 BattleScript_SandTrapperActivates[];
 extern const u8 BattleScript_TookAttack[];
 extern const u8 BattleScript_SturdyPreventsOHKO[];
