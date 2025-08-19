@@ -317,6 +317,7 @@ static void Cmd_payhpboostattackandspeed(void);
 static void Cmd_setsandtrap(void);
 static void Cmd_recoverpartybasedonsunlight(void);
 static void Cmd_setfog(void);
+static void Cmd_getrandom(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -574,7 +575,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_payhpboostattackandspeed,                //0xFB
     Cmd_setsandtrap,                             //0xFC
     Cmd_recoverpartybasedonsunlight,             //0xFD
-    Cmd_setfog,                                  //0xFE
+    Cmd_setfog,                                  //0xFe
+    Cmd_getrandom,                               //0xFF
 };
 
 struct StatFractions
@@ -1009,6 +1011,7 @@ static bool8 AccuracyCalcHelper(u16 move)
     if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)
      || (gStatuses3[gBattlerTarget] & STATUS3_ON_AIR && gBattleMoves[move].effect == EFFECT_THUNDER)
      || (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS && gBattleMoves[move].effect == EFFECT_THUNDER)
+     || (WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_AROMA) && gBattleMoves[move].effect == EFFECT_SPORE)
      || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
     {
         JumpIfMoveFailed(7, move);
@@ -10233,4 +10236,11 @@ static void Cmd_recoverpartybasedonsunlight(void)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
+}
+
+static void Cmd_getrandom(void)
+{
+    u16 lessthan = T2_READ_16(gBattlescriptCurrInstr + 1);
+    gRandomResult = Random() % lessthan;
+    gBattlescriptCurrInstr += 3;
 }

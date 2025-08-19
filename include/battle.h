@@ -731,5 +731,6 @@ extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
 extern u8 gBattleTerrainEffect;
+extern u16 gRandomResult;
 
 #endif // GUARD_BATTLE_H

@@ -2059,10 +2059,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SPORE] =
     {
-        .effect = EFFECT_SLEEP,
+        .effect = EFFECT_SPORE,
         .power = 0,
         .type = TYPE_GRASS,
-        .accuracy = 100,
+        .accuracy = 50,
         .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,

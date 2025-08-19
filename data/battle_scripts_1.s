@@ -261,6 +261,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDoubleSleep			 @ EFFECT_DOUBLE_SLEEP
 	.4byte BattleScript_EffectSetFog				 @ EFFECT_SET_FOG
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SET_FOG_HIT
+	.4byte BattleScript_EffectSpore					 @ EFFECT_SPORE
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -308,6 +309,14 @@ BattleScript_MoveMissed::
 	effectivenesssound
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectSpore::
+	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_NotAffected
+	getrandom 3
+	jumpifhalfword CMP_EQUAL, gRandomResult, 0, BattleScript_EffectSleep
+	jumpifhalfword CMP_EQUAL, gRandomResult, 1, BattleScript_EffectParalyze
+	jumpifhalfword CMP_EQUAL, gRandomResult, 2, BattleScript_EffectPoison
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSleep::

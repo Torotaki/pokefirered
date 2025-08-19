@@ -192,6 +192,7 @@ EWRAM_DATA struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gPauseCounterBattle = 0;
 EWRAM_DATA u16 gPaydayMoney = 0;
 EWRAM_DATA u16 gRandomTurnNumber = 0;
+EWRAM_DATA u16 gRandomResult = 0;
 EWRAM_DATA u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT] = {0};
 EWRAM_DATA u8 gBattleOutcome = 0;
 EWRAM_DATA struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT] = {0};

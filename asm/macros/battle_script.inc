@@ -1281,6 +1281,11 @@
 	.byte 0xfe
 	.endm
 
+	.macro getrandom param0:req
+	.byte 0xff
+	.2byte \param0
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
