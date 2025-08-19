@@ -1545,7 +1545,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             
             if (gBattleWeather == B_WEATHER_AROMA)
             {   
-                if ((gBattleMons[gBattlerAttacker].type1 != TYPE_GRASS && gBattleMons[gBattlerAttacker].type2 != TYPE_GRASS) && (Random() % 4) == 0)
+                if (!(IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS) || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON)) && (Random() % 4) == 0)
                 {
                     gProtectStructs[gBattlerAttacker].prlzImmobility = 1;
                     // This is removed in FRLG and Emerald for some reason
