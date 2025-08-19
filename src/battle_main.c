@@ -3454,17 +3454,36 @@ void SwapTurnOrder(u8 id1, u8 id2)
 
 // Cannot return 0.5 so returning double and having it divide by 2 in calculation
 u8 GetWeatherDoubleSpeedMultiplierForBattler(u8 battler) {
-    if ((gBattleMons[battler].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
-        || (gBattleMons[battler].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
-        return 4;
     
-    if ((gBattleMons[battler].type1 == TYPE_FLYING || gBattleMons[battler].type2 == TYPE_FLYING || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
-        && gBattleWeather & B_WEATHER_RAIN)
-        return 1;
+    if (WEATHER_HAS_EFFECT)
+    {
+        if (gBattleWeather & B_WEATHER_RAIN)
+        {
+            if (gBattleMons[battler].ability == ABILITY_SWIFT_SWIM)
+                return 4;
 
-    if ((gBattleMons[battler].type1 == TYPE_GRASS || gBattleMons[battler].type2 == TYPE_GRASS)
-        && gBattleWeather & B_WEATHER_SUN)
-        return 1;
+            if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING) || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
+                return 1;
+        }
+
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            if (gBattleMons[battler].ability == ABILITY_CHLOROPHYLL)
+                return 4;
+
+            if (IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
+                return 1;
+        }
+
+        if (gBattleWeather & B_WEATHER_AROMA)
+        {
+            if (IS_BATTLER_OF_TYPE(battler, TYPE_GRASS) || IS_BATTLER_OF_TYPE(battler, TYPE_POISON))
+                return 2;
+
+            if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING) || IS_BATTLER_OF_TYPE(battler, TYPE_BUG) || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
+                return 1;
+        }
+    }
     
     return 2;
 }
