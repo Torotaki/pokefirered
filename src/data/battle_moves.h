@@ -927,7 +927,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_SUBMISSION] =
     {
         .effect = EFFECT_RECOIL,
-        .power = 60,
+        .power = 70,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 25,
@@ -1976,7 +1976,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_LEECH_LIFE] =
     {
         .effect = EFFECT_ABSORB,
-        .power = 20,
+        .power = 30,
         .type = TYPE_BUG,
         .accuracy = 100,
         .pp = 25,
@@ -5228,5 +5228,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = 0,
         .category = CATEGORY_STATUS,
+    },
+    [MOVE_DRAIN_LIFE] =
+    {
+        .effect = EFFECT_ABSORB,
+        .power = 50,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
     },
 };

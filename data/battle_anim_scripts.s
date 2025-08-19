@@ -396,6 +396,7 @@ gBattleAnims_Moves::
 	.4byte Move_WAKE_UP_SLAP
 	.4byte Move_LULLABY
 	.4byte Move_FOG
+	.4byte Move_DRAIN_LIFE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10328,6 +10329,9 @@ Move_LULLABY:
 
 Move_FOG:
 	goto General_Fog
+
+Move_DRAIN_LIFE:
+	goto Move_CRUNCH
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

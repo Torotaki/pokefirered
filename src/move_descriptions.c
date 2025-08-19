@@ -370,6 +370,7 @@ const u8 gMoveDescription_Mirage[] = _("Inflicts Confusion.\nAlso burns the foe\
 const u8 gMoveDescription_WakeUpSlap[] = _("Doubly effective on\na sleeping foe,\nbut it also cures\nthe foe's sleep.");
 const u8 gMoveDescription_Lullaby[] = _("Puts both the user\nand the foe to\nsleep.");
 const u8 gMoveDescription_Fog[] = _("Creates a thick fog\nthat lowers the\naccuracy of\nnon-GHOST POKéMON.");
+const u8 gMoveDescription_DrainLife[] = _("An attack that\nabsorbs half the\ndamage it inflicted\nto restore HP.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -746,4 +747,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_WAKE_UP_SLAP  - 1] = gMoveDescription_WakeUpSlap,
     [MOVE_LULLABY       - 1] = gMoveDescription_Lullaby,
     [MOVE_FOG           - 1] = gMoveDescription_Fog,
+    [MOVE_DRAIN_LIFE    - 1] = gMoveDescription_DrainLife,
 };

@@ -4160,7 +4160,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_SUPER_POTION, ITEM_FULL_HEAL},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_LeaderLtSurge),
+        .party = GET_LEADER_PARTY(sParty_LeaderLtSurge),
     },
     [TRAINER_LEADER_ERIKA] = {
         .trainerClass = TRAINER_CLASS_LEADER,
