@@ -84,6 +84,7 @@ static const u8 sSandTrapperDescription[] = _("Sets SAND TRAP on entry.");
 static const u8 sMedicDescription[] = _("Add 1/8 of your max HP to ally heals.");
 static const u8 sEcholocationDescription[] = _("Negates the effects of FOG.");
 static const u8 sFloralScentDescription[] = _("Summons aroma in battle.");
+static const u8 sAromaBoostDescription[] = _("Hits harder in aroma.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -173,6 +174,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MEDIC] = sMedicDescription,
     [ABILITY_ECHOLOCATION] = sEcholocationDescription,
     [ABILITY_FLORAL_SCENT] = sFloralScentDescription,
+    [ABILITY_AROMA_BOOST] = sAromaBoostDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -263,4 +265,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MEDIC] = _("MEDIC"),
     [ABILITY_ECHOLOCATION] = _("ECHOLOCATION"),
     [ABILITY_FLORAL_SCENT] = _("FLORAL SCENT"),
+    [ABILITY_AROMA_BOOST] = _("AROMA BOOST"),
 };

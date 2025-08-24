@@ -3478,7 +3478,7 @@ u8 GetWeatherDoubleSpeedMultiplierForBattler(u8 battler) {
 
         if (gBattleWeather & B_WEATHER_AROMA)
         {
-            if (IS_BATTLER_OF_TYPE(battler, TYPE_GRASS) || IS_BATTLER_OF_TYPE(battler, TYPE_POISON))
+            if (IS_BATTLER_OF_TYPE(battler, TYPE_GRASS) || IS_BATTLER_OF_TYPE(battler, TYPE_POISON) || gBattleMons[battler].ability == ABILITY_AROMA_BOOST)
                 return 2;
 
             if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING) || IS_BATTLER_OF_TYPE(battler, TYPE_BUG) || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)

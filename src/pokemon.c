@@ -2545,8 +2545,14 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 defense = 2 * defense / 3;
             }
         }
+        if (gBattleWeather & B_WEATHER_AROMA)
+        {
+            if (attacker->ability == ABILITY_AROMA_BOOST) {
+                attack = (150 * attack) / 100;
+                spAttack = (150 * spAttack) / 100;
+            }
+        }
     }
-    
 
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
