@@ -262,6 +262,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSetFog				 @ EFFECT_SET_FOG
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SET_FOG_HIT
 	.4byte BattleScript_EffectSpore					 @ EFFECT_SPORE
+	.4byte BattleScript_EffectDrainSeed				 @ EFFECT_DRAIN_SEED
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1250,6 +1251,50 @@ BattleScript_DoLeechSeed::
 	setseeded
 	attackanimation
 	waitanimation
+	printfromtable gLeechSeedStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectDrainSeed::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	typecalc
+	adjustnormaldamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	negativedamage
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_DrainSeedLiquidOoze
+	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB
+	goto BattleScript_DrainSeedUpdateHp
+BattleScript_DrainSeedLiquidOoze::
+	manipulatedamage DMG_CHANGE_SIGN
+	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB_OOZE
+BattleScript_DrainSeedUpdateHp::
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	jumpifmovehadnoeffect BattleScript_DrainSeedTryFainting
+	printfromtable gAbsorbDrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_DrainSeedTryFainting::
+	tryfaintmon BS_ATTACKER
+	tryfaintmon BS_TARGET
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MoveEnd
+	setseeded
+	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_MoveEnd
 	printfromtable gLeechSeedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
