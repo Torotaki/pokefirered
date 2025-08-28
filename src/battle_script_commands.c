@@ -1094,8 +1094,9 @@ static void Cmd_accuracycheck(void)
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(gBattleMoves[move]))
             calc = (calc * 80) / 100; // 1.2 hustle loss
         if ((WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_FOG)
-            && (gBattleMons[gBattlerAttacker].type1 != TYPE_GHOST && gBattleMons[gBattlerAttacker].type2 != TYPE_GHOST)
-            && gBattleMons[gBattlerAttacker].ability != ABILITY_ECHOLOCATION)
+            && (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+            && gBattleMons[gBattlerAttacker].ability != ABILITY_ECHOLOCATION
+            && gBattleMoves[move].effect != EFFECT_PURSUIT)
         {
                 calc = (calc * 50) / 100; // Acc halved in FOG
         }
@@ -8553,7 +8554,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
         && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
         && gBattleMons[gBattlerAttacker].hp
         && !gDisableStructs[gBattlerTarget].truantCounter
-        && gChosenMoveByBattler[gBattlerTarget] == MOVE_PURSUIT)
+        && gBattleMoves[gChosenMoveByBattler[gBattlerTarget]].effect == EFFECT_PURSUIT)
     {
         s32 i;
 
@@ -8563,7 +8564,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
                 gActionsByTurnOrder[i] = B_ACTION_TRY_FINISH;
         }
 
-        gCurrentMove = MOVE_PURSUIT;
+        gCurrentMove = gChosenMoveByBattler[gBattlerTarget];
         gCurrMovePos = gChosenMovePos = *(gBattleStruct->chosenMovePositions + gBattlerTarget);
         gBattlescriptCurrInstr += 5;
         gBattleScripting.animTurn = 1;
