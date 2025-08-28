@@ -4593,7 +4593,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SAND_TOMB] =
     {
-        .effect = EFFECT_TRAP,
+        .effect = EFFECT_SAND_TOMB,
         .power = 20,
         .type = TYPE_GROUND,
         .accuracy = 100,

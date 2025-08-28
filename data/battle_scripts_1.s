@@ -263,6 +263,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SET_FOG_HIT
 	.4byte BattleScript_EffectSpore					 @ EFFECT_SPORE
 	.4byte BattleScript_EffectDrainSeed				 @ EFFECT_DRAIN_SEED
+	.4byte BattleScript_EffectSandTomb				 @ EFFECT_SAND_TOMB
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2092,6 +2093,11 @@ BattleScript_SkullBashEnd::
 BattleScript_EffectTwister::
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN, BattleScript_HitDoubleDamageOnAir
 	jumpifstatus3 BS_TARGET, STATUS3_ON_AIR, BattleScript_HitDoubleDamageOnAir
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSandTomb::
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_SAND_TRAP, BattleScript_EffectHit
+	setmoveeffect MOVE_EFFECT_SPD_MINUS_1
 	goto BattleScript_EffectHit
 
 BattleScript_HitDoubleDamageOnAir::
