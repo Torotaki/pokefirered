@@ -752,4 +752,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_DRAIN_LIFE    - 1] = gMoveDescription_DrainLife,
     [MOVE_DRAIN_SEED    - 1] = gMoveDescription_DrainSeed,
     [MOVE_SCENTED_DEATH - 1] = gMoveDescription_ScentedDeath,
+    [MOVE_EARTH_SHAKE   - 1] = gMoveDescription_Magnitude,
 };

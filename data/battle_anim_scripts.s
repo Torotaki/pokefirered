@@ -399,6 +399,7 @@ gBattleAnims_Moves::
 	.4byte Move_DRAIN_LIFE
 	.4byte Move_DRAIN_SEED
 	.4byte Move_SCENTED_DEATH
+	.4byte Move_EARTH_SHAKE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10340,6 +10341,9 @@ Move_DRAIN_SEED:
 
 Move_SCENTED_DEATH:
 	goto Move_PETAL_DANCE
+
+Move_EARTH_SHAKE:
+	goto Move_MAGNITUDE
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
