@@ -379,8 +379,10 @@
 #define MOVE_DRAIN_LIFE 375
 #define MOVE_DRAIN_SEED 376
 #define MOVE_HEIST 377
+#define MOVE_SCENTED_DEATH 378
+#define MOVE_EARTH_SHAKE 379
 
-#define MOVES_COUNT 378
+#define MOVES_COUNT 380
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

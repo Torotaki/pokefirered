@@ -373,6 +373,7 @@ const u8 gMoveDescription_Fog[] = _("Creates a thick fog\nthat lowers the\naccur
 const u8 gMoveDescription_DrainLife[] = _("An attack that\nabsorbs half the\ndamage it inflicted\nto restore HP.");
 const u8 gMoveDescription_DrainSeed[] = _("An attack that\ndrains the foes HP\nand plants seeds\nwhich drains HP.");
 const u8 gMoveDescription_Heist[] = _("An attack that\nearns money after\nbattle and steals\nfoes held item.");
+const u8 gMoveDescription_ScentedDeath[] = _("A poisonous attack\nthat spreads aroma\non the Battlefield.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -752,4 +753,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_DRAIN_LIFE    - 1] = gMoveDescription_DrainLife,
     [MOVE_DRAIN_SEED    - 1] = gMoveDescription_DrainSeed,
     [MOVE_HEIST         - 1] = gMoveDescription_Heist,
+    [MOVE_SCENTED_DEATH - 1] = gMoveDescription_ScentedDeath,
+    [MOVE_EARTH_SHAKE   - 1] = gMoveDescription_Magnitude,
 };
