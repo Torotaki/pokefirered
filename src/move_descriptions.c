@@ -371,7 +371,8 @@ const u8 gMoveDescription_WakeUpSlap[] = _("Doubly effective on\na sleeping foe,
 const u8 gMoveDescription_Lullaby[] = _("Puts both the user\nand the foe to\nsleep.");
 const u8 gMoveDescription_Fog[] = _("Creates a thick fog\nthat lowers the\naccuracy of\nnon-GHOST POKéMON.");
 const u8 gMoveDescription_DrainLife[] = _("An attack that\nabsorbs half the\ndamage it inflicted\nto restore HP.");
-const u8 gMoveDescription_DrainSeed[] = _("An Attack that\ndrains the foes HP\nand plants seeds\nwhich drains HP.");
+const u8 gMoveDescription_DrainSeed[] = _("An attack that\ndrains the foes HP\nand plants seeds\nwhich drains HP.");
+const u8 gMoveDescription_Heist[] = _("An attack that\nearns money after\nbattle and steals\nfoes held item.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -750,4 +751,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_FOG           - 1] = gMoveDescription_Fog,
     [MOVE_DRAIN_LIFE    - 1] = gMoveDescription_DrainLife,
     [MOVE_DRAIN_SEED    - 1] = gMoveDescription_DrainSeed,
+    [MOVE_HEIST         - 1] = gMoveDescription_Heist,
 };

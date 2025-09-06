@@ -398,6 +398,7 @@ gBattleAnims_Moves::
 	.4byte Move_FOG
 	.4byte Move_DRAIN_LIFE
 	.4byte Move_DRAIN_SEED
+	.4byte Move_HEIST
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10336,6 +10337,28 @@ Move_DRAIN_LIFE:
 
 Move_DRAIN_SEED:
 	goto Move_LEECH_SEED
+
+Move_HEIST:
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_COIN
+	monbg ANIM_TARGET
+	delay 1
+	fadetobg BG_DARK
+	waitbgfadein
+	setalpha 12, 8
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 6, 4
+	delay 6
+	playsewithpan SE_M_PAY_DAY, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
+	createsprite gFallingCoinSpriteTemplate, ANIM_ATTACKER, 2
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 8, 1
+	waitforvisualfinish
+	delay 20
+	clearmonbg ANIM_TARGET
+	blendoff
+	restorebg
+	waitbgfadein
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

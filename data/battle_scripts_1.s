@@ -264,6 +264,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSpore					 @ EFFECT_SPORE
 	.4byte BattleScript_EffectDrainSeed				 @ EFFECT_DRAIN_SEED
 	.4byte BattleScript_EffectSandTomb				 @ EFFECT_SAND_TOMB
+	.4byte BattleScript_EffectHeist					 @ EFFECT_HEIST
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -297,6 +298,34 @@ BattleScript_HitFromAtkAnimation::
 	seteffectwithchance
 	tryfaintmon BS_TARGET
 BattleScript_MoveEnd::
+	moveendall
+	end
+
+BattleScript_EffectHitAndReturn::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	typecalc
+	adjustnormaldamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	return
+
+BattleScript_CheckFaintAndMoveEnd::
+	tryfaintmon BS_TARGET
 	moveendall
 	end
 
@@ -769,6 +798,13 @@ BattleScript_ImmunityProtected::
 BattleScript_EffectPayDay::
 	setmoveeffect MOVE_EFFECT_PAYDAY
 	goto BattleScript_EffectHit
+
+BattleScript_EffectHeist::
+	setmoveeffect MOVE_EFFECT_PAYDAY
+	call BattleScript_EffectHitAndReturn
+	setmoveeffect MOVE_EFFECT_STEAL_ITEM
+	seteffectprimary
+	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_EffectLightScreen::
 	attackcanceler
