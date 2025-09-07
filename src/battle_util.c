@@ -1730,7 +1730,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         GET_MOVE_TYPE(move, moveType);
 
         if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags)
-         && (gLastUsedAbility == ABILITY_INTIMIDATE || gLastUsedAbility == ABILITY_TRACE))
+         && (gLastUsedAbility == ABILITY_INTIMIDATE || gLastUsedAbility == ABILITY_TRACE || gLastUsedAbility == ABILITY_DISTRACT))
             return effect;
 
         switch (caseID)
@@ -1825,6 +1825,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITY_INTIMIDATE:
+            case ABILITY_DISTRACT:
                 if (!(gSpecialStatuses[battler].intimidatedMon))
                 {
                     gStatuses3[battler] |= STATUS3_INTIMIDATE_POKES;
@@ -2301,7 +2302,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     gLastUsedAbility = ABILITY_INTIMIDATE;
                     gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
+                    // gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK;
+                    gMultiHitCounter = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK;
                     BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
+                    gBattleStruct->intimidateBattler = i;
+                    effect++;
+                    break;
+                }
+                else if (gBattleMons[i].ability == ABILITY_DISTRACT && gStatuses3[i] & STATUS3_INTIMIDATE_POKES)
+                {
+                    gLastUsedAbility = ABILITY_DISTRACT;
+                    gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
+                    // gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK;
+                    gMultiHitCounter = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK;
+                    BattleScriptPushCursorAndCallback(BattleScript_DistractActivatesEnd3);
                     gBattleStruct->intimidateBattler = i;
                     effect++;
                     break;
@@ -2372,8 +2386,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     gLastUsedAbility = ABILITY_INTIMIDATE;
                     gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
+                    // gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK;
+                    gMultiHitCounter = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_IntimidateActivates;
+                    gBattleStruct->intimidateBattler = i;
+                    effect++;
+                    break;
+                }
+                else if (gBattleMons[i].ability == ABILITY_DISTRACT && (gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
+                {
+                    gLastUsedAbility = ABILITY_DISTRACT;
+                    gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
+                    // gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK;
+                    gMultiHitCounter = B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_DistractActivates;
                     gBattleStruct->intimidateBattler = i;
                     effect++;
                     break;

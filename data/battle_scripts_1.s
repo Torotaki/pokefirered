@@ -4439,7 +4439,11 @@ BattleScript_IntimidateActivationAnimLoop::
 	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_IntimidateFail
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring STRINGID_PKMNCUTSATTACKWITH
+	setbyte cMULTISTRING_CHOOSER, B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK
+	jumpifbyte CMP_EQUAL, gMultiHitCounter, 0, BattleScript_IntimidateActivationAnimLoopBeforePrintMsg
+	setbyte cMULTISTRING_CHOOSER, B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK
+BattleScript_IntimidateActivationAnimLoopBeforePrintMsg::
+	printfromtable gEntryStatChangeMonStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_IntimidateFail::
 	addbyte gBattlerTarget, 1
@@ -4447,6 +4451,17 @@ BattleScript_IntimidateFail::
 
 BattleScript_IntimidateEnd::
 	return
+
+BattleScript_DistractActivatesEnd3::
+	call BattleScript_DoDistractActivationAnim
+	end3
+
+BattleScript_DoDistractActivationAnim::
+	pause B_WAIT_TIME_SHORT
+BattleScript_DistractActivates::
+	setbyte gBattlerTarget, 0
+	setstatchanger STAT_SPATK, 1, TRUE
+	goto BattleScript_IntimidateActivationAnimLoop
 
 BattleScript_IntimidateAbilityFail::
 	pause B_WAIT_TIME_SHORT

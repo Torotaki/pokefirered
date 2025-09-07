@@ -398,8 +398,9 @@
 #define STRINGID_STARTEDFOG 397
 #define STRINGID_FOGCONTINUES 398
 #define STRINGID_PKMNSXSUMMONEDAROMA 399
+#define STRINGID_PKMNCUTSSPATTACKWITH 400
 
-#define BATTLESTRINGS_COUNT     400
+#define BATTLESTRINGS_COUNT     401
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -614,5 +615,9 @@
 // gMoveTerrainChangeStringIds
 #define B_MSG_TERRAIN_FAILED    0
 #define B_MSG_SET_SAND_TRAP     1
+
+// gEntryStatChangeMonStringIds
+#define B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK 0
+#define B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK 1
 
 #endif // GUARD_BATTLE_STRING_IDS_H
