@@ -1779,6 +1779,25 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
                 }
                 break;
+            case ABILITYEFFECT_SWITCH_IN_TERRAIN:
+                if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING)
+                    || gBattleMons[battler].ability == ABILITY_LEVITATE
+                    || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
+                    break;
+                if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
+                    && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER)) {
+                    gBattleScripting.battler = battler;
+                    gEffectBattler = battler;
+                    if (gBattleMons[battler].ability != ABILITY_OWN_TEMPO
+                        && !(gBattleMons[battler].status2 & STATUS2_SUBSTITUTE)
+                        && !(gSideStatuses[GET_BATTLER_SIDE(gEffectBattler)] & SIDE_STATUS_SAFEGUARD))
+                    {
+                        gBattleMons[battler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
+                    }
+                    BattleScriptPushCursorAndCallback(BattleScript_FloodingTryConfuse);
+                    effect++;
+                }
+                break;
             case ABILITY_DRIZZLE:
                 if (!(gBattleWeather & B_WEATHER_RAIN))
                 {

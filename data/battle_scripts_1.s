@@ -1034,6 +1034,7 @@ BattleScript_AddBurn::
 	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_FloodingPrevents
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_BURN
 	seteffectprimary
@@ -2050,6 +2051,22 @@ BattleScript_EffectSandTrap::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectWaterSport::
+	attackcanceler
+	attackstring
+	ppreduce
+	setflooding
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	jumpifstatus2 BS_ATTACKER, STATUS2_CONFUSION, BattleScript_MoveEnd
+	jumpifability BS_ATTACKER, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
+	seteffectprimary
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectDefenseUpHit::
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
@@ -2514,6 +2531,7 @@ BattleScript_EffectWillOWisp::
 	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_FloodingPrevents
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -2526,6 +2544,11 @@ BattleScript_EffectWillOWisp::
 BattleScript_WaterVeilPrevents::
 	copybyte gEffectBattler, gBattlerTarget
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABILITY_PREVENTS_MOVE_STATUS
+	call BattleScript_BRNPrevention
+	goto BattleScript_MoveEnd
+
+BattleScript_FloodingPrevents::
+	setbyte cMULTISTRING_CHOOSER, B_MSG_TERRAIN_PREVENTS_MOVE_STATUS
 	call BattleScript_BRNPrevention
 	goto BattleScript_MoveEnd
 
@@ -3016,7 +3039,6 @@ BattleScript_DoubleSleepSafeguardProtected::
 	goto BattleScript_DoubleSleepDanceLoopIncrement
 
 BattleScript_EffectMudSport::
-BattleScript_EffectWaterSport::
 	attackcanceler
 	attackstring
 	ppreduce
@@ -3773,6 +3795,24 @@ BattleScript_SpikesOnAttackerFainted::
 	getexp BS_ATTACKER
 	moveendall
 	goto BattleScript_HandleFaintedMon
+
+BattleScript_FloodingTryConfuse::
+	jumpifability BS_SCRIPTING, ABILITY_OWN_TEMPO, BattleScript_FloodingOwnTempoPrevents
+	jumpifsideaffecting BS_SCRIPTING, SIDE_STATUS_SAFEGUARD, BattleScript_FloodingSafeguardPrevents
+	jumpifstatus2 BS_SCRIPTING, STATUS2_SUBSTITUTE, BattleScript_FloodingEnds
+	chosenstatus2animation BS_SCRIPTING, STATUS2_CONFUSION
+	printstring STRINGID_PKMNWASCONFUSED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_FloodingEnds::
+	end3
+
+BattleScript_FloodingOwnTempoPrevents::
+	call BattleScript_OwnTempoPreventsWithReturn
+	end3
+
+BattleScript_FloodingSafeguardPrevents::
+	call BattleScript_SafeguardProtectedReturns
+	end3
 
 BattleScript_SpikesOnTarget::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE

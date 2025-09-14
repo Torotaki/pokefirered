@@ -553,6 +553,10 @@
 	.4byte \ptr
 	.endm
 
+	.macro get_terrain
+	.byte 0x5e
+	.endm
+
 @ useful script macros
 	.macro get_curr_move_type
 	get_type AI_TYPE_MOVE

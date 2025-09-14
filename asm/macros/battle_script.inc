@@ -1268,8 +1268,9 @@
 	.4byte \param0
 	.endm
 
-	.macro setsandtrap
+	.macro setterrain param0:req
 	.byte 0xfc
+	.byte \param0
 	.endm
 
 	.macro recoverpartybasedonsunlight param0:req
@@ -1284,6 +1285,15 @@
 	.macro getrandom param0:req
 	.byte 0xff
 	.2byte \param0
+	.endm
+
+@ set terrain macros
+	.macro setsandtrap
+	setterrain B_TERRAIN_EFFECT_SAND_TRAP
+	.endm
+
+	.macro setflooding
+	setterrain B_TERRAIN_EFFECT_FLOODING
 	.endm
 
 @ various command changed to more readable macros

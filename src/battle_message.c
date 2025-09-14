@@ -284,6 +284,7 @@ static const u8 sText_PkmnPreventsStatLossWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PR
 static const u8 sText_PkmnHurtsWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nhurt {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnTraced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!");
 static const u8 sText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!");
+static const u8 sText_FloodingPreventsBurns[] = _("FLOODING\nprevents burns!");
 static const u8 sText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!");
@@ -365,6 +366,7 @@ static const u8 sText_StartedHail[] = _("It started to hail!");
 static const u8 sText_HailContinues[] = _("Hail continues to fall.");
 static const u8 sText_HailStopped[] = _("The hail stopped.");
 static const u8 sText_SetSandTrap[] = _("The battlers are\ntrapped in a sand pit!");
+static const u8 sText_SetFlooding[] = _("The battlefield was\nflooded with water!");
 static const u8 sText_PkmnsXSetSandTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncreated a sand pit!");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
 static const u8 sText_FailedToSwallow[] = _("But it failed to SWALLOW\na thing!");
@@ -920,6 +922,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_FOGCONTINUES - BATTLESTRINGS_TABLE_START]                  = sText_FogContinues,
     [STRINGID_PKMNSXSUMMONEDAROMA - BATTLESTRINGS_TABLE_START]           = sText_PkmnsXSummonedAroma,
     [STRINGID_PKMNCUTSSPATTACKWITH - BATTLESTRINGS_TABLE_START]          = sText_PkmnCutsSpAttackWith,
+    [STRINGID_SETFLOODING - BATTLESTRINGS_TABLE_START]                   = sText_SetFlooding,
+    [STRINGID_FLOODINGPREVENTSBURN - BATTLESTRINGS_TABLE_START]          = sText_FloodingPreventsBurns,
 };
 
 const u16 gMissStringIds[] =
@@ -957,7 +961,8 @@ const u16 gMoveWeatherChangeStringIds[] =
 const u16 gMoveTerrainChangeStringIds[] =
 {
     [B_MSG_TERRAIN_FAILED]    = STRINGID_BUTITFAILED,
-    [B_MSG_SET_SAND_TRAP]     = STRINGID_SETSANDTRAP
+    [B_MSG_SET_SAND_TRAP]     = STRINGID_SETSANDTRAP,
+    [B_MSG_SET_FLOODING]      = STRINGID_SETFLOODING
 };
 
 const u16 gSandstormHailContinuesStringIds[] =
@@ -1260,7 +1265,8 @@ const u16 gBRNPreventionStringIds[] =
 {
     [B_MSG_ABILITY_PREVENTS_MOVE_STATUS]    = STRINGID_PKMNSXPREVENTSBURNS,
     [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
-    [B_MSG_STATUS_HAD_NO_EFFECT]            = STRINGID_PKMNSXHADNOEFFECTONY
+    [B_MSG_STATUS_HAD_NO_EFFECT]            = STRINGID_PKMNSXHADNOEFFECTONY,
+    [B_MSG_TERRAIN_PREVENTS_MOVE_STATUS]    = STRINGID_FLOODINGPREVENTSBURN
 };
 
 const u16 gPRLZPreventionStringIds[] =

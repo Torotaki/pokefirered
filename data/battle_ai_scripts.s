@@ -544,6 +544,8 @@ AI_CBM_WillOWisp::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus10
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus10
+	get_terrain
+	if_equal AI_TERRAIN_FLOODING, Score_Minus10
 @	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  @ Improvement in Emerald
 	end
 

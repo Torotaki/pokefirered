@@ -190,6 +190,7 @@
 #define SIDE_STATUS_FUTUREATTACK     (1 << 6)
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+#define SIDE_STATUS_TERRAIN_APPLIED  (1 << 10)
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)
@@ -217,7 +218,7 @@
 
 // Battle Terrain flags
 #define B_TERRAIN_EFFECT_SAND_TRAP    (1 << 0)
-#define B_TERRAIN_EFFECT_UNDEFINED1   (1 << 1)
+#define B_TERRAIN_EFFECT_FLOODING     (1 << 1)
 #define B_TERRAIN_EFFECT_UNDEFINED2   (1 << 2)
 #define B_TERRAIN_EFFECT_UNDEFINED3   (1 << 3)
 #define B_TERRAIN_EFFECT_UNDEFINED4   (1 << 4)

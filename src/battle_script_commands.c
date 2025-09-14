@@ -314,7 +314,9 @@ static void Cmd_fixedhealing(void);
 static void Cmd_setaroma(void);
 static void Cmd_clearWeather(void);
 static void Cmd_payhpboostattackandspeed(void);
+static void Cmd_setterrain(void);
 static void Cmd_setsandtrap(void);
+static void Cmd_setflooding(void);
 static void Cmd_recoverpartybasedonsunlight(void);
 static void Cmd_setfog(void);
 static void Cmd_getrandom(void);
@@ -573,9 +575,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setaroma,                                //0xF9
     Cmd_clearWeather,                            //0xFA
     Cmd_payhpboostattackandspeed,                //0xFB
-    Cmd_setsandtrap,                             //0xFC
+    Cmd_setterrain,                              //0xFC
     Cmd_recoverpartybasedonsunlight,             //0xFD
-    Cmd_setfog,                                  //0xFe
+    Cmd_setfog,                                  //0xFE
     Cmd_getrandom,                               //0xFF
 };
 
@@ -2271,6 +2273,16 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 gBattlescriptCurrInstr = BattleScript_BRNPrevention;
 
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STATUS_HAD_NO_EFFECT;
+                return;
+            }
+            if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
+                && (gHitMarker & HITMARKER_STATUS_ABILITY_EFFECT)
+                && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
+            {
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_BRNPrevention;
+
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_PREVENTS_MOVE_STATUS;
                 return;
             }
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_FIRE))
@@ -5132,6 +5144,11 @@ static void Cmd_switchineffects(void)
         else
             gBattlescriptCurrInstr = BattleScript_SpikesOnFaintedBattler;
     }
+    else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TERRAIN_APPLIED))
+    {
+        AbilityBattleEffects(0, gActiveBattler, 0, ABILITYEFFECT_SWITCH_IN_TERRAIN, 0);
+        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_TERRAIN_APPLIED;
+    }
     else
     {
         // There is a hack here in pokeemerald to ensure the truant counter will be 0 when the battler's next turn starts.
@@ -5146,6 +5163,7 @@ static void Cmd_switchineffects(void)
             && !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
         {
             gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~SIDE_STATUS_SPIKES_DAMAGED;
+            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~SIDE_STATUS_TERRAIN_APPLIED;
 
             for (i = 0; i < gBattlersCount; i++)
             {
@@ -10167,6 +10185,23 @@ void ApplyFixedHealToActiveMon(void)
         gBattlescriptCurrInstr += 6;
 }
 
+static void Cmd_setterrain(void)
+{
+    u8 terrain = gBattlescriptCurrInstr[1];
+
+    switch (terrain)
+    {
+    case B_TERRAIN_EFFECT_SAND_TRAP:
+        Cmd_setsandtrap();
+        break;
+    case B_TERRAIN_EFFECT_FLOODING:
+        Cmd_setflooding();
+        break;
+    }
+
+    gBattlescriptCurrInstr++;
+}
+
 static void Cmd_setsandtrap(void)
 {
     if (gBattleTerrainEffect == B_TERRAIN_EFFECT_SAND_TRAP)
@@ -10179,6 +10214,22 @@ static void Cmd_setsandtrap(void)
         gBattleTerrainEffect = B_TERRAIN_EFFECT_SAND_TRAP;
         gBattleTerrain = BATTLE_TERRAIN_SAND_TRAP;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAND_TRAP;
+    }
+    gBattlescriptCurrInstr++;
+}
+
+static void Cmd_setflooding(void)
+{
+    if (gBattleTerrainEffect == B_TERRAIN_EFFECT_FLOODING)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_FAILED;
+    }
+    else
+    {
+        gBattleTerrainEffect = B_TERRAIN_EFFECT_FLOODING;
+        gBattleTerrain = BATTLE_TERRAIN_WATER;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_FLOODING;
     }
     gBattlescriptCurrInstr++;
 }

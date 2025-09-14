@@ -97,6 +97,7 @@ static void Cmd_nullsub_33(void);
 static void Cmd_if_status_in_party(void);
 static void Cmd_if_status_not_in_party(void);
 static void Cmd_get_weather(void);
+static void Cmd_get_terrain(void);
 static void Cmd_if_effect(void);
 static void Cmd_if_not_effect(void);
 static void Cmd_if_stat_level_less_than(void);
@@ -240,6 +241,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_level_compare,                 // 0x5B
     Cmd_if_target_taunted,                // 0x5C
     Cmd_if_target_not_taunted,            // 0x5D
+    Cmd_get_terrain,                      // 0x5E
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1392,6 +1394,16 @@ static void Cmd_get_weather(void)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SUNNY;
     if (gBattleWeather & B_WEATHER_HAIL_TEMPORARY)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_HAIL;
+
+    sAIScriptPtr += 1;
+}
+
+static void Cmd_get_terrain(void)
+{
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP)
+        AI_THINKING_STRUCT->funcResult = AI_TERRAIN_SAND_TRAP;
+    if (gBattleWeather & B_TERRAIN_EFFECT_FLOODING)
+        AI_THINKING_STRUCT->funcResult = AI_TERRAIN_FLOODING;
 
     sAIScriptPtr += 1;
 }

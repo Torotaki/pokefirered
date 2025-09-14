@@ -2286,6 +2286,9 @@ static void BattleStartClearSetData(void)
     gBattlerTarget = 0;
     gBattleWeather = 0;
     gBattleTerrainEffect = 0;
+    if (gBattleTerrain == BATTLE_TERRAIN_WATER) {
+        gBattleTerrainEffect = B_TERRAIN_EFFECT_FLOODING;
+    }
 
     dataPtr = (u8 *)&gWishFutureKnock;
     for (i = 0; i < sizeof(struct WishFutureKnock); i++)
@@ -2864,6 +2867,7 @@ static void BattleIntroPlayerSendsOutMonAnimation(void)
     }
     gBattleStruct->switchInAbilitiesCounter = 0;
     gBattleStruct->switchInItemsCounter = 0;
+    gBattleStruct->switchInTerrainCounter = 0;
     gBattleStruct->overworldWeatherDone = FALSE;
 
     gBattleMainFunc = TryDoEventsBeforeFirstTurn;
@@ -2885,6 +2889,7 @@ static void BattleIntroSwitchInPlayerMons(void)
 
         gBattleStruct->switchInAbilitiesCounter = 0;
         gBattleStruct->switchInItemsCounter = 0;
+        gBattleStruct->switchInTerrainCounter = 0;
         gBattleStruct->overworldWeatherDone = FALSE;
 
         gBattleMainFunc = TryDoEventsBeforeFirstTurn;
@@ -2936,8 +2941,14 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (effect != 0)
             return;
     }
-    for (i = 0; i < gBattlersCount; i++) // pointless, ruby leftover
-        ;
+    while (gBattleStruct->switchInTerrainCounter < gBattlersCount)
+    {
+        if (AbilityBattleEffects(0, gBattlerByTurnOrder[gBattleStruct->switchInTerrainCounter], 0, ABILITYEFFECT_SWITCH_IN_TERRAIN, 0) != 0)
+            effect++;
+        ++gBattleStruct->switchInTerrainCounter;
+        if (effect != 0)
+            return;
+    }
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;

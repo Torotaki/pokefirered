@@ -399,8 +399,10 @@
 #define STRINGID_FOGCONTINUES 398
 #define STRINGID_PKMNSXSUMMONEDAROMA 399
 #define STRINGID_PKMNCUTSSPATTACKWITH 400
+#define STRINGID_SETFLOODING 401
+#define STRINGID_FLOODINGPREVENTSBURN 402
 
-#define BATTLESTRINGS_COUNT     401
+#define BATTLESTRINGS_COUNT     403
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -605,6 +607,7 @@
 #define B_MSG_ABILITY_PREVENTS_MOVE_STATUS    0
 #define B_MSG_ABILITY_PREVENTS_ABILITY_STATUS 1
 #define B_MSG_STATUS_HAD_NO_EFFECT            2
+#define B_MSG_TERRAIN_PREVENTS_MOVE_STATUS    3
 
 // gGotDefrostedStringIds
 #define B_MSG_DEFROSTED         0
@@ -615,6 +618,7 @@
 // gMoveTerrainChangeStringIds
 #define B_MSG_TERRAIN_FAILED    0
 #define B_MSG_SET_SAND_TRAP     1
+#define B_MSG_SET_FLOODING      2
 
 // gEntryStatChangeMonStringIds
 #define B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK 0
