@@ -375,6 +375,8 @@ const u8 gMoveDescription_DrainSeed[] = _("An attack that\ndrains the foes HP\na
 const u8 gMoveDescription_Heist[] = _("An attack that\nearns money after\nbattle and steals\nfoes held item.");
 const u8 gMoveDescription_ScentedDeath[] = _("A poisonous attack\nthat spreads aroma\non the Battlefield.");
 const u8 gMoveDescription_Flood[] = _("Sets FLOODING.\nConfuses non-flying\nnon-WATER POKéMON\non entry.");
+const u8 gMoveDescription_HighTide[] = _("Sets FLOODING and\nconfuses all\nPOKéMON.");
+const u8 gMoveDescription_TidalWave[] = _("An attack that also\nsets FLOODING.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -757,4 +759,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_SCENTED_DEATH - 1] = gMoveDescription_ScentedDeath,
     [MOVE_EARTH_SHAKE   - 1] = gMoveDescription_Magnitude,
     [MOVE_FLOOD         - 1] = gMoveDescription_Flood,
+    [MOVE_HIGH_TIDE     - 1] = gMoveDescription_HighTide,
+    [MOVE_TIDAL_WAVE    - 1] = gMoveDescription_TidalWave,
 };

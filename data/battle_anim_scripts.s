@@ -402,6 +402,8 @@ gBattleAnims_Moves::
 	.4byte Move_SCENTED_DEATH
 	.4byte Move_EARTH_SHAKE
 	.4byte Move_FLOOD
+	.4byte Move_HIGH_TIDE
+	.4byte Move_TIDAL_WAVE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10389,6 +10391,32 @@ Move_FLOOD:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 7, 0, RGB(0, 25, 28)
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
+	end
+
+Move_HIGH_TIDE:
+	loadspritegfx ANIM_TAG_MOON
+	setalpha 0, 16
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 16, RGB_BLACK
+	waitforvisualfinish
+	createsprite gMoonSpriteTemplate, ANIM_ATTACKER, 2, 120, 56
+	createvisualtask AnimTask_AlphaFadeIn, 3, 0, 16, 16, 0, 1
+	playsewithpan SE_M_MOONLIGHT, 0
+	delay 30
+	delay 30
+	delay 30
+	delay 30
+	delay 30
+	createvisualtask AnimTask_MoonlightEndFade, 2
+	setbattleterrainbackground
+	waitforvisualfinish
+	end
+
+Move_TIDAL_WAVE:
+	createvisualtask AnimTask_CreateSurfWave, 2, FALSE
+	delay 24
+	setbattleterrainbackground
+	panse SE_M_SURF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	waitforvisualfinish
 	end
 
 Move_COUNT:

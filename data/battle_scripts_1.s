@@ -266,6 +266,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSandTomb				 @ EFFECT_SAND_TOMB
 	.4byte BattleScript_EffectHeist					 @ EFFECT_HEIST
 	.4byte BattleScript_EffectFlood					 @ EFFECT_FLOOD
+	.4byte BattleScript_EffectFloodHit				 @ EFFECT_FLOOD_HIT
+	.4byte BattleScript_EffectHighTide				 @ EFFECT_HIGH_TIDE
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -304,6 +306,7 @@ BattleScript_MoveEnd::
 
 BattleScript_EffectHitAndReturn::
 	attackcanceler
+BattleScript_EffectHitAndReturnAfterCanceller::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
@@ -2066,7 +2069,7 @@ BattleScript_EffectWaterSport::
 	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
-	goto BattleScript_MoveEnd
+	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_EffectFlood::
 	attackcanceler
@@ -2077,8 +2080,29 @@ BattleScript_EffectFlood::
 	waitanimation
 	printfromtable gMoveTerrainChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
-	tryfaintmon BS_TARGET
-	goto BattleScript_MoveEnd
+	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_EffectFloodHit::
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_EffectHit
+	attackcanceler
+	setflooding
+	call BattleScript_EffectHitAndReturnAfterCanceller
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_EffectHighTide::
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_EffectTeeterDance
+	attackcanceler
+	attackstring
+	ppreduce
+	setflooding
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gBattlerTarget, 0
+	goto BattleScript_TeeterDanceLoop
 
 BattleScript_EffectDefenseUpHit::
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
@@ -2957,7 +2981,6 @@ BattleScript_EffectTeeterDance::
 BattleScript_TeeterDanceLoop::
 	movevaluescleanup
 	setmoveeffect MOVE_EFFECT_CONFUSION
-	jumpifbyteequal gBattlerAttacker, gBattlerTarget, BattleScript_TeeterDanceLoopIncrement
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_TeeterDanceOwnTempoPrevents
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_TeeterDanceSubstitutePrevents
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_TeeterDanceAlreadyConfused
