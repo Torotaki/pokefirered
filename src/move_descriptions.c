@@ -346,7 +346,7 @@ const u8 gMoveDescription_PoisonTail[] = _("An attack with a\nhigh critical-hit\
 const u8 gMoveDescription_Covet[] = _("A cutely executed\nattack that also\nsteals the foe's\nhold item.");
 const u8 gMoveDescription_VoltTackle[] = _("The user throws an\nelectrified tackle.\nIt hurts the user\na little.");
 const u8 gMoveDescription_MagicalLeaf[] = _("The foe is attacked\nwith a strange leaf\nthat cannot be\nevaded.");
-const u8 gMoveDescription_WaterSport[] = _("Weakens FIRE-type\nattacks while the\nuser is in the\nbattle.");
+const u8 gMoveDescription_WaterSport[] = _("Sets FLOODING but\nconfuses the user.");
 const u8 gMoveDescription_CalmMind[] = _("The user focuses\nits mind to raise\nthe SP. ATK and\nSP. DEF stats.");
 const u8 gMoveDescription_LeafBlade[] = _("The foe is slashed\nwith a sharp leaf.\nIt has a high\ncritical-hit ratio.");
 const u8 gMoveDescription_DragonDance[] = _("A mystic, powerful\ndance that boosts\nthe user's ATTACK\nand SPEED stats.");
@@ -374,6 +374,7 @@ const u8 gMoveDescription_DrainLife[] = _("An attack that\nabsorbs half the\ndam
 const u8 gMoveDescription_DrainSeed[] = _("An attack that\ndrains the foes HP\nand plants seeds\nwhich drains HP.");
 const u8 gMoveDescription_Heist[] = _("An attack that\nearns money after\nbattle and steals\nfoes held item.");
 const u8 gMoveDescription_ScentedDeath[] = _("A poisonous attack\nthat spreads aroma\non the Battlefield.");
+const u8 gMoveDescription_Flood[] = _("Sets FLOODING.\nConfuses non-flying\nnon-WATER POKéMON\non entry.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -755,4 +756,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_HEIST         - 1] = gMoveDescription_Heist,
     [MOVE_SCENTED_DEATH - 1] = gMoveDescription_ScentedDeath,
     [MOVE_EARTH_SHAKE   - 1] = gMoveDescription_Magnitude,
+    [MOVE_FLOOD         - 1] = gMoveDescription_Flood,
 };

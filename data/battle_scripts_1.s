@@ -265,6 +265,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDrainSeed				 @ EFFECT_DRAIN_SEED
 	.4byte BattleScript_EffectSandTomb				 @ EFFECT_SAND_TOMB
 	.4byte BattleScript_EffectHeist					 @ EFFECT_HEIST
+	.4byte BattleScript_EffectFlood					 @ EFFECT_FLOOD
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2065,6 +2066,18 @@ BattleScript_EffectWaterSport::
 	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectFlood::
+	attackcanceler
+	attackstring
+	ppreduce
+	setflooding
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectDefenseUpHit::

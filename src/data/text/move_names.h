@@ -379,4 +379,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_HEIST]         = _("HEIST"),
     [MOVE_SCENTED_DEATH] = _("DEATH SCENT"),
     [MOVE_EARTH_SHAKE]   = _("EARTH SHAKE"),
+    [MOVE_FLOOD]         = _("FLOOD"),
 };
