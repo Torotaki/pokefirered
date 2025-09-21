@@ -285,6 +285,8 @@ static const u8 sText_PkmnHurtsWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABI
 static const u8 sText_PkmnTraced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!");
 static const u8 sText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!");
 static const u8 sText_FloodingPreventsBurns[] = _("FLOODING\nprevents burns!");
+static const u8 sText_DiveFailedNoFlooding[] = _("But there was no\nFLOODING to hide in!");
+static const u8 sText_DigFailedFlooding[] = _("But the FLOODING\nprevented it!");
 static const u8 sText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!");
@@ -924,6 +926,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNCUTSSPATTACKWITH - BATTLESTRINGS_TABLE_START]          = sText_PkmnCutsSpAttackWith,
     [STRINGID_SETFLOODING - BATTLESTRINGS_TABLE_START]                   = sText_SetFlooding,
     [STRINGID_FLOODINGPREVENTSBURN - BATTLESTRINGS_TABLE_START]          = sText_FloodingPreventsBurns,
+    [STRINGID_DIVEFAILEDNOFLOODING - BATTLESTRINGS_TABLE_START]          = sText_DiveFailedNoFlooding,
+    [STRINGID_DIGFAILEDFLOODING - BATTLESTRINGS_TABLE_START]             = sText_DigFailedFlooding,
 };
 
 const u16 gMissStringIds[] =
@@ -1308,6 +1312,12 @@ const u16 gEntryStatChangeMonStringIds[] =
 {
     [B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK]  = STRINGID_PKMNCUTSATTACKWITH,
     [B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK]  = STRINGID_PKMNCUTSSPATTACKWITH,
+};
+
+const u16 gSemiInvulFailedStringIds[] =
+{
+    [B_MSG_DIVE_FAILED_NO_FLOODING]  = STRINGID_DIVEFAILEDNOFLOODING,
+    [B_MSG_DIG_FAILED_FLOODING]  = STRINGID_DIGFAILEDFLOODING,
 };
 
 // Index is determined in VARIOUS_GET_BATTLERS_FOR_RECALL by ORing flags for each present battler on the losing side.

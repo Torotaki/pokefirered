@@ -401,8 +401,10 @@
 #define STRINGID_PKMNCUTSSPATTACKWITH 400
 #define STRINGID_SETFLOODING 401
 #define STRINGID_FLOODINGPREVENTSBURN 402
+#define STRINGID_DIVEFAILEDNOFLOODING 403
+#define STRINGID_DIGFAILEDFLOODING 404
 
-#define BATTLESTRINGS_COUNT     403
+#define BATTLESTRINGS_COUNT     405
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -623,5 +625,9 @@
 // gEntryStatChangeMonStringIds
 #define B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK 0
 #define B_MSG_PKMN_ENTRY_ABILITY_LOWERED_SP_ATK 1
+
+// gSemiInvulFailedStringIds
+#define B_MSG_DIVE_FAILED_NO_FLOODING 0
+#define B_MSG_DIG_FAILED_FLOODING 1
 
 #endif // GUARD_BATTLE_STRING_IDS_H

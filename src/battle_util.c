@@ -1548,8 +1548,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 if (!(IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS) || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON) || gBattleMons[gBattlerAttacker].ability == ABILITY_AROMA_BOOST) && (Random() % 4) == 0)
                 {
                     gProtectStructs[gBattlerAttacker].prlzImmobility = 1;
-                    // This is removed in FRLG and Emerald for some reason
-                    //CancelMultiTurnMoves(gBattlerAttacker);
+                    CancelMultiTurnMoves(gBattlerAttacker);
                     gBattlescriptCurrInstr = BattleScript_MoveUsedDistracted;
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     effect = 1;
@@ -1888,6 +1887,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     gBattleTerrainEffect = B_TERRAIN_EFFECT_SAND_TRAP;
                     gBattleTerrain = BATTLE_TERRAIN_SAND_TRAP;
+                    CheckTerrainShiftUpdates();
                     BattleScriptPushCursorAndCallback(BattleScript_SandTrapperActivates);
                     gBattleScripting.battler = battler;
                     effect++;
@@ -3375,6 +3375,28 @@ u8 IsMonDisobedient(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = Random() & (NUM_LOAF_STRINGS - 1);
             gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
             return 1;
+        }
+    }
+}
+
+void CheckTerrainShiftUpdates(void)
+{
+    u32 statusToCheck;
+    u8 i;
+
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING)
+    {
+        statusToCheck = STATUS3_UNDERGROUND;
+    } else {
+        statusToCheck = STATUS3_UNDERWATER;
+    }
+    
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gStatuses3[i] & statusToCheck)
+        {
+            CancelMultiTurnMoves(i);
+            // battlescript
         }
     }
 }

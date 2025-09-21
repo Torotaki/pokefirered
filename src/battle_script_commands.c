@@ -10214,6 +10214,7 @@ static void Cmd_setsandtrap(void)
         gBattleTerrainEffect = B_TERRAIN_EFFECT_SAND_TRAP;
         gBattleTerrain = BATTLE_TERRAIN_SAND_TRAP;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAND_TRAP;
+        CheckTerrainShiftUpdates();
     }
     gBattlescriptCurrInstr++;
 }
@@ -10230,6 +10231,7 @@ static void Cmd_setflooding(void)
         gBattleTerrainEffect = B_TERRAIN_EFFECT_FLOODING;
         gBattleTerrain = BATTLE_TERRAIN_WATER;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_FLOODING;
+        CheckTerrainShiftUpdates();
     }
     gBattlescriptCurrInstr++;
 }

@@ -2348,6 +2348,15 @@ BattleScript_EffectSemiInvulnerable::
 	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIG
 	goto BattleScript_FirstTurnSemiInvulnerable
 
+BattleScript_SemiInvulFailed::
+	attackcanceler
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	printfromtable gSemiInvulFailedStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_CheckSecondTurnSemiInvulnerable::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_SecondTurnSemiInvulnerable
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_SecondTurnSemiInvulnerable
@@ -2359,14 +2368,30 @@ BattleScript_Fly::
 	goto BattleScript_FirstTurnSemiInvulnerable
 
 BattleScript_Dive::
-	call BattleScript_CheckSecondTurnSemiInvulnerable
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_DiveFailedNoFlooding
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_DiveSecondTurnSemiInvulnerable
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_DiveSecondTurnSemiInvulnerable
 	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIVE
 	goto BattleScript_FirstTurnSemiInvulnerable
 
+BattleScript_DiveSecondTurnSemiInvulnerable::
+	call BattleScript_PrepareSecondTurnSemiInvulnerable
+	setmoveeffect MOVE_EFFECT_CONFUSION
+	goto BattleScript_SemiInvulnerableTryHit
+
+BattleScript_DiveFailedNoFlooding::
+	setbyte cMULTISTRING_CHOOSER, B_MSG_DIVE_FAILED_NO_FLOODING
+	goto BattleScript_SemiInvulFailed
+
 BattleScript_Dig::
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_DigFailedFlooding
 	call BattleScript_CheckSecondTurnSemiInvulnerable
 	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DIG
 	goto BattleScript_FirstTurnSemiInvulnerable
+
+BattleScript_DigFailedFlooding::
+	setbyte cMULTISTRING_CHOOSER, B_MSG_DIG_FAILED_FLOODING
+	goto BattleScript_SemiInvulFailed	
 
 BattleScript_FirstTurnBounce::
 	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_BOUNCE
@@ -2383,12 +2408,17 @@ BattleScript_FirstTurnSemiInvulnerable::
 	setsemiinvulnerablebit
 	goto BattleScript_MoveEnd
 
-BattleScript_SecondTurnSemiInvulnerable::
+
+BattleScript_PrepareSecondTurnSemiInvulnerable::
 	attackcanceler
 	setmoveeffect MOVE_EFFECT_CHARGING
 	setbyte sB_ANIM_TURN, 1
 	clearstatusfromeffect BS_ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
+	return
+
+BattleScript_SecondTurnSemiInvulnerable::
+	call BattleScript_PrepareSecondTurnSemiInvulnerable
 	jumpifnotmove MOVE_BOUNCE, BattleScript_SemiInvulnerableTryHit
 	setmoveeffect MOVE_EFFECT_PARALYSIS
 BattleScript_SemiInvulnerableTryHit::
@@ -4222,6 +4252,7 @@ BattleScript_MoveUsedFlinched::
 BattleScript_MoveUsedDistracted::
 	printstring STRINGID_PKMNDISTRACTEDBYAROMA
 	waitmessage B_WAIT_TIME_LONG
+	statusanimation BS_ATTACKER
 	goto BattleScript_MoveEnd
 
 BattleScript_PrintUproarOverTurns::
