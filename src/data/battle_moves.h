@@ -4705,15 +4705,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HOWL] =
     {
-        .effect = EFFECT_ATTACK_UP,
+        .effect = EFFECT_HOWL,
         .power = 0,
         .type = TYPE_DARK,
-        .accuracy = 0,
+        .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_USER,
+        .target = MOVE_TARGET_BOTH,
         .priority = 0,
-        .flags = FLAG_SNATCH_AFFECTED,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_STATUS,
     },
 

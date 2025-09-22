@@ -271,6 +271,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_AntiUnderwaterHit			 @ EFFECT_ANTI_UNDERWATER_HIT
 	.4byte BattleScript_EffectSelfBurnHit			 @ EFFECT_SELF_BURN_HIT
 	.4byte BattleScript_EffectSelfConfusionHit		 @ EFFECT_SELF_CONFUSION_HIT
+	.4byte BattleScript_EffectHowl					 @ EFFECT_HOWL
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3299,6 +3300,24 @@ BattleScript_EffectCamouflage::
 	printstring STRINGID_PKMNCHANGEDTYPE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectHowl::
+	attackcanceler
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_HowlTryLowerAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_HowlTryLowerAtk
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_HowlTryLowerAtk::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MakeMoveMissed
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	goto BattleScript_EffectAttackDown
 
 BattleScript_EffectHealingSeed::
 	attackcanceler
