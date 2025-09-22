@@ -2376,6 +2376,9 @@ BattleScript_Dive::
 
 BattleScript_DiveSecondTurnSemiInvulnerable::
 	call BattleScript_PrepareSecondTurnSemiInvulnerable
+	jumpiftype BS_TARGET, TYPE_FLYING, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_LEVITATE, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_DRAGONFLIGHT, BattleScript_NotAffected
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	goto BattleScript_SemiInvulnerableTryHit
 
