@@ -520,12 +520,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_THRASH] =
     {
-        .effect = EFFECT_RAMPAGE,
+        .effect = EFFECT_SELF_CONFUSION_HIT,
         .power = 80,
         .type = TYPE_DARK,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 100,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_RANDOM,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,

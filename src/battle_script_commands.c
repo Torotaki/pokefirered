@@ -2291,6 +2291,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
+            if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING)
+                break;
 
             statusChanged = TRUE;
             break;

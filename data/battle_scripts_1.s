@@ -269,6 +269,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFloodHit				 @ EFFECT_FLOOD_HIT
 	.4byte BattleScript_EffectHighTide				 @ EFFECT_HIGH_TIDE
 	.4byte BattleScript_AntiUnderwaterHit			 @ EFFECT_ANTI_UNDERWATER_HIT
+	.4byte BattleScript_EffectSelfBurnHit			 @ EFFECT_SELF_BURN_HIT
+	.4byte BattleScript_EffectSelfConfusionHit		 @ EFFECT_SELF_CONFUSION_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -448,6 +450,14 @@ BattleScript_EffectFreezeHit::
 
 BattleScript_EffectParalyzeHit::
 	setmoveeffect MOVE_EFFECT_PARALYSIS
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSelfBurnHit::
+	setmoveeffect MOVE_EFFECT_BURN | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSelfConfusionHit::
+	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
 
 BattleScript_EffectExplosion::
