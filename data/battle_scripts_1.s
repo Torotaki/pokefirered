@@ -268,12 +268,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFlood					 @ EFFECT_FLOOD
 	.4byte BattleScript_EffectFloodHit				 @ EFFECT_FLOOD_HIT
 	.4byte BattleScript_EffectHighTide				 @ EFFECT_HIGH_TIDE
+	.4byte BattleScript_AntiUnderwaterHit			 @ EFFECT_ANTI_UNDERWATER_HIT
 
 BattleScript_EffectHit::
-	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
-	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
-	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
-	setbyte sDMG_MULTIPLIER, 2
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
 BattleScript_HitFromAccCheck::
@@ -345,6 +342,12 @@ BattleScript_MoveMissed::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_AntiUnderwaterHit::
+	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_EffectHit
+	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
+	setbyte sDMG_MULTIPLIER, 2
+	goto BattleScript_EffectHit
 
 BattleScript_EffectSpore::
 	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_NotAffected
