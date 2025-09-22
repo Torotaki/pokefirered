@@ -4929,7 +4929,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WATER_PULSE] =
     {
-        .effect = EFFECT_CONFUSE_HIT,
+        .effect = EFFECT_ANTI_UNDERWATER_HIT,
         .power = 50,
         .type = TYPE_WATER,
         .accuracy = 100,
