@@ -2733,6 +2733,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 switch (gBattleMoves[gCurrentMove].effect)
                 {
                 case EFFECT_WAKE_UP_SLAP:
+                case EFFECT_HYPER_VOICE:
                     if (!(gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP))
                     {
                         gBattlescriptCurrInstr++;
@@ -8215,10 +8216,21 @@ static void Cmd_healpartystatus(void)
     u32 zero = 0;
     u8 toHeal = 0;
 
-    if (gCurrentMove == MOVE_HEAL_BELL)
+    if (gCurrentMove == MOVE_HEAL_BELL || gBattleMoves[gCurrentMove].effect == EFFECT_HYPER_VOICE)
     {
         struct Pokemon *party;
         s32 i;
+        u32 statusToHeal;
+
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_HYPER_VOICE)
+        {
+            statusToHeal = STATUS1_SLEEP;
+        }
+        else
+        {
+            statusToHeal = STATUS1_ANY;
+        }
+        
 
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BELL;
 
@@ -8229,8 +8241,10 @@ static void Cmd_healpartystatus(void)
 
         if (gBattleMons[gBattlerAttacker].ability != ABILITY_SOUNDPROOF)
         {
-            gBattleMons[gBattlerAttacker].status1 = 0;
-            gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
+            if (gBattleMons[gBattlerAttacker].status1 & statusToHeal) {
+                gBattleMons[gBattlerAttacker].status1 = 0;
+                gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
+            }
         }
         else
         {
@@ -8245,8 +8259,10 @@ static void Cmd_healpartystatus(void)
         {
             if (gBattleMons[gActiveBattler].ability != ABILITY_SOUNDPROOF)
             {
-                gBattleMons[gActiveBattler].status1 = 0;
-                gBattleMons[gActiveBattler].status2 &= ~STATUS2_NIGHTMARE;
+                if (gBattleMons[gActiveBattler].status1 & statusToHeal) {
+                    gBattleMons[gActiveBattler].status1 = 0;
+                    gBattleMons[gActiveBattler].status2 &= ~STATUS2_NIGHTMARE;
+                }
             }
             else
             {
@@ -8265,6 +8281,7 @@ static void Cmd_healpartystatus(void)
             if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
                 u8 ability;
+                u32 status = GetMonData(&party[i], MON_DATA_STATUS);
 
                 if (gBattlerPartyIndexes[gBattlerAttacker] == i)
                     ability = gBattleMons[gBattlerAttacker].ability;
@@ -8275,7 +8292,8 @@ static void Cmd_healpartystatus(void)
                 else
                     ability = GetAbilityBySpecies(species, abilityNum);
 
-                if (ability != ABILITY_SOUNDPROOF)
+                if (ability != ABILITY_SOUNDPROOF
+                    && (status & statusToHeal))
                     toHeal |= (1 << i);
             }
         }

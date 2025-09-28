@@ -272,6 +272,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSelfBurnHit			 @ EFFECT_SELF_BURN_HIT
 	.4byte BattleScript_EffectSelfConfusionHit		 @ EFFECT_SELF_CONFUSION_HIT
 	.4byte BattleScript_EffectHowl					 @ EFFECT_HOWL
+	.4byte BattleScript_EffectHyperVoice			 @ EFFECT_HYPER_VOICE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2725,6 +2726,17 @@ BattleScript_EffectExploit::
 	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_SmellingsaltDoubleDmg
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_SmellingsaltDoubleDmg
 	goto BattleScript_EffectHit
+
+BattleScript_EffectHyperVoice::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHyperVoiceHit
+	setmoveeffect MOVE_EFFECT_REMOVE_STATUS | MOVE_EFFECT_CERTAIN
+BattleScript_EffectHyperVoiceHit::
+	call BattleScript_EffectHitAndReturn
+	healpartystatus
+	waitstate
+	updatestatusicon BS_ATTACKER_WITH_PARTNER
+	waitstate
+	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_EffectFollowMe::
 	attackcanceler

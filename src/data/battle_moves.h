@@ -4257,7 +4257,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HYPER_VOICE] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_HYPER_VOICE,
         .power = 70,
         .type = TYPE_NORMAL,
         .accuracy = 100,
