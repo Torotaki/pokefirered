@@ -3396,7 +3396,20 @@ void CheckTerrainShiftUpdates(void)
         if (gStatuses3[i] & statusToCheck)
         {
             CancelMultiTurnMoves(i);
-            // battlescript
+            // battlescript here if we want to display text
         }
     }
+}
+
+s8 GetMovePriority(u16 moveBattler1, u8 battler2)
+{
+    if (gBattleMoves[moveBattler1].effect == EFFECT_PURSUIT)
+    {
+        if (gStatuses3[battler2] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+        {
+            return -2;
+        }
+    }
+
+    return gBattleMoves[moveBattler1].priority;
 }
