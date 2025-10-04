@@ -403,8 +403,9 @@
 #define STRINGID_FLOODINGPREVENTSBURN 402
 #define STRINGID_DIVEFAILEDNOFLOODING 403
 #define STRINGID_DIGFAILEDFLOODING 404
+#define STRINGID_PKMNSXLOSTHPINSUN 405
 
-#define BATTLESTRINGS_COUNT     405
+#define BATTLESTRINGS_COUNT     406
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

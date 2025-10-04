@@ -1968,6 +1968,30 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
 
                     break;
+                case ABILITY_MOIST_SKIN:
+                    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
+                        && gBattleMons[battler].maxHP == gBattleMons[battler].hp)
+                        break;
+
+                    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
+                        || gBattleWeather & B_WEATHER_SUN)
+                    {
+                        gBattleMoveDamage = gBattleMons[battler].maxHP / 16;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+
+                        if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING) {
+                            BattleScriptPushCursorAndCallback(BattleScript_RainDishActivates);
+                            gBattleMoveDamage *= -1;
+                        }
+                        else
+                        {
+                            BattleScriptPushCursorAndCallback(BattleScript_MoistSkinSunDamage);
+                        }
+                        effect++;
+                    }
+                    
+                    break;
                 }
             }
             break;
