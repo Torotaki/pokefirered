@@ -188,6 +188,7 @@ static void Cmd_jumpifnexttargetvalid(void);
 static void Cmd_tryhealhalfhealth(void);
 static void Cmd_trymirrormove(void);
 static void Cmd_setrain(void);
+static void Cmd_setweather(void);
 static void Cmd_setreflect(void);
 static void Cmd_setseeded(void);
 static void Cmd_manipulatedamage(void);
@@ -448,7 +449,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifnexttargetvalid,                   //0x7A
     Cmd_tryhealhalfhealth,                       //0x7B
     Cmd_trymirrormove,                           //0x7C
-    Cmd_setrain,                                 //0x7D
+    Cmd_setweather,                              //0x7D
     Cmd_setreflect,                              //0x7E
     Cmd_setseeded,                               //0x7F
     Cmd_manipulatedamage,                        //0x80
@@ -6564,6 +6565,36 @@ static void Cmd_trymirrormove(void)
         gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure = TRUE;
         gBattlescriptCurrInstr++;
     }
+}
+
+static void Cmd_setweather(void)
+{
+    u8 weather = gBattlescriptCurrInstr[1];
+
+    switch (weather)
+    {
+    case B_WEATHER_RAIN:
+        Cmd_setrain();
+        break;
+    case B_WEATHER_AROMA:
+        Cmd_setaroma();
+        break;
+    case B_WEATHER_FOG:
+        Cmd_setfog();
+        break;
+    case B_WEATHER_SANDSTORM:
+        Cmd_setsandstorm();
+        break;
+    case B_WEATHER_SUN:
+        Cmd_setsunny();
+        break;
+    case B_WEATHER_HAIL_PERMANENT:
+    case B_WEATHER_HAIL_TEMPORARY:
+        Cmd_sethail();
+        break;
+    }
+
+    gBattlescriptCurrInstr++;
 }
 
 static void Cmd_setrain(void)

@@ -692,8 +692,9 @@
 	.byte 0x7c
 	.endm
 
-	.macro setrain
+	.macro setweather param0:req
 	.byte 0x7d
+	.byte \param0
 	.endm
 
 	.macro setreflect
@@ -800,7 +801,7 @@
 	.byte 0x94
 	.endm
 
-	.macro setsandstorm
+	.macro unused3
 	.byte 0x95
 	.endm
 
@@ -970,7 +971,7 @@
 	.4byte \param0
 	.endm
 
-	.macro setsunny
+	.macro unused4
 	.byte 0xbb
 	.endm
 
@@ -1028,7 +1029,7 @@
 	.byte 0xc7
 	.endm
 
-	.macro sethail
+	.macro unused5
 	.byte 0xc8
 	.endm
 
@@ -1255,7 +1256,7 @@
 	.byte \battler
 	.endm
 
-	.macro setaroma
+	.macro unused1
 	.byte 0xf9
 	.endm
 
@@ -1278,7 +1279,7 @@
 	.4byte \param0
 	.endm
 
-	.macro setfog
+	.macro unused2
 	.byte 0xfe
 	.endm
 
@@ -1294,6 +1295,31 @@
 
 	.macro setflooding
 	setterrain B_TERRAIN_EFFECT_FLOODING
+	.endm
+
+@ set weather macros
+	.macro setrain
+	setweather B_WEATHER_RAIN
+	.endm
+
+	.macro setaroma
+	setweather B_WEATHER_AROMA
+	.endm
+
+	.macro setfog
+	setweather B_WEATHER_FOG
+	.endm
+
+	.macro setsandstorm
+	setweather B_WEATHER_SANDSTORM
+	.endm
+
+	.macro setsunny
+	setweather B_WEATHER_SUN
+	.endm
+
+	.macro sethail
+	setweather B_WEATHER_HAIL_TEMPORARY
 	.endm
 
 @ various command changed to more readable macros
