@@ -384,8 +384,9 @@
 #define MOVE_FLOOD 380
 #define MOVE_HIGH_TIDE 381
 #define MOVE_TIDAL_WAVE 382
+#define MOVE_OVEREXERT 383
 
-#define MOVES_COUNT 383
+#define MOVES_COUNT 384
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

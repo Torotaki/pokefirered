@@ -99,7 +99,7 @@ const u8 gMoveDescription_Hypnosis[] = _("Hypnotic suggestion\nis used to make t
 const u8 gMoveDescription_Meditate[] = _("The user meditates\nto awaken its power\nand raise its\nATTACK stat.");
 const u8 gMoveDescription_Agility[] = _("The user relaxes\nand lightens its\nbody to sharply\nboost its SPEED.");
 const u8 gMoveDescription_QuickAttack[] = _("An almost invisibly\nfast attack that\nis certain to strike\nfirst.");
-const u8 gMoveDescription_Rage[] = _("An attack that\nbecomes stronger\neach time the user\nis hit in battle.");
+const u8 gMoveDescription_Rage[] = _("An attack that Burns\nthe user.");
 const u8 gMoveDescription_Teleport[] = _("Use it to flee from\nany wild POKéMON.\nAlso warps to the\nlast POKé CENTER.");
 const u8 gMoveDescription_NightShade[] = _("An attack with a\nmirage that inflicts\ndamage matching\nthe user's level.");
 const u8 gMoveDescription_Mimic[] = _("The user copies the\nmove last used by\nthe foe for the\nrest of the battle.");
@@ -377,6 +377,7 @@ const u8 gMoveDescription_ScentedDeath[] = _("A poisonous attack\nthat spreads a
 const u8 gMoveDescription_Flood[] = _("Sets FLOODING.\nConfuses non-flying\nnon-WATER POKéMON\non entry.");
 const u8 gMoveDescription_HighTide[] = _("Sets FLOODING and\nconfuses all\nPOKéMON.");
 const u8 gMoveDescription_TidalWave[] = _("An attack that also\nsets FLOODING.");
+const u8 gMoveDescription_Overexert[] = _("An attack that Burns\nthe user.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -761,4 +762,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_FLOOD         - 1] = gMoveDescription_Flood,
     [MOVE_HIGH_TIDE     - 1] = gMoveDescription_HighTide,
     [MOVE_TIDAL_WAVE    - 1] = gMoveDescription_TidalWave,
+    [MOVE_OVEREXERT     - 1] = gMoveDescription_Overexert,
 };

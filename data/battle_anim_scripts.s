@@ -404,6 +404,7 @@ gBattleAnims_Moves::
 	.4byte Move_FLOOD
 	.4byte Move_HIGH_TIDE
 	.4byte Move_TIDAL_WAVE
+	.4byte Move_OVEREXERT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10418,6 +10419,9 @@ Move_TIDAL_WAVE:
 	panse SE_M_SURF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	waitforvisualfinish
 	end
+
+Move_OVEREXERT:
+	goto Move_RAGE
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

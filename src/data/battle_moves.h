@@ -1388,12 +1388,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RAGE] =
     {
-        .effect = EFFECT_RAGE,
+        .effect = EFFECT_SELF_BURN_HIT,
         .power = 60,
-        .type = TYPE_NORMAL,
+        .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -3515,12 +3515,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEAT_UP] =
     {
-        .effect = EFFECT_BEAT_UP,
-        .power = 10,
+        .effect = EFFECT_SELF_CONFUSION_HIT,
+        .power = 60,
         .type = TYPE_DARK,
         .accuracy = 100,
-        .pp = 15,
-        .secondaryEffectChance = 0,
+        .pp = 25,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -5359,5 +5359,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .category = CATEGORY_SPECIAL,
+    },
+
+    [MOVE_OVEREXERT] =
+    {
+        .effect = EFFECT_SELF_BURN_HIT,
+        .power = 90,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_MAKES_CONTACT,
+        .category = CATEGORY_PHYSICAL,
     },
 };
