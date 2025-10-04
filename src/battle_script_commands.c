@@ -321,6 +321,7 @@ static void Cmd_setflooding(void);
 static void Cmd_recoverpartybasedonsunlight(void);
 static void Cmd_setfog(void);
 static void Cmd_getrandom(void);
+static void Cmd_applyterrainentryeffects(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -473,7 +474,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setlightscreen,                          //0x92
     Cmd_tryKO,                                   //0x93
     Cmd_damagetohalftargethp,                    //0x94
-    Cmd_setsandstorm,                            //0x95
+    Cmd_applyterrainentryeffects,                //0x95
     Cmd_weatherdamage,                           //0x96
     Cmd_tryinfatuating,                          //0x97
     Cmd_updatestatusicon,                        //0x98
@@ -10348,4 +10349,14 @@ static void Cmd_getrandom(void)
     u16 lessthan = T2_READ_16(gBattlescriptCurrInstr + 1);
     gRandomResult = Random() % lessthan;
     gBattlescriptCurrInstr += 3;
+}
+
+static void Cmd_applyterrainentryeffects(void)
+{
+    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    if (ApplyTerrainEntryEffects(gActiveBattler) == 0)
+        gBattlescriptCurrInstr += 2;
+    else {
+        gBattlescriptCurrInstr = BattleScript_ReapplyFloodingTryConfuse;
+    }
 }

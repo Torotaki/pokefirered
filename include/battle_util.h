@@ -96,5 +96,6 @@ u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 void CheckTerrainShiftUpdates(void);
 s8 GetMovePriority(u16 moveBattler1, u8 battler2);
+u8 ApplyTerrainEntryEffects(u8 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

@@ -1779,20 +1779,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITYEFFECT_SWITCH_IN_TERRAIN:
-                if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING)
-                    || gBattleMons[battler].ability == ABILITY_LEVITATE
-                    || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
-                    break;
-                if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
-                    && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER)) {
-                    gBattleScripting.battler = battler;
-                    gEffectBattler = battler;
-                    if (gBattleMons[battler].ability != ABILITY_OWN_TEMPO
-                        && !(gBattleMons[battler].status2 & STATUS2_SUBSTITUTE)
-                        && !(gSideStatuses[GET_BATTLER_SIDE(gEffectBattler)] & SIDE_STATUS_SAFEGUARD))
-                    {
-                        gBattleMons[battler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
-                    }
+                if (ApplyTerrainEntryEffects(battler) != 0)
+                {
                     BattleScriptPushCursorAndCallback(BattleScript_FloodingTryConfuse);
                     effect++;
                 }
@@ -3436,4 +3424,29 @@ s8 GetMovePriority(u16 moveBattler1, u8 battler2)
     }
 
     return gBattleMoves[moveBattler1].priority;
+}
+
+u8 ApplyTerrainEntryEffects(u8 battler) {
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING)
+        || gBattleMons[battler].ability == ABILITY_LEVITATE
+        || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
+        return 0;
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
+        && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER)) {
+        if (gBattleMons[battler].status2 & STATUS2_CONFUSION)
+        {
+            return 0;
+        }
+    
+        gBattleScripting.battler = battler;
+        gEffectBattler = battler;
+        if (gBattleMons[battler].ability != ABILITY_OWN_TEMPO
+            && !(gBattleMons[battler].status2 & STATUS2_SUBSTITUTE)
+            && !(gSideStatuses[GET_BATTLER_SIDE(gEffectBattler)] & SIDE_STATUS_SAFEGUARD))
+        {
+            gBattleMons[battler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
+        }
+        return 1;
+    }
+    return 0;
 }

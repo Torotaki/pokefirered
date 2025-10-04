@@ -273,6 +273,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSelfConfusionHit		 @ EFFECT_SELF_CONFUSION_HIT
 	.4byte BattleScript_EffectHowl					 @ EFFECT_HOWL
 	.4byte BattleScript_EffectHyperVoice			 @ EFFECT_HYPER_VOICE
+	.4byte BattleScript_EffectReapplyTerrainHit		 @ EFFECT_REAPPLY_TERRAIN_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3338,6 +3339,11 @@ BattleScript_EffectHealingSeed::
 	fixedhealing BattleScript_AlreadyAtFullHp, BS_TARGET
 	goto BattleScript_PresentHealTarget
 
+BattleScript_EffectReapplyTerrainHit::
+	call BattleScript_EffectHitAndReturn
+	applyterrainentryeffects BS_TARGET
+	goto BattleScript_CheckFaintAndMoveEnd
+
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER
 	pause B_WAIT_TIME_LONG
@@ -3926,6 +3932,24 @@ BattleScript_FloodingOwnTempoPrevents::
 BattleScript_FloodingSafeguardPrevents::
 	call BattleScript_SafeguardProtectedReturns
 	end3
+
+BattleScript_ReapplyFloodingTryConfuse::
+	jumpifability BS_SCRIPTING, ABILITY_OWN_TEMPO, BattleScript_ReapplyFloodingOwnTempoPrevents
+	jumpifsideaffecting BS_SCRIPTING, SIDE_STATUS_SAFEGUARD, BattleScript_ReapplyFloodingSafeguardPrevents
+	jumpifstatus2 BS_SCRIPTING, STATUS2_SUBSTITUTE, BattleScript_ReapplyFloodingEnds
+	chosenstatus2animation BS_SCRIPTING, STATUS2_CONFUSION
+	printstring STRINGID_PKMNWASCONFUSED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_ReapplyFloodingEnds::
+	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_ReapplyFloodingOwnTempoPrevents::
+	call BattleScript_OwnTempoPreventsWithReturn
+	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_ReapplyFloodingSafeguardPrevents::
+	call BattleScript_SafeguardProtectedReturns
+	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_SpikesOnTarget::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
