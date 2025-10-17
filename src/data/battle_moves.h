@@ -1164,8 +1164,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FIRE_SPIN] =
     {
-        .effect = EFFECT_TRAP,
-        .power = 20,
+        .effect = EFFECT_BURN_HIT,
+        .power = 30,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 25,
@@ -1173,7 +1173,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .category = CATEGORY_SPECIAL,
+        .category = CATEGORY_PHYSICAL,
     },
 
     [MOVE_THUNDER_SHOCK] =
@@ -2410,7 +2410,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FLAME_WHEEL] =
     {
         .effect = EFFECT_BURN_HIT,
-        .power = 50,
+        .power = 70,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 25,
@@ -4187,8 +4187,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BLAZE_KICK] =
     {
-        .effect = EFFECT_BLAZE_KICK,
-        .power = 70,
+        .effect = EFFECT_BURN_HIT,
+        .power = 50,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 25,
