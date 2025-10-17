@@ -1779,9 +1779,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITYEFFECT_SWITCH_IN_TERRAIN:
-                if (ApplyTerrainEntryEffects(battler) != 0)
+                switch (ApplyTerrainEntryEffects(battler))
                 {
+                case 1:
                     BattleScriptPushCursorAndCallback(BattleScript_FloodingTryConfuse);
+                    effect++;
+                    break;
+                case 2:
+                    BattleScriptPushCursorAndCallback(BattleScript_FrozenTerrainTrySlowing);
                     effect++;
                 }
                 break;
@@ -3447,6 +3452,21 @@ u8 ApplyTerrainEntryEffects(u8 battler) {
             gBattleMons[battler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
         }
         return 1;
+    }
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FROZEN
+        && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE)) {
+        if (gBattleMons[battler].statStages[STAT_SPEED] <= MIN_STAT_STAGE)
+        {
+            return 0;
+        }
+    
+        gBattleScripting.battler = battler;
+        gEffectBattler = battler;
+        if (gBattleMons[battler].ability != ABILITY_CLEAR_BODY
+            && !(gBattleMons[battler].status2 & STATUS2_SUBSTITUTE))
+        {
+            return 2;
+        }
     }
     return 0;
 }

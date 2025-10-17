@@ -274,6 +274,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHowl					 @ EFFECT_HOWL
 	.4byte BattleScript_EffectHyperVoice			 @ EFFECT_HYPER_VOICE
 	.4byte BattleScript_EffectReapplyTerrainHit		 @ EFFECT_REAPPLY_TERRAIN_HIT
+	.4byte BattleScript_EffectSetFrozenTerrain		 @ EFFECT_SET_FROZEN_TERRAIN
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1055,6 +1056,7 @@ BattleScript_AddBurn::
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
 	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_FloodingPrevents
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_FloodingPrevents
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_BURN
 	seteffectprimary
@@ -2120,6 +2122,17 @@ BattleScript_EffectHighTide::
 	setbyte gBattlerTarget, 0
 	goto BattleScript_TeeterDanceLoop
 
+BattleScript_EffectSetFrozenTerrain::
+	attackcanceler
+	attackstring
+	ppreduce
+	setfrozen
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_CheckFaintAndMoveEnd
+
 BattleScript_EffectDefenseUpHit::
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
@@ -2618,6 +2631,7 @@ BattleScript_EffectWillOWisp::
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
 	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_FloodingPrevents
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_FloodingPrevents
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -3950,6 +3964,27 @@ BattleScript_ReapplyFloodingOwnTempoPrevents::
 BattleScript_ReapplyFloodingSafeguardPrevents::
 	call BattleScript_SafeguardProtectedReturns
 	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_FrozenTerrainTrySlowing::
+	call BattleScript_FrozenTerrainSlowed
+	end3
+
+BattleScript_ReapplyFrozenTerrainTrySlowing::
+	call BattleScript_FrozenTerrainSlowed
+	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_FrozenTerrainSlowed::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_FrozenTerrainSlowedReturn
+	setstatchanger STAT_SPEED, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_FrozenTerrainSlowedReturn
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_FrozenTerrainSlowedReturn
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY, BattleScript_FrozenTerrainSlowedReturn
+	setgraphicalstatchangevalues
+	playanimation BS_EFFECT_BATTLER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_FrozenTerrainSlowedReturn::
+	return
 
 BattleScript_SpikesOnTarget::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE

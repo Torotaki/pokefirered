@@ -1404,6 +1404,8 @@ static void Cmd_get_terrain(void)
         AI_THINKING_STRUCT->funcResult = AI_TERRAIN_SAND_TRAP;
     if (gBattleWeather & B_TERRAIN_EFFECT_FLOODING)
         AI_THINKING_STRUCT->funcResult = AI_TERRAIN_FLOODING;
+    if (gBattleWeather & B_TERRAIN_EFFECT_FROZEN)
+        AI_THINKING_STRUCT->funcResult = AI_TERRAIN_FROZEN;
 
     sAIScriptPtr += 1;
 }

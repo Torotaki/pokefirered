@@ -219,7 +219,7 @@
 // Battle Terrain flags
 #define B_TERRAIN_EFFECT_SAND_TRAP    (1 << 0)
 #define B_TERRAIN_EFFECT_FLOODING     (1 << 1)
-#define B_TERRAIN_EFFECT_UNDEFINED2   (1 << 2)
+#define B_TERRAIN_EFFECT_FROZEN       (1 << 2)
 #define B_TERRAIN_EFFECT_UNDEFINED3   (1 << 3)
 #define B_TERRAIN_EFFECT_UNDEFINED4   (1 << 4)
 #define B_TERRAIN_EFFECT_UNDEFINED5   (1 << 5)
@@ -314,6 +314,7 @@
 #define BATTLE_TERRAIN_LANCE       18
 #define BATTLE_TERRAIN_CHAMPION    19
 #define BATTLE_TERRAIN_SAND_TRAP   20
+#define BATTLE_TERRAIN_FROZEN      21
 
 #define B_WAIT_TIME_LONG  64
 #define B_WAIT_TIME_MED   48

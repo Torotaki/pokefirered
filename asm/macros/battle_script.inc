@@ -1298,6 +1298,10 @@
 	setterrain B_TERRAIN_EFFECT_FLOODING
 	.endm
 
+	.macro setfrozen
+	setterrain B_TERRAIN_EFFECT_FROZEN
+	.endm
+
 @ set weather macros
 	.macro setrain
 	setweather B_WEATHER_RAIN

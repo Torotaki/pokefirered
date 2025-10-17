@@ -318,6 +318,7 @@ static void Cmd_payhpboostattackandspeed(void);
 static void Cmd_setterrain(void);
 static void Cmd_setsandtrap(void);
 static void Cmd_setflooding(void);
+static void Cmd_setfrozen(void);
 static void Cmd_recoverpartybasedonsunlight(void);
 static void Cmd_setfog(void);
 static void Cmd_getrandom(void);
@@ -824,6 +825,7 @@ static const u8 sTerrainToType[] =
     [BATTLE_TERRAIN_BUILDING]   = TYPE_NORMAL,
     [BATTLE_TERRAIN_PLAIN]      = TYPE_NORMAL,
     [BATTLE_TERRAIN_SAND_TRAP]  = TYPE_GROUND,
+    [BATTLE_TERRAIN_FROZEN]     = TYPE_ICE,
 };
 
 // - ITEM_ULTRA_BALL skips Master Ball and ITEM_NONE
@@ -2277,7 +2279,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STATUS_HAD_NO_EFFECT;
                 return;
             }
-            if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
+            if (gBattleTerrainEffect & (B_TERRAIN_EFFECT_FLOODING | B_TERRAIN_EFFECT_FROZEN)
                 && (gHitMarker & HITMARKER_STATUS_ABILITY_EFFECT)
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
@@ -2293,7 +2295,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
-            if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING)
+            if (gBattleTerrainEffect & (B_TERRAIN_EFFECT_FLOODING | B_TERRAIN_EFFECT_FROZEN))
                 break;
 
             statusChanged = TRUE;
@@ -10249,6 +10251,9 @@ static void Cmd_setterrain(void)
     case B_TERRAIN_EFFECT_FLOODING:
         Cmd_setflooding();
         break;
+    case B_TERRAIN_EFFECT_FROZEN:
+        Cmd_setfrozen();
+        break;
     }
 
     gBattlescriptCurrInstr++;
@@ -10283,6 +10288,23 @@ static void Cmd_setflooding(void)
         gBattleTerrainEffect = B_TERRAIN_EFFECT_FLOODING;
         gBattleTerrain = BATTLE_TERRAIN_WATER;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_FLOODING;
+        CheckTerrainShiftUpdates();
+    }
+    gBattlescriptCurrInstr++;
+
+}
+static void Cmd_setfrozen(void)
+{
+    if (gBattleTerrainEffect == B_TERRAIN_EFFECT_FROZEN)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_FAILED;
+    }
+    else
+    {
+        gBattleTerrainEffect = B_TERRAIN_EFFECT_FROZEN;
+        gBattleTerrain = BATTLE_TERRAIN_FROZEN;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_FROZEN;
         CheckTerrainShiftUpdates();
     }
     gBattlescriptCurrInstr++;
@@ -10354,9 +10376,16 @@ static void Cmd_getrandom(void)
 static void Cmd_applyterrainentryeffects(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    if (ApplyTerrainEntryEffects(gActiveBattler) == 0)
+    switch (ApplyTerrainEntryEffects(gActiveBattler))
+    {
+    case 0:
         gBattlescriptCurrInstr += 2;
-    else {
+        break;
+    case 1:
         gBattlescriptCurrInstr = BattleScript_ReapplyFloodingTryConfuse;
+        break;
+    case 2:
+        gBattlescriptCurrInstr = BattleScript_ReapplyFrozenTerrainTrySlowing;
+        break;
     }
 }

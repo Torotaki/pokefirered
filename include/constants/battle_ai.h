@@ -31,6 +31,7 @@
 // ai terrain
 #define AI_TERRAIN_SAND_TRAP 0
 #define AI_TERRAIN_FLOODING  1
+#define AI_TERRAIN_FROZEN    2
 
 // get_how_powerful_move_is
 #define MOVE_POWER_DISCOURAGED  0

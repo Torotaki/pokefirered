@@ -3590,6 +3590,9 @@ Move_HAIL:
 	loopsewithpan SE_M_HAIL, 0, 8, 10
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 6, 0, RGB_BLACK
+	waitforvisualfinish
+	setbattleterrainbackground
+	waitforvisualfinish
 	end
 
 Move_TORMENT:
@@ -9880,6 +9883,7 @@ Move_SECRET_POWER:
 	jumpargeq 0, BATTLE_TERRAIN_MOUNTAIN,   Move_ROCK_THROW
 	jumpargeq 0, BATTLE_TERRAIN_CAVE,       Move_BITE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,   Move_STRENGTH
+	jumpargeq 0, BATTLE_TERRAIN_FROZEN,     Move_ICY_WIND
 	goto Move_SLAM
 
 Move_TWISTER:

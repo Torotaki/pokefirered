@@ -610,6 +610,14 @@ static const struct BattleBackground sBattleTerrainTable[] = {
         .entryTileset = sBattleTerrainAnimTiles_uBuilding,
         .entryTilemap = sBattleTerrainAnimTilemap_uBuilding,
         .palette = sBattleTerrainPalette_uBuilding
+    },
+    [BATTLE_TERRAIN_FROZEN] =
+    {
+        .tileset = sBattleTerrainTiles_Mountain,
+        .tilemap = sBattleTerrainTilemap_Mountain,
+        .entryTileset = sBattleTerrainAnimTiles_Mountain,
+        .entryTilemap = sBattleTerrainAnimTilemap_Mountain,
+        .palette = sBattleTerrainPalette_Indoor2
     }
 };
 
