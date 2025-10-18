@@ -383,4 +383,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_HIGH_TIDE]     = _("HIGH TIDE"),
     [MOVE_TIDAL_WAVE]    = _("TIDAL WAVE"),
     [MOVE_OVEREXERT]     = _("OVEREXERT"),
+    [MOVE_STILL_FOCUS]   = _("STILL FOCUS"),
 };

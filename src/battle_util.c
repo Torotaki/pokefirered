@@ -1305,7 +1305,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gBattleMons[gBattlerAttacker].status1 -= toSub;
                     if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
                     {
-                        if (gCurrentMove != MOVE_SNORE && gCurrentMove != MOVE_SLEEP_TALK)
+                        if (gCurrentMove != MOVE_SNORE && gCurrentMove != MOVE_SLEEP_TALK && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS)
                         {
                             gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                             gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
@@ -1329,7 +1329,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             {
                 if (Random() % 5)
                 {
-                    if (gBattleMoves[gCurrentMove].effect != EFFECT_THAW_HIT) // unfreezing via a move effect happens in case 13
+                    if (gBattleMoves[gCurrentMove].effect != EFFECT_THAW_HIT && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS) // unfreezing via a move effect happens in case 13
                     {
                         gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
                         gHitMarker |= HITMARKER_NO_ATTACKSTRING;
@@ -1376,7 +1376,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_FLINCH: // flinch
-            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_FLINCHED)
+            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_FLINCHED && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS)
             {
                 gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_FLINCHED;
                 gProtectStructs[gBattlerAttacker].flinchImmobility = 1;
@@ -1388,7 +1388,9 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_DISABLED: // disabled move
-            if (gDisableStructs[gBattlerAttacker].disabledMove == gCurrentMove && gDisableStructs[gBattlerAttacker].disabledMove != MOVE_NONE)
+            if (gDisableStructs[gBattlerAttacker].disabledMove == gCurrentMove
+                && gDisableStructs[gBattlerAttacker].disabledMove != MOVE_NONE
+                && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS)
             {
                 gProtectStructs[gBattlerAttacker].usedDisabledMove = 1;
                 gBattleScripting.battler = gBattlerAttacker;
@@ -1411,7 +1413,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_IMPRISONED: // imprisoned
-            if (GetImprisonedMovesCount(gBattlerAttacker, gCurrentMove))
+            if (gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS && GetImprisonedMovesCount(gBattlerAttacker, gCurrentMove))
             {
                 gProtectStructs[gBattlerAttacker].usedImprisonedMove = 1;
                 CancelMultiTurnMoves(gBattlerAttacker);
@@ -1422,7 +1424,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_CONFUSED: // confusion
-            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION)
+            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS)
             {
                 gBattleMons[gBattlerAttacker].status2 -= STATUS2_CONFUSION_TURN(1);
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION)
@@ -1454,7 +1456,9 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_PARALYSED: // paralysis
-            if ((gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS) && (Random() % 4) == 0)
+            if ((gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS)
+                && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS
+                && (Random() % 4) == 0)
             {
                 gProtectStructs[gBattlerAttacker].prlzImmobility = 1;
                 // This is removed in FRLG and Emerald for some reason
@@ -1478,7 +1482,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_IN_LOVE: // infatuation
-            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
+            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS)
             {
                 gBattleScripting.battler = CountTrailingZeroBits((gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION) >> 0x10);
                 if (Random() & 1)
@@ -1542,10 +1546,13 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_AROMA: // Aroma
-            
             if (gBattleWeather == B_WEATHER_AROMA)
             {   
-                if (!(IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS) || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON) || gBattleMons[gBattlerAttacker].ability == ABILITY_AROMA_BOOST) && (Random() % 4) == 0)
+                if (!(IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS)
+                      || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON)
+                      || gBattleMons[gBattlerAttacker].ability == ABILITY_AROMA_BOOST)
+                    && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS
+                    && (Random() % 4) == 0)
                 {
                     gProtectStructs[gBattlerAttacker].prlzImmobility = 1;
                     CancelMultiTurnMoves(gBattlerAttacker);

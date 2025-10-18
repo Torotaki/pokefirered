@@ -276,6 +276,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectReapplyTerrainHit		 @ EFFECT_REAPPLY_TERRAIN_HIT
 	.4byte BattleScript_EffectSetFrozenTerrain		 @ EFFECT_SET_FROZEN_TERRAIN
 	.4byte BattleScript_EffectIceTypeInSnow			 @ EFFECT_ICE_TYPE_IN_SNOW
+	.4byte BattleScript_EffectHit					 @ EFFECT_STILL_FOCUS
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
