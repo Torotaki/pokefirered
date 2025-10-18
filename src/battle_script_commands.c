@@ -3055,8 +3055,45 @@ static void Cmd_tryfaintmon(void)
                 gBattleMons[gBattlerAttacker].statStages[STAT_SPEED]++;
                 gBattleScripting.animArg1 = 14 + STAT_SPEED;
                 gBattleScripting.animArg2 = 0;
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPEED);
                 BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
                 gBattleScripting.battler = gBattlerAttacker;
+            }
+            if (gBattleMons[gBattlerAttacker].hp != 0 && gBattleMons[gBattlerAttacker].ability == ABILITY_VICTORY_FLEX)
+            {
+                if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE
+                    && gBattleMons[gBattlerAttacker].statStages[STAT_DEF] < MAX_STAT_STAGE)
+                {
+                    gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
+                    gBattleMons[gBattlerAttacker].statStages[STAT_DEF]++;
+                    PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+                    PREPARE_STAT_BUFFER(gBattleTextBuff2, STAT_DEF);
+                    BattleScriptPushCursorAndCallback(BattleScript_VictoryFlexActivates);
+                    gBattleScripting.battler = gBattlerAttacker;
+                }
+                else
+                {
+                    u8 statBuffed;
+
+                    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE)
+                    {
+                        gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
+                        statBuffed = STAT_ATK;
+                    }
+                    if (gBattleMons[gBattlerAttacker].statStages[STAT_DEF] < MAX_STAT_STAGE)
+                    {
+                        gBattleMons[gBattlerAttacker].statStages[STAT_DEF]++;
+                        statBuffed = STAT_DEF;
+                    }
+
+                    if (statBuffed > 0) {
+                        PREPARE_STAT_BUFFER(gBattleTextBuff1, statBuffed);
+                        gBattleScripting.animArg1 = 14 + statBuffed;
+                        gBattleScripting.animArg2 = 0;
+                        BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
+                        gBattleScripting.battler = gBattlerAttacker;
+                    }
+                }
             }
         }
         else

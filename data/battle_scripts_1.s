@@ -4576,7 +4576,13 @@ BattleScript_DrizzleActivates::
 
 BattleScript_SpeedBoostActivates::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring STRINGID_PKMNRAISEDSPEED
+	printstring STRINGID_PKMNRAISEDSTAT
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_VictoryFlexActivates::
+	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_DEF, 0
+	printstring STRINGID_PKMNRAISEDTWOSTATS
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
