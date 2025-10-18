@@ -772,7 +772,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WATER_GUN] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_ICE_TYPE_IN_SNOW,
         .power = 70,
         .type = TYPE_WATER,
         .accuracy = 100,

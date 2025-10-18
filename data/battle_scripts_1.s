@@ -275,6 +275,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHyperVoice			 @ EFFECT_HYPER_VOICE
 	.4byte BattleScript_EffectReapplyTerrainHit		 @ EFFECT_REAPPLY_TERRAIN_HIT
 	.4byte BattleScript_EffectSetFrozenTerrain		 @ EFFECT_SET_FROZEN_TERRAIN
+	.4byte BattleScript_EffectIceTypeInSnow			 @ EFFECT_ICE_TYPE_IN_SNOW
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3165,6 +3166,11 @@ BattleScript_EffectPoisonFang::
 
 BattleScript_EffectWeatherBall::
 	setweatherballtype
+	goto BattleScript_EffectHit
+
+BattleScript_EffectIceTypeInSnow::
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_EffectHit
+	setmovetype TYPE_ICE
 	goto BattleScript_EffectHit
 
 BattleScript_EffectOverheat::

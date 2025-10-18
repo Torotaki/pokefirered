@@ -323,6 +323,7 @@ static void Cmd_recoverpartybasedonsunlight(void);
 static void Cmd_setfog(void);
 static void Cmd_getrandom(void);
 static void Cmd_applyterrainentryeffects(void);
+static void Cmd_setmovetype(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -513,7 +514,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setsafeguard,                            //0xB8
     Cmd_magnitudedamagecalculation,              //0xB9
     Cmd_jumpifnopursuitswitchdmg,                //0xBA
-    Cmd_setsunny,                                //0xBB
+    Cmd_setmovetype,                             //0xBB
     Cmd_maxattackhalvehp,                        //0xBC
     Cmd_copyfoestats,                            //0xBD
     Cmd_rapidspinfree,                           //0xBE
@@ -10388,4 +10389,11 @@ static void Cmd_applyterrainentryeffects(void)
         gBattlescriptCurrInstr = BattleScript_ReapplyFrozenTerrainTrySlowing;
         break;
     }
+}
+
+static void Cmd_setmovetype(void)
+{
+    u8 type = gBattlescriptCurrInstr[1];
+    *(&gBattleStruct->dynamicMoveType) = type | F_DYNAMIC_TYPE_2;
+    gBattlescriptCurrInstr +=2;
 }

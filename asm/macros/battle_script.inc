@@ -972,8 +972,9 @@
 	.4byte \param0
 	.endm
 
-	.macro unused4
+	.macro setmovetype type:req
 	.byte 0xbb
+	.byte \type
 	.endm
 
 	.macro maxattackhalvehp param0:req
