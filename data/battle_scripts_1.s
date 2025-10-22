@@ -277,6 +277,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSetFrozenTerrain		 @ EFFECT_SET_FROZEN_TERRAIN
 	.4byte BattleScript_EffectIceTypeInSnow			 @ EFFECT_ICE_TYPE_IN_SNOW
 	.4byte BattleScript_EffectHit					 @ EFFECT_STILL_FOCUS
+	.4byte BattleScript_EffectLaunchAirborneHit		 @ EFFECT_LAUNCH_AIRBORNE_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -912,6 +913,18 @@ BattleScriptFirstChargingTurn::
 	printfromtable gFirstTurnOfTwoStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
+
+BattleScript_EffectLaunchAirborneHit::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
+	jumpiftype BS_TARGET, TYPE_FLYING, BattleScript_EffectHit
+	jumpifability BS_TARGET, ABILITY_LEVITATE, BattleScript_EffectHit
+	jumpifability BS_TARGET, ABILITY_DRAGONFLIGHT, BattleScript_EffectHit
+	call BattleScript_EffectHitAndReturn
+	cancelmultiturnmoves BS_TARGET
+	setsemiinvulnerablebit
+	printstring STRINGID_PKMNLAUNCHEDAIRBORNE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_EffectSuperFang::
 	attackcanceler
@@ -4368,6 +4381,11 @@ BattleScript_MoveUsedDistracted::
 	statusanimation BS_ATTACKER
 	goto BattleScript_MoveEnd
 
+BattleScript_MoveUsedStuckAirborne::
+	printstring STRINGID_PKMNSTUCKAIRBORNE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_PrintUproarOverTurns::
 	printfromtable gUproarOverTurnStringIds
 	waitmessage B_WAIT_TIME_LONG
@@ -4590,6 +4608,14 @@ BattleScript_VictoryFlexActivates::
 BattleScript_OutlastSpeedBoost::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_OUTLASTBOOST
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_LandingFromLaunchedAirborne::
+	makevisible BS_ATTACKER
+	playanimation BS_ATTACKER, B_ANIM_LANDING_FROM_AIRBORNE
+	clearsemiinvulnerablebit
+	printstring STRINGID_PKMNLANDEDFROMAIRBORNE
 	waitmessage B_WAIT_TIME_LONG
 	end3
 

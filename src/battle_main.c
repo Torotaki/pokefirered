@@ -3076,9 +3076,7 @@ u8 IsRunningFromBattleImpossible(void)
             return BATTLE_RUN_FAILURE;
         }
         if (side != GetBattlerSide(i)
-         && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
-         && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT
-         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
+         && !IS_BATTLER_FLYING(gActiveBattler)
          && gBattleMons[i].ability == ABILITY_ARENA_TRAP)
         {
             gBattleScripting.battler = i;
@@ -3096,9 +3094,7 @@ u8 IsRunningFromBattleImpossible(void)
         return BATTLE_RUN_FAILURE;
     }
     if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP
-        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
-        && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT
-        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
+        && !IS_BATTLER_FLYING(gActiveBattler)
         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GROUND))
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_CANT_ESCAPE;
@@ -3258,18 +3254,14 @@ static void HandleTurnActionSelectionState(void)
                     if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
                      || gStatuses3[gActiveBattler] & STATUS3_ROOTED
                      || (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP
-                        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
                         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GROUND)
-                        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
-                        && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT))
+                        && !IS_BATTLER_FLYING(gActiveBattler)))
                     {
                         BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_ABILITY_PREVENTS, 6, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }
                     else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
                           || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
-                              && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
-                              && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
-                              && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT)
+                              && !IS_BATTLER_FLYING(gActiveBattler))
                           || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
                               && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
                     {

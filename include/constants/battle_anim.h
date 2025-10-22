@@ -378,6 +378,7 @@
 #define B_ANIM_AROMA_CONTINUES          28
 #define B_ANIM_SET_SAND_TRAP            29
 #define B_ANIM_FOG_CONTINUES            30
+#define B_ANIM_LANDING_FROM_AIRBORNE    31
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

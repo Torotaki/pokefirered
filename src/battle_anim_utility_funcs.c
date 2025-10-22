@@ -968,3 +968,16 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void AnimTask_GetTargetHasSubstituteOrIsFlying(u8 taskId)
+{
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE
+        || IS_BATTLER_FLYING(gBattlerTarget))
+    {
+        gBattleAnimArgs[0] = TRUE;
+    } else {
+        gBattleAnimArgs[0] = FALSE;
+    }
+    
+    DestroyAnimVisualTask(taskId);
+}

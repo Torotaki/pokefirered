@@ -131,13 +131,14 @@
 #define MOVEEND_CHANGED_ITEMS                   7
 #define MOVEEND_ATTACKER_INVISIBLE              8
 #define MOVEEND_ATTACKER_VISIBLE                9
-#define MOVEEND_TARGET_VISIBLE                  10
-#define MOVEEND_ITEM_EFFECTS_ALL                11
-#define MOVEEND_KINGSROCK_SHELLBELL             12
-#define MOVEEND_SUBSTITUTE                      13
-#define MOVEEND_UPDATE_LAST_MOVES               14
-#define MOVEEND_MIRROR_MOVE                     15
-#define MOVEEND_NEXT_TARGET                     16
-#define MOVEEND_COUNT                           17
+#define MOVEEND_TARGET_INVISIBLE                10
+#define MOVEEND_TARGET_VISIBLE                  11
+#define MOVEEND_ITEM_EFFECTS_ALL                12
+#define MOVEEND_KINGSROCK_SHELLBELL             13
+#define MOVEEND_SUBSTITUTE                      14
+#define MOVEEND_UPDATE_LAST_MOVES               15
+#define MOVEEND_MIRROR_MOVE                     16
+#define MOVEEND_NEXT_TARGET                     17
+#define MOVEEND_COUNT                           18
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

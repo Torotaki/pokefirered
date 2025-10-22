@@ -406,6 +406,7 @@ gBattleAnims_Moves::
 	.4byte Move_TIDAL_WAVE
 	.4byte Move_OVEREXERT
 	.4byte Move_STILL_FOCUS
+	.4byte Move_SKY_TOSS
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -453,6 +454,7 @@ gBattleAnims_General::
 	.4byte General_Aroma		            @ B_ANIM_AROMA_CONTINUES
 	.4byte General_SandTrap                 @ B_ANIM_SET_SAND_TRAP
 	.4byte General_Fog 		                @ B_ANIM_FOG_CONTINUES
+	.4byte General_LandingFromAirborne 		@ B_ANIM_LANDING_FROM_AIRBORNE
 
 	.align 2
 gBattleAnims_Special::
@@ -10465,6 +10467,55 @@ Move_STILL_FOCUS:
 	call UnsetPsychicBackground
 	end
 
+Move_SKY_TOSS:
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_ROUND_SHADOW
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	fadetobg BG_IN_AIR
+	waitbgfadeout
+	playsewithpan SE_M_SKY_UPPERCUT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_MoveSkyUppercutBg, 5, 55
+	waitbgfadein
+	setalpha 12, 8
+	delay 38
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 28, 0, 0, 5
+	delay 4
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 6, 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -28, 28, ANIM_TARGET, 1
+	delay 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -15, 8, ANIM_TARGET, 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -5, -12, ANIM_TARGET, 1
+	delay 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, -32, ANIM_TARGET, 1
+	delay 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 5, -52, ANIM_TARGET, 1
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -26, 16, 1, 4
+	delay 4
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 6
+	delay 4
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_TARGET, 3, 1, 0, -123, 0, 24
+	delay 24
+	createvisualtask AnimTask_GetTargetHasSubstituteOrIsFlying, 5
+	jumpargeq 0, 0, SkyTossCleanup
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 24
+	delay 24
+SkyTossCleanup:
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	restorebg
+	waitbgfadeout
+	setarg 7, 0xFFFF
+	waitbgfadein
+	end
+
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -11325,6 +11376,11 @@ General_Aroma:
 
 General_Fog:
 	goto Move_HAZE
+
+General_LandingFromAirborne:
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 24
+	delay 24
+	end
 
 SafariReaction_WatchingCarefully:
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET

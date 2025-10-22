@@ -4059,6 +4059,7 @@ static void Cmd_playanimation(void)
           || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_AROMA_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_FOG_CONTINUES
+          || gBattlescriptCurrInstr[2] == B_ANIM_LANDING_FROM_AIRBORNE
           || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
@@ -4104,6 +4105,7 @@ static void Cmd_playanimation_var(void)
           || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
           || *animationIdPtr == B_ANIM_AROMA_CONTINUES
           || *animationIdPtr == B_ANIM_FOG_CONTINUES
+          || *animationIdPtr == B_ANIM_LANDING_FROM_AIRBORNE
           || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animationIdPtr, *argumentPtr);
@@ -4397,6 +4399,18 @@ static void Cmd_moveend(void)
                 MarkBattlerForControllerExec(gActiveBattler);
                 gStatuses3[gBattlerAttacker] &= ~STATUS3_SEMI_INVULNERABLE;
                 gSpecialStatuses[gBattlerAttacker].restoredBattlerSprite = 1;
+                gBattleScripting.moveendState++;
+                return;
+            }
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_TARGET_INVISIBLE: // make target sprite invisible
+            if (gBattlerTarget < gBattlersCount
+                && gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
+            {
+                gActiveBattler = gBattlerTarget;
+                BtlController_EmitSpriteInvisibility(BUFFER_A, TRUE);
+                MarkBattlerForControllerExec(gActiveBattler);
                 gBattleScripting.moveendState++;
                 return;
             }
@@ -5162,9 +5176,7 @@ static void Cmd_switchineffects(void)
 
     if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
-        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
-        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
-        && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT)
+        && !IS_BATTLER_FLYING(gActiveBattler))
     {
         u8 spikesDmg;
 
@@ -8969,6 +8981,10 @@ static void Cmd_setsemiinvulnerablebit(void)
         break;
     case EFFECT_DIVE:
         gStatuses3[gBattlerAttacker] |= STATUS3_UNDERWATER;
+        break;
+    case EFFECT_LAUNCH_AIRBORNE_HIT:
+        gStatuses3[gBattlerTarget] |= STATUS3_ON_AIR;
+        gDisableStructs[gBattlerTarget].launchedAirborneTimer = 2;
         break;
     default:
         gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;

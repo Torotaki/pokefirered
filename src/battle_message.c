@@ -123,6 +123,9 @@ static const u8 sText_PkmnBlownAway[] = _("{B_DEF_NAME_WITH_PREFIX} was\nblown a
 static const u8 sText_PkmnChangedType[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
 static const u8 sText_PkmnFlinched[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!");
 static const u8 sText_PkmnDistractedByAroma[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndistracted by the aroma!");
+static const u8 sText_PkmnStuckAirborne[] = _("{B_ATK_NAME_WITH_PREFIX} is\nstuck high up in the air!");
+static const u8 sText_PkmnLaunchedAirborne[] = _("{B_DEF_NAME_WITH_PREFIX} got\nlaunched high up in the air!");
+static const u8 sText_PkmnLandedFromAirborne[] = _("{B_ATK_NAME_WITH_PREFIX} returned\nto the ground!");
 static const u8 sText_PkmnRegainedHealth[] = _("{B_DEF_NAME_WITH_PREFIX} regained\nhealth!");
 static const u8 sText_PkmnHPFull[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nHP is full!");
 static const u8 sText_PkmnRaisedSpDef[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF!");
@@ -934,6 +937,9 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSXLOSTHPINSUN - BATTLESTRINGS_TABLE_START]             = sText_PkmnsXLostHPInSun,
     [STRINGID_SETFROZEN - BATTLESTRINGS_TABLE_START]                     = sText_SetFrozen,
     [STRINGID_PKMNRAISEDTWOSTATS - BATTLESTRINGS_TABLE_START]            = sText_PkmnRaisedTwoStats,
+    [STRINGID_PKMNSTUCKAIRBORNE - BATTLESTRINGS_TABLE_START]             = sText_PkmnStuckAirborne,
+    [STRINGID_PKMNLAUNCHEDAIRBORNE - BATTLESTRINGS_TABLE_START]          = sText_PkmnLaunchedAirborne,
+    [STRINGID_PKMNLANDEDFROMAIRBORNE - BATTLESTRINGS_TABLE_START]        = sText_PkmnLandedFromAirborne,
 };
 
 const u16 gMissStringIds[] =

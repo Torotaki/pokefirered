@@ -314,12 +314,8 @@ static bool8 ShouldSwitch(void)
         if ((gBattleMons[gActiveBattler].type1 == TYPE_STEEL) || (gBattleMons[gActiveBattler].type2 == TYPE_STEEL))
             return FALSE;
     if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP)
-        if (gBattleMons[gActiveBattler].type1 != TYPE_FLYING
-            && gBattleMons[gActiveBattler].type2 != TYPE_FLYING
-            && gBattleMons[gActiveBattler].type1 != TYPE_GROUND
-            && gBattleMons[gActiveBattler].type2 != TYPE_GROUND
-            && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
-            && gBattleMons[gActiveBattler].ability != ABILITY_DRAGONFLIGHT)
+        if (!IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GROUND)
+            && !IS_BATTLER_FLYING(gActiveBattler))
         {
             return FALSE;
         }

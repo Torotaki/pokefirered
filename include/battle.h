@@ -151,7 +151,7 @@ struct DisableStruct
     /*0x0B*/ u8 disableTimer : 4;
     /*0x0B*/ u8 disableTimerStartValue : 4;
     /*0x0C*/ u8 encoredMovePos;
-    /*0x0D*/ u8 unkD;
+    /*0x0D*/ u8 launchedAirborneTimer;
     /*0x0E*/ u8 encoreTimer : 4;
     /*0x0E*/ u8 encoreTimerStartValue : 4;
     /*0x0F*/ u8 perishSongTimer : 4;
@@ -491,6 +491,13 @@ extern struct BattleStruct *gBattleStruct;
     gBattleMons[battlerId].type1 = type;    \
     gBattleMons[battlerId].type2 = type;    \
 }
+
+#define IS_BATTLER_FLYING(battlerId)                            \
+(                                                               \
+    IS_BATTLER_OF_TYPE(battlerId, TYPE_FLYING)                  \
+    || gBattleMons[battlerId].ability == ABILITY_LEVITATE       \
+    || gBattleMons[battlerId].ability == ABILITY_DRAGONFLIGHT   \
+)
 
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE2(n)((n & 0xF0))

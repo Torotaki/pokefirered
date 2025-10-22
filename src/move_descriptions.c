@@ -379,6 +379,7 @@ const u8 gMoveDescription_HighTide[] = _("Sets FLOODING and\nconfuses all\nPOKé
 const u8 gMoveDescription_TidalWave[] = _("An attack that also\nsets FLOODING.");
 const u8 gMoveDescription_Overexert[] = _("An attack that Burns\nthe user.");
 const u8 gMoveDescription_StillFocus[] = _("The user stays still\nto focus on a mental\nattack that can't\nbe interrupted.");
+const u8 gMoveDescription_SkyToss[] = _("A throw launching\nnon-flying foes\nairborne for next\nturn. Moves last.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -765,4 +766,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_TIDAL_WAVE    - 1] = gMoveDescription_TidalWave,
     [MOVE_OVEREXERT     - 1] = gMoveDescription_Overexert,
     [MOVE_STILL_FOCUS   - 1] = gMoveDescription_StillFocus,
+    [MOVE_SKY_TOSS      - 1] = gMoveDescription_SkyToss,
 };

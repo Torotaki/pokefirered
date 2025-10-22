@@ -729,6 +729,7 @@ enum
     ENDTURN_YAWN,
     ENDTURN_ITEMS2,
     ENDTURN_OUTLAST,
+    ENDTURN_LAUNCHED,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -1064,6 +1065,17 @@ u8 DoBattlerEndTurnEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
+            case ENDTURN_LAUNCHED:
+                if (gDisableStructs[gActiveBattler].launchedAirborneTimer) {
+                    if (--gDisableStructs[gActiveBattler].launchedAirborneTimer == 0)
+                    {
+                        BattleScriptPushCursorAndCallback(BattleScript_LandingFromLaunchedAirborne);
+                        gBattleScripting.battler = gActiveBattler;
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsTracker++;                
+                break;
             case ENDTURN_BATTLER_COUNT:  // done
                 gBattleStruct->turnEffectsTracker = 0;
                 gBattleStruct->turnEffectsBattlerId++;
@@ -1264,6 +1276,7 @@ enum
     CANCELLER_BIDE,
     CANCELLER_THAW,
     CANCELLER_AROMA,
+    CANCELLER_LAUNCHED,
     CANCELLER_END,
 };
 
@@ -1560,6 +1573,15 @@ u8 AtkCanceller_UnableToUseMove(void)
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     effect = 1;
                 }
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_LAUNCHED: // Launched airborne
+            if (gDisableStructs[gBattlerAttacker].launchedAirborneTimer > 0)
+            {
+                gBattlescriptCurrInstr = BattleScript_MoveUsedStuckAirborne;
+                gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                effect = 1;
             }
             gBattleStruct->atkCancellerTracker++;
             break;
@@ -3440,9 +3462,7 @@ s8 GetMovePriority(u16 moveBattler1, u8 battler2)
 }
 
 u8 ApplyTerrainEntryEffects(u8 battler) {
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING)
-        || gBattleMons[battler].ability == ABILITY_LEVITATE
-        || gBattleMons[battler].ability == ABILITY_DRAGONFLIGHT)
+    if (IS_BATTLER_FLYING(battler))
         return 0;
     if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
         && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER)) {

@@ -384,4 +384,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_TIDAL_WAVE]    = _("TIDAL WAVE"),
     [MOVE_OVEREXERT]     = _("OVEREXERT"),
     [MOVE_STILL_FOCUS]   = _("STILL FOCUS"),
+    [MOVE_SKY_TOSS]      = _("SKY TOSS"),
 };
