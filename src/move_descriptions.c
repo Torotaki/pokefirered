@@ -100,7 +100,7 @@ const u8 gMoveDescription_Meditate[] = _("The user meditates\nto awaken its powe
 const u8 gMoveDescription_Agility[] = _("The user relaxes\nand lightens its\nbody to sharply\nboost its SPEED.");
 const u8 gMoveDescription_QuickAttack[] = _("An almost invisibly\nfast attack that\nis certain to strike\nfirst.");
 const u8 gMoveDescription_Rage[] = _("An attack that Burns\nthe user.");
-const u8 gMoveDescription_Teleport[] = _("Use it to flee from\nany wild POKéMON.\nAlso warps to the\nlast POKé CENTER.");
+const u8 gMoveDescription_Teleport[] = _("Use it to swiftly\nswitch out your POKéMON.\nAlso warps to the\nlast POKé CENTER.");
 const u8 gMoveDescription_NightShade[] = _("An attack with a\nmirage that inflicts\ndamage matching\nthe user's level.");
 const u8 gMoveDescription_Mimic[] = _("The user copies the\nmove last used by\nthe foe for the\nrest of the battle.");
 const u8 gMoveDescription_Screech[] = _("An ear-splitting\nscreech is emitted\nto sharply reduce\nthe foe's DEFENSE.");
@@ -381,6 +381,8 @@ const u8 gMoveDescription_Overexert[] = _("An attack that Burns\nthe user.");
 const u8 gMoveDescription_StillFocus[] = _("The user stays still\nto focus on a mental\nattack that can't\nbe interrupted.");
 const u8 gMoveDescription_SkyToss[] = _("A throw launching\nnon-flying foes\nairborne for next\nturn. Moves last.");
 const u8 gMoveDescription_SeedTrap[] = _("Sets a trap that\nseeds the foe if\nthey make contact\nthis turn.");
+const u8 gMoveDescription_FutureForce[] = _("An attack that is\nexecuted last.\nThe user flinches\nif hit beforehand.");
+const u8 gMoveDescription_WarpStrike[] = _("Hit and swiftly\nswitch out your POKéMON.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -770,4 +772,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_SKY_TOSS      - 1] = gMoveDescription_SkyToss,
     [MOVE_SEED_TRAP     - 1] = gMoveDescription_SeedTrap,
     [MOVE_SEED_TRAP_HIT - 1] = gMoveDescription_SeedTrap,
+    [MOVE_FUTURE_FORCE  - 1] = gMoveDescription_FutureForce,
+    [MOVE_WARP_STRIKE   - 1] = gMoveDescription_WarpStrike,
 };

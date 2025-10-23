@@ -30,8 +30,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_KARATE_CHOP] =
     {
-        .effect = EFFECT_HIGH_CRITICAL,
-        .power = 40,
+        .effect = EFFECT_HIT,
+        .power = 50,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 25,
@@ -1346,7 +1346,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MEDITATE] =
     {
-        .effect = EFFECT_ATTACK_UP,
+        .effect = EFFECT_SPECIAL_DEFENSE_UP,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -1402,14 +1402,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TELEPORT] =
     {
-        .effect = EFFECT_TELEPORT,
+        .effect = EFFECT_BATON_PASS,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
         .pp = 20,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
-        .priority = 0,
+        .priority = 1,
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
@@ -1877,16 +1877,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_KINESIS] =
     {
-        .effect = EFFECT_ACCURACY_DOWN,
-        .power = 0,
+        .effect = EFFECT_REAPPLY_TERRAIN_HIT,
+        .power = 70,
         .type = TYPE_PSYCHIC,
-        .accuracy = 80,
-        .pp = 15,
+        .accuracy = 100,
+        .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
-        .category = CATEGORY_STATUS,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_SPECIAL,
     },
 
     [MOVE_SOFT_BOILED] =
@@ -3698,7 +3698,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FOCUS_PUNCH] =
     {
         .effect = EFFECT_FOCUS_PUNCH,
-        .power = 150,
+        .power = 90,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 20,
@@ -4859,7 +4859,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CALM_MIND] =
     {
-        .effect = EFFECT_CALM_MIND,
+        .effect = EFFECT_SPECIAL_DEFENSE_UP_2,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -5429,5 +5429,33 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .category = CATEGORY_PHYSICAL
+    },
+    
+    [MOVE_FUTURE_FORCE] =
+    {
+        .effect = EFFECT_FOCUS_PUNCH,
+        .power = 90,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_SPECIAL,
+    },
+
+    [MOVE_WARP_STRIKE] =
+    {
+        .effect = EFFECT_BATON_PASS_HIT,
+        .power = 30,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 1,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_SPECIAL,
     },
 };
