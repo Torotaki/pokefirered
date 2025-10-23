@@ -251,7 +251,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_RAIN_DANCE_HIT
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SUNNY_DAY_HIT
 	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SANDSTORM_HIT
-	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SWEET_SCENT_HIT
+	.4byte BattleScript_EffectSweetScentHit			 @ EFFECT_SWEET_SCENT_HIT
 	.4byte BattleScript_EffectExploit				 @ EFFECT_EXPLOIT
 	.4byte BattleScript_EffectChallenge				 @ EFFECT_CHALLENGE
 	.4byte BattleScript_EffectSandTrap				 @ EFFECT_SAND_TRAP
@@ -312,9 +312,9 @@ BattleScript_MoveEnd::
 
 BattleScript_EffectHitAndReturn::
 	attackcanceler
+	attackstring
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 BattleScript_EffectHitAndReturnAfterAccuracyCheck::
-	attackstring
 	ppreduce
 	critcalc
 	damagecalc
@@ -1803,8 +1803,6 @@ BattleScript_PerishSongNotAffected::
 
 BattleScript_EffectSandstorm::
 	attackcanceler
-	attackstring
-	ppreduce
 	setsandstorm
 	goto BattleScript_MoveWeatherChange
 
@@ -2013,10 +2011,10 @@ BattleScript_EffectHiddenPower::
 
 BattleScript_EffectRainDance::
 	attackcanceler
-	attackstring
-	ppreduce
 	setrain
 BattleScript_MoveWeatherChange::
+	attackstring
+	ppreduce
 	attackanimation
 	waitanimation
 BattleScript_PrintWeatherChange::
@@ -2026,24 +2024,35 @@ BattleScript_PrintWeatherChange::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
+BattleScript_WeatherChangeHitMissed::
+	pause B_WAIT_TIME_SHORT
+	ppreduce
+	effectivenesssound
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_PrintWeatherChange
+
 BattleScript_EffectSweetScent::
 	attackcanceler
-	attackstring
-	ppreduce
 	setaroma
 	goto BattleScript_MoveWeatherChange
 
+BattleScript_EffectSweetScentHit::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_AROMA, BattleScript_EffectHit
+	attackcanceler
+	setaroma
+	attackstring
+	accuracycheck BattleScript_WeatherChangeHitMissed, ACC_CURR_MOVE
+	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
+	goto BattleScript_PrintWeatherChange
+
 BattleScript_EffectSetFog::
 	attackcanceler
-	attackstring
-	ppreduce
 	setfog
 	goto BattleScript_MoveWeatherChange
 
 BattleScript_EffectClearWeather::
 	attackcanceler
-	attackstring
-	ppreduce
 	clearWeather
 	goto BattleScript_MoveWeatherChange
 
@@ -2071,18 +2080,18 @@ BattleScript_EffectAromatherapy::
 
 BattleScript_EffectSunnyDay::
 	attackcanceler
-	attackstring
-	ppreduce
 	setsunny
 	goto BattleScript_MoveWeatherChange
 
 BattleScript_EffectSandTrap::
 	attackcanceler
+	setsandtrap
+BattleScript_MoveTerrainChange::
 	attackstring
 	ppreduce
-	setsandtrap
 	attackanimation
 	waitanimation
+BattleScript_PrintTerrainChange::
 	printfromtable gMoveTerrainChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
@@ -2106,29 +2115,26 @@ BattleScript_EffectWaterSport::
 
 BattleScript_EffectFlood::
 	attackcanceler
-	attackstring
-	ppreduce
 	setflooding
-	attackanimation
-	waitanimation
-	printfromtable gMoveTerrainChangeStringIds
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+	goto BattleScript_MoveTerrainChange
 
 BattleScript_EffectFloodHit::
 	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_EffectHit
 	attackcanceler
 	attackstring
-	ppreduce
 	setflooding
 	attackanimation
 	waitanimation
-	accuracycheck BattleScript_EffectFloodDisplayMessage, ACC_CURR_MOVE
+	accuracycheck BattleScript_EffectFloodHitMissed, ACC_CURR_MOVE
 	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
-BattleScript_EffectFloodDisplayMessage::
-	printfromtable gMoveTerrainChangeStringIds
+	goto BattleScript_PrintTerrainChange
+
+BattleScript_EffectFloodHitMissed::
+	ppreduce
+	effectivenesssound
+	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_CheckFaintAndMoveEnd
+	goto BattleScript_PrintTerrainChange
 
 BattleScript_EffectHighTide::
 	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_EffectTeeterDance
@@ -2145,14 +2151,8 @@ BattleScript_EffectHighTide::
 
 BattleScript_EffectSetFrozenTerrain::
 	attackcanceler
-	attackstring
-	ppreduce
 	setfrozen
-	attackanimation
-	waitanimation
-	printfromtable gMoveTerrainChangeStringIds
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_CheckFaintAndMoveEnd
+	goto BattleScript_MoveTerrainChange
 
 BattleScript_EffectDefenseUpHit::
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
@@ -2603,8 +2603,6 @@ BattleScript_SwallowFail::
 
 BattleScript_EffectHail::
 	attackcanceler
-	attackstring
-	ppreduce
 	sethail
 	goto BattleScript_MoveWeatherChange
 
