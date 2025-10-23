@@ -243,14 +243,14 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_Fly					         @ EFFECT_FLY
 	.4byte BattleScript_Dive				         @ EFFECT_DIVE
 	.4byte BattleScript_Dig       					 @ EFFECT_DIG
-	.4byte BattleScript_EffectChangeWeatherHit   	 @ EFFECT_CLEAR_WEATHER_HIT
+	.4byte BattleScript_EffectClearWeatherHit   	 @ EFFECT_CLEAR_WEATHER_HIT
 	.4byte BattleScript_EffectLockOnAndDef2Boost   	 @ EFFECT_LOCK_ON_AND_DEF_BOOST2
 	.4byte BattleScript_EffectBatonPassHit		   	 @ EFFECT_BATON_PASS_HIT
 	.4byte BattleScript_EffectOutlast			   	 @ EFFECT_OUTLAST
 	.4byte BattleScript_EffectOverclock			   	 @ EFFECT_OVERCLOCK
-	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_RAIN_DANCE_HIT
-	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SUNNY_DAY_HIT
-	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SANDSTORM_HIT
+	.4byte BattleScript_EffectRainDanceHit			 @ EFFECT_RAIN_DANCE_HIT
+	.4byte BattleScript_EffectSunnyDayHit			 @ EFFECT_SUNNY_DAY_HIT
+	.4byte BattleScript_EffectSandstormHit		 	 @ EFFECT_SANDSTORM_HIT
 	.4byte BattleScript_EffectSweetScentHit			 @ EFFECT_SWEET_SCENT_HIT
 	.4byte BattleScript_EffectExploit				 @ EFFECT_EXPLOIT
 	.4byte BattleScript_EffectChallenge				 @ EFFECT_CHALLENGE
@@ -260,7 +260,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectWakeUpSlap			 @ EFFECT_WAKE_UP_SLAP
 	.4byte BattleScript_EffectDoubleSleep			 @ EFFECT_DOUBLE_SLEEP
 	.4byte BattleScript_EffectSetFog				 @ EFFECT_SET_FOG
-	.4byte BattleScript_EffectChangeWeatherHit		 @ EFFECT_SET_FOG_HIT
+	.4byte BattleScript_EffectSetFogHit				 @ EFFECT_SET_FOG_HIT
 	.4byte BattleScript_EffectSpore					 @ EFFECT_SPORE
 	.4byte BattleScript_EffectDrainSeed				 @ EFFECT_DRAIN_SEED
 	.4byte BattleScript_EffectSandTomb				 @ EFFECT_SAND_TOMB
@@ -1806,6 +1806,12 @@ BattleScript_EffectSandstorm::
 	setsandstorm
 	goto BattleScript_MoveWeatherChange
 
+BattleScript_EffectSandstormHit::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SANDSTORM, BattleScript_EffectHit
+	attackcanceler
+	setsandstorm
+	goto BattleScript_MoveWeatherHit
+
 BattleScript_EffectRollout::
 	attackcanceler
 	attackstring
@@ -2024,6 +2030,16 @@ BattleScript_PrintWeatherChange::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectRainDanceHit::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN, BattleScript_EffectHit
+	attackcanceler
+	setrain
+BattleScript_MoveWeatherHit::	
+	attackstring
+	accuracycheck BattleScript_WeatherChangeHitMissed, ACC_CURR_MOVE
+	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
+	goto BattleScript_PrintWeatherChange
+
 BattleScript_WeatherChangeHitMissed::
 	pause B_WAIT_TIME_SHORT
 	ppreduce
@@ -2041,24 +2057,29 @@ BattleScript_EffectSweetScentHit::
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_AROMA, BattleScript_EffectHit
 	attackcanceler
 	setaroma
-	attackstring
-	accuracycheck BattleScript_WeatherChangeHitMissed, ACC_CURR_MOVE
-	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
-	goto BattleScript_PrintWeatherChange
+	goto BattleScript_MoveWeatherHit
 
 BattleScript_EffectSetFog::
 	attackcanceler
 	setfog
 	goto BattleScript_MoveWeatherChange
 
+BattleScript_EffectSetFogHit::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_FOG, BattleScript_EffectHit
+	attackcanceler
+	setfog
+	goto BattleScript_MoveWeatherHit
+
 BattleScript_EffectClearWeather::
 	attackcanceler
 	clearWeather
 	goto BattleScript_MoveWeatherChange
 
-BattleScript_EffectChangeWeatherHit::
-	setmoveeffect MOVE_EFFECT_CHANGE_WEATHER | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
+BattleScript_EffectClearWeatherHit::
+	jumpifhalfword CMP_NO_COMMON_BITS, gBattleWeather, B_WEATHER_ANY, BattleScript_EffectHit
+	attackcanceler
+	clearWeather
+	goto BattleScript_MoveWeatherHit
 
 BattleScript_EffectAromatherapy::
 	attackcanceler
@@ -2082,6 +2103,12 @@ BattleScript_EffectSunnyDay::
 	attackcanceler
 	setsunny
 	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectSunnyDayHit::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_EffectHit
+	attackcanceler
+	setsunny
+	goto BattleScript_MoveWeatherHit
 
 BattleScript_EffectSandTrap::
 	attackcanceler
