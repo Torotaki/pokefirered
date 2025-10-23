@@ -929,6 +929,17 @@ static void Cmd_attackcanceler(void)
         gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
         gBattlescriptCurrInstr++;
     }
+    else if (gProtectStructs[gBattlerTarget].contactTrapped
+        && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT
+        && (!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)))
+    {
+        CancelMultiTurnMoves(gBattlerAttacker);
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MISS_TYPE] = B_MSG_TRAPPED_MISS;
+        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastHitByType[gBattlerTarget] = 0;
+        gBattlescriptCurrInstr = BattleScript_TrapLeechSeedTriggered;
+    }
     else
     {
         gBattlescriptCurrInstr++;
@@ -975,6 +986,15 @@ static bool8 JumpIfMoveAffectedByProtect(u16 move)
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(7, move);
         gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
+        affected = TRUE;
+    }
+    if (gProtectStructs[gBattlerTarget].contactTrapped && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MISS_TYPE] = B_MSG_TRAPPED_MISS;
+        gBattlescriptCurrInstr = BattleScript_TrapLeechSeedTriggered;
+        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastHitByType[gBattlerTarget] = 0;
         affected = TRUE;
     }
     return affected;
@@ -6397,6 +6417,14 @@ static void Cmd_setprotectlike(void)
             gProtectStructs[gBattlerAttacker].outlasted = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
         }
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_TRAP_LEECH_SEED)
+        {
+            gProtectStructs[gBattlerAttacker].contactTrapped = 1;
+            gDisableStructs[gBattlerAttacker].disabledMove = gCurrentMove;
+            gDisableStructs[gBattlerTarget].disableTimer = (Random() & 3) + 3;
+            gDisableStructs[gBattlerTarget].disableTimerStartValue = gDisableStructs[gBattlerTarget].disableTimer; // not sure what value but copied from disable
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_UP_TRAP;
+        }
         gDisableStructs[gBattlerAttacker].protectUses++;
     }
     else
@@ -8061,6 +8089,9 @@ static bool8 IsTwoTurnsMove(u16 move)
      || gBattleMoves[move].effect == EFFECT_SKY_ATTACK
      || gBattleMoves[move].effect == EFFECT_SOLAR_BEAM
      || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
+     || gBattleMoves[move].effect == EFFECT_FLY
+     || gBattleMoves[move].effect == EFFECT_DIG
+     || gBattleMoves[move].effect == EFFECT_DIVE
      || gBattleMoves[move].effect == EFFECT_BIDE)
         return TRUE;
     else

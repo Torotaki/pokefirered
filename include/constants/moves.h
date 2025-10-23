@@ -387,8 +387,10 @@
 #define MOVE_OVEREXERT 383
 #define MOVE_STILL_FOCUS 384
 #define MOVE_SKY_TOSS 385
+#define MOVE_SEED_TRAP 386
+#define MOVE_SEED_TRAP_HIT 387
 
-#define MOVES_COUNT 386
+#define MOVES_COUNT 388
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

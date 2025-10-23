@@ -2518,6 +2518,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
     gProtectStructs[gActiveBattler].outlasted = FALSE;
+    gProtectStructs[gActiveBattler].contactTrapped = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -3012,6 +3013,7 @@ void BattleTurnPassed(void)
             return;
     }
     gProtectStructs[gActiveBattler].outlasted = FALSE;
+    gProtectStructs[gActiveBattler].contactTrapped = FALSE;
     if (HandleFaintedMonActions())
         return;
     gBattleStruct->faintedActionsState = 0;

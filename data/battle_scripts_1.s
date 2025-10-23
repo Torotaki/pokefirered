@@ -278,6 +278,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectIceTypeInSnow			 @ EFFECT_ICE_TYPE_IN_SNOW
 	.4byte BattleScript_EffectHit					 @ EFFECT_STILL_FOCUS
 	.4byte BattleScript_EffectLaunchAirborneHit		 @ EFFECT_LAUNCH_AIRBORNE_HIT
+	.4byte BattleScript_EffectTrapLeechSeed			 @ EFFECT_TRAP_LEECH_SEED
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -316,6 +317,7 @@ BattleScript_EffectHitAndReturn::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 BattleScript_EffectHitAndReturnAfterAccuracyCheck::
 	ppreduce
+BattleScript_EffectHitAndReturnAfterPPReduce::
 	critcalc
 	damagecalc
 	typecalc
@@ -1743,6 +1745,7 @@ BattleScript_DoGhostCurse::
 	tryfaintmon BS_ATTACKER
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectTrapLeechSeed::
 BattleScript_EffectOutlast::
 BattleScript_EffectProtect::
 BattleScript_EffectEndure::
@@ -1755,6 +1758,26 @@ BattleScript_EffectEndure::
 	printfromtable gProtectLikeUsedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_TrapLeechSeedTriggered::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	effectivenesssound
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gMoveResultFlags, 0
+	copybyte gEffectBattler, gBattlerTarget
+	copybyte gBattlerTarget, gBattlerAttacker
+	copybyte gBattlerAttacker, gEffectBattler
+	sethword gCurrentMove, MOVE_SEED_TRAP_HIT
+	call BattleScript_EffectHitAndReturnAfterPPReduce
+	tryfaintmon BS_TARGET
+	getbattlerfainted BS_TARGET
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_MoveEnd
+	jumpifstatus3 BS_TARGET, STATUS3_LEECHSEED, BattleScript_MoveEnd
+	sethword gCurrentMove, MOVE_LEECH_SEED
+	goto BattleScript_DoLeechSeed
 
 BattleScript_EffectSpikes::
 	attackcanceler
