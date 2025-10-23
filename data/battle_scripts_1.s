@@ -312,8 +312,8 @@ BattleScript_MoveEnd::
 
 BattleScript_EffectHitAndReturn::
 	attackcanceler
-BattleScript_EffectHitAndReturnAfterCanceller::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+BattleScript_EffectHitAndReturnAfterAccuracyCheck::
 	attackstring
 	ppreduce
 	critcalc
@@ -2102,7 +2102,7 @@ BattleScript_EffectWaterSport::
 	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
-	goto BattleScript_CheckFaintAndMoveEnd
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectFlood::
 	attackcanceler
@@ -2113,13 +2113,19 @@ BattleScript_EffectFlood::
 	waitanimation
 	printfromtable gMoveTerrainChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_CheckFaintAndMoveEnd
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectFloodHit::
 	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_EffectHit
 	attackcanceler
+	attackstring
+	ppreduce
 	setflooding
-	call BattleScript_EffectHitAndReturnAfterCanceller
+	attackanimation
+	waitanimation
+	accuracycheck BattleScript_EffectFloodDisplayMessage, ACC_CURR_MOVE
+	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
+BattleScript_EffectFloodDisplayMessage::
 	printfromtable gMoveTerrainChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_CheckFaintAndMoveEnd
