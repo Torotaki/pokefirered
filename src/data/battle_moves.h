@@ -2661,7 +2661,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AQUAJET] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_ICE_TYPE_IN_SNOW,
         .power = 30,
         .type = TYPE_WATER,
         .accuracy = 100,
