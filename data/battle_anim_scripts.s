@@ -407,6 +407,8 @@ gBattleAnims_Moves::
 	.4byte Move_OVEREXERT
 	.4byte Move_STILL_FOCUS
 	.4byte Move_SKY_TOSS
+	.4byte Move_SEED_TRAP
+	.4byte Move_SEED_TRAP_HIT
 	.4byte Move_FUTURE_FORCE
 	.4byte Move_WARP_STRIKE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
@@ -10517,6 +10519,12 @@ SkyTossCleanup:
 	setarg 7, 0xFFFF
 	waitbgfadein
 	end
+
+Move_SEED_TRAP:
+	goto Move_INGRAIN
+
+Move_SEED_TRAP_HIT:
+	goto Move_CONSTRICT
 
 Move_FUTURE_FORCE:
 	goto Move_PSYCHIC

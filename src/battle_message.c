@@ -67,6 +67,8 @@ static const u8 sText_PkmnProtectedItself[] = _("{B_DEF_NAME_WITH_PREFIX}\nprote
 static const u8 sText_AvoidedDamage[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\ndamage with {B_DEF_ABILITY}!");
 static const u8 sText_PkmnMakesGroundMiss[] = _("{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!");
 static const u8 sText_PkmnAvoidedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!");
+static const u8 sText_PkmnSetTrap[] = _("{B_ATK_NAME_WITH_PREFIX}\nset a trap!");
+static const u8 sText_PkmnWasTrappedByContact[] = _("{B_ATK_NAME_WITH_PREFIX}'s attack made\ncontact with {B_DEF_NAME_WITH_PREFIX}'s trap!");
 static const u8 sText_ItDoesntAffect[] = _("It doesn't affect\n{B_DEF_NAME_WITH_PREFIX}…");
 static const u8 sText_AttackerFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p");
 static const u8 sText_TargetFainted[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p");
@@ -940,6 +942,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSTUCKAIRBORNE - BATTLESTRINGS_TABLE_START]             = sText_PkmnStuckAirborne,
     [STRINGID_PKMNLAUNCHEDAIRBORNE - BATTLESTRINGS_TABLE_START]          = sText_PkmnLaunchedAirborne,
     [STRINGID_PKMNLANDEDFROMAIRBORNE - BATTLESTRINGS_TABLE_START]        = sText_PkmnLandedFromAirborne,
+    [STRINGID_PKMNWASTRAPPEDBYCONTACT - BATTLESTRINGS_TABLE_START]       = sText_PkmnWasTrappedByContact,
+    [STRINGID_PKMNSETTRAP - BATTLESTRINGS_TABLE_START]                   = sText_PkmnSetTrap,
 };
 
 const u16 gMissStringIds[] =
@@ -948,7 +952,8 @@ const u16 gMissStringIds[] =
     [B_MSG_PROTECTED]   = STRINGID_PKMNPROTECTEDITSELF,
     [B_MSG_AVOIDED_ATK] = STRINGID_PKMNAVOIDEDATTACK,
     [B_MSG_AVOIDED_DMG] = STRINGID_AVOIDEDDAMAGE,
-    [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS
+    [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS,
+    [B_MSG_TRAPPED_MISS]= STRINGID_PKMNWASTRAPPEDBYCONTACT
 };
 
 const u16 gNoEscapeStringIds[] =
@@ -1017,7 +1022,8 @@ const u16 gProtectLikeUsedStringIds[] =
 {
     [B_MSG_PROTECTED_ITSELF] = STRINGID_PKMNPROTECTEDITSELF2,
     [B_MSG_BRACED_ITSELF]    = STRINGID_PKMNBRACEDITSELF,
-    [B_MSG_PROTECT_FAILED]   = STRINGID_BUTITFAILED
+    [B_MSG_PROTECT_FAILED]   = STRINGID_BUTITFAILED,
+    [B_MSG_SET_UP_TRAP]      = STRINGID_PKMNSETTRAP
 };
 
 const u16 gReflectLightScreenSafeguardStringIds[] =

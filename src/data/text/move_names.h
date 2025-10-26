@@ -385,6 +385,8 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_OVEREXERT]     = _("OVEREXERT"),
     [MOVE_STILL_FOCUS]   = _("STILL FOCUS"),
     [MOVE_SKY_TOSS]      = _("SKY TOSS"),
+    [MOVE_SEED_TRAP]     = _("SEED TRAP"),
+    [MOVE_SEED_TRAP_HIT] = _("SEEDTRAP HIT"),
     [MOVE_FUTURE_FORCE]  = _("FUTURE FORCE"),
-    [MOVE_WARP_STRIKE]  = _("WARP STRIKE"),
+    [MOVE_WARP_STRIKE]   = _("WARP STRIKE"),
 };

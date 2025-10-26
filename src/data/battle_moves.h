@@ -5403,6 +5403,34 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_SPECIAL,
     },
 
+    [MOVE_SEED_TRAP] =
+    {
+        .effect = EFFECT_TRAP_LEECH_SEED,
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 3,
+        .flags = 0,
+        .category = CATEGORY_STATUS,
+    },
+
+    [MOVE_SEED_TRAP_HIT] =
+    {
+        .effect = EFFECT_ALWAYS_HIT,
+        .power = 30,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 1,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL
+    },
+    
     [MOVE_FUTURE_FORCE] =
     {
         .effect = EFFECT_FOCUS_PUNCH,

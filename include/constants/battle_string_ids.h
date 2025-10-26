@@ -409,8 +409,10 @@
 #define STRINGID_PKMNSTUCKAIRBORNE 408
 #define STRINGID_PKMNLAUNCHEDAIRBORNE 409
 #define STRINGID_PKMNLANDEDFROMAIRBORNE 410
+#define STRINGID_PKMNWASTRAPPEDBYCONTACT 411
+#define STRINGID_PKMNSETTRAP 412
 
-#define BATTLESTRINGS_COUNT     411
+#define BATTLESTRINGS_COUNT     413
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -442,6 +444,7 @@
 #define B_MSG_AVOIDED_ATK  2
 #define B_MSG_AVOIDED_DMG  3
 #define B_MSG_GROUND_MISS  4
+#define B_MSG_TRAPPED_MISS 5
 
 // gAbsorbDrainStringIds
 #define B_MSG_ABSORB      0
@@ -500,6 +503,7 @@
 #define B_MSG_PROTECTED_ITSELF 0
 #define B_MSG_BRACED_ITSELF    1
 #define B_MSG_PROTECT_FAILED   2
+#define B_MSG_SET_UP_TRAP      3
 
 // gRestUsedStringIds
 #define B_MSG_REST           0
