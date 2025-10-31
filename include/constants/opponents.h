@@ -116,7 +116,7 @@
 #define TRAINER_BUG_CATCHER_CALE                 110
 #define TRAINER_BUG_CATCHER_KEIGO                111
 #define TRAINER_BUG_CATCHER_ELIJAH               112
-#define TRAINER_BUG_CATCHER_2                    113
+#define TRAINER_BUG_CATCHER_MARU                 113
 #define TRAINER_BUG_CATCHER_BRENT                114
 #define TRAINER_BUG_CATCHER_CONNER               115
 #define TRAINER_LASS_JANICE                      116

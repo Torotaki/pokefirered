@@ -68,7 +68,23 @@ static const struct TrainerMonNoItemDefaultMoves sParty_SwimmingTriathleteM[] = 
 static const struct TrainerMonNoItemDefaultMoves sParty_SwimmingTriathleteF[] = {DUMMY_TRAINER_MON};
 static const struct TrainerMonNoItemDefaultMoves sParty_DragonTamer[] = {DUMMY_TRAINER_MON};
 static const struct TrainerMonNoItemDefaultMoves sParty_RSBirdKeeper[] = {DUMMY_TRAINER_MON};
-static const struct TrainerMonNoItemDefaultMoves sParty_NinjaBoy[] = {DUMMY_TRAINER_MON};
+static const struct TrainerMonNoItemDefaultMoves sParty_NinjaBoy[] = {
+     {
+        .iv = 0,
+        .lvl = 11,
+        .species = SPECIES_CATERPIE,
+    },
+    {
+        .iv = 0,
+        .lvl = 11,
+        .species = SPECIES_VENONAT,
+    },
+     {
+        .iv = 0,
+        .lvl = 12,
+        .species = SPECIES_WEEDLE,
+    }
+};
 static const struct TrainerMonNoItemDefaultMoves sParty_BattleGirl[] = {DUMMY_TRAINER_MON};
 static const struct TrainerMonNoItemDefaultMoves sParty_ParasolLady[] = {DUMMY_TRAINER_MON};
 static const struct TrainerMonNoItemDefaultMoves sParty_RSSwimmerF[] = {DUMMY_TRAINER_MON};
@@ -446,17 +462,17 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BugCatcherElijah[] = {
 static const struct TrainerMonNoItemDefaultMoves sParty_BugCatcher2[] = {
     {
         .iv = 0,
-        .lvl = 18,
+        .lvl = 8,
         .species = SPECIES_METAPOD,
     },
     {
         .iv = 0,
-        .lvl = 18,
+        .lvl = 8,
         .species = SPECIES_CATERPIE,
     },
     {
         .iv = 0,
-        .lvl = 18,
+        .lvl = 9,
         .species = SPECIES_VENONAT,
     },
 };

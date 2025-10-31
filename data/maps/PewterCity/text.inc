@@ -87,9 +87,14 @@ PewterCity_Text_MuseumOfScience::
     .string "PEWTER MUSEUM OF SCIENCE$"
 
 PewterCity_Text_GymSign::
-    .string "PEWTER CITY POKéMON GYM\n"
+    .string "PEWTER CITY ROCK POKéMON GYM\n"
     .string "LEADER: BROCK\l"
     .string "The Rock-Solid POKéMON TRAINER!$"
+
+PewterCity_Text_BugGymSign::
+    .string "PEWTER CITY BUG POKéMON GYM\n"
+    .string "LEADER: TAKASHI\l"
+    .string "The Ninja-Bug POKéMON TRAINER!$"
 
 PewterCity_Text_CitySign::
     .string "PEWTER CITY\n"

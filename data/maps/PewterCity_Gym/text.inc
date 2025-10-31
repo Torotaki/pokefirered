@@ -109,13 +109,13 @@ PewterCity_Gym_Text_YoureChampMaterial::
     .string "You're POKéMON champ material!$"
 
 PewterCity_Gym_Text_GymStatue::
-    .string "PEWTER POKéMON GYM\n"
+    .string "PEWTER ROCK POKéMON GYM\n"
     .string "LEADER: BROCK\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}$"
 
 PewterCity_Gym_Text_GymStatuePlayerWon::
-    .string "PEWTER POKéMON GYM\n"
+    .string "PEWTER ROCK POKéMON GYM\n"
     .string "LEADER: BROCK\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}, {PLAYER}$"

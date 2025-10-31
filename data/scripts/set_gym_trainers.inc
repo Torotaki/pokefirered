@@ -8,10 +8,15 @@ EventScript_SetGymTrainers::
 	case 6, EventScript_SetSaffronGymTrainers
 	case 7, EventScript_SetCinnabarGymTrainers
 	case 8, EventScript_SetViridianGymTrainers
+	case 9, EventScript_SetPewterBugGymTrainers
 	end
 
 EventScript_SetPewterGymTrainers::
 	settrainerflag TRAINER_CAMPER_LIAM
+	return
+
+EventScript_SetPewterBugGymTrainers::
+	settrainerflag TRAINER_BUG_CATCHER_MARU
 	return
 
 EventScript_SetCeruleanGymTrainers::

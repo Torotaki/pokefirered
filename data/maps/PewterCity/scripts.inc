@@ -647,6 +647,12 @@ PewterCity_EventScript_GymSign::
 	releaseall
 	end
 
+PewterCity_EventScript_BugGymSign::
+	lockall
+	msgbox PewterCity_Text_BugGymSign
+	releaseall
+	end
+
 PewterCity_EventScript_CitySign::
 	msgbox PewterCity_Text_CitySign, MSGBOX_SIGN
 	end

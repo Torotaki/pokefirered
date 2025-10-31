@@ -1,0 +1,53 @@
+PewterCity_Bug_Gym_MapScripts::
+	.byte 0
+
+PewterCity_Bug_Gym_EventScript_Takashi::
+	trainerbattle_single TRAINER_NINJA_BOY, PewterCity_Bug_Gym_Text_TakashiIntro, PewterCity_Bug_Gym_Text_TakashiDefeat, PewterCity_Bug_Gym_EventScript_DefeatedTakashi, NO_MUSIC
+	msgbox PewterCity_Bug_Gym_Text_TakashiPostBattle
+	release
+	end
+
+PewterCity_Bug_Gym_EventScript_DefeatedTakashi::
+	setflag FLAG_DEFEATED_TAKASHI
+	setflag FLAG_BADGE11_GET
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
+	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
+	set_gym_trainers 9
+	release
+	end
+
+PewterCity_Bug_Gym_EventScript_Maru::
+	trainerbattle_single TRAINER_BUG_CATCHER_MARU, PewterCity_Bug_Gym_Text_MaruIntro, PewterCity_Bug_Gym_Text_MaruDefeat
+	msgbox PewterCity_Bug_Gym_Text_MaruPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+PewterCity_Bug_Gym_EventScript_WildWeedle::
+	setwildbattle SPECIES_WEEDLE, 5
+	dowildbattle
+	release
+	end
+
+PewterCity_Bug_Gym_EventScript_GymGuy::
+	lock
+	faceplayer
+	goto_if_set FLAG_DEFEATED_TAKASHI, PewterCity_Bug_Gym_EventScript_GymGuyPostVictory
+	msgbox PewterCity_Bug_Gym_Text_AntiBugAdvice
+	release
+	end
+
+PewterCity_Bug_Gym_EventScript_GymGuyPostVictory::
+	msgbox PewterCity_Bug_Gym_Text_NiceAntiNinjaMoves
+	release
+	end
+
+PewterCity_Bug_Gym_EventScript_GymStatue::
+	lockall
+	goto_if_set FLAG_BADGE11_GET, PewterCity_Bug_Gym_EventScript_GymStatuePostVictory
+	msgbox PewterCity_Bug_Gym_Text_GymStatue
+	releaseall
+	end
+
+PewterCity_Bug_Gym_EventScript_GymStatuePostVictory::
+	msgbox PewterCity_Bug_Gym_Text_GymStatuePlayerWon
+	releaseall
+	end

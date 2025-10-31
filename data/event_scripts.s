@@ -1361,3 +1361,6 @@ Text_TestMsg::
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
 	.include "data/text/pokedude.inc"
+
+	.include "data/maps/PewterCity_Bug_Gym/scripts.inc"
+	.include "data/maps/PewterCity_Bug_Gym/text.inc"
