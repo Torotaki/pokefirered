@@ -279,6 +279,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit					 @ EFFECT_STILL_FOCUS
 	.4byte BattleScript_EffectLaunchAirborneHit		 @ EFFECT_LAUNCH_AIRBORNE_HIT
 	.4byte BattleScript_EffectTrapLeechSeed			 @ EFFECT_TRAP_LEECH_SEED
+	.4byte BattleScript_EffectSlowingFlinchHit		 @ EFFECT_SLOWING_FLINCH_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -773,6 +774,13 @@ BattleScript_EffectConversion::
 BattleScript_EffectFlinchHit::
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
+
+BattleScript_EffectSlowingFlinchHit::
+	setmoveeffect MOVE_EFFECT_FLINCH
+	call BattleScript_EffectHitAndReturn
+	setmoveeffect MOVE_EFFECT_SPD_MINUS_1 | MOVE_EFFECT_AFFECTS_USER
+	seteffectprimary
+	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_EffectRestoreHp::
 	attackcanceler
