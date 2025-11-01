@@ -2539,7 +2539,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             {
                 spDefense = 15 * spDefense / 10;
             }
-            if (defender->type1 == TYPE_FLYING || defender->type2 == TYPE_FLYING)
+            if (defender->type1 == TYPE_FLYING || defender->type2 == TYPE_FLYING || defender->ability == ABILITY_DRAGONFLIGHT)
             {
                 spDefense = 2 * spDefense / 3;
                 defense = 2 * defense / 3;
@@ -2691,10 +2691,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (gBattleWeather & B_WEATHER_FOG)
             if ((type == TYPE_FLYING) && (attacker->ability != ABILITY_ECHOLOCATION))
                 damage /= 2;
-                
-        // Any weather except sun weakens solar beam
-        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL | B_WEATHER_FOG | B_WEATHER_AROMA)) && gCurrentMove == MOVE_SOLAR_BEAM)
-            damage /= 2;
 
         // Sun boosts Fire, weakens Water
         if (gBattleWeather & B_WEATHER_SUN)

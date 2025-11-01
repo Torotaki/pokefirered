@@ -5573,6 +5573,10 @@ AuroraBeamCreateRings:
 
 Move_SOLAR_BEAM:
 	loadspritegfx ANIM_TAG_ORBS
+	goto SolarBeamUnleash
+
+Move_SOLAR_BEAM_old:
+	loadspritegfx ANIM_TAG_ORBS
 	choosetwoturnanim SolarBeamSetUp, SolarBeamUnleash
 
 SolarBeamEnd:

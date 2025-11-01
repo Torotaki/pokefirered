@@ -280,6 +280,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectLaunchAirborneHit		 @ EFFECT_LAUNCH_AIRBORNE_HIT
 	.4byte BattleScript_EffectTrapLeechSeed			 @ EFFECT_TRAP_LEECH_SEED
 	.4byte BattleScript_EffectSlowingFlinchHit		 @ EFFECT_SLOWING_FLINCH_HIT
+	.4byte BattleScript_EffectSleepingSolarBeam		 @ EFFECT_SLEEPING_SOLAR_BEAM
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2392,6 +2393,11 @@ BattleScript_SolarBeamOnFirstTurn::
 	seteffectprimary
 	ppreduce
 	goto BattleScript_TwoTurnMovesSecondTurn
+
+BattleScript_EffectSleepingSolarBeam::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_EffectHit
+	setmoveeffect MOVE_EFFECT_SLEEP | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
 
 BattleScript_EffectThunder::
 	jumpifnostatus3 BS_TARGET, STATUS3_ON_AIR, BattleScript_EffectHit
