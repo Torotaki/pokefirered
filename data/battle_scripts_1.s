@@ -1587,6 +1587,10 @@ BattleScript_EffectHealBell::
 	attackcanceler
 	attackstring
 	ppreduce
+	call BattleScript_DoHealBell
+	goto BattleScript_MoveEnd
+
+BattleScript_DoHealBell::
 	healpartystatus
 	waitstate
 	attackanimation
@@ -1604,7 +1608,7 @@ BattleScript_CheckHealBellMon2Unaffected::
 BattleScript_PartyHealEnd::
 	updatestatusicon BS_ATTACKER_WITH_PARTNER
 	waitstate
-	goto BattleScript_MoveEnd
+	return
 
 BattleScript_EffectTripleKick::
 	attackcanceler
@@ -4671,6 +4675,11 @@ BattleScript_VictoryFlexActivates::
 	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_DEF, 0
 	printstring STRINGID_PKMNRAISEDTWOSTATS
 	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_VictoryBellActivates::
+	sethword gCurrentMove, MOVE_HEAL_BELL
+	call BattleScript_DoHealBell
 	end3
 
 BattleScript_OutlastSpeedBoost::

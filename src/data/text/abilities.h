@@ -88,6 +88,7 @@ static const u8 sAromaBoostDescription[] = _("Hits harder in aroma.");
 static const u8 sDistractDescription[] = _("Lowers the foe's SP. ATK.");
 static const u8 sMoistSkinDescription[] = _("Recovers HP in FLOOD. Loses HP in SUN.");
 static const u8 sVictoryFlexDescription[] = _("KO's boosts ATTACK and DEFENSE.");
+static const u8 sVictoryBellDescription[] = _("KO's clears status from team.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -181,6 +182,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_DISTRACT] = sDistractDescription,
     [ABILITY_MOIST_SKIN] = sMoistSkinDescription,
     [ABILITY_VICTORY_FLEX] = sVictoryFlexDescription,
+    [ABILITY_VICTORY_BELL] = sVictoryBellDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -275,4 +277,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_DISTRACT] = _("DISTRACT"),
     [ABILITY_MOIST_SKIN] = _("MOIST SKIN"),
     [ABILITY_VICTORY_FLEX] = _("VICTORY FLEX"),
+    [ABILITY_VICTORY_BELL] = _("VICTORY BELL"),
 };

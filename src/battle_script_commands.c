@@ -3012,6 +3012,11 @@ static void Cmd_tryfaintmon(void)
                 BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
                 gBattleScripting.battler = gBattlerAttacker;
             }
+            if (gBattleMons[gBattlerAttacker].hp != 0 && gBattleMons[gBattlerAttacker].ability == ABILITY_VICTORY_BELL)
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_VictoryBellActivates);
+                gBattleScripting.battler = gBattlerAttacker;
+            }
             if (gBattleMons[gBattlerAttacker].hp != 0 && gBattleMons[gBattlerAttacker].ability == ABILITY_VICTORY_FLEX)
             {
                 if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE
