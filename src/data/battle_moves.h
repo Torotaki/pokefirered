@@ -5458,4 +5458,32 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_SPECIAL,
     },
+
+    [MOVE_BALL_UP] =
+    {
+        .effect = EFFECT_BALL_UP,
+        .power = 0,
+        .type = TYPE_ROCK,
+        .accuracy = 0,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 1,
+        .flags = FLAG_SNATCH_AFFECTED,
+        .category = CATEGORY_STATUS,
+    },
+
+    [MOVE_BALL_FORM] =
+    {
+        .effect = EFFECT_BALL_FORM,
+        .power = 0,
+        .type = TYPE_ROCK,
+        .accuracy = 0,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 1,
+        .flags = FLAG_SNATCH_AFFECTED,
+        .category = CATEGORY_STATUS,
+    },
 };

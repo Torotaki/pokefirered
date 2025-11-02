@@ -111,7 +111,9 @@ const u8 gMoveDescription_Minimize[] = _("The user compresses\nall the cells in 
 const u8 gMoveDescription_Smokescreen[] = _("An obscuring cloud\nof smoke or ink\nreduces the foe's\naccuracy.");
 const u8 gMoveDescription_ConfuseRay[] = _("The foe is exposed\nto a sinister ray\nthat triggers\nconfusion.");
 const u8 gMoveDescription_Withdraw[] = _("The user withdraws\nits body in its hard\nshell, raising its\nDEFENSE stat.");
-const u8 gMoveDescription_DefenseCurl[] = _("The user curls up\nto conceal weak\nspots and raise its\nDEFENSE stat.");
+const u8 gMoveDescription_DefenseCurl[] = _("The user curls up\nand raise its\nDEFENSE stat.\nDoes not stack.");
+const u8 gMoveDescription_BallUp[] = _("The user raise its\nDEFENSE and SPEED\nstat.\nDoes not stack.");
+const u8 gMoveDescription_BallForm[] = _("The user raise its\nDEFENSE, SP. DEF\nand SPEED stat.\nDoes not stack.");
 const u8 gMoveDescription_Barrier[] = _("The user creates a\nsturdy wall that\nsharply raises its\nDEFENSE stat.");
 const u8 gMoveDescription_LightScreen[] = _("A wall of light\ncuts damage from\nSP. ATK attacks\nfor five turns.");
 const u8 gMoveDescription_Haze[] = _("Eliminates all stat\nchanges among all\nPOKéMON engaged in\nbattle.");
@@ -774,4 +776,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_SEED_TRAP_HIT - 1] = gMoveDescription_SeedTrap,
     [MOVE_FUTURE_FORCE  - 1] = gMoveDescription_FutureForce,
     [MOVE_WARP_STRIKE   - 1] = gMoveDescription_WarpStrike,
+    [MOVE_BALL_UP       - 1] = gMoveDescription_BallUp,
+    [MOVE_BALL_FORM     - 1] = gMoveDescription_BallForm,
 };

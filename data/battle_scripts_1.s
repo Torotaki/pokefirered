@@ -281,6 +281,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTrapLeechSeed			 @ EFFECT_TRAP_LEECH_SEED
 	.4byte BattleScript_EffectSlowingFlinchHit		 @ EFFECT_SLOWING_FLINCH_HIT
 	.4byte BattleScript_EffectSleepingSolarBeam		 @ EFFECT_SLEEPING_SOLAR_BEAM
+	.4byte BattleScript_EffectBallUp				 @ EFFECT_BALL_UP
+	.4byte BattleScript_EffectBallForm				 @ EFFECT_BALL_FORM
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2555,6 +2557,7 @@ BattleScript_EffectDefenseCurl::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifstatus2 BS_ATTACKER, STATUS2_DEFENSE_CURL, BattleScript_ButItFailed
 	setdefensecurlbit
 	setstatchanger STAT_DEF, 1, FALSE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_DefenseCurlDoStatUpAnim
@@ -2563,6 +2566,67 @@ BattleScript_EffectDefenseCurl::
 	waitanimation
 BattleScript_DefenseCurlDoStatUpAnim::
 	goto BattleScript_StatUpDoAnim
+
+BattleScript_EffectBallUp::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_ATTACKER, STATUS2_DEFENSE_CURL, BattleScript_ButItFailed
+	setdefensecurlbit
+	attackanimation
+	waitanimation
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_BallUpDoStatAnim
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
+BattleScript_BallUpDoStatAnim::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPEED, 0
+	setstatchanger STAT_DEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_BallUpTrySpeed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_BallUpTrySpeed
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_BallUpTrySpeed::
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_BallUpEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_BallUpEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_BallUpEnd::
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectBallForm::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_ATTACKER, STATUS2_DEFENSE_CURL, BattleScript_ButItFailed
+	setdefensecurlbit
+	attackanimation
+	waitanimation
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_BallFormDoStatAnim
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_BallFormDoStatAnim
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
+BattleScript_BallFormDoStatAnim::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPDEF | BIT_SPEED, 0
+	setstatchanger STAT_DEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_BallFormpTrySpDefense
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_BallFormpTrySpDefense
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_BallFormpTrySpDefense::
+	setstatchanger STAT_SPDEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_BallFormTrySpeed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_BallFormTrySpeed
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_BallFormTrySpeed::
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_BallFormEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_BallFormEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_BallFormEnd::
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSoftboiled::
 	attackcanceler

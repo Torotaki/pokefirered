@@ -411,6 +411,8 @@ gBattleAnims_Moves::
 	.4byte Move_SEED_TRAP_HIT
 	.4byte Move_FUTURE_FORCE
 	.4byte Move_WARP_STRIKE
+	.4byte Move_BALL_UP
+	.4byte Move_BALL_FORM
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10536,6 +10538,14 @@ Move_FUTURE_FORCE:
 
 Move_WARP_STRIKE:
 	goto Move_TELEPORT
+
+Move_BALL_UP:
+	goto Move_DEFENSE_CURL
+
+Move_BALL_FORM:
+	loadspritegfx ANIM_TAG_ECLIPSING_ORB
+	createsprite gEclipsingOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, 6, 0, 1
+	goto Move_RECYCLE
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

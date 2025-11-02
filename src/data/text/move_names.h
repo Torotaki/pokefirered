@@ -389,4 +389,6 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_SEED_TRAP_HIT] = _("SEEDTRAP HIT"),
     [MOVE_FUTURE_FORCE]  = _("FUTURE FORCE"),
     [MOVE_WARP_STRIKE]   = _("WARP STRIKE"),
+    [MOVE_BALL_UP]       = _("BALL UP"),
+    [MOVE_BALL_FORM]     = _("BALL FORM"),
 };
