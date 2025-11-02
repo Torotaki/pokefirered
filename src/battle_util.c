@@ -1915,6 +1915,17 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_FLOODBRINGER:
+                if (!(gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING))
+                {
+                    gBattleTerrainEffect = B_TERRAIN_EFFECT_FLOODING;
+                    gBattleTerrain = BATTLE_TERRAIN_WATER;
+                    CheckTerrainShiftUpdates();
+                    BattleScriptPushCursorAndCallback(BattleScript_FloodbringerActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1

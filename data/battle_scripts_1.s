@@ -4840,6 +4840,13 @@ BattleScript_SandTrapperActivates::
 	playanimation BS_BATTLER_0, B_ANIM_SET_SAND_TRAP
 	end3
 
+BattleScript_FloodbringerActivates::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNSXSETSFLOODING
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SET_FLOODING
+	end3
+
 BattleScript_TookAttack::
 	attackstring
 	pause B_WAIT_TIME_SHORT

@@ -378,6 +378,7 @@ static const u8 sText_SetSandTrap[] = _("The battlers are\ntrapped in a sand pit
 static const u8 sText_SetFlooding[] = _("The battlefield was\nflooded with water!");
 static const u8 sText_SetFrozen[] = _("The battlefield was\ncovered in snow!");
 static const u8 sText_PkmnsXSetSandTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncreated a sand pit!");
+static const u8 sText_PkmnsXSetFlooding[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nflooded the battlefield!");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
 static const u8 sText_FailedToSwallow[] = _("But it failed to SWALLOW\na thing!");
 static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!");
@@ -944,6 +945,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNLANDEDFROMAIRBORNE - BATTLESTRINGS_TABLE_START]        = sText_PkmnLandedFromAirborne,
     [STRINGID_PKMNWASTRAPPEDBYCONTACT - BATTLESTRINGS_TABLE_START]       = sText_PkmnWasTrappedByContact,
     [STRINGID_PKMNSETTRAP - BATTLESTRINGS_TABLE_START]                   = sText_PkmnSetTrap,
+    [STRINGID_PKMNSXSETSFLOODING - BATTLESTRINGS_TABLE_START]            = sText_PkmnsXSetFlooding,
 };
 
 const u16 gMissStringIds[] =

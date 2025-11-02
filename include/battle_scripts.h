@@ -160,6 +160,7 @@ extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_SnowWarningActivates[];
 extern const u8 BattleScript_FloralScentActivates[];
 extern const u8 BattleScript_SandTrapperActivates[];
+extern const u8 BattleScript_FloodbringerActivates[];
 extern const u8 BattleScript_TookAttack[];
 extern const u8 BattleScript_SturdyPreventsOHKO[];
 extern const u8 BattleScript_DampStopsExplosion[];

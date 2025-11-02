@@ -2920,6 +2920,15 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->overworldWeatherDone = TRUE;
         return;
     }
+    // Check all terrain entry effects happening from the fastest mon to slowest.
+    while (gBattleStruct->switchInTerrainCounter < gBattlersCount)
+    {
+        if (AbilityBattleEffects(0, gBattlerByTurnOrder[gBattleStruct->switchInTerrainCounter], 0, ABILITYEFFECT_SWITCH_IN_TERRAIN, 0) != 0)
+            effect++;
+        ++gBattleStruct->switchInTerrainCounter;
+        if (effect != 0)
+            return;
+    }
     // Check all switch in abilities happening from the fastest mon to slowest.
     while (gBattleStruct->switchInAbilitiesCounter < gBattlersCount)
     {
@@ -2939,14 +2948,6 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter], FALSE))
             effect++;
         ++gBattleStruct->switchInItemsCounter;
-        if (effect != 0)
-            return;
-    }
-    while (gBattleStruct->switchInTerrainCounter < gBattlersCount)
-    {
-        if (AbilityBattleEffects(0, gBattlerByTurnOrder[gBattleStruct->switchInTerrainCounter], 0, ABILITYEFFECT_SWITCH_IN_TERRAIN, 0) != 0)
-            effect++;
-        ++gBattleStruct->switchInTerrainCounter;
         if (effect != 0)
             return;
     }

@@ -459,6 +459,7 @@ gBattleAnims_General::
 	.4byte General_SandTrap                 @ B_ANIM_SET_SAND_TRAP
 	.4byte General_Fog 		                @ B_ANIM_FOG_CONTINUES
 	.4byte General_LandingFromAirborne 		@ B_ANIM_LANDING_FROM_AIRBORNE
+	.4byte General_Flooding			 		@ B_ANIM_SET_FLOODING
 
 	.align 2
 gBattleAnims_Special::
@@ -11150,6 +11151,9 @@ General_Hail:
 	
 General_SandTrap:
 	goto Move_SAND_TRAP
+
+General_Flooding:
+	goto Move_FLOOD
 
 General_LeechSeedDrain:
 	createvisualtask AnimTask_GetBattlersFromArg, 5
