@@ -393,8 +393,9 @@
 #define MOVE_WARP_STRIKE 389
 #define MOVE_BALL_UP 390
 #define MOVE_BALL_FORM 391
+#define MOVE_SPIN_TACKLE 392
 
-#define MOVES_COUNT 392
+#define MOVES_COUNT 393
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

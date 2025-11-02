@@ -283,6 +283,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSleepingSolarBeam		 @ EFFECT_SLEEPING_SOLAR_BEAM
 	.4byte BattleScript_EffectBallUp				 @ EFFECT_BALL_UP
 	.4byte BattleScript_EffectBallForm				 @ EFFECT_BALL_FORM
+	.4byte BattleScript_EffectSpinTackle			 @ EFFECT_SPIN_TACKLE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1861,6 +1862,17 @@ BattleScript_RolloutHit::
 	typecalc2
 	rolloutdamagecalculation
 	goto BattleScript_HitFromCritCalc
+
+BattleScript_EffectSpinTackle::
+	setmoveeffect MOVE_EFFECT_SPD_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_EffectSpinTackleCheckCurl
+	setmovetype TYPE_FIRE
+BattleScript_EffectSpinTackleCheckCurl::
+	jumpifstatus2 BS_ATTACKER, STATUS2_DEFENSE_CURL, BattleScript_EffectSpinTackleDoubleDmg
+	goto BattleScript_EffectHit
+BattleScript_EffectSpinTackleDoubleDmg::	
+	setbyte sDMG_MULTIPLIER, 2
+	goto BattleScript_EffectHit
 
 BattleScript_EffectSwagger::
 	attackcanceler

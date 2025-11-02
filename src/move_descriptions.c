@@ -208,6 +208,7 @@ const u8 gMoveDescription_GigaDrain[] = _("A harsh attack that\nabsorbs half the
 const u8 gMoveDescription_Endure[] = _("The user endures\nany hit with 1 HP\nleft. It may fail if\nused in succession.");
 const u8 gMoveDescription_Charm[] = _("The foe is charmed\nby the user's cute\nappeals, sharply\ncutting its ATTACK.");
 const u8 gMoveDescription_Rollout[] = _("A 5-turn rolling\nattack that becomes\nstronger each time\nit hits.");
+const u8 gMoveDescription_RollOver[] = _("A rolling attack.\nSlows the user. Is\nstronger if curled\nand is FIRE in sun.");
 const u8 gMoveDescription_FalseSwipe[] = _("A restrained attack\nthat always leaves\nthe foe with at\nleast 1 HP.");
 const u8 gMoveDescription_Swagger[] = _("A move that makes\nthe foe confused,\nbut also sharply\nraises its ATTACK.");
 const u8 gMoveDescription_MilkDrink[] = _("Heals the user by\nup to half its full\nHP. It can be used\nto heal an ally.");
@@ -778,4 +779,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_WARP_STRIKE   - 1] = gMoveDescription_WarpStrike,
     [MOVE_BALL_UP       - 1] = gMoveDescription_BallUp,
     [MOVE_BALL_FORM     - 1] = gMoveDescription_BallForm,
+    [MOVE_SPIN_TACKLE   - 1] = gMoveDescription_RollOver,
 };

@@ -5486,4 +5486,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_SNATCH_AFFECTED,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_SPIN_TACKLE] =
+    {
+        .effect = EFFECT_SPIN_TACKLE,
+        .power = 30,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
+    },
 };
