@@ -283,7 +283,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSleepingSolarBeam		 @ EFFECT_SLEEPING_SOLAR_BEAM
 	.4byte BattleScript_EffectBallUp				 @ EFFECT_BALL_UP
 	.4byte BattleScript_EffectBallForm				 @ EFFECT_BALL_FORM
-	.4byte BattleScript_EffectSpinTackle			 @ EFFECT_SPIN_TACKLE
+	.4byte BattleScript_EffectRunOver			 	 @ EFFECT_RUN_OVER
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1863,14 +1863,14 @@ BattleScript_RolloutHit::
 	rolloutdamagecalculation
 	goto BattleScript_HitFromCritCalc
 
-BattleScript_EffectSpinTackle::
+BattleScript_EffectRunOver::
 	setmoveeffect MOVE_EFFECT_SPD_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	jumpifbyte CMP_NO_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_EffectSpinTackleCheckCurl
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_EffectRunOverCheckCurl
 	setmovetype TYPE_FIRE
-BattleScript_EffectSpinTackleCheckCurl::
-	jumpifstatus2 BS_ATTACKER, STATUS2_DEFENSE_CURL, BattleScript_EffectSpinTackleDoubleDmg
+BattleScript_EffectRunOverCheckCurl::
+	jumpifstatus2 BS_ATTACKER, STATUS2_DEFENSE_CURL, BattleScript_EffectRunOverDoubleDmg
 	goto BattleScript_EffectHit
-BattleScript_EffectSpinTackleDoubleDmg::	
+BattleScript_EffectRunOverDoubleDmg::	
 	setbyte sDMG_MULTIPLIER, 2
 	goto BattleScript_EffectHit
 

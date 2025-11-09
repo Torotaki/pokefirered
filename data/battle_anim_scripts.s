@@ -413,7 +413,7 @@ gBattleAnims_Moves::
 	.4byte Move_WARP_STRIKE
 	.4byte Move_BALL_UP
 	.4byte Move_BALL_FORM
-	.4byte Move_SPIN_TACKLE
+	.4byte Move_RUN_OVER
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10548,7 +10548,7 @@ Move_BALL_FORM:
 	createsprite gEclipsingOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, 6, 0, 1
 	goto Move_RECYCLE
 
-Move_SPIN_TACKLE:
+Move_RUN_OVER:
 	loadspritegfx ANIM_TAG_IMPACT
 	createvisualtask AnimTask_GetWeather, 2
 	delay 1

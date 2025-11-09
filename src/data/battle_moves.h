@@ -5487,9 +5487,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_STATUS,
     },
 
-    [MOVE_SPIN_TACKLE] =
+    [MOVE_RUN_OVER] =
     {
-        .effect = EFFECT_SPIN_TACKLE,
+        .effect = EFFECT_RUN_OVER,
         .power = 30,
         .type = TYPE_ROCK,
         .accuracy = 100,
