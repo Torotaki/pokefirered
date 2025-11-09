@@ -319,6 +319,7 @@ static void Cmd_setterrain(void);
 static void Cmd_setsandtrap(void);
 static void Cmd_setflooding(void);
 static void Cmd_setfrozen(void);
+static void Cmd_setsharprocks(void);
 static void Cmd_recoverpartybasedonsunlight(void);
 static void Cmd_setfog(void);
 static void Cmd_getrandom(void);
@@ -827,6 +828,7 @@ static const u8 sTerrainToType[] =
     [BATTLE_TERRAIN_PLAIN]      = TYPE_NORMAL,
     [BATTLE_TERRAIN_SAND_TRAP]  = TYPE_GROUND,
     [BATTLE_TERRAIN_FROZEN]     = TYPE_ICE,
+    [BATTLE_TERRAIN_SHARP_ROCKS]= TYPE_ROCK,
 };
 
 // - ITEM_ULTRA_BALL skips Master Ball and ITEM_NONE
@@ -10277,6 +10279,9 @@ static void Cmd_setterrain(void)
     case B_TERRAIN_EFFECT_FROZEN:
         Cmd_setfrozen();
         break;
+    case B_TERRAIN_EFFECT_SHARP_ROCKS:
+        Cmd_setsharprocks();
+        break;
     }
 
     gBattlescriptCurrInstr++;
@@ -10316,6 +10321,7 @@ static void Cmd_setflooding(void)
     gBattlescriptCurrInstr++;
 
 }
+
 static void Cmd_setfrozen(void)
 {
     if (gBattleTerrainEffect == B_TERRAIN_EFFECT_FROZEN)
@@ -10328,6 +10334,23 @@ static void Cmd_setfrozen(void)
         gBattleTerrainEffect = B_TERRAIN_EFFECT_FROZEN;
         gBattleTerrain = BATTLE_TERRAIN_FROZEN;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_FROZEN;
+        CheckTerrainShiftUpdates();
+    }
+    gBattlescriptCurrInstr++;
+}
+
+static void Cmd_setsharprocks(void)
+{
+    if (gBattleTerrainEffect == B_TERRAIN_EFFECT_SHARP_ROCKS)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_FAILED;
+    }
+    else
+    {
+        gBattleTerrainEffect = B_TERRAIN_EFFECT_SHARP_ROCKS;
+        gBattleTerrain = BATTLE_TERRAIN_SHARP_ROCKS;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SHARP_ROCKS;
         CheckTerrainShiftUpdates();
     }
     gBattlescriptCurrInstr++;
@@ -10398,17 +10421,20 @@ static void Cmd_getrandom(void)
 
 static void Cmd_applyterrainentryeffects(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    switch (ApplyTerrainEntryEffects(gActiveBattler))
+    u8 battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    switch (ApplyTerrainEntryEffects(battler))
     {
-    case 0:
+    case TERRAIN_ENTRY_EFFECT_NONE:
         gBattlescriptCurrInstr += 2;
         break;
-    case 1:
+    case TERRAIN_ENTRY_EFFECT_FLOODING:
         gBattlescriptCurrInstr = BattleScript_ReapplyFloodingTryConfuse;
         break;
-    case 2:
+    case TERRAIN_ENTRY_EFFECT_FROZEN:
         gBattlescriptCurrInstr = BattleScript_ReapplyFrozenTerrainTrySlowing;
+        break;
+    case TERRAIN_ENTRY_EFFECT_SHARP_ROCKS:
+        gBattlescriptCurrInstr = BattleScript_ReapplySharpRockDmg;
         break;
     }
 }

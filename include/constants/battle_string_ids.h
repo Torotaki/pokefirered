@@ -412,8 +412,10 @@
 #define STRINGID_PKMNWASTRAPPEDBYCONTACT 411
 #define STRINGID_PKMNSETTRAP 412
 #define STRINGID_PKMNSXSETSFLOODING 413
+#define STRINGID_PKMNWASHURTBYSHARPROCKS 414
+#define STRINGID_SETSHARPROCKS 415
 
-#define BATTLESTRINGS_COUNT     414
+#define BATTLESTRINGS_COUNT     416
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -633,6 +635,7 @@
 #define B_MSG_SET_SAND_TRAP     1
 #define B_MSG_SET_FLOODING      2
 #define B_MSG_SET_FROZEN        3
+#define B_MSG_SET_SHARP_ROCKS   4
 
 // gEntryStatChangeMonStringIds
 #define B_MSG_PKMN_ENTRY_ABILITY_LOWERED_ATTACK 0

@@ -354,6 +354,7 @@ static const u8 sText_DontLeaveBirch[] = _(""); // Dummied
 static const u8 sText_ButNothingHappened[] = _("But nothing happened!");
 static const u8 sText_ButItFailed[] = _("But it failed!");
 static const u8 sText_ItHurtConfusion[] = _("It hurt itself in its\nconfusion!");
+static const u8 sText_PkmnWasHurtBySharpRocks[] = _("{B_DEF_NAME_WITH_PREFIX} was hurt by the\nSHARP ROCKS!");
 static const u8 sText_MirrorMoveFailed[] = _("The MIRROR MOVE failed!");
 static const u8 sText_StartedToRain[] = _("It started to rain!");
 static const u8 sText_DownpourStarted[] = _("A downpour started!"); // corresponds to DownpourText in pokegold and pokecrystal and is used by Rain Dance in GSC
@@ -377,6 +378,7 @@ static const u8 sText_HailStopped[] = _("The hail stopped.");
 static const u8 sText_SetSandTrap[] = _("The battlers are\ntrapped in a sand pit!");
 static const u8 sText_SetFlooding[] = _("The battlefield was\nflooded with water!");
 static const u8 sText_SetFrozen[] = _("The battlefield was\ncovered in snow!");
+static const u8 sText_SetSharpRocks[] = _("The battlefield was\ncovered in sharp rocks!");
 static const u8 sText_PkmnsXSetSandTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncreated a sand pit!");
 static const u8 sText_PkmnsXSetFlooding[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nflooded the battlefield!");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
@@ -946,6 +948,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNWASTRAPPEDBYCONTACT - BATTLESTRINGS_TABLE_START]       = sText_PkmnWasTrappedByContact,
     [STRINGID_PKMNSETTRAP - BATTLESTRINGS_TABLE_START]                   = sText_PkmnSetTrap,
     [STRINGID_PKMNSXSETSFLOODING - BATTLESTRINGS_TABLE_START]            = sText_PkmnsXSetFlooding,
+    [STRINGID_PKMNWASHURTBYSHARPROCKS - BATTLESTRINGS_TABLE_START]       = sText_PkmnWasHurtBySharpRocks,
+    [STRINGID_SETSHARPROCKS - BATTLESTRINGS_TABLE_START]                 = sText_SetSharpRocks,
 };
 
 const u16 gMissStringIds[] =
@@ -986,7 +990,8 @@ const u16 gMoveTerrainChangeStringIds[] =
     [B_MSG_TERRAIN_FAILED]    = STRINGID_BUTITFAILED,
     [B_MSG_SET_SAND_TRAP]     = STRINGID_SETSANDTRAP,
     [B_MSG_SET_FLOODING]      = STRINGID_SETFLOODING,
-    [B_MSG_SET_FROZEN]        = STRINGID_SETFROZEN
+    [B_MSG_SET_FROZEN]        = STRINGID_SETFROZEN,
+    [B_MSG_SET_SHARP_ROCKS]   = STRINGID_SETSHARPROCKS
 };
 
 const u16 gSandstormHailContinuesStringIds[] =

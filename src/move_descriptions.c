@@ -386,6 +386,7 @@ const u8 gMoveDescription_SkyToss[] = _("A throw launching\nnon-flying foes\nair
 const u8 gMoveDescription_SeedTrap[] = _("Sets a trap that\nseeds the foe if\nthey make contact\nthis turn.");
 const u8 gMoveDescription_FutureForce[] = _("An attack that is\nexecuted last.\nThe user flinches\nif hit beforehand.");
 const u8 gMoveDescription_WarpStrike[] = _("Hit and swiftly\nswitch out your POKéMON.");
+const u8 gMoveDescription_SharpRocks[] = _("Sets SHARP ROCKS.\nHurts non-flying\nnon-GHOST POKéMON\non entry.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -780,4 +781,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_BALL_UP       - 1] = gMoveDescription_BallUp,
     [MOVE_BALL_FORM     - 1] = gMoveDescription_BallForm,
     [MOVE_RUN_OVER      - 1] = gMoveDescription_RunOver,
+    [MOVE_SHARP_ROCKS   - 1] = gMoveDescription_SharpRocks,
 };

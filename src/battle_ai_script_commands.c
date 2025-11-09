@@ -1402,10 +1402,12 @@ static void Cmd_get_terrain(void)
 {
     if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SAND_TRAP)
         AI_THINKING_STRUCT->funcResult = AI_TERRAIN_SAND_TRAP;
-    if (gBattleWeather & B_TERRAIN_EFFECT_FLOODING)
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING)
         AI_THINKING_STRUCT->funcResult = AI_TERRAIN_FLOODING;
-    if (gBattleWeather & B_TERRAIN_EFFECT_FROZEN)
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FROZEN)
         AI_THINKING_STRUCT->funcResult = AI_TERRAIN_FROZEN;
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SHARP_ROCKS)
+        AI_THINKING_STRUCT->funcResult = AI_TERRAIN_SHARP_ROCKS;
 
     sAIScriptPtr += 1;
 }

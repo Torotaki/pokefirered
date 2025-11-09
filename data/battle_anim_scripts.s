@@ -414,6 +414,7 @@ gBattleAnims_Moves::
 	.4byte Move_BALL_UP
 	.4byte Move_BALL_FORM
 	.4byte Move_RUN_OVER
+	.4byte Move_SHARP_ROCKS
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9909,6 +9910,7 @@ Move_SECRET_POWER:
 	jumpargeq 0, BATTLE_TERRAIN_CAVE,       Move_BITE
 	jumpargeq 0, BATTLE_TERRAIN_BUILDING,   Move_STRENGTH
 	jumpargeq 0, BATTLE_TERRAIN_FROZEN,     Move_ICY_WIND
+	jumpargeq 0, BATTLE_TERRAIN_SHARP_ROCKS,Move_ROCK_THROW
 	goto Move_SLAM
 
 Move_TWISTER:
@@ -10578,6 +10580,24 @@ SpinTackleSpin:
 	delay 3
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 7
 	waitforvisualfinish
+	end
+
+Move_SHARP_ROCKS:
+	loadspritegfx ANIM_TAG_SPIKES
+	monbg ANIM_DEF_PARTNER
+	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER
+	waitplaysewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET, 28
+	createsprite gSpikesSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 24, 30
+	delay 10
+	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER
+	waitplaysewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET, 28
+	createsprite gSpikesSpriteTemplate, ANIM_TARGET, 2, 20, 0, -24, 24, 30
+	delay 10
+	waitplaysewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET, 28
+	createsprite gSpikesSpriteTemplate, ANIM_TARGET, 2, 20, 0, 24, 24, 30
+	setbattleterrainbackground
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
 	end
 
 Move_COUNT:

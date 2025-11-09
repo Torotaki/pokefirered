@@ -1810,12 +1810,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             case ABILITYEFFECT_SWITCH_IN_TERRAIN:
                 switch (ApplyTerrainEntryEffects(battler))
                 {
-                case 1:
+                case TERRAIN_ENTRY_EFFECT_FLOODING:
                     BattleScriptPushCursorAndCallback(BattleScript_FloodingTryConfuse);
                     effect++;
                     break;
-                case 2:
+                case TERRAIN_ENTRY_EFFECT_FROZEN:
                     BattleScriptPushCursorAndCallback(BattleScript_FrozenTerrainTrySlowing);
+                    effect++;
+                case TERRAIN_ENTRY_EFFECT_SHARP_ROCKS:
+                    BattleScriptPushCursorAndCallback(BattleScript_SharpRockDmg);
                     effect++;
                 }
                 break;
@@ -3474,12 +3477,12 @@ s8 GetMovePriority(u16 moveBattler1, u8 battler2)
 
 u8 ApplyTerrainEntryEffects(u8 battler) {
     if (IS_BATTLER_FLYING(battler))
-        return 0;
+        return TERRAIN_ENTRY_EFFECT_NONE;
     if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING
         && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER)) {
         if (gBattleMons[battler].status2 & STATUS2_CONFUSION)
         {
-            return 0;
+            return TERRAIN_ENTRY_EFFECT_NONE;
         }
     
         gBattleScripting.battler = battler;
@@ -3490,13 +3493,13 @@ u8 ApplyTerrainEntryEffects(u8 battler) {
         {
             gBattleMons[battler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
         }
-        return 1;
+        return TERRAIN_ENTRY_EFFECT_FLOODING;
     }
     if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FROZEN
         && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE)) {
         if (gBattleMons[battler].statStages[STAT_SPEED] <= MIN_STAT_STAGE)
         {
-            return 0;
+            return TERRAIN_ENTRY_EFFECT_NONE;
         }
     
         gBattleScripting.battler = battler;
@@ -3504,8 +3507,39 @@ u8 ApplyTerrainEntryEffects(u8 battler) {
         if (gBattleMons[battler].ability != ABILITY_CLEAR_BODY
             && !(gBattleMons[battler].status2 & STATUS2_SUBSTITUTE))
         {
-            return 2;
+            return TERRAIN_ENTRY_EFFECT_FROZEN;
         }
     }
-    return 0;
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SHARP_ROCKS
+        && !IS_BATTLER_OF_TYPE(battler, TYPE_GHOST)) {
+
+        struct BattlePokemon *rocks;
+        rocks = &gBattleMons[battler];
+        // effectively a pokemon with baseAttack 50
+        rocks->attack = ((25 * rocks->level) / 100) + 5;
+        rocks->item = ITEM_NONE;
+        rocks->ability = ABILITY_DAMP;
+        rocks->statStages[0] = DEFAULT_STAT_STAGE;
+        rocks->statStages[1] = DEFAULT_STAT_STAGE;
+        rocks->statStages[2] = DEFAULT_STAT_STAGE;
+        rocks->statStages[3] = DEFAULT_STAT_STAGE;
+        rocks->statStages[4] = DEFAULT_STAT_STAGE;
+        rocks->statStages[5] = DEFAULT_STAT_STAGE;
+        rocks->statStages[6] = DEFAULT_STAT_STAGE;
+        rocks->statStages[7] = DEFAULT_STAT_STAGE;
+        gEffectBattler = battler;
+        gBattleScripting.battler = battler;
+
+        gBattleMoveDamage = CalculateBaseDamage(rocks,
+                                                &gBattleMons[battler],
+                                                MOVE_POUND,
+                                                gSideStatuses[GET_BATTLER_SIDE(battler)],
+                                                30,
+                                                0,
+                                                battler,
+                                                battler);
+
+        return TERRAIN_ENTRY_EFFECT_SHARP_ROCKS;
+    }
+    return TERRAIN_ENTRY_EFFECT_NONE;
 }

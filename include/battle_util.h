@@ -59,6 +59,11 @@
 #define BS_GET_PLAYER2                  13
 #define BS_GET_OPPONENT2                14
 
+#define TERRAIN_ENTRY_EFFECT_NONE           0
+#define TERRAIN_ENTRY_EFFECT_FLOODING       1
+#define TERRAIN_ENTRY_EFFECT_FROZEN         2
+#define TERRAIN_ENTRY_EFFECT_SHARP_ROCKS    3
+
 u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingImprison(u8 attacker);

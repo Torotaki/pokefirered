@@ -284,6 +284,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBallUp				 @ EFFECT_BALL_UP
 	.4byte BattleScript_EffectBallForm				 @ EFFECT_BALL_FORM
 	.4byte BattleScript_EffectRunOver			 	 @ EFFECT_RUN_OVER
+	.4byte BattleScript_EffectSharpRocks			 @ EFFECT_SHARP_ROCKS
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2231,6 +2232,11 @@ BattleScript_EffectSetFrozenTerrain::
 	setfrozen
 	goto BattleScript_MoveTerrainChange
 
+BattleScript_EffectSharpRocks::
+	attackcanceler
+	setsharprocks
+	goto BattleScript_MoveTerrainChange
+
 BattleScript_EffectDefenseUpHit::
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
@@ -3523,6 +3529,8 @@ BattleScript_EffectHealingSeed::
 
 BattleScript_EffectReapplyTerrainHit::
 	call BattleScript_EffectHitAndReturn
+	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_NO_EFFECT, BattleScript_CheckFaintAndMoveEnd
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	applyterrainentryeffects BS_TARGET
 	goto BattleScript_CheckFaintAndMoveEnd
 
@@ -4142,7 +4150,7 @@ BattleScript_ReapplyFrozenTerrainTrySlowing::
 	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_FrozenTerrainSlowed::
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_FrozenTerrainSlowedReturn
+	jumpifstatus2 BS_EFFECT_BATTLER, STATUS2_SUBSTITUTE, BattleScript_FrozenTerrainSlowedReturn
 	setstatchanger STAT_SPEED, 1, TRUE
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_FrozenTerrainSlowedReturn
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_FrozenTerrainSlowedReturn
@@ -4152,6 +4160,31 @@ BattleScript_FrozenTerrainSlowed::
 	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_FrozenTerrainSlowedReturn::
+	return
+
+BattleScript_SharpRockDmg::
+	call BattleScript_SharpRockDoDamage
+	end3
+
+BattleScript_ReapplySharpRockDmg::
+	call BattleScript_SharpRockDoDamage
+	goto BattleScript_MoveEnd
+
+BattleScript_SharpRockDoDamage::
+	sethword gCurrentMove, MOVE_POUND
+	typecalc
+	adjustsetdamage
+	printstring STRINGID_PKMNWASHURTBYSHARPROCKS
+	waitmessage B_WAIT_TIME_LONG
+	effectivenesssound
+	hitanimation BS_SCRIPTING
+	waitstate
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_SCRIPTING
 	return
 
 BattleScript_SpikesOnTarget::

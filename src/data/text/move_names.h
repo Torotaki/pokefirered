@@ -392,4 +392,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_BALL_UP]       = _("BALL UP"),
     [MOVE_BALL_FORM]     = _("BALL FORM"),
     [MOVE_RUN_OVER]      = _("RUN OVER"),
+    [MOVE_SHARP_ROCKS]   = _("SHARP ROCKS"),
 };

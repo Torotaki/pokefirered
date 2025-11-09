@@ -1303,6 +1303,10 @@
 	setterrain B_TERRAIN_EFFECT_FROZEN
 	.endm
 
+	.macro setsharprocks
+	setterrain B_TERRAIN_EFFECT_SHARP_ROCKS
+	.endm
+
 @ set weather macros
 	.macro setrain
 	setweather B_WEATHER_RAIN
