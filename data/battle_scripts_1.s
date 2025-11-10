@@ -285,6 +285,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBallForm				 @ EFFECT_BALL_FORM
 	.4byte BattleScript_EffectRunOver			 	 @ EFFECT_RUN_OVER
 	.4byte BattleScript_EffectSharpRocks			 @ EFFECT_SHARP_ROCKS
+	.4byte BattleScript_EffectSharpRocksSlow		 @ EFFECT_SHARP_ROCKS_SLOW
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2236,6 +2237,32 @@ BattleScript_EffectSharpRocks::
 	attackcanceler
 	setsharprocks
 	goto BattleScript_MoveTerrainChange
+
+BattleScript_EffectSharpRocksSlow::
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_SHARP_ROCKS, BattleScript_EffectSpeedDown
+	attackcanceler
+	setsharprocks
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	setstatchanger STAT_SPEED, 1, TRUE
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MoveEnd
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_MoveEnd
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_EffectSharpRocksSlowStatDownDoAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY, BattleScript_MoveEnd
+	pause B_WAIT_TIME_SHORT
+	goto BattleScript_EffectSharpRocksSlowStatDownPrintString
+BattleScript_EffectSharpRocksSlowStatDownDoAnim::
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_EffectSharpRocksSlowStatDownPrintString::
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectDefenseUpHit::
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER

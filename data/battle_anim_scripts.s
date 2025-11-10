@@ -9371,6 +9371,7 @@ Move_ROCK_TOMB:
 	createsprite gRedXSpriteTemplate, ANIM_TARGET, 5, ANIM_TARGET, 50
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 20, 1
 	createvisualtask AnimTask_ShakeBattleTerrain, 2, 2, 0, 10, 1
+	setbattleterrainbackground
 	waitforvisualfinish
 	end
 

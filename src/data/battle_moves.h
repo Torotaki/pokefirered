@@ -4439,16 +4439,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ROCK_TOMB] =
     {
-        .effect = EFFECT_SPEED_DOWN_HIT,
-        .power = 50,
+        .effect = EFFECT_SHARP_ROCKS_SLOW,
+        .power = 0,
         .type = TYPE_ROCK,
         .accuracy = 100,
-        .pp = 25,
-        .secondaryEffectChance = 100,
-        .target = MOVE_TARGET_SELECTED,
-        .priority = -1,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
-        .category = CATEGORY_PHYSICAL,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .flags = 0,
     },
 
     [MOVE_SILVER_WIND] =
