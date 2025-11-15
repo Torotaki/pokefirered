@@ -2286,8 +2286,14 @@ static void BattleStartClearSetData(void)
     gBattlerTarget = 0;
     gBattleWeather = 0;
     gBattleTerrainEffect = 0;
-    if (gBattleTerrain == BATTLE_TERRAIN_WATER) {
+    switch (gBattleTerrain)
+    {
+    case BATTLE_TERRAIN_WATER:
         gBattleTerrainEffect = B_TERRAIN_EFFECT_FLOODING;
+        break;
+    case BATTLE_TERRAIN_CAVE:
+        gBattleTerrainEffect = B_TERRAIN_EFFECT_SHARP_ROCKS;
+        break;
     }
 
     dataPtr = (u8 *)&gWishFutureKnock;

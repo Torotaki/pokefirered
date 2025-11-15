@@ -3514,6 +3514,10 @@ u8 ApplyTerrainEntryEffects(u8 battler) {
         && !IS_BATTLER_OF_TYPE(battler, TYPE_GHOST)) {
 
         struct BattlePokemon *rocks;
+        
+        if (ItemId_GetHoldEffect(gBattleMons[battler].item) == HOLD_EFFECT_STOP_ROCKS_DMG)
+            return TERRAIN_ENTRY_EFFECT_NONE;
+
         rocks = &gBattleMons[battler];
         // effectively a pokemon with baseAttack 50
         rocks->attack = ((25 * rocks->level) / 100) + 5;

@@ -487,6 +487,8 @@ u8 BattleSetup_GetTerrainId(void)
             return BATTLE_TERRAIN_BUILDING;
         if (MetatileBehavior_IsSurfable(tileBehavior))
             return BATTLE_TERRAIN_POND;
+        if (gMapHeader.weather == 20) // WEATHER_ROUTE119_CYCLE set in diglett cave
+            return BATTLE_TERRAIN_SAND;
         return BATTLE_TERRAIN_CAVE;
     case MAP_TYPE_INDOOR:
     case MAP_TYPE_SECRET_BASE:

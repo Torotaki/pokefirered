@@ -10349,7 +10349,7 @@ static void Cmd_setsharprocks(void)
     else
     {
         gBattleTerrainEffect = B_TERRAIN_EFFECT_SHARP_ROCKS;
-        gBattleTerrain = BATTLE_TERRAIN_SHARP_ROCKS;
+        gBattleTerrain = BATTLE_TERRAIN_CAVE;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SHARP_ROCKS;
         CheckTerrainShiftUpdates();
     }

@@ -37,8 +37,16 @@ PewterCity_Gym_Text_TakeThisWithYou::
     .string "Take this with you.$"
 
 PewterCity_Gym_Text_ReceivedTM39FromBrock::
-    .string "{PLAYER} received TM39\n"
+    .string "{PLAYER} received HARD STONE\n"
     .string "from BROCK.$"
+
+PewterCity_Gym_Text_ExplainHardStone::
+    .string "The HARD STONE is an item to be held\n"
+    .string "by POKéMON.\p"
+    .string "It prevents that POKéMON from taking\n"
+    .string "damage from SHARP ROCKS.\p"
+    .string "It will help you make it through\n"
+    .string "MT. MOON safely.$"
 
 PewterCity_Gym_Text_ExplainTM39::
     .string "A TM, Technical Machine, contains a\n"
