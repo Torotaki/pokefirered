@@ -415,6 +415,7 @@ gBattleAnims_Moves::
 	.4byte Move_BALL_FORM
 	.4byte Move_RUN_OVER
 	.4byte Move_SHARP_ROCKS
+	.4byte Move_RAIN_SHOWER
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10599,6 +10600,32 @@ Move_SHARP_ROCKS:
 	setbattleterrainbackground
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
+	end
+
+Move_RAIN_SHOWER:
+	loadspritegfx ANIM_TAG_RAIN_DROPS
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES
+	playsewithpan SE_M_RAIN_DANCE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 2, 0, 4, RGB_BLACK
+	waitforvisualfinish
+	createvisualtask AnimTask_CreateRaindrops, 2, 0, 3, 120
+	createvisualtask AnimTask_CreateRaindrops, 2, 0, 3, 120
+	delay 30
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 0, -15, 0, 15, 55, ANIM_ATTACKER
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 0, -15, 0, 15, 55, ANIM_TARGET
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	delay 10
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 15, -20, 0, 15, 50, ANIM_ATTACKER
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 15, -20, 0, 15, 50, ANIM_TARGET
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	delay 10
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, -15, -10, 0, 10, 45, ANIM_ATTACKER
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, -15, -10, 0, 10, 45, ANIM_TARGET
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	delay 120
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 2, 4, 0, RGB_BLACK
+	waitforvisualfinish
 	end
 
 Move_COUNT:

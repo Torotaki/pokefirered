@@ -5513,4 +5513,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_RAIN_SHOWER] =
+    {
+        .effect = EFFECT_RAIN_SHOWER,
+        .power = 0,
+        .type = TYPE_WATER,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .flags = 0,
+        .category = CATEGORY_STATUS,
+    },
 };

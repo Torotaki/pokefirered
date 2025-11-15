@@ -768,7 +768,13 @@ static void AnimHydroCannonBeam(struct Sprite *sprite)
 // Water droplet appears and drips down. Used by Water Gun on impact
 static void AnimWaterGunDroplet(struct Sprite *sprite)
 {
-    InitSpritePosToAnimTarget(sprite, TRUE);
+    if (gBattleAnimArgs[5] == ANIM_ATTACKER)
+    {
+        InitSpritePosToAnimAttacker(sprite, TRUE);
+    } else {
+        InitSpritePosToAnimTarget(sprite, TRUE);
+    }
+    
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = sprite->x + gBattleAnimArgs[2];
     sprite->data[4] = sprite->y + gBattleAnimArgs[4];

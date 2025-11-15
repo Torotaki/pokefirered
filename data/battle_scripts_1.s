@@ -286,6 +286,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectRunOver			 	 @ EFFECT_RUN_OVER
 	.4byte BattleScript_EffectSharpRocks			 @ EFFECT_SHARP_ROCKS
 	.4byte BattleScript_EffectSharpRocksSlow		 @ EFFECT_SHARP_ROCKS_SLOW
+	.4byte BattleScript_EffectRainShower			 @ EFFECT_RAIN_SHOWER
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2090,6 +2091,18 @@ BattleScript_MoveWeatherHit::
 	attackstring
 	accuracycheck BattleScript_WeatherChangeHitMissed, ACC_CURR_MOVE
 	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
+	goto BattleScript_PrintWeatherChange
+
+BattleScript_EffectRainShower::
+	attackcanceler
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	normalisebuffs
+	printstring STRINGID_STATCHANGESGONE
+	waitmessage B_WAIT_TIME_LONG
+	setrain
 	goto BattleScript_PrintWeatherChange
 
 BattleScript_WeatherChangeHitMissed::

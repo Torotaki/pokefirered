@@ -387,6 +387,7 @@ const u8 gMoveDescription_SeedTrap[] = _("Sets a trap that\nseeds the foe if\nth
 const u8 gMoveDescription_FutureForce[] = _("An attack that is\nexecuted last.\nThe user flinches\nif hit beforehand.");
 const u8 gMoveDescription_WarpStrike[] = _("Hit and swiftly\nswitch out your POKéMON.");
 const u8 gMoveDescription_SharpRocks[] = _("Sets SHARP ROCKS.\nHurts non-flying\nnon-GHOST POKéMON\non entry.");
+const u8 gMoveDescription_RainShower[] = _("Summons rain and\nclears all stat\nchanges.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -782,4 +783,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_BALL_FORM     - 1] = gMoveDescription_BallForm,
     [MOVE_RUN_OVER      - 1] = gMoveDescription_RunOver,
     [MOVE_SHARP_ROCKS   - 1] = gMoveDescription_SharpRocks,
+    [MOVE_RAIN_SHOWER   - 1] = gMoveDescription_RainShower,
 };
