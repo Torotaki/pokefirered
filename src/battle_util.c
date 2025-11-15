@@ -1318,7 +1318,10 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gBattleMons[gBattlerAttacker].status1 -= toSub;
                     if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
                     {
-                        if (gCurrentMove != MOVE_SNORE && gCurrentMove != MOVE_SLEEP_TALK && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS)
+                        if (gCurrentMove != MOVE_SNORE
+                            && gCurrentMove != MOVE_SLEEP_TALK
+                            && gBattleMoves[gCurrentMove].effect != EFFECT_STILL_FOCUS
+                            && gBattleMoves[gCurrentMove].effect != EFFECT_HYPER_VOICE)
                         {
                             gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                             gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
