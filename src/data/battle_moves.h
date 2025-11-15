@@ -2186,7 +2186,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_REST] =
     {
         .effect = EFFECT_REST,
-        .power = 0,
+        .power = 100,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
         .pp = 10,
@@ -4243,8 +4243,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SLACK_OFF] =
     {
-        .effect = EFFECT_RESTORE_HP,
-        .power = 0,
+        .effect = EFFECT_REST,
+        .power = 50,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,

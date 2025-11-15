@@ -6747,7 +6747,7 @@ static void Cmd_trysetrest(void)
 {
     const u8 *failJump = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     gActiveBattler = gBattlerTarget = gBattlerAttacker;
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP * (-1);
+    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP * (-1) * gBattleMoves[gCurrentMove].power / 100;
 
     if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
     {
