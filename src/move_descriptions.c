@@ -209,6 +209,7 @@ const u8 gMoveDescription_Endure[] = _("The user endures\nany hit with 1 HP\nlef
 const u8 gMoveDescription_Charm[] = _("The foe is charmed\nby the user's cute\nappeals, sharply\ncutting its ATTACK.");
 const u8 gMoveDescription_Rollout[] = _("A 5-turn rolling\nattack that becomes\nstronger each time\nit hits.");
 const u8 gMoveDescription_RunOver[] = _("A rolling attack.\nSlows the user. Is\nstronger if curled\nand is FIRE in sun.");
+const u8 gMoveDescription_RockRam[] = _("A rolling attack.\nSlows the user. Is\nstronger if curled\nand is FIRE in sun.");
 const u8 gMoveDescription_FalseSwipe[] = _("A restrained attack\nthat always leaves\nthe foe with at\nleast 1 HP.");
 const u8 gMoveDescription_Swagger[] = _("A move that makes\nthe foe confused,\nbut also sharply\nraises its ATTACK.");
 const u8 gMoveDescription_MilkDrink[] = _("Heals the user by\nup to half its full\nHP. It can be used\nto heal an ally.");
@@ -784,4 +785,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_RUN_OVER      - 1] = gMoveDescription_RunOver,
     [MOVE_SHARP_ROCKS   - 1] = gMoveDescription_SharpRocks,
     [MOVE_RAIN_SHOWER   - 1] = gMoveDescription_RainShower,
+    [MOVE_ROCK_RAM      - 1] = gMoveDescription_RockRam,
 };

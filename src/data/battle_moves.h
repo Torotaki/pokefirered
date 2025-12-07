@@ -5489,7 +5489,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_RUN_OVER] =
     {
         .effect = EFFECT_RUN_OVER,
-        .power = 30,
+        .power = 50,
         .type = TYPE_ROCK,
         .accuracy = 100,
         .pp = 25,
@@ -5527,4 +5527,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
+
+        [MOVE_ROCK_RAM] =
+    {
+        .effect = EFFECT_RUN_OVER,
+        .power = 40,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
 };

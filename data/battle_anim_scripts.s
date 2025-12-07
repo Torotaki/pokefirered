@@ -416,6 +416,7 @@ gBattleAnims_Moves::
 	.4byte Move_RUN_OVER
 	.4byte Move_SHARP_ROCKS
 	.4byte Move_RAIN_SHOWER
+	.4byte Move_ROCK_RAM
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10627,6 +10628,9 @@ Move_RAIN_SHOWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 2, 4, 0, RGB_BLACK
 	waitforvisualfinish
 	end
+
+Move_ROCK_RAM:
+	goto Move_HEADBUTT
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
