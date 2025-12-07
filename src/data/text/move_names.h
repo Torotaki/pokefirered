@@ -395,4 +395,6 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_SHARP_ROCKS]   = _("SHARP ROCKS"),
     [MOVE_RAIN_SHOWER]   = _("RAIN SHOWER"),
     [MOVE_ROCK_RAM]      = _("ROCK RAM"),
+    [MOVE_DROP_SHOT]     = _("DROP SHOT"),
+    [MOVE_TANGLE_VINE]   = _("TANGLE VINE"),
 };

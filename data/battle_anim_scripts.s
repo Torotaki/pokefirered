@@ -417,6 +417,8 @@ gBattleAnims_Moves::
 	.4byte Move_SHARP_ROCKS
 	.4byte Move_RAIN_SHOWER
 	.4byte Move_ROCK_RAM
+	.4byte Move_DROP_SHOT
+	.4byte Move_TANGLE_VINE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10252,7 +10254,10 @@ Move_EXPLOIT:
 	goto Move_FAINT_ATTACK
 
 Move_AQUAJET:
-	goto Move_QUICK_ATTACK
+	goto Move_WATER_GUN
+
+Move_DROP_SHOT:
+	goto Move_WATER_GUN
 
 Move_TAKE_FLIGHT:
 	goto Move_FLY
@@ -10631,6 +10636,9 @@ Move_RAIN_SHOWER:
 
 Move_ROCK_RAM:
 	goto Move_HEADBUTT
+
+Move_TANGLE_VINE:
+	goto Move_VINE_WHIP
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

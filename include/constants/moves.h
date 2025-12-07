@@ -397,8 +397,10 @@
 #define MOVE_SHARP_ROCKS 393
 #define MOVE_RAIN_SHOWER 394
 #define MOVE_ROCK_RAM 395
+#define MOVE_DROP_SHOT 396
+#define MOVE_TANGLE_VINE 397
 
-#define MOVES_COUNT 396
+#define MOVES_COUNT 398
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

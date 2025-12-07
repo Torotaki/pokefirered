@@ -2662,7 +2662,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_AQUAJET] =
     {
         .effect = EFFECT_ICE_TYPE_IN_SNOW,
-        .power = 30,
+        .power = 50,
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 25,
@@ -5541,4 +5541,32 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .category = CATEGORY_PHYSICAL,
      },
+
+         [MOVE_DROP_SHOT] =
+    {
+        .effect = EFFECT_ICE_TYPE_IN_SNOW,
+        .power = 30,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_SPECIAL,
+    },
+
+    [MOVE_TANGLE_VINE] =
+    {
+        .effect = EFFECT_SLOWING_FLINCH_HIT,
+        .power = 50,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 25,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL
+    },
 };
