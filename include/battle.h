@@ -166,7 +166,7 @@ struct DisableStruct
     /*0x14*/ u8 battlerPreventingEscape;
     /*0x15*/ u8 battlerWithSureHit;
     /*0x16*/ u8 isFirstTurn;
-    /*0x17*/ u8 unk17;
+    /*0x17*/ u8 cantEscapeTimer;
     /*0x18*/ u8 truantCounter : 1;
     /*0x18*/ u8 truantSwitchInHack : 1; // Unused here, but used in pokeemerald
     /*0x18*/ u8 unk18_a_2 : 2;

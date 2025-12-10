@@ -147,6 +147,7 @@ extern const u8 BattleScript_VictoryFlexActivates[];
 extern const u8 BattleScript_VictoryBellActivates[];
 extern const u8 BattleScript_OutlastSpeedBoost[];
 extern const u8 BattleScript_LandingFromLaunchedAirborne[];
+extern const u8 BattleScript_CanEscapeAgain[];
 extern const u8 BattleScript_ShellArmorActivates[];
 extern const u8 BattleScript_TraceActivates[];
 extern const u8 BattleScript_RainDishActivates[];

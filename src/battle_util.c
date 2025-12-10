@@ -730,6 +730,7 @@ enum
     ENDTURN_ITEMS2,
     ENDTURN_OUTLAST,
     ENDTURN_LAUNCHED,
+    ENDTURN_CANT_ESCAPE,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -1075,6 +1076,18 @@ u8 DoBattlerEndTurnEffects(void)
                     }
                 }
                 gBattleStruct->turnEffectsTracker++;                
+                break;
+            case ENDTURN_CANT_ESCAPE:
+                if (gDisableStructs[gActiveBattler].cantEscapeTimer)
+                    if (--gDisableStructs[gActiveBattler].cantEscapeTimer == 0)
+                    {
+                        gBattleMons[gActiveBattler].status2 &= ~STATUS2_ESCAPE_PREVENTION;
+                        gDisableStructs[gActiveBattler].battlerPreventingEscape = 0;
+                        BattleScriptPushCursorAndCallback(BattleScript_CanEscapeAgain);
+                        gBattleScripting.battler = gActiveBattler;
+                        effect++;
+                    }
+                gBattleStruct->turnEffectsTracker++;       
                 break;
             case ENDTURN_BATTLER_COUNT:  // done
                 gBattleStruct->turnEffectsTracker = 0;

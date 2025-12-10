@@ -3126,6 +3126,7 @@ AI_HPAware_DiscouragedEffectsWhenLowHP::
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_OVERCLOCK
+	.byte EFFECT_LOCK_ON_AND_BLOCK
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetHighHP::

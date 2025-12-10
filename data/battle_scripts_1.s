@@ -287,6 +287,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSharpRocks			 @ EFFECT_SHARP_ROCKS
 	.4byte BattleScript_EffectSharpRocksSlow		 @ EFFECT_SHARP_ROCKS_SLOW
 	.4byte BattleScript_EffectRainShower			 @ EFFECT_RAIN_SHOWER
+	.4byte BattleScript_EffectLockOnAndBlockEscape	 @ EFFECT_LOCK_ON_AND_BLOCK
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1507,6 +1508,15 @@ BattleScript_EffectConversion2::
 
 BattleScript_EffectLockOn::
 	call BattleScript_DoLockOn
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectLockOnAndBlockEscape::
+	call BattleScript_DoLockOn
+	jumpifstatus2 BS_TARGET, STATUS2_ESCAPE_PREVENTION, BattleScript_MoveEnd
+	setmoveeffect MOVE_EFFECT_PREVENT_ESCAPE
+	seteffectprimary
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_DoLockOn::
@@ -4842,6 +4852,11 @@ BattleScript_LandingFromLaunchedAirborne::
 	playanimation BS_ATTACKER, B_ANIM_LANDING_FROM_AIRBORNE
 	clearsemiinvulnerablebit
 	printstring STRINGID_PKMNLANDEDFROMAIRBORNE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_CanEscapeAgain::
+	printstring STRINGID_PKMNCANESCAPEAGAIN
 	waitmessage B_WAIT_TIME_LONG
 	end3
 

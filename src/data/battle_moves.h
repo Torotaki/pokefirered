@@ -2787,7 +2787,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LOCK_ON] =
     {
-        .effect = EFFECT_LOCK_ON,
+        .effect = EFFECT_LOCK_ON_AND_BLOCK,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 100,

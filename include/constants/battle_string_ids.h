@@ -414,8 +414,9 @@
 #define STRINGID_PKMNSXSETSFLOODING 413
 #define STRINGID_PKMNWASHURTBYSHARPROCKS 414
 #define STRINGID_SETSHARPROCKS 415
+#define STRINGID_PKMNCANESCAPEAGAIN 416
 
-#define BATTLESTRINGS_COUNT     416
+#define BATTLESTRINGS_COUNT     417
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
