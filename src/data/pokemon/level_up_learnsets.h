@@ -884,10 +884,10 @@ static const u16 sSlowpokeLevelUpLearnset[] = {
 };
 
 static const u16 sSlowbroLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_AQUAJET),
     LEVEL_UP_MOVE(1, MOVE_UPROAR),
     LEVEL_UP_MOVE(1, MOVE_SLACK_OFF),
     LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
+    LEVEL_UP_MOVE(1, MOVE_HYPER_VOICE),
     LEVEL_UP_MOVE(37, MOVE_RAIN_SHOWER),
     LEVEL_UP_END
 };
