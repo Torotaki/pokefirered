@@ -2715,7 +2715,10 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         || IS_ITEM_MAIL(gBattleMons[gBattlerTarget].item)
                         || gBattleMons[gBattlerTarget].item == ITEM_NONE)
                     {
-                        gBattlescriptCurrInstr++;
+                        if (primary)
+                            gBattlescriptCurrInstr = BattleScript_ButItFailed;
+                        else 
+                            gBattlescriptCurrInstr++;
                     }
                     else
                     {

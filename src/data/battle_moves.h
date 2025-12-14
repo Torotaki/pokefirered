@@ -5528,7 +5528,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_STATUS,
     },
 
-        [MOVE_ROCK_RAM] =
+    [MOVE_ROCK_RAM] =
     {
         .effect = EFFECT_RUN_OVER,
         .power = 40,
@@ -5542,7 +5542,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_PHYSICAL,
      },
 
-         [MOVE_DROP_SHOT] =
+    [MOVE_DROP_SHOT] =
     {
         .effect = EFFECT_ICE_TYPE_IN_SNOW,
         .power = 30,
@@ -5568,5 +5568,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .category = CATEGORY_PHYSICAL
+    },
+
+    [MOVE_MAGNET_PULL] =
+    {
+        .effect = EFFECT_MAGNET_PULL,
+        .power = 0,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_STATUS,
     },
 };

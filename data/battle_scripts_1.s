@@ -288,6 +288,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSharpRocksSlow		 @ EFFECT_SHARP_ROCKS_SLOW
 	.4byte BattleScript_EffectRainShower			 @ EFFECT_RAIN_SHOWER
 	.4byte BattleScript_EffectLockOnAndBlockEscape	 @ EFFECT_LOCK_ON_AND_BLOCK
+	.4byte BattleScript_EffectMagnetPull			 @ EFFECT_MAGNET_PULL
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3039,6 +3040,19 @@ BattleScript_EffectTrick::
 	waitmessage B_WAIT_TIME_LONG
 	printfromtable gItemSwapStringIds
 	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectMagnetPull::
+	jumpiftype BS_TARGET, TYPE_STEEL, BattleScript_EffectMeanLook
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	attackanimation
+	waitanimation
+	setmoveeffect MOVE_EFFECT_STEAL_ITEM
+	seteffectprimary
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectRolePlay::

@@ -391,6 +391,7 @@ const u8 gMoveDescription_SharpRocks[] = _("Sets SHARP ROCKS.\nHurts non-flying\
 const u8 gMoveDescription_RainShower[] = _("Summons rain and\nclears all stat\nchanges.");
 const u8 gMoveDescription_DropShot[] = _("The foe is struck\nwith a lot of water\nor Ice in snowy terrain.");
 const u8 gMoveDescription_TangleVine[] = _("The foe is hit with\nentangled vines.\nThe user is slowed\nand the foe flinches.");
+const u8 gMoveDescription_MagnetPull[] = _("Steals the foe's\nheld item or traps\nSTEEL POKéMON for\none turn.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -790,4 +791,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_ROCK_RAM      - 1] = gMoveDescription_RockRam,
     [MOVE_DROP_SHOT     - 1] = gMoveDescription_DropShot,
     [MOVE_TANGLE_VINE   - 1] = gMoveDescription_TangleVine,
+    [MOVE_MAGNET_PULL   - 1] = gMoveDescription_MagnetPull,
 };

@@ -419,6 +419,7 @@ gBattleAnims_Moves::
 	.4byte Move_ROCK_RAM
 	.4byte Move_DROP_SHOT
 	.4byte Move_TANGLE_VINE
+	.4byte Move_MAGNET_PULL
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10639,6 +10640,28 @@ Move_ROCK_RAM:
 
 Move_TANGLE_VINE:
 	goto Move_VINE_WHIP
+
+Move_MAGNET_PULL:
+	loadspritegfx ANIM_TAG_THIN_RING
+	loadspritegfx ANIM_TAG_NOISE_LINE
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, 16, 0, 0, 42
+	call MagnetLines
+	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_ATTACKER
+	call MagnetLines
+	call MagnetLines
+	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_ATTACKER
+	call MagnetLines
+	call MagnetLines
+	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_ATTACKER
+	call MagnetLines
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 7
+	waitforvisualfinish
+	end
+
+MagnetLines:
+	createsprite gThinRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0
+	delay 7
+	return
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

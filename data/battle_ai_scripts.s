@@ -1886,6 +1886,7 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_OUTLAST
 	.byte EFFECT_OVERCLOCK
 	.byte EFFECT_CHALLENGE
+	.byte EFFECT_MAGNET_PULL
 	.byte -1
 
 AI_CV_PainSplit::
