@@ -43,6 +43,7 @@ static void ApplyCleanseTagEncounterRateMod(u32 *rate);
 static bool8 IsLeadMonHoldingCleanseTag(void);
 static u16 WildEncounterRandom(void);
 static void AddToWildEncounterRateBuff(u8 encouterRate);
+bool8 TryGenerateWildMonOfType(const struct WildPokemonInfo *info, u8 type, u8 area);
 
 #include "data/wild_encounters.h"
 
@@ -504,6 +505,91 @@ bool8 SweetScentWildEncounter(void)
     }
 
     return FALSE;
+}
+
+bool8 MagnetPullWildEncounter(void)
+{
+    s16 x, y;
+    u16 headerId;
+    struct WildPokemonInfo steelMonsInfo;
+    struct WildPokemon steelMons[12];
+    struct WildPokemon lastSteelMon;
+    bool8 steelTypeFound = FALSE;
+
+    PlayerGetDestCoords(&x, &y);
+    headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId != HEADER_NONE)
+    {
+        if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
+        {
+            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
+                return FALSE;
+
+            if (!TryGenerateWildMonOfType(gWildMonHeaders[headerId].landMonsInfo, TYPE_STEEL, WILD_AREA_LAND))
+                return FALSE;
+
+            StartWildBattle();
+            return TRUE;
+        }
+        else if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_WATER)
+        {
+            if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
+                return FALSE;
+
+            if (!TryGenerateWildMonOfType(gWildMonHeaders[headerId].waterMonsInfo, TYPE_STEEL, WILD_AREA_WATER))
+                return FALSE;
+
+            StartWildBattle();
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 TryGenerateWildMonOfType(const struct WildPokemonInfo *info, u8 type, u8 area)
+{
+    s8 i, j, slotCount;
+    struct WildPokemonInfo typeMonsInfo;
+    struct WildPokemon typeMons[12];
+    struct WildPokemon lastTypeMon;
+    bool8 typeFound = FALSE;
+
+    if (area == WILD_AREA_LAND)
+        slotCount = 12;
+    else
+        slotCount = 5;
+    
+
+    for (i = 0; i < slotCount; i++)
+    {
+        struct WildPokemon currentMon;
+        currentMon = info->wildPokemon[i];
+        if (gSpeciesInfo[currentMon.species].types[0] == type
+            || gSpeciesInfo[currentMon.species].types[1] == type)
+        {
+            lastTypeMon = currentMon;
+
+            if (!typeFound) {
+                for (j = i - 1; j >= 0; j--)
+                {
+                    typeMons[j] = lastTypeMon;
+                }
+                
+                typeFound = TRUE;
+            }
+        }
+
+        typeMons[i] = lastTypeMon;
+    }
+
+    if (!typeFound) {
+        return FALSE;
+    }
+
+    typeMonsInfo.wildPokemon = typeMons;
+    TryGenerateWildMon(&typeMonsInfo, area, 0);
+    return TRUE;
 }
 
 bool8 DoesCurrentMapHaveFishingMons(void)

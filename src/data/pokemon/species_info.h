@@ -2384,6 +2384,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .fieldUtilityFlags = FLAG_CAN_MAGNET_PULL
     },
     [SPECIES_MAGNETON] =
     {
@@ -2413,6 +2414,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .fieldUtilityFlags = FLAG_CAN_MAGNET_PULL
     },
     [SPECIES_FARFETCHD] =
     {

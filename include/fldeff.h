@@ -59,4 +59,8 @@ void ChooseMonForFixedHealing(u8 taskId);
 void Task_TryUseMoveOnPartyMon(u8 taskId);
 void Task_TryUseFixedHealingOnPartyMon(u8 taskId);
 
+// Item Finders
+bool8 SetUpFieldMove_MagnetPull(void);
+bool8 FldEff_MagnetPull(void);
+
 #endif // GUARD_FLDEFF_H

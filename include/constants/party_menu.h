@@ -46,7 +46,8 @@
 #define FIELD_MOVE_HEALING_SEED 12
 #define FIELD_MOVE_PATCH_UP     13
 #define FIELD_MOVE_SING         14
-#define FIELD_MOVE_END          15
+#define FIELD_MOVE_MAGNET_PULL  15
+#define FIELD_MOVE_END          16
 
 #define PARTY_LAYOUT_SINGLE          0
 #define PARTY_LAYOUT_DOUBLE          1

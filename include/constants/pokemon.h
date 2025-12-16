@@ -242,6 +242,7 @@
 #define FLAG_CAN_FLASH              (1 << 4)
 #define FLAG_CAN_DIG                (1 << 5)
 #define FLAG_CAN_TELEPORT           (1 << 6)
+#define FLAG_CAN_MAGNET_PULL        (1 << 7)
 
 // Battle move flags
 #define FLAG_MAKES_CONTACT          (1 << 0)
