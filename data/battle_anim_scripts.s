@@ -420,6 +420,7 @@ gBattleAnims_Moves::
 	.4byte Move_DROP_SHOT
 	.4byte Move_TANGLE_VINE
 	.4byte Move_MAGNET_PULL
+	.4byte Move_DODGE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10665,6 +10666,11 @@ MagnetLines:
 	delay 7
 	return
 
+Move_DODGE:
+	loadspritegfx ANIM_TAG_ROUND_SHADOW
+	loadspritegfx ANIM_TAG_IMPACT
+	goto FlySetUp
+
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -11530,6 +11536,8 @@ General_Fog:
 	goto Move_HAZE
 
 General_LandingFromAirborne:
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 24
 	delay 24
 	end

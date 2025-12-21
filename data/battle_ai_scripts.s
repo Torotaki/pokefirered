@@ -732,6 +732,7 @@ AI_CheckViability::
 	if_effect EFFECT_MINIMIZE, AI_CV_EvasionUp
 	if_effect EFFECT_CURSE, AI_CV_Curse
 	if_effect EFFECT_PROTECT, AI_CV_Protect
+	if_effect EFFECT_DODGE, AI_CV_Protect
 	if_effect EFFECT_FORESIGHT, AI_CV_Foresight
 	if_effect EFFECT_ENDURE, AI_CV_Endure
 	if_effect EFFECT_OUTLAST, AI_CV_Endure
@@ -1450,6 +1451,7 @@ AI_CV_Toxic2::
 AI_CV_Toxic3::
 	if_has_move_with_effect AI_USER, EFFECT_SPECIAL_DEFENSE_UP, AI_CV_Toxic4
 	if_has_move_with_effect AI_USER, EFFECT_PROTECT, AI_CV_Toxic4
+	if_has_move_with_effect AI_USER, EFFECT_DODGE, AI_CV_Toxic4
 	goto AI_CV_Toxic_End
 
 AI_CV_Toxic4::
@@ -2327,6 +2329,7 @@ AI_CV_ChargeUpMove::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_ChargeUpMove_ScoreDown2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_ChargeUpMove_ScoreDown2
 	if_has_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_ChargeUpMove_ScoreDown2
+	if_has_move_with_effect AI_TARGET, EFFECT_DODGE, AI_CV_ChargeUpMove_ScoreDown2
 	if_hp_more_than AI_USER, 38, AI_CV_ChargeUpMove_End
 	score -1
 	goto AI_CV_ChargeUpMove_End

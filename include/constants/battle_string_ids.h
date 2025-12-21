@@ -509,6 +509,7 @@
 #define B_MSG_BRACED_ITSELF    1
 #define B_MSG_PROTECT_FAILED   2
 #define B_MSG_SET_UP_TRAP      3
+#define B_MSG_FLEW_HIGH        4
 
 // gRestUsedStringIds
 #define B_MSG_REST           0

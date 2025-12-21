@@ -292,6 +292,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPrepareSlash			 @ EFFECT_PREPARE_SLASH
 	.4byte BattleScript_EffectSlash			 		 @ EFFECT_SLASH
 	.4byte BattleScript_EffectFlyAndPrepareSlash	 @ EFFECT_FLY_AND_PREPARE_SLASH
+	.4byte BattleScript_EffectDodge					 @ EFFECT_DODGE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1778,6 +1779,7 @@ BattleScript_DoGhostCurse::
 	tryfaintmon BS_ATTACKER
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectDodge::
 BattleScript_EffectTrapLeechSeed::
 BattleScript_EffectOutlast::
 BattleScript_EffectProtect::

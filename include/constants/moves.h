@@ -400,8 +400,9 @@
 #define MOVE_DROP_SHOT 396
 #define MOVE_TANGLE_VINE 397
 #define MOVE_MAGNET_PULL 398
+#define MOVE_DODGE 399
 
-#define MOVES_COUNT 399
+#define MOVES_COUNT 400
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
