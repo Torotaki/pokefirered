@@ -8962,6 +8962,10 @@ static void Cmd_setsemiinvulnerablebit(void)
         gStatuses3[gBattlerTarget] |= STATUS3_ON_AIR;
         gDisableStructs[gBattlerTarget].launchedAirborneTimer = 2;
         break;
+    case EFFECT_FLY_AND_PREPARE_SLASH:
+        gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
+        gDisableStructs[gBattlerAttacker].launchedAirborneTimer = 1;
+        break;
     default:
         gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         break;

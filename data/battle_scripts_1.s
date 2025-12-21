@@ -291,6 +291,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMagnetPull			 @ EFFECT_MAGNET_PULL
 	.4byte BattleScript_EffectPrepareSlash			 @ EFFECT_PREPARE_SLASH
 	.4byte BattleScript_EffectSlash			 		 @ EFFECT_SLASH
+	.4byte BattleScript_EffectFlyAndPrepareSlash	 @ EFFECT_FLY_AND_PREPARE_SLASH
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3604,12 +3605,21 @@ BattleScript_EffectPrepareSlash::
 	attackcanceler
 	attackstring
 	ppreduce
+BattleScript_PrepareSlash::
 	attackanimation
 	waitanimation
 	setslashprepared
 	printstring STRINGID_PKMNPREPAREDSLASH
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectFlyAndPrepareSlash::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus3 BS_ATTACKER, STATUS3_SLASH_PREPARED, BattleScript_ButItFailed
+	setsemiinvulnerablebit
+	goto BattleScript_PrepareSlash
 
 BattleScript_EffectSlash::
 	jumpifnostatus3 BS_ATTACKER, STATUS3_SLASH_PREPARED, BattleScript_EffectHit

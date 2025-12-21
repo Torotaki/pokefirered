@@ -198,7 +198,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SWORDS_DANCE] =
     {
-        .effect = EFFECT_PREPARE_SLASH,
+        .effect = EFFECT_FLY_AND_PREPARE_SLASH,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,

@@ -1412,6 +1412,8 @@ Move_SWORDS_DANCE:
 	createsprite gSwordsDanceBladeSpriteTemplate, ANIM_ATTACKER, 2, 0, 0
 	delay 22
 	createvisualtask AnimTask_FlashAnimTagWithColor, 2, ANIM_TAG_SWORD, 2, 2, RGB(18, 31, 31), 16, 0, 0
+	delay 24
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_TARGET, 3, 1, 0, -123, 0, 12
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
