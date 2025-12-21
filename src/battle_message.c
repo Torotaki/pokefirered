@@ -204,6 +204,7 @@ static const u8 sText_PkmnReducedPP[] = _("Reduced {B_DEF_NAME_WITH_PREFIX}'s\n{
 static const u8 sText_PkmnStoleItem[] = _("{B_ATK_NAME_WITH_PREFIX} stole\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
 static const u8 sText_TargetCantEscapeNow[] = _("{B_DEF_NAME_WITH_PREFIX} can't\nescape now!");
 static const u8 sText_PkmnCanEscapeAgain[] = _("{B_ATK_NAME_WITH_PREFIX} can\nescape again!");
+static const u8 sText_PkmnPreparedSlash[] = _("{B_ATK_NAME_WITH_PREFIX} prepared\na powerful cut!");
 static const u8 sText_PkmnFellIntoNightmare[] = _("{B_DEF_NAME_WITH_PREFIX} fell into\na NIGHTMARE!");
 static const u8 sText_PkmnLockedInNightmare[] = _("{B_ATK_NAME_WITH_PREFIX} is locked\nin a NIGHTMARE!");
 static const u8 sText_PkmnLaidCurse[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP and\nlaid a CURSE on {B_DEF_NAME_WITH_PREFIX}!");
@@ -952,6 +953,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNWASHURTBYSHARPROCKS - BATTLESTRINGS_TABLE_START]       = sText_PkmnWasHurtBySharpRocks,
     [STRINGID_SETSHARPROCKS - BATTLESTRINGS_TABLE_START]                 = sText_SetSharpRocks,
     [STRINGID_PKMNCANESCAPEAGAIN - BATTLESTRINGS_TABLE_START]            = sText_PkmnCanEscapeAgain,
+    [STRINGID_PKMNPREPAREDSLASH - BATTLESTRINGS_TABLE_START]             = sText_PkmnPreparedSlash,
 };
 
 const u16 gMissStringIds[] =

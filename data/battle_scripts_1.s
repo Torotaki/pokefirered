@@ -289,6 +289,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectRainShower			 @ EFFECT_RAIN_SHOWER
 	.4byte BattleScript_EffectLockOnAndBlockEscape	 @ EFFECT_LOCK_ON_AND_BLOCK
 	.4byte BattleScript_EffectMagnetPull			 @ EFFECT_MAGNET_PULL
+	.4byte BattleScript_EffectPrepareSlash			 @ EFFECT_PREPARE_SLASH
+	.4byte BattleScript_EffectSlash			 		 @ EFFECT_SLASH
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3597,6 +3599,22 @@ BattleScript_EffectReapplyTerrainHit::
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	applyterrainentryeffects BS_TARGET
 	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_EffectPrepareSlash::
+	attackcanceler
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	setslashprepared
+	printstring STRINGID_PKMNPREPAREDSLASH
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectSlash::
+	jumpifnostatus3 BS_ATTACKER, STATUS3_SLASH_PREPARED, BattleScript_EffectHit
+	setbyte sDMG_MULTIPLIER, 2
+	goto BattleScript_EffectHit
 
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER

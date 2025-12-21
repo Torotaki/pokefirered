@@ -1258,7 +1258,7 @@
 	.byte \battler
 	.endm
 
-	.macro unused1
+	.macro setslashprepared
 	.byte 0xf9
 	.endm
 

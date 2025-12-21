@@ -731,6 +731,7 @@ enum
     ENDTURN_OUTLAST,
     ENDTURN_LAUNCHED,
     ENDTURN_CANT_ESCAPE,
+    ENDTURN_SLASH_PREPARED,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -1088,6 +1089,11 @@ u8 DoBattlerEndTurnEffects(void)
                         effect++;
                     }
                 gBattleStruct->turnEffectsTracker++;       
+                break;
+            case ENDTURN_SLASH_PREPARED:
+                if (gDisableStructs[gActiveBattler].slashPreparedTimer && --gDisableStructs[gActiveBattler].slashPreparedTimer == 0)
+                    gStatuses3[gActiveBattler] &= ~STATUS3_SLASH_PREPARED;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_BATTLER_COUNT:  // done
                 gBattleStruct->turnEffectsTracker = 0;

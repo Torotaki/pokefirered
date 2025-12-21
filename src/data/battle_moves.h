@@ -198,7 +198,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SWORDS_DANCE] =
     {
-        .effect = EFFECT_ATTACK_UP_2,
+        .effect = EFFECT_PREPARE_SLASH,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,
@@ -212,7 +212,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CUT] =
     {
-        .effect = EFFECT_ATTACK_UP_HIT,
+        .effect = EFFECT_SLASH,
         .power = 30,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -2227,7 +2227,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SHARPEN] =
     {
-        .effect = EFFECT_ATTACK_UP,
+        .effect = EFFECT_PREPARE_SLASH,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,
@@ -2283,7 +2283,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SLASH] =
     {
-        .effect = EFFECT_ATTACK_UP_HIT,
+        .effect = EFFECT_SLASH,
         .power = 70,
         .type = TYPE_STEEL,
         .accuracy = 100,

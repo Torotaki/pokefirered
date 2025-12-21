@@ -325,6 +325,7 @@ static void Cmd_setfog(void);
 static void Cmd_getrandom(void);
 static void Cmd_applyterrainentryeffects(void);
 static void Cmd_setmovetype(void);
+static void Cmd_setslashprepared(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -577,7 +578,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_finishaction,                            //0xF6
     Cmd_finishturn,                              //0xF7
     Cmd_fixedhealing,                            //0xF8
-    Cmd_setaroma,                                //0xF9
+    Cmd_setslashprepared,                        //0xF9
     Cmd_clearWeather,                            //0xFA
     Cmd_payhpboostattackandspeed,                //0xFB
     Cmd_setterrain,                              //0xFC
@@ -10448,4 +10449,11 @@ static void Cmd_setmovetype(void)
     u8 type = gBattlescriptCurrInstr[1];
     *(&gBattleStruct->dynamicMoveType) = type | F_DYNAMIC_TYPE_2;
     gBattlescriptCurrInstr +=2;
+}
+
+static void Cmd_setslashprepared(void)
+{
+    gStatuses3[gBattlerAttacker] |= STATUS3_SLASH_PREPARED;
+    gDisableStructs[gBattlerAttacker].slashPreparedTimer = 2;
+    gBattlescriptCurrInstr++;
 }
