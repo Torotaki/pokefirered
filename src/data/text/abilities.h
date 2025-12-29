@@ -90,6 +90,7 @@ static const u8 sMoistSkinDescription[] = _("Recovers HP in FLOOD. Loses HP in S
 static const u8 sVictoryFlexDescription[] = _("KO's boosts ATTACK and DEFENSE.");
 static const u8 sVictoryBellDescription[] = _("KO's clears status from team.");
 static const u8 sFloodbringerDescription[] = _("Sets FLOODING on entry.");
+static const u8 sVictoryDrawDescription[] = _("KO's prepare CUT and SLASH.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -185,6 +186,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_VICTORY_FLEX] = sVictoryFlexDescription,
     [ABILITY_VICTORY_BELL] = sVictoryBellDescription,
     [ABILITY_FLOODBRINGER] = sFloodbringerDescription,
+    [ABILITY_VICTORY_DRAW] = sVictoryDrawDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -281,4 +283,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_VICTORY_FLEX] = _("VICTORY FLEX"),
     [ABILITY_VICTORY_BELL] = _("VICTORY BELL"),
     [ABILITY_FLOODBRINGER] = _("FLOODBRINGER"),
+    [ABILITY_VICTORY_DRAW] = _("VICTORY DRAW"),
 };

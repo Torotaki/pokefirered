@@ -3121,6 +3121,9 @@ Move_ACID_ARMOR:
 	end
 
 Move_SHARPEN:
+	goto Move_IRON_DEFENSE
+
+Move_SHARPEN_old:
 	loadspritegfx ANIM_TAG_SPHERE_TO_CUBE
 	createsprite gSharpenSphereSpriteTemplate, ANIM_ATTACKER, 2
 	waitforvisualfinish

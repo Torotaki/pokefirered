@@ -4885,6 +4885,15 @@ BattleScript_VictoryBellActivates::
 	call BattleScript_DoHealBell
 	end3
 
+BattleScript_VictoryDrawActivates::
+	sethword gCurrentMove, MOVE_SHARPEN
+	attackanimation
+	waitanimation
+	setslashprepared
+	printstring STRINGID_PKMNPREPAREDSLASH
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_OutlastSpeedBoost::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_OUTLASTBOOST
