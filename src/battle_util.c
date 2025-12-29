@@ -3036,6 +3036,20 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
+            case HOLD_EFFECT_STICK:
+                if (gBattleMons[battlerId].species == SPECIES_FARFETCHD && !moveTurn && gBattleMons[battlerId].statStages[STAT_ATK] < MAX_STAT_STAGE)
+                {
+                    if (Random() % 10 == 0) {
+                        PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+                        gEffectBattler = battlerId;
+                        SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                        gBattleScripting.animArg1 = 14 + STAT_ATK;
+                        gBattleScripting.animArg2 = 0;
+                        BattleScriptExecute(BattleScript_NonConsumedItemStatRaiseEnd2);
+                        effect = ITEM_STATS_CHANGE;
+                    }
+                }
+                break;
             }
             if (effect != 0)
             {
