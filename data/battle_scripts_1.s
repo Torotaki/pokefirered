@@ -293,6 +293,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSlash			 		 @ EFFECT_SLASH
 	.4byte BattleScript_EffectFlyAndPrepareSlash	 @ EFFECT_FLY_AND_PREPARE_SLASH
 	.4byte BattleScript_EffectDodge					 @ EFFECT_DODGE
+	.4byte BattleScript_EffectFreeze				 @ EFFECT_FREEZE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2883,6 +2884,35 @@ BattleScript_AlreadyBurned::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectFreeze::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifstatus BS_TARGET, STATUS1_FREEZE, BattleScript_AlreadyFrozen
+	jumpiftype BS_TARGET, TYPE_ICE, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_MAGMA_ARMOR, BattleScript_MagmaArmorPrevents
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	attackanimation
+	waitanimation
+	setmoveeffect MOVE_EFFECT_FREEZE
+	seteffectprimary
+	goto BattleScript_MoveEnd
+
+BattleScript_AlreadyFrozen::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNALREADYFROZEN
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_MagmaArmorPrevents::
+	copybyte gEffectBattler, gBattlerTarget
+	setbyte cMULTISTRING_CHOOSER, B_MSG_ABILITY_PREVENTS_MOVE_STATUS
+	call BattleScript_FRZPrevention
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectMemento::
 	attackcanceler
 	jumpifbyte CMP_EQUAL, cMISS_TYPE, B_MSG_PROTECTED, BattleScript_MementoTargetProtect
@@ -5136,6 +5166,12 @@ BattleScript_AbilityNoStatLoss::
 BattleScript_BRNPrevention::
 	pause B_WAIT_TIME_SHORT
 	printfromtable gBRNPreventionStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_FRZPrevention::
+	pause B_WAIT_TIME_SHORT
+	printfromtable gFRZPreventionStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
 

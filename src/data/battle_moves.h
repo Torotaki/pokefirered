@@ -5597,4 +5597,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_FREEZE] =
+    {
+        .effect = EFFECT_FREEZE,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_STATUS,
+    },
 };

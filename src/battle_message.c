@@ -100,6 +100,7 @@ static const u8 sText_PkmnHurtByBurn[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby
 static const u8 sText_PkmnAlreadyHasBurn[] = _("{B_DEF_NAME_WITH_PREFIX} already\nhas a burn.");
 static const u8 sText_PkmnWasFrozen[] = _("{B_EFF_NAME_WITH_PREFIX} was\nfrozen!");
 static const u8 sText_PkmnHurtByFreeze[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby its freeze!");
+static const u8 sText_PkmnAlreadyFrozen[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready frozen.");
 static const u8 sText_PkmnFrozenBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nfroze {B_EFF_NAME_WITH_PREFIX} solid!");
 static const u8 sText_PkmnIsFrozen[] = _("{B_ATK_NAME_WITH_PREFIX} is\nfrozen!");
 static const u8 sText_PkmnWasDefrosted[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndefrosted!");
@@ -294,6 +295,7 @@ static const u8 sText_PkmnHurtsWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABI
 static const u8 sText_PkmnTraced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!");
 static const u8 sText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!");
 static const u8 sText_TerrainPreventsBurns[] = _("The terrain\nprevents burns!");
+static const u8 sText_PkmnsXPreventsFreeze[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents freezing!");
 static const u8 sText_DiveFailedNoFlooding[] = _("But there was no\nFLOODING to hide in!");
 static const u8 sText_DigFailedFlooding[] = _("But the FLOODING\nprevented it!");
 static const u8 sText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
@@ -956,6 +958,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNCANESCAPEAGAIN - BATTLESTRINGS_TABLE_START]            = sText_PkmnCanEscapeAgain,
     [STRINGID_PKMNPREPAREDSLASH - BATTLESTRINGS_TABLE_START]             = sText_PkmnPreparedSlash,
     [STRINGID_PKMNHURTBYFREEZE - BATTLESTRINGS_TABLE_START]              = sText_PkmnHurtByFreeze,
+    [STRINGID_PKMNALREADYFROZEN - BATTLESTRINGS_TABLE_START]             = sText_PkmnAlreadyFrozen,
+    [STRINGID_PKMNSXPREVENTSFREEZE - BATTLESTRINGS_TABLE_START]          = sText_PkmnsXPreventsFreeze,
 };
 
 const u16 gMissStringIds[] =
@@ -1304,6 +1308,13 @@ const u16 gBRNPreventionStringIds[] =
     [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
     [B_MSG_STATUS_HAD_NO_EFFECT]            = STRINGID_PKMNSXHADNOEFFECTONY,
     [B_MSG_TERRAIN_PREVENTS_MOVE_STATUS]    = STRINGID_TERRAINPREVENTSBURN
+};
+
+const u16 gFRZPreventionStringIds[] =
+{
+    [B_MSG_ABILITY_PREVENTS_MOVE_STATUS]    = STRINGID_PKMNSXPREVENTSBURNS,
+    [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
+    [B_MSG_STATUS_HAD_NO_EFFECT]            = STRINGID_PKMNSXHADNOEFFECTONY
 };
 
 const u16 gPRLZPreventionStringIds[] =

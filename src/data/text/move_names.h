@@ -399,4 +399,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_TANGLE_VINE]   = _("TANGLE VINE"),
     [MOVE_MAGNET_PULL]   = _("MAGNET PULL"),
     [MOVE_DODGE]         = _("DODGE"),
+    [MOVE_FREEZE]        = _("FREEZE"),
 };

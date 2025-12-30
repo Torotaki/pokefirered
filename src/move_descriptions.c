@@ -393,6 +393,7 @@ const u8 gMoveDescription_DropShot[] = _("The foe is struck\nwith a lot of water
 const u8 gMoveDescription_TangleVine[] = _("The foe is hit with\nentangled vines.\nThe user is slowed\nand the foe flinches.");
 const u8 gMoveDescription_MagnetPull[] = _("Steals the foe's\nheld item or traps\nSTEEL POKéMON for\none turn.");
 const u8 gMoveDescription_Dodge[] = _("Avoids an attack by\ngoing up in the air.\nIt may fail if used\nin succession.");
+const u8 gMoveDescription_Freeze[] = _("Freezes the foe.\nThis halves their\nSP. ATK and hurts\nthem every turn.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -794,4 +795,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_TANGLE_VINE   - 1] = gMoveDescription_TangleVine,
     [MOVE_MAGNET_PULL   - 1] = gMoveDescription_MagnetPull,
     [MOVE_DODGE         - 1] = gMoveDescription_Dodge,
+    [MOVE_FREEZE        - 1] = gMoveDescription_Freeze,
 };

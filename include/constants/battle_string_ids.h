@@ -417,8 +417,10 @@
 #define STRINGID_PKMNCANESCAPEAGAIN 416
 #define STRINGID_PKMNPREPAREDSLASH 417
 #define STRINGID_PKMNHURTBYFREEZE 418
+#define STRINGID_PKMNALREADYFROZEN 419
+#define STRINGID_PKMNSXPREVENTSFREEZE 420
 
-#define BATTLESTRINGS_COUNT     419
+#define BATTLESTRINGS_COUNT     421
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -622,7 +624,7 @@
 #define B_MSG_STATUSED            0
 #define B_MSG_STATUSED_BY_ABILITY 1
 
-// gBRNPreventionStringIds / gPRLZPreventionStringIds / gPSNPreventionStringIds
+// gBRNPreventionStringIds / gPRLZPreventionStringIds / gPSNPreventionStringIds / gFRZPreventionStringIds
 #define B_MSG_ABILITY_PREVENTS_MOVE_STATUS    0
 #define B_MSG_ABILITY_PREVENTS_ABILITY_STATUS 1
 #define B_MSG_STATUS_HAD_NO_EFFECT            2
