@@ -2324,6 +2324,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_FREEZE:
+            // add handling of primary moves once they exist
             if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN)
                 noSunCanFreeze = FALSE;
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_ICE))
@@ -2335,7 +2336,6 @@ void SetMoveEffect(bool8 primary, u8 certain)
             if (gBattleMons[gEffectBattler].ability == ABILITY_MAGMA_ARMOR)
                 break;
 
-            CancelMultiTurnMoves(gEffectBattler);
             statusChanged = TRUE;
             break;
         case STATUS1_PARALYSIS:
@@ -8662,7 +8662,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
 
     if (gChosenActionByBattler[gBattlerTarget] == B_ACTION_USE_MOVE
         && gBattlerAttacker == *(gBattleStruct->moveTarget + gBattlerTarget)
-        && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
+        && !(gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP)
         && gBattleMons[gBattlerAttacker].hp
         && !gDisableStructs[gBattlerTarget].truantCounter
         && gBattleMoves[gChosenMoveByBattler[gBattlerTarget]].effect == EFFECT_PURSUIT)
@@ -9070,7 +9070,7 @@ static void Cmd_callterrainattack(void)
 // Refresh
 static void Cmd_cureifburnedparalysedorpoisoned(void)
 {
-    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
+    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FREEZE))
     {
         gBattleMons[gBattlerAttacker].status1 = 0;
         gBattlescriptCurrInstr += 5;

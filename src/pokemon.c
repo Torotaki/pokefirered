@@ -2647,6 +2647,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         damage = (damage / damageHelper);
         damage /= 50;
 
+        // Freeze cuts special attack in half
+        if (attacker->status1 & STATUS1_FREEZE)
+            damage /= 2;
+
         // Apply Lightscreen
         if ((sideStatus & SIDE_STATUS_LIGHTSCREEN) && gCritMultiplier == 1)
         {

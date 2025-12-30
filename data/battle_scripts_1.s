@@ -2932,7 +2932,7 @@ BattleScript_MementoTargetProtectEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectFacade::
-	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, BattleScript_FacadeDoubleDmg
+	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FREEZE, BattleScript_FacadeDoubleDmg
 	goto BattleScript_EffectHit
 
 BattleScript_FacadeDoubleDmg::
@@ -4617,6 +4617,11 @@ BattleScript_DoTurnDmgEnd::
 
 BattleScript_BurnTurnDmg::
 	printstring STRINGID_PKMNHURTBYBURN
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoStatusTurnDmg
+
+BattleScript_FreezeTurnDmg::
+	printstring STRINGID_PKMNHURTBYFREEZE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_DoStatusTurnDmg
 

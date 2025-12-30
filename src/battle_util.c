@@ -841,6 +841,15 @@ u8 DoBattlerEndTurnEffects(void)
                     BattleScriptExecute(BattleScript_BurnTurnDmg);
                     effect++;
                 }
+                if ((gBattleMons[gActiveBattler].status1 & STATUS1_FREEZE) && gBattleMons[gActiveBattler].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                    
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptExecute(BattleScript_FreezeTurnDmg);
+                    effect++;
+                }
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_NIGHTMARES:  // spooky nightmares
@@ -1359,8 +1368,8 @@ u8 AtkCanceller_UnableToUseMove(void)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
-        case CANCELLER_FROZEN: // check being frozen
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
+        case CANCELLER_FROZEN: // check being frozen turned off since freeze is no longer stopping attacks
+            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE && FALSE)
             {
                 if (Random() % 5)
                 {
