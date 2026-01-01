@@ -402,8 +402,9 @@
 #define MOVE_MAGNET_PULL 398
 #define MOVE_DODGE 399
 #define MOVE_FREEZE 400
+#define MOVE_COLD_FRONT 401
 
-#define MOVES_COUNT 401
+#define MOVES_COUNT 402
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

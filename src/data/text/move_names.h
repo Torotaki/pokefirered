@@ -400,4 +400,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_MAGNET_PULL]   = _("MAGNET PULL"),
     [MOVE_DODGE]         = _("DODGE"),
     [MOVE_FREEZE]        = _("FREEZE"),
+    [MOVE_COLD_FRONT]    = _("COLD FRONT"),
 };

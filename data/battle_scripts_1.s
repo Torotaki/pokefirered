@@ -294,6 +294,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFlyAndPrepareSlash	 @ EFFECT_FLY_AND_PREPARE_SLASH
 	.4byte BattleScript_EffectDodge					 @ EFFECT_DODGE
 	.4byte BattleScript_EffectFreeze				 @ EFFECT_FREEZE
+	.4byte BattleScript_EffectSetFrozenHit			 @ EFFECT_SET_FROZEN_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2234,11 +2235,11 @@ BattleScript_EffectFloodHit::
 	setflooding
 	attackanimation
 	waitanimation
-	accuracycheck BattleScript_EffectFloodHitMissed, ACC_CURR_MOVE
+	accuracycheck BattleScript_EffectTerrainHitMissed, ACC_CURR_MOVE
 	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
 	goto BattleScript_PrintTerrainChange
 
-BattleScript_EffectFloodHitMissed::
+BattleScript_EffectTerrainHitMissed::
 	ppreduce
 	effectivenesssound
 	resultmessage
@@ -2262,6 +2263,17 @@ BattleScript_EffectSetFrozenTerrain::
 	attackcanceler
 	setfrozen
 	goto BattleScript_MoveTerrainChange
+
+BattleScript_EffectSetFrozenHit::
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_EffectHit
+	attackcanceler
+	attackstring
+	setfrozen
+	attackanimation
+	waitanimation
+	accuracycheck BattleScript_EffectTerrainHitMissed, ACC_CURR_MOVE
+	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
+	goto BattleScript_PrintTerrainChange
 
 BattleScript_EffectSharpRocks::
 	attackcanceler

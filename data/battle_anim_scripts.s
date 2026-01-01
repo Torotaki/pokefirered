@@ -422,6 +422,7 @@ gBattleAnims_Moves::
 	.4byte Move_MAGNET_PULL
 	.4byte Move_DODGE
 	.4byte Move_FREEZE
+	.4byte Move_COLD_FRONT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10698,6 +10699,9 @@ Move_FREEZE:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
+
+Move_COLD_FRONT:
+	goto Move_ICY_WIND
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

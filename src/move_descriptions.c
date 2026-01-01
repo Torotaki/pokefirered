@@ -368,8 +368,9 @@ const u8 gMoveDescription_PoisonBloom[] = _("The foe is Struck\nwith poison.\nIt
 const u8 gMoveDescription_Exploit[] = _("An attack with\nincreased damage\nto poisoned and\nsleeping foes.");
 const u8 gMoveDescription_Challenge[] = _("Issues a challenge.\nIncreases attack\nand confuses the\nuser and the foe.");
 const u8 gMoveDescription_SandTrap[] = _("Sets SAND PIT.\nPrevents switching\nunless flying or\nground type.");
-const u8 gMoveDescription_RainFront[] = _("Summons Rain.\nto strike the target.");
-const u8 gMoveDescription_DesertRush[] = _("Summons a\nSandstorm to strike\nthe foe.");
+const u8 gMoveDescription_RainFront[] = _("Summons rain\nto strike the target.");
+const u8 gMoveDescription_DesertRush[] = _("Summons a\nsandstorm to strike\nthe foe.");
+const u8 gMoveDescription_ColdFront[] = _("Summons snow to\nstrike the foe.\nCovers the field in\nsnow.");
 const u8 gMoveDescription_Mirage[] = _("Inflicts Confusion.\nAlso burns the foe\nduring harsh\nsunlight.");
 const u8 gMoveDescription_WakeUpSlap[] = _("Doubly effective on\na sleeping foe,\nbut it also cures\nthe foe's sleep.");
 const u8 gMoveDescription_Lullaby[] = _("Puts both the user\nand the foe to\nsleep.");
@@ -796,4 +797,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_MAGNET_PULL   - 1] = gMoveDescription_MagnetPull,
     [MOVE_DODGE         - 1] = gMoveDescription_Dodge,
     [MOVE_FREEZE        - 1] = gMoveDescription_Freeze,
+    [MOVE_COLD_FRONT    - 1] = gMoveDescription_ColdFront,
 };
