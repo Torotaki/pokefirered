@@ -4606,16 +4606,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SHEER_COLD] =
     {
-        .effect = EFFECT_FREEZE_HIT,
-        .power = 110,
+        .effect = EFFECT_SET_FROZEN_FREEZE,
+        .power = 0,
         .type = TYPE_ICE,
-        .accuracy = 50,
+        .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 50,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
-        .category = CATEGORY_SPECIAL,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_MAGIC_COAT_AFFECTED,
+        .category = CATEGORY_STATUS,
     },
 
     [MOVE_MUDDY_WATER] =

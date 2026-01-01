@@ -295,6 +295,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDodge					 @ EFFECT_DODGE
 	.4byte BattleScript_EffectFreeze				 @ EFFECT_FREEZE
 	.4byte BattleScript_EffectSetFrozenHit			 @ EFFECT_SET_FROZEN_HIT
+	.4byte BattleScript_EffectSetFrozenFreeze		 @ EFFECT_SET_FROZEN_FREEZE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2274,6 +2275,27 @@ BattleScript_EffectSetFrozenHit::
 	accuracycheck BattleScript_EffectTerrainHitMissed, ACC_CURR_MOVE
 	call BattleScript_EffectHitAndReturnAfterAccuracyCheck
 	goto BattleScript_PrintTerrainChange
+
+BattleScript_EffectSetFrozenFreeze::
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_EffectFreeze
+	attackcanceler
+	attackstring
+	ppreduce
+	setfrozen
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MoveEnd
+	jumpifstatus BS_TARGET, STATUS1_FREEZE, BattleScript_MoveEnd
+	jumpiftype BS_TARGET, TYPE_ICE, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_MAGMA_ARMOR, BattleScript_MagmaArmorPrevents
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_MoveEnd
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	setmoveeffect MOVE_EFFECT_FREEZE
+	seteffectprimary
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSharpRocks::
 	attackcanceler
