@@ -2268,6 +2268,10 @@ BattleScript_EffectSetFrozenTerrain::
 	goto BattleScript_MoveTerrainChange
 
 BattleScript_EffectSetFrozenHit::
+	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_SetFrozenHit
+	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
+	setbyte sDMG_MULTIPLIER, 2
+BattleScript_SetFrozenHit::
 	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_EffectHit
 	attackcanceler
 	attackstring
