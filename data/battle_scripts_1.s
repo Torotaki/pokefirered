@@ -296,6 +296,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFreeze				 @ EFFECT_FREEZE
 	.4byte BattleScript_EffectSetFrozenHit			 @ EFFECT_SET_FROZEN_HIT
 	.4byte BattleScript_EffectSetFrozenFreeze		 @ EFFECT_SET_FROZEN_FREEZE
+	.4byte BattleScript_EffectAuroraVeil			 @ EFFECT_AURORA_VEIL
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2296,6 +2297,30 @@ BattleScript_EffectSetFrozenFreeze::
 	setmoveeffect MOVE_EFFECT_FREEZE
 	seteffectprimary
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectAuroraVeil::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_AuroraVeilTerrain
+	attackanimation
+	waitanimation
+BattleScript_AuroraVeilAfterTerrain::
+	setlightscreen
+	printfromtable gReflectLightScreenSafeguardStringIds
+	waitmessage B_WAIT_TIME_LONG
+	setsafeguard
+	printfromtable gReflectLightScreenSafeguardStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_AuroraVeilTerrain::
+	setfrozen
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_AuroraVeilAfterTerrain
 
 BattleScript_EffectSharpRocks::
 	attackcanceler

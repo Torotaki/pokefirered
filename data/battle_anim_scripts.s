@@ -423,6 +423,7 @@ gBattleAnims_Moves::
 	.4byte Move_DODGE
 	.4byte Move_FREEZE
 	.4byte Move_COLD_FRONT
+	.4byte Move_AURORA_VEIL
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10702,6 +10703,23 @@ Move_FREEZE:
 
 Move_COLD_FRONT:
 	goto Move_ICY_WIND
+
+Move_AURORA_VEIL:
+	loadspritegfx ANIM_TAG_SPARKLE_3
+	loadspritegfx ANIM_TAG_GREEN_LIGHT_WALL
+	fadetobg BG_AURORA
+	waitbgfadein
+	setalpha 0, 16
+	waitplaysewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER, 15
+	createsprite gLightScreenWallSpriteTemplate, ANIM_ATTACKER, 1, 40, 0, ANIM_TAG_GREEN_LIGHT_WALL
+	delay 10
+	call SpecialScreenSparkle
+	waitforvisualfinish
+	delay 1
+	blendoff
+	restorebg
+	waitbgfadein
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

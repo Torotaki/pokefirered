@@ -224,6 +224,7 @@ const u8 gMoveDescription_Return[] = _("This attack move\ngrows more powerful\nt
 const u8 gMoveDescription_Present[] = _("The foe is given a\nbooby-trapped gift.\nIt restores HP\nsometimes, however.");
 const u8 gMoveDescription_Frustration[] = _("This attack move\ngrows more powerful\nthe less the user\nlikes its TRAINER.");
 const u8 gMoveDescription_Safeguard[] = _("It protects the\nuser's party from\nall status problems\nfor five turns.");
+const u8 gMoveDescription_AuroraVeil[] = _("Shields party from\nSP. ATKs and status\nproblems for five\nturns. Sets snow.");
 const u8 gMoveDescription_PainSplit[] = _("The user adds its\nHP to the foe's HP,\nthen equally shares\nthe total HP.");
 const u8 gMoveDescription_SacredFire[] = _("A mystical and\npowerful fire\nattack that may\ninflict a burn.");
 const u8 gMoveDescription_Magnitude[] = _("A ground-shaking\nattack against all\nstanding POKéMON.\nIts power varies.");
@@ -798,4 +799,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_DODGE         - 1] = gMoveDescription_Dodge,
     [MOVE_FREEZE        - 1] = gMoveDescription_Freeze,
     [MOVE_COLD_FRONT    - 1] = gMoveDescription_ColdFront,
+    [MOVE_AURORA_VEIL   - 1] = gMoveDescription_AuroraVeil,
 };
