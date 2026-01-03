@@ -828,12 +828,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BLIZZARD] =
     {
-        .effect = EFFECT_FREEZE_HIT,
-        .power = 110,
+        .effect = EFFECT_BLIZZARD,
+        .power = 90,
         .type = TYPE_ICE,
-        .accuracy = 50,
+        .accuracy = 5,
         .pp = 10,
-        .secondaryEffectChance = 25,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,

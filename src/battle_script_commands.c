@@ -1040,8 +1040,8 @@ static bool8 AccuracyCalcHelper(u16 move)
 
     if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)
      || (gStatuses3[gBattlerTarget] & STATUS3_ON_AIR && gBattleMoves[move].effect == EFFECT_THUNDER)
-     || (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS && gBattleMoves[move].effect == EFFECT_THUNDER)
      || (WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_AROMA) && gBattleMoves[move].effect == EFFECT_SPORE)
+     || ((gBattleTerrainEffect & B_TERRAIN_EFFECT_FROZEN) && gBattleMoves[move].effect == EFFECT_BLIZZARD)
      || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
     {
         JumpIfMoveFailed(7, move);

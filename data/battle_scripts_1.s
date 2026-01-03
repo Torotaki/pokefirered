@@ -297,6 +297,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSetFrozenHit			 @ EFFECT_SET_FROZEN_HIT
 	.4byte BattleScript_EffectSetFrozenFreeze		 @ EFFECT_SET_FROZEN_FREEZE
 	.4byte BattleScript_EffectAuroraVeil			 @ EFFECT_AURORA_VEIL
+	.4byte BattleScript_EffectFreezeHit			 	 @ EFFECT_BLIZZARD
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
