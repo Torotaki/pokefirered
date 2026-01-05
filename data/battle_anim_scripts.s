@@ -191,7 +191,7 @@ gBattleAnims_Moves::
 	.4byte Move_TRIPLE_KICK
 	.4byte Move_THIEF
 	.4byte Move_SPIDER_WEB
-	.4byte Move_MIND_READER
+	.4byte Move_TAKE_AIM
 	.4byte Move_NIGHTMARE
 	.4byte Move_FLAME_WHEEL
 	.4byte Move_SNORE
@@ -4760,7 +4760,7 @@ BellyDrumRight:
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 8, 2, 1
 	return
 
-Move_MIND_READER:
+Move_TAKE_AIM:
 	loadspritegfx ANIM_TAG_TEAL_ALERT
 	loadspritegfx ANIM_TAG_OPENING_EYE
 	loadspritegfx ANIM_TAG_ROUND_WHITE_HALO

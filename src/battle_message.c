@@ -1529,7 +1529,7 @@ static const u16 sGrammarMoveUsedTable[] =
     MOVE_REST,
     MOVE_SHARPEN,
     MOVE_SUBSTITUTE,
-    MOVE_MIND_READER,
+    MOVE_TAKE_AIM,
     MOVE_SNORE,
     MOVE_PROTECT,
     MOVE_SPIKES,

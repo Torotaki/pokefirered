@@ -1024,7 +1024,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     EC_POKEMON2(MILOTIC),
     EC_POKEMON(MILTANK),
     EC_MOVE2(MIMIC),
-    EC_MOVE(MIND_READER),
+    EC_MOVE(TAKE_AIM),
     EC_MOVE2(MINIMIZE),
     EC_POKEMON2(MINUN),
     EC_WORD_MINUS,

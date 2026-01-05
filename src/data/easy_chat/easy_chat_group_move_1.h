@@ -71,7 +71,7 @@ static const u16 sEasyChatGroup_Move1[] = {
     MOVE_MEMENTO,
     MOVE_METAL_SOUND,
     MOVE_METEOR_MASH,
-    MOVE_MIND_READER,
+    MOVE_TAKE_AIM,
     MOVE_MIRROR_MOVE,
     MOVE_MIST,
     MOVE_MORNING_SUN,

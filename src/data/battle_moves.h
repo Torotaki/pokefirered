@@ -2379,13 +2379,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_STATUS,
     },
 
-    [MOVE_MIND_READER] =
+    [MOVE_TAKE_AIM] =
     {
         .effect = EFFECT_LOCK_ON,
         .power = 0,
-        .type = TYPE_PSYCHIC,
+        .type = TYPE_STEEL,
         .accuracy = 100,
-        .pp = 5,
+        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
