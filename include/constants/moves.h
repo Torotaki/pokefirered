@@ -406,8 +406,9 @@
 #define MOVE_AURORA_VEIL 402
 #define MOVE_RAILGUN 403
 #define MOVE_POISON 404
+#define MOVE_ZAP_SHOT 405
 
-#define MOVES_COUNT 405
+#define MOVES_COUNT 406
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

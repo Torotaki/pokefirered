@@ -426,6 +426,7 @@ gBattleAnims_Moves::
 	.4byte Move_AURORA_VEIL
 	.4byte Move_RAILGUN
 	.4byte Move_POISON
+	.4byte Move_ZAP_SHOT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10728,6 +10729,9 @@ Move_RAILGUN:
 
 Move_POISON:
 	goto Move_TOXIC
+	
+Move_ZAP_SHOT:
+	goto Move_SPARK
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
