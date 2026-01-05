@@ -397,6 +397,7 @@ const u8 gMoveDescription_MagnetPull[] = _("Steals the foe's\nheld item or traps
 const u8 gMoveDescription_Dodge[] = _("Avoids an attack by\ngoing up in the air.\nIt may fail if used\nin succession.");
 const u8 gMoveDescription_Freeze[] = _("Freezes the foe.\nThis halves their\nSP. ATK and hurts\nthem every turn.");
 const u8 gMoveDescription_Railgun[] = _("Shoots a powerful\nmetal projectile at\nthe foe, breaking\nScreens.");
+const u8 gMoveDescription_Poison[] = _("A move that will\npoison the foe.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -802,4 +803,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_COLD_FRONT    - 1] = gMoveDescription_ColdFront,
     [MOVE_AURORA_VEIL   - 1] = gMoveDescription_AuroraVeil,
     [MOVE_RAILGUN       - 1] = gMoveDescription_Railgun,
+    [MOVE_POISON       - 1] = gMoveDescription_Poison,
 };
