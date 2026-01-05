@@ -402,4 +402,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_FREEZE]        = _("FREEZE"),
     [MOVE_COLD_FRONT]    = _("COLD FRONT"),
     [MOVE_AURORA_VEIL]   = _("AURORA VEIL"),
+    [MOVE_RAILGUN]       = _("RAILGUN"),
 };
