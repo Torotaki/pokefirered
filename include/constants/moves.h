@@ -171,7 +171,7 @@
 #define MOVE_TRIPLE_KICK 167
 #define MOVE_THIEF 168
 #define MOVE_SPIDER_WEB 169
-#define MOVE_MIND_READER 170
+#define MOVE_TAKE_AIM 170
 #define MOVE_NIGHTMARE 171
 #define MOVE_FLAME_WHEEL 172
 #define MOVE_SNORE 173
@@ -404,8 +404,11 @@
 #define MOVE_FREEZE 400
 #define MOVE_COLD_FRONT 401
 #define MOVE_AURORA_VEIL 402
+#define MOVE_RAILGUN 403
+#define MOVE_POISON 404
+#define MOVE_ZAP_SHOT 405
 
-#define MOVES_COUNT 403
+#define MOVES_COUNT 406
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

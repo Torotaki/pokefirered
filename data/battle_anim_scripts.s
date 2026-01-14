@@ -191,7 +191,7 @@ gBattleAnims_Moves::
 	.4byte Move_TRIPLE_KICK
 	.4byte Move_THIEF
 	.4byte Move_SPIDER_WEB
-	.4byte Move_MIND_READER
+	.4byte Move_TAKE_AIM
 	.4byte Move_NIGHTMARE
 	.4byte Move_FLAME_WHEEL
 	.4byte Move_SNORE
@@ -424,6 +424,9 @@ gBattleAnims_Moves::
 	.4byte Move_FREEZE
 	.4byte Move_COLD_FRONT
 	.4byte Move_AURORA_VEIL
+	.4byte Move_RAILGUN
+	.4byte Move_POISON
+	.4byte Move_ZAP_SHOT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -4757,7 +4760,7 @@ BellyDrumRight:
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 8, 2, 1
 	return
 
-Move_MIND_READER:
+Move_TAKE_AIM:
 	loadspritegfx ANIM_TAG_TEAL_ALERT
 	loadspritegfx ANIM_TAG_OPENING_EYE
 	loadspritegfx ANIM_TAG_ROUND_WHITE_HALO
@@ -10720,6 +10723,15 @@ Move_AURORA_VEIL:
 	restorebg
 	waitbgfadein
 	end
+
+Move_RAILGUN:
+	goto Move_HYPER_BEAM
+
+Move_POISON:
+	goto Move_TOXIC
+	
+Move_ZAP_SHOT:
+	goto Move_SPARK
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

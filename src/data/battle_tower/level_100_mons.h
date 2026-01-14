@@ -1319,7 +1319,7 @@ const struct BattleTowerPokemonTemplate gBattleTowerLevel100Mons[] =
 		.teamFlags = 0x0C,
 		.moves = {
 			MOVE_DYNAMIC_PUNCH,
-			MOVE_MIND_READER,
+			MOVE_TAKE_AIM,
 			MOVE_SNATCH,
 			MOVE_MEGA_DRAIN
 		},
@@ -2036,7 +2036,7 @@ const struct BattleTowerPokemonTemplate gBattleTowerLevel100Mons[] =
 			MOVE_DYNAMIC_PUNCH,
 			MOVE_COUNTER,
 			MOVE_BULK_UP,
-			MOVE_MIND_READER
+			MOVE_TAKE_AIM
 		},
 		.evSpread = F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP,
 		.nature = NATURE_HARDY,

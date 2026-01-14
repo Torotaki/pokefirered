@@ -1835,16 +1835,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SPIKE_CANNON] =
     {
-        .effect = EFFECT_MULTI_HIT,
-        .power = 20,
+        .effect = EFFECT_BRICK_BREAK,
+        .power = 60,
         .type = TYPE_STEEL,
-        .accuracy = 100,
-        .pp = 25,
+        .accuracy = 5,
+        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .category = CATEGORY_PHYSICAL,
+        .category = CATEGORY_SPECIAL,
     },
 
     [MOVE_CONSTRICT] =
@@ -2379,13 +2379,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = CATEGORY_STATUS,
     },
 
-    [MOVE_MIND_READER] =
+    [MOVE_TAKE_AIM] =
     {
         .effect = EFFECT_LOCK_ON,
         .power = 0,
-        .type = TYPE_PSYCHIC,
+        .type = TYPE_STEEL,
         .accuracy = 100,
-        .pp = 5,
+        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -2690,10 +2690,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ZAP_CANNON] =
     {
         .effect = EFFECT_PARALYZE_HIT,
-        .power = 110,
+        .power = 90,
         .type = TYPE_ELECTRIC,
         .accuracy = 5,
-        .pp = 5,
+        .pp = 10,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -5638,5 +5638,47 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_SNATCH_AFFECTED,
         .category = CATEGORY_STATUS,
+    },
+
+    [MOVE_RAILGUN] =
+    {
+        .effect = EFFECT_BRICK_BREAK,
+        .power = 90,
+        .type = TYPE_STEEL,
+        .accuracy = 5,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_SPECIAL,
+    },
+
+    [MOVE_POISON] =
+    {
+        .effect = EFFECT_POISON,
+        .power = 0,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_STATUS,
+    },
+
+    [MOVE_ZAP_SHOT] =
+    {
+        .effect = EFFECT_PARALYZE_HIT,
+        .power = 60,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 5,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_SPECIAL,
     },
 };
