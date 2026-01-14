@@ -2555,6 +2555,14 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
     }
 
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FROZEN)
+    {
+        if (defender->ability == ABILITY_SNOW_COVER)
+        {
+            spDefense = 15 * spDefense / 10;
+        }
+    }
+
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;

@@ -91,6 +91,7 @@ static const u8 sVictoryFlexDescription[] = _("KO's boosts ATTACK and DEFENSE.")
 static const u8 sVictoryBellDescription[] = _("KO's clears status from team.");
 static const u8 sFloodbringerDescription[] = _("Sets FLOODING on entry.");
 static const u8 sVictoryDrawDescription[] = _("KO's prepare CUT and SLASH.");
+static const u8 sSnowCoverDescription[] = _("Boosts SP. DEF in snow.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -187,6 +188,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_VICTORY_BELL] = sVictoryBellDescription,
     [ABILITY_FLOODBRINGER] = sFloodbringerDescription,
     [ABILITY_VICTORY_DRAW] = sVictoryDrawDescription,
+    [ABILITY_SNOW_COVER] = sSnowCoverDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -284,4 +286,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_VICTORY_BELL] = _("VICTORY BELL"),
     [ABILITY_FLOODBRINGER] = _("FLOODBRINGER"),
     [ABILITY_VICTORY_DRAW] = _("VICTORY DRAW"),
+    [ABILITY_SNOW_COVER] = _("SNOW COVER"),
 };
