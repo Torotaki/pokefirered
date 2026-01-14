@@ -6057,6 +6057,22 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
+    },
+    {
+      "english": "BLACK SLUDGE",
+      "itemId": "ITEM_BLACK_SLUDGE",
+      "price": 0,
+      "holdEffect": "HOLD_EFFECT_BLACK_SLUDGE",
+      "holdEffectParam": 0,
+      "description_english": "A mass of smelly dark sludge.\\nDoubles poison damage for all if\\nheld by any of the POKéMON.",
+      "importance": 0,
+      "registrability": 0,
+      "pocket": "POCKET_ITEMS",
+      "type": "ITEM_TYPE_BAG_MENU",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
+      "battleUsage": 0,
+      "battleUseFunc": "NULL",
+      "secondaryId": 0
     }
   ]
 }

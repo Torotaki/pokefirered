@@ -799,9 +799,27 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_POISON:  // poison
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].hp != 0)
                 {
+                    bool8 isBlackSludge = FALSE;
+                    u8 itemBattler;
+
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
+
+                    for (itemBattler = 0; itemBattler < gBattlersCount; itemBattler++)
+                    {
+                        if (ItemId_GetHoldEffect(gBattleMons[itemBattler].item) == HOLD_EFFECT_BLACK_SLUDGE)
+                        {
+                            isBlackSludge = TRUE;
+                            break;
+                        }
+                    }
+
+                    if (isBlackSludge)
+                    {
+                        gBattleMoveDamage *= 2;
+                    }
+
                     if (gBattleMons[gActiveBattler].ability == ABILITY_RESYNTHESIS) {
                         gBattleMoveDamage *= -1; // heal 1/8th instead
                     }
