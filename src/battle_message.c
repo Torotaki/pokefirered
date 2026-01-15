@@ -204,6 +204,7 @@ static const u8 sText_PkmnTryingToTakeFoe[] = _("{B_ATK_NAME_WITH_PREFIX} is try
 static const u8 sText_PkmnTookFoe[] = _("{B_DEF_NAME_WITH_PREFIX} took\n{B_ATK_NAME_WITH_PREFIX} with it!");
 static const u8 sText_PkmnReducedPP[] = _("Reduced {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} by {B_BUFF2}!");
 static const u8 sText_PkmnStoleItem[] = _("{B_ATK_NAME_WITH_PREFIX} stole\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
+static const u8 sText_PkmnGainedItem[] = _("{B_EFF_NAME_WITH_PREFIX} gained\na {B_LAST_ITEM}!");
 static const u8 sText_TargetCantEscapeNow[] = _("{B_DEF_NAME_WITH_PREFIX} can't\nescape now!");
 static const u8 sText_PkmnCanEscapeAgain[] = _("{B_ATK_NAME_WITH_PREFIX} can\nescape again!");
 static const u8 sText_PkmnPreparedSlash[] = _("{B_ATK_NAME_WITH_PREFIX} prepared\na powerful cut!");
@@ -960,6 +961,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNHURTBYFREEZE - BATTLESTRINGS_TABLE_START]              = sText_PkmnHurtByFreeze,
     [STRINGID_PKMNALREADYFROZEN - BATTLESTRINGS_TABLE_START]             = sText_PkmnAlreadyFrozen,
     [STRINGID_PKMNSXPREVENTSFREEZE - BATTLESTRINGS_TABLE_START]          = sText_PkmnsXPreventsFreeze,
+    [STRINGID_PKMNGAINEDITEM - BATTLESTRINGS_TABLE_START]                = sText_PkmnGainedItem,
 };
 
 const u16 gMissStringIds[] =

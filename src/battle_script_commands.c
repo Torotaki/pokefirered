@@ -326,6 +326,7 @@ static void Cmd_getrandom(void);
 static void Cmd_applyterrainentryeffects(void);
 static void Cmd_setmovetype(void);
 static void Cmd_setslashprepared(void);
+static void Cmd_createitemonmon(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -529,7 +530,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setsemiinvulnerablebit,                  //0xC5
     Cmd_clearsemiinvulnerablebit,                //0xC6
     Cmd_setminimize,                             //0xC7
-    Cmd_sethail,                                 //0xC8
+    Cmd_createitemonmon,                         //0xC8
     Cmd_trymemento,                              //0xC9
     Cmd_setforcedtarget,                         //0xCA
     Cmd_setcharge,                               //0xCB
@@ -10450,4 +10451,24 @@ static void Cmd_setslashprepared(void)
     gStatuses3[gBattlerAttacker] |= STATUS3_SLASH_PREPARED;
     gDisableStructs[gBattlerAttacker].slashPreparedTimer = 2;
     gBattlescriptCurrInstr++;
+}
+
+static void Cmd_createitemonmon(void)
+{
+    u8 battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    u16 item = T2_READ_16(gBattlescriptCurrInstr + 2);
+    
+    if (gBattleMons[battler].item == ITEM_NONE) {
+        gBattleMons[battler].item = item;
+        gActiveBattler = battler;
+        gLastUsedItem = item;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
+        MarkBattlerForControllerExec(battler);
+        BattleScriptPush(gBattlescriptCurrInstr + 4);
+        gEffectBattler = battler;
+        gBattlescriptCurrInstr = BattleScript_ItemGained;
+        return;
+    }
+
+    gBattlescriptCurrInstr += 4;
 }

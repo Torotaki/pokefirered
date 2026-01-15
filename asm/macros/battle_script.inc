@@ -1031,8 +1031,10 @@
 	.byte 0xc7
 	.endm
 
-	.macro unused5
+	.macro createitemonmon battler:req, param1:req
 	.byte 0xc8
+	.byte \battler
+	.2byte \param1
 	.endm
 
 	.macro trymemento ptr:req

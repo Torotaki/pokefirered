@@ -1737,12 +1737,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SLUDGE] =
     {
-        .effect = EFFECT_POISON_HIT,
-        .power = 50,
+        .effect = EFFECT_SLUDGE,
+        .power = 30,
         .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 20,
+        .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
@@ -2633,12 +2633,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SLUDGE_BOMB] =
     {
-        .effect = EFFECT_POISON_HIT,
-        .power = 70,
+        .effect = EFFECT_SLUDGE,
+        .power = 30,
         .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 30,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,

@@ -298,6 +298,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSetFrozenFreeze		 @ EFFECT_SET_FROZEN_FREEZE
 	.4byte BattleScript_EffectAuroraVeil			 @ EFFECT_AURORA_VEIL
 	.4byte BattleScript_EffectFreezeHit			 	 @ EFFECT_BLIZZARD
+	.4byte BattleScript_EffectSludge			 	 @ EFFECT_SLUDGE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3722,6 +3723,12 @@ BattleScript_EffectSlash::
 	setbyte sDMG_MULTIPLIER, 2
 	goto BattleScript_EffectHit
 
+BattleScript_EffectSludge::
+	setmoveeffect MOVE_EFFECT_POISON
+	call BattleScript_EffectHitAndReturn
+	createitemonmon BS_TARGET, ITEM_BLACK_SLUDGE
+	goto BattleScript_CheckFaintAndMoveEnd
+
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER
 	pause B_WAIT_TIME_LONG
@@ -4956,6 +4963,11 @@ BattleScript_RecoilEnd::
 BattleScript_ItemSteal::
 	playanimation BS_TARGET, B_ANIM_ITEM_STEAL
 	printstring STRINGID_PKMNSTOLEITEM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_ItemGained::
+	printstring STRINGID_PKMNGAINEDITEM
 	waitmessage B_WAIT_TIME_LONG
 	return
 
