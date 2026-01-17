@@ -3077,6 +3077,22 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     }
                 }
                 break;
+            case HOLD_EFFECT_BLACK_SLUDGE:
+                if (gBattleMons[battlerId].ability == ABILITY_LIQUID_OOZE && !moveTurn)
+                {
+                    if (gBattleMons[battlerId].hp < gBattleMons[battlerId].maxHP)
+                    {
+                        gBattleMoveDamage = gBattleMons[battlerId].maxHP / 16;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                        if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
+                            gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
+                        gBattleMoveDamage *= -1;
+                        BattleScriptExecute(BattleScript_ItemHealHP_End2);
+                        effect = ITEM_HP_CHANGE;
+                        RecordItemEffectBattle(battlerId, battlerHoldEffect);
+                    }
+                }
             }
             if (effect != 0)
             {

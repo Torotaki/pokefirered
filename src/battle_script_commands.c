@@ -1127,7 +1127,10 @@ static void Cmd_accuracycheck(void)
         if ((WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_FOG)
             && (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
             && gBattleMons[gBattlerAttacker].ability != ABILITY_ECHOLOCATION
-            && gBattleMoves[move].effect != EFFECT_PURSUIT)
+            && gBattleMoves[move].effect != EFFECT_PURSUIT
+            && gBattleMoves[move].effect != EFFECT_LOCK_ON
+            && gBattleMoves[move].effect != EFFECT_LOCK_ON_AND_BLOCK
+            && gBattleMoves[move].effect != EFFECT_LOCK_ON_AND_DEF_BOOST2)
         {
                 calc = (calc * 50) / 100; // Acc halved in FOG
         }
