@@ -676,6 +676,12 @@ static const u8 *const sMoveEffectBS_Ptrs[] =
     [MOVE_EFFECT_RECOIL_33]        = BattleScript_MoveEffectRecoil,
 };
 
+static const u8 *const sTrapMoveEffectBS_Ptrs[] =
+{
+    [EFFECT_TRAP_LEECH_SEED]       = BattleScript_TrapLeechSeedTriggered,
+    [EFFECT_TRAP_POISON]           = BattleScript_TrapPoisonTriggered,
+};
+
 static const struct WindowTemplate sUnusedWinTemplate =
 {
     .bg = 0,
@@ -942,7 +948,7 @@ static void Cmd_attackcanceler(void)
         gBattleCommunication[MISS_TYPE] = B_MSG_TRAPPED_MISS;
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
-        gBattlescriptCurrInstr = BattleScript_TrapLeechSeedTriggered;
+        gBattlescriptCurrInstr = sTrapMoveEffectBS_Ptrs[gBattleMoves[gDisableStructs[gBattlerTarget].disabledMove].effect];
     }
     else
     {
@@ -996,7 +1002,7 @@ static bool8 JumpIfMoveAffectedByProtect(u16 move)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MISS_TYPE] = B_MSG_TRAPPED_MISS;
-        gBattlescriptCurrInstr = BattleScript_TrapLeechSeedTriggered;
+        gBattlescriptCurrInstr = sTrapMoveEffectBS_Ptrs[gBattleMoves[gDisableStructs[gBattlerTarget].disabledMove].effect];
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
         affected = TRUE;
@@ -6440,7 +6446,8 @@ static void Cmd_setprotectlike(void)
             gProtectStructs[gBattlerAttacker].outlasted = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
         }
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_TRAP_LEECH_SEED)
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_TRAP_LEECH_SEED
+            || gBattleMoves[gCurrentMove].effect == EFFECT_TRAP_POISON)
         {
             gProtectStructs[gBattlerAttacker].contactTrapped = 1;
             gDisableStructs[gBattlerAttacker].disabledMove = gCurrentMove;

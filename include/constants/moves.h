@@ -407,8 +407,10 @@
 #define MOVE_RAILGUN 403
 #define MOVE_POISON 404
 #define MOVE_ZAP_SHOT 405
+#define MOVE_POISON_TRAP 406
+#define MOVE_POISON_TRAP_HIT 407
 
-#define MOVES_COUNT 406
+#define MOVES_COUNT 408
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

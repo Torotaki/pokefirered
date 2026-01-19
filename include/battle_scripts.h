@@ -260,6 +260,7 @@ extern const u8 BattleScript_ReapplyFrozenTerrainTrySlowing[];
 extern const u8 BattleScript_TrapLeechSeedTriggered[];
 extern const u8 BattleScript_SharpRockDmg[];
 extern const u8 BattleScript_ReapplySharpRockDmg[];
+extern const u8 BattleScript_TrapPoisonTriggered[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

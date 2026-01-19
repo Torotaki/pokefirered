@@ -5682,4 +5682,32 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_SPECIAL,
     },
+
+    [MOVE_POISON_TRAP] =
+    {
+        .effect = EFFECT_TRAP_POISON,
+        .power = 0,
+        .type = TYPE_POISON,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 3,
+        .flags = 0,
+        .category = CATEGORY_STATUS,
+    },
+
+    [MOVE_POISON_TRAP_HIT] =
+    {
+        .effect = EFFECT_ALWAYS_HIT,
+        .power = 30,
+        .type = TYPE_POISON,
+        .accuracy = 0,
+        .pp = 1,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL
+    },
 };

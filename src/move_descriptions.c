@@ -399,6 +399,7 @@ const u8 gMoveDescription_Freeze[] = _("Freezes the foe.\nThis halves their\nSP.
 const u8 gMoveDescription_Railgun[] = _("Shoots a powerful\nmetal projectile at\nthe foe, breaking\nScreens.");
 const u8 gMoveDescription_Poison[] = _("A move that will\npoison the foe.");
 const u8 gMoveDescription_ZapShot[] = _("An electric blast\nthat inflicts damage\nand paralyze.");
+const u8 gMoveDescription_PoisonTrap[] = _("Sets a trap that\npoisons the foe if\nthey make contact\nthis turn.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -806,4 +807,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_RAILGUN       - 1] = gMoveDescription_Railgun,
     [MOVE_POISON        - 1] = gMoveDescription_Poison,
     [MOVE_ZAP_SHOT      - 1] = gMoveDescription_ZapShot,
+    [MOVE_POISON_TRAP   - 1] = gMoveDescription_PoisonTrap,
+    [MOVE_POISON_TRAP_HIT- 1] = gMoveDescription_PoisonTrap,
 };

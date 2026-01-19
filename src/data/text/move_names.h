@@ -403,6 +403,8 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_COLD_FRONT]    = _("COLD FRONT"),
     [MOVE_AURORA_VEIL]   = _("AURORA VEIL"),
     [MOVE_RAILGUN]       = _("RAILGUN"),
-    [MOVE_POISON]       = _("POISON"),
-    [MOVE_ZAP_SHOT]       = _("ZAP SHOT"),
+    [MOVE_POISON]        = _("POISON"),
+    [MOVE_ZAP_SHOT]      = _("ZAP SHOT"),
+    [MOVE_POISON_TRAP]   = _("POISON TRAP"),
+    [MOVE_POISON_TRAP_HIT] = _("PSN TRAP HIT"),
 };

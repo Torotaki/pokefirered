@@ -278,7 +278,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectIceTypeInSnow			 @ EFFECT_ICE_TYPE_IN_SNOW
 	.4byte BattleScript_EffectHit					 @ EFFECT_STILL_FOCUS
 	.4byte BattleScript_EffectLaunchAirborneHit		 @ EFFECT_LAUNCH_AIRBORNE_HIT
-	.4byte BattleScript_EffectTrapLeechSeed			 @ EFFECT_TRAP_LEECH_SEED
+	.4byte BattleScript_EffectContactTrap			 @ EFFECT_TRAP_LEECH_SEED
 	.4byte BattleScript_EffectSlowingFlinchHit		 @ EFFECT_SLOWING_FLINCH_HIT
 	.4byte BattleScript_EffectSleepingSolarBeam		 @ EFFECT_SLEEPING_SOLAR_BEAM
 	.4byte BattleScript_EffectBallUp				 @ EFFECT_BALL_UP
@@ -299,6 +299,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectAuroraVeil			 @ EFFECT_AURORA_VEIL
 	.4byte BattleScript_EffectFreezeHit			 	 @ EFFECT_BLIZZARD
 	.4byte BattleScript_EffectSludge			 	 @ EFFECT_SLUDGE
+	.4byte BattleScript_EffectContactTrap			 @ EFFECT_TRAP_POISON
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1786,7 +1787,7 @@ BattleScript_DoGhostCurse::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectDodge::
-BattleScript_EffectTrapLeechSeed::
+BattleScript_EffectContactTrap::
 BattleScript_EffectOutlast::
 BattleScript_EffectProtect::
 BattleScript_EffectEndure::
@@ -1819,6 +1820,21 @@ BattleScript_TrapLeechSeedTriggered::
 	jumpifstatus3 BS_TARGET, STATUS3_LEECHSEED, BattleScript_MoveEnd
 	sethword gCurrentMove, MOVE_LEECH_SEED
 	goto BattleScript_DoLeechSeed
+
+BattleScript_TrapPoisonTriggered::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	effectivenesssound
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gMoveResultFlags, 0
+	copybyte gEffectBattler, gBattlerTarget
+	copybyte gBattlerTarget, gBattlerAttacker
+	copybyte gBattlerAttacker, gEffectBattler
+	sethword gCurrentMove, MOVE_POISON_TRAP_HIT
+	setmoveeffect MOVE_EFFECT_POISON
+	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectSpikes::
 	attackcanceler
