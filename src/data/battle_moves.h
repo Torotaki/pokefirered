@@ -408,12 +408,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HEADBUTT] =
     {
-        .effect = EFFECT_FLINCH_HIT,
+        .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 15,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
@@ -870,7 +870,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AURORA_BEAM] =
     {
-        .effect = EFFECT_ATTACK_DOWN_HIT,
+        .effect = EFFECT_FREEZE_HIT,
         .power = 50,
         .type = TYPE_ICE,
         .accuracy = 100,
@@ -2745,16 +2745,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ICY_WIND] =
     {
-        .effect = EFFECT_SPEED_DOWN_HIT,
-        .power = 40,
+        .effect = EFFECT_FREEZE,
+        .power = 0,
         .type = TYPE_ICE,
-        .accuracy = 100,
-        .pp = 25,
-        .secondaryEffectChance = 50,
+        .accuracy = 75,
+        .pp = 20,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
-        .category = CATEGORY_SPECIAL,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_STATUS,
     },
 
     [MOVE_DETECT] =
