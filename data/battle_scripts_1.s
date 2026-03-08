@@ -300,6 +300,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFreezeHit			 	 @ EFFECT_BLIZZARD
 	.4byte BattleScript_EffectSludge			 	 @ EFFECT_SLUDGE
 	.4byte BattleScript_EffectContactTrap			 @ EFFECT_TRAP_POISON
+	.4byte BattleScript_EffectHit					 @ EFFECT_KO_SUBSTITUTE_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -5019,6 +5020,17 @@ BattleScript_VictoryDrawActivates::
 	setslashprepared
 	printstring STRINGID_PKMNPREPAREDSLASH
 	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_KoSetSubstitute::
+	jumpifstatus2 BS_ATTACKER, STATUS2_SUBSTITUTE, BattleScript_KoSetSubstituteEnd
+	setsubstitute
+	sethword gCurrentMove, MOVE_SUBSTITUTE
+	attackanimation
+	waitanimation
+	printfromtable gSubstituteUsedStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_KoSetSubstituteEnd::	
 	end3
 
 BattleScript_OutlastSpeedBoost::

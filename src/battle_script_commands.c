@@ -3074,6 +3074,11 @@ static void Cmd_tryfaintmon(void)
                     }
                 }
             }
+            if (gBattleMons[gBattlerAttacker].hp != 0 && gBattleMoves[gChosenMoveByBattler[gBattlerAttacker]].effect == EFFECT_KO_SUBSTITUTE_HIT)
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_KoSetSubstitute);
+                gBattleScripting.battler = gBattlerAttacker;
+            }
         }
         else
         {
@@ -7730,7 +7735,7 @@ static void Cmd_setsubstitute(void)
     if (gBattleMons[gBattlerAttacker].maxHP / 4 == 0)
         hp = 1;
 
-    if (gBattleMons[gBattlerAttacker].hp <= hp)
+    if (gBattleMons[gBattlerAttacker].hp <= hp && gBattleMoves[gCurrentMove].effect != EFFECT_KO_SUBSTITUTE_HIT)
     {
         gBattleMoveDamage = 0;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SUBSTITUTE_FAILED;

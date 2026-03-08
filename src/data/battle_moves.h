@@ -3459,8 +3459,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SHADOW_BALL] =
     {
-        .effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
-        .power = 70,
+        .effect = EFFECT_KO_SUBSTITUTE_HIT,
+        .power = 50,
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 25,
