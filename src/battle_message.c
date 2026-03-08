@@ -139,6 +139,8 @@ static const u8 sText_PkmnRaisedDefALittle[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_M
 static const u8 sText_PkmnCoveredByVeil[] = _("{B_ATK_PREFIX2}'s party is covered\nby a veil!");
 static const u8 sText_PkmnUsedSafeguard[] = _("{B_DEF_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!");
 static const u8 sText_PkmnSafeguardExpired[] = _("{B_ATK_PREFIX3}'s party is no longer\nprotected by SAFEGUARD!");
+static const u8 sText_PkmnInTrickMirror[] = _("{B_ATK_NAME_WITH_PREFIX} trapped the foes in\na TRICK MIRROR!");
+static const u8 sText_PkmnEscapedTrickMirror[] = _("{B_ATK_NAME_WITH_PREFIX} escaped from\nthe TRICK MIRROR!");
 static const u8 sText_PkmnWentToSleep[] = _("{B_ATK_NAME_WITH_PREFIX} went\nto sleep!");
 static const u8 sText_PkmnSleptHealthy[] = _("{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!");
 static const u8 sText_PkmnWhippedWhirlwind[] = _("{B_ATK_NAME_WITH_PREFIX} whipped\nup a whirlwind!");
@@ -964,6 +966,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSXPREVENTSFREEZE - BATTLESTRINGS_TABLE_START]          = sText_PkmnsXPreventsFreeze,
     [STRINGID_PKMNGAINEDITEM - BATTLESTRINGS_TABLE_START]                = sText_PkmnGainedItem,
     [STRINGID_PKMNSXSUMMONEDFOG - BATTLESTRINGS_TABLE_START]             = sText_PkmnsXSummonedFog,
+    [STRINGID_PKMNINTRICKMIRROR - BATTLESTRINGS_TABLE_START]             = sText_PkmnInTrickMirror,
+    [STRINGID_PKMNESCAPEDTRICKMIRROR - BATTLESTRINGS_TABLE_START]        = sText_PkmnEscapedTrickMirror,
 };
 
 const u16 gMissStringIds[] =
@@ -1055,7 +1059,8 @@ const u16 gReflectLightScreenSafeguardStringIds[] =
     [B_MSG_SET_REFLECT_DOUBLE]     = STRINGID_PKMNRAISEDDEFALITTLE,
     [B_MSG_SET_LIGHTSCREEN_SINGLE] = STRINGID_PKMNRAISEDSPDEF,
     [B_MSG_SET_LIGHTSCREEN_DOUBLE] = STRINGID_PKMNRAISEDSPDEFALITTLE,
-    [B_MSG_SET_SAFEGUARD]          = STRINGID_PKMNCOVEREDBYVEIL
+    [B_MSG_SET_SAFEGUARD]          = STRINGID_PKMNCOVEREDBYVEIL,
+    [B_MSG_SET_TRICKMIRROR]        = STRINGID_PKMNINTRICKMIRROR
 };
 
 const u16 gLeechSeedStringIds[] =

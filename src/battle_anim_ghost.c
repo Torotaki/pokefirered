@@ -1141,16 +1141,24 @@ static void AnimGhostStatusSprite_End(struct Sprite *sprite)
 
 void AnimTask_GrudgeFlames(u8 taskId)
 {
+    u8 affectedBattler;
     struct Task *task = &gTasks[taskId];
+
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
+    {
+        affectedBattler = gBattleAnimAttacker;
+    } else {
+        affectedBattler = gBattleAnimTarget;
+    }
 
     task->data[0] = 0;
     task->data[1] = 16;
-    task->data[9] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
-    task->data[10] = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
-    task->data[11] = (GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) / 2) + 8;
+    task->data[9] = GetBattlerSpriteCoord(affectedBattler, BATTLER_COORD_X_2);
+    task->data[10] = GetBattlerYCoordWithElevation(affectedBattler);
+    task->data[11] = (GetBattlerSpriteCoordAttr(affectedBattler, BATTLER_COORD_ATTR_WIDTH) / 2) + 8;
     task->data[7] = 0;
-    task->data[5] = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
-    task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 2;
+    task->data[5] = GetBattlerSpriteBGPriority(affectedBattler);
+    task->data[6] = GetBattlerSpriteSubpriority(affectedBattler) - 2;
     task->data[3] = 0;
     task->data[4] = 16;
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));

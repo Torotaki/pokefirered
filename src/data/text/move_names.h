@@ -407,4 +407,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_ZAP_SHOT]      = _("ZAP SHOT"),
     [MOVE_POISON_TRAP]   = _("POISON TRAP"),
     [MOVE_POISON_TRAP_HIT] = _("PSN TRAP HIT"),
+    [MOVE_TRICK_MIRROR] = _("TRICK MIRROR"),
 };

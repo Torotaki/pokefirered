@@ -421,8 +421,10 @@
 #define STRINGID_PKMNSXPREVENTSFREEZE 420
 #define STRINGID_PKMNGAINEDITEM 421
 #define STRINGID_PKMNSXSUMMONEDFOG 422
+#define STRINGID_PKMNINTRICKMIRROR 423
+#define STRINGID_PKMNESCAPEDTRICKMIRROR 424
 
-#define BATTLESTRINGS_COUNT     423
+#define BATTLESTRINGS_COUNT     425
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -508,6 +510,7 @@
 #define B_MSG_SET_LIGHTSCREEN_SINGLE 3
 #define B_MSG_SET_LIGHTSCREEN_DOUBLE 4
 #define B_MSG_SET_SAFEGUARD          5
+#define B_MSG_SET_TRICKMIRROR        6
 
 // gProtectLikeUsedStringIds
 #define B_MSG_PROTECTED_ITSELF 0

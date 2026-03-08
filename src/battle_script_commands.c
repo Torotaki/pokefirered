@@ -210,6 +210,7 @@ static void Cmd_forcerandomswitch(void);
 static void Cmd_tryconversiontypechange(void);
 static void Cmd_givepaydaymoney(void);
 static void Cmd_setlightscreen(void);
+static void Cmd_settrickmirror(void);
 static void Cmd_tryKO(void);
 static void Cmd_damagetohalftargethp(void);
 static void Cmd_setsandstorm(void);
@@ -584,7 +585,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_payhpboostattackandspeed,                //0xFB
     Cmd_setterrain,                              //0xFC
     Cmd_recoverpartybasedonsunlight,             //0xFD
-    Cmd_setfog,                                  //0xFE
+    Cmd_settrickmirror,                          //0xFE
     Cmd_getrandom,                               //0xFF
 };
 
@@ -7386,6 +7387,15 @@ static void Cmd_setlightscreen(void)
     gBattlescriptCurrInstr++;
 }
 
+static void Cmd_settrickmirror(void)
+{
+    gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)] |= SIDE_STATUS_TRICK_MIRROR;
+    gSideTimers[GET_BATTLER_SIDE(gBattlerTarget)].trickmirrorTimer = 5;
+    gSideTimers[GET_BATTLER_SIDE(gBattlerTarget)].trickmirrorBattlerId = gBattlerTarget;
+    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_TRICKMIRROR;
+    gBattlescriptCurrInstr++;
+}
+
 static void Cmd_tryKO(void)
 {
     u8 holdEffect, param;
@@ -9784,14 +9794,17 @@ static void Cmd_snatchsetbattlers(void)
 // Brick Break
 static void Cmd_removelightscreenreflect(void)
 {
-    u8 opposingSide = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
+    u8 ownSide = GetBattlerSide(gBattlerAttacker);
+    u8 opposingSide = ownSide ^ BIT_SIDE;
 
-    if (gSideTimers[opposingSide].reflectTimer || gSideTimers[opposingSide].lightscreenTimer)
+    if (gSideTimers[opposingSide].reflectTimer || gSideTimers[opposingSide].lightscreenTimer || gSideTimers[ownSide].trickmirrorTimer)
     {
         gSideStatuses[opposingSide] &= ~SIDE_STATUS_REFLECT;
         gSideStatuses[opposingSide] &= ~SIDE_STATUS_LIGHTSCREEN;
+        gSideStatuses[opposingSide] &= ~SIDE_STATUS_TRICK_MIRROR;
         gSideTimers[opposingSide].reflectTimer = 0;
         gSideTimers[opposingSide].lightscreenTimer = 0;
+        gSideTimers[opposingSide].trickmirrorTimer = 0;
         gBattleScripting.animTurn = 1;
         gBattleScripting.animTargetsHit = 1;
     }

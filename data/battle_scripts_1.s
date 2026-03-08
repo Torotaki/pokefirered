@@ -301,6 +301,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSludge			 	 @ EFFECT_SLUDGE
 	.4byte BattleScript_EffectContactTrap			 @ EFFECT_TRAP_POISON
 	.4byte BattleScript_EffectHit					 @ EFFECT_KO_SUBSTITUTE_HIT
+	.4byte BattleScript_TrickMirror					 @ EFFECT_TRICK_MIRROR
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -866,6 +867,13 @@ BattleScript_EffectLightScreen::
 	attackstring
 	ppreduce
 	setlightscreen
+	goto BattleScript_PrintReflectLightScreenSafeguardString
+
+BattleScript_TrickMirror::
+	attackcanceler
+	attackstring
+	ppreduce
+	settrickmirror
 	goto BattleScript_PrintReflectLightScreenSafeguardString
 
 BattleScript_EffectTriAttack::
@@ -4181,6 +4189,12 @@ BattleScript_SafeguardProtectedReturns::
 BattleScript_SafeguardEnds::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSAFEGUARDEXPIRED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_TrickMirrorEnds::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNESCAPEDTRICKMIRROR
 	waitmessage B_WAIT_TIME_LONG
 	end2
 

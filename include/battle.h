@@ -252,7 +252,8 @@ struct SideTimer
     /*0x08*/ u8 followmeTimer;
     /*0x09*/ u8 followmeTarget;
     /*0x0A*/ u8 spikesAmount;
-    /*0x0B*/ u8 fieldB;
+    /*0x0B*/ u8 trickmirrorTimer;
+    /*0x0C*/ u8 trickmirrorBattlerId;
 };
 
 extern struct SideTimer gSideTimers[];

@@ -455,6 +455,7 @@ enum
     ENDTURN_LIGHT_SCREEN,
     ENDTURN_MIST,
     ENDTURN_SAFEGUARD,
+    ENDTURN_TRICK_MIRROR,
     ENDTURN_WISH,
     ENDTURN_RAIN,
     ENDTURN_SANDSTORM,
@@ -589,6 +590,30 @@ u8 DoFieldEndTurnEffects(void)
                     {
                         gSideStatuses[side] &= ~SIDE_STATUS_SAFEGUARD;
                         BattleScriptExecute(BattleScript_SafeguardEnds);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+                if (effect != 0)
+                    break;
+            }
+            if (effect == 0)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
+            }
+            break;
+        case ENDTURN_TRICK_MIRROR:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+                gActiveBattler = gBattlerAttacker = gSideTimers[side].trickmirrorBattlerId;
+                if (gSideStatuses[side] & SIDE_STATUS_TRICK_MIRROR)
+                {
+                    if (--gSideTimers[side].trickmirrorTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_TRICK_MIRROR;
+                        BattleScriptExecute(BattleScript_TrickMirrorEnds);
                         effect++;
                     }
                 }

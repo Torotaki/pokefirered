@@ -429,6 +429,7 @@ gBattleAnims_Moves::
 	.4byte Move_ZAP_SHOT
 	.4byte Move_POISON_TRAP
 	.4byte Move_POISON_TRAP_HIT
+	.4byte Move_TRICK_MIRROR
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -3998,7 +3999,7 @@ Move_GRUDGE:
 	fadetobg BG_GHOST
 	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
 	waitbgfadein
-	createvisualtask AnimTask_GrudgeFlames, 3
+	createvisualtask AnimTask_GrudgeFlames, 3, ANIM_ATTACKER
 	loopsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER, 16, 4
 	delay 10
 	delay 80
@@ -10740,6 +10741,26 @@ Move_POISON_TRAP:
 
 Move_POISON_TRAP_HIT:
 	goto Move_POISON_TAIL
+
+Move_TRICK_MIRROR:
+	loadspritegfx ANIM_TAG_PURPLE_FLAME
+	loadspritegfx ANIM_TAG_GRAY_LIGHT_WALL
+	monbg ANIM_ATTACKER
+	splitbgprio_all
+	fadetobg BG_GHOST
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	waitbgfadein
+	createsprite gBarrierWallSpriteTemplate, ANIM_ATTACKER, 3, 40, 0, ANIM_TAG_GRAY_LIGHT_WALL
+	createvisualtask AnimTask_GrudgeFlames, 3, ANIM_TARGET
+	loopsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER, 16, 4
+	delay 10
+	delay 80
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
+	waitforvisualfinish
+	restorebg
+	waitbgfadein
+	clearmonbg ANIM_ATTACKER
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

@@ -1283,7 +1283,7 @@
 	.4byte \param0
 	.endm
 
-	.macro unused2
+	.macro settrickmirror
 	.byte 0xfe
 	.endm
 

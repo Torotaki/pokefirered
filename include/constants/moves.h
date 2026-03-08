@@ -409,8 +409,9 @@
 #define MOVE_ZAP_SHOT 405
 #define MOVE_POISON_TRAP 406
 #define MOVE_POISON_TRAP_HIT 407
+#define MOVE_TRICK_MIRROR 408
 
-#define MOVES_COUNT 408
+#define MOVES_COUNT 409
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

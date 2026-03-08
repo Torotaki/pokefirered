@@ -2567,6 +2567,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
+    if (gSideStatuses[battlerIdAtk] & SIDE_STATUS_TRICK_MIRROR)
+    {
+        u16 tempAttack = attack;
+        attack = spAttack;
+        spAttack = tempAttack;
+    }
+
     if (IS_MOVE_PHYSICAL(gBattleMoves[move]))
     {
         if (gCritMultiplier == 2)
