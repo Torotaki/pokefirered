@@ -420,8 +420,9 @@
 #define STRINGID_PKMNALREADYFROZEN 419
 #define STRINGID_PKMNSXPREVENTSFREEZE 420
 #define STRINGID_PKMNGAINEDITEM 421
+#define STRINGID_PKMNSXSUMMONEDFOG 422
 
-#define BATTLESTRINGS_COUNT     422
+#define BATTLESTRINGS_COUNT     423
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

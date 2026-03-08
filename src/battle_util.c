@@ -1916,6 +1916,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_EERIE_FOG:
+                if (!(gBattleWeather & B_WEATHER_FOG))
+                {
+                    gBattleWeather = B_WEATHER_FOG;
+                    BattleScriptPushCursorAndCallback(BattleScript_EerieFogActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
             case ABILITY_INTIMIDATE:
             case ABILITY_DISTRACT:
                 if (!(gSpecialStatuses[battler].intimidatedMon))

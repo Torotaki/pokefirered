@@ -5189,6 +5189,14 @@ BattleScript_FloralScentActivates::
 	call BattleScript_WeatherFormChanges
 	end3
 
+BattleScript_EerieFogActivates::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNSXSUMMONEDFOG
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_FOG_CONTINUES
+	call BattleScript_WeatherFormChanges
+	end3
+
 BattleScript_SandTrapperActivates::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSXSETSSANDTRAP

@@ -306,6 +306,7 @@ static const u8 sText_PkmnsXLostHPInSun[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK
 static const u8 sText_PkmnsXWhippedUpSandstorm[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nwhipped up a sandstorm!");
 static const u8 sText_PkmnsXSummonedHailstorm[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nsummoned a hailstorm!");
 static const u8 sText_PkmnsXSummonedAroma[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nspread a sweet aroma!");
+static const u8 sText_PkmnsXSummonedFog[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nobscured the battlefield!");
 static const u8 sText_PkmnsXIntensifiedSun[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nintensified the sun's rays!");
 static const u8 sText_PkmnsXPreventsYLoss[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents {B_BUFF1} loss!");
 static const u8 sText_PkmnsXInfatuatedY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ninfatuated {B_ATK_NAME_WITH_PREFIX}!");
@@ -962,6 +963,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNALREADYFROZEN - BATTLESTRINGS_TABLE_START]             = sText_PkmnAlreadyFrozen,
     [STRINGID_PKMNSXPREVENTSFREEZE - BATTLESTRINGS_TABLE_START]          = sText_PkmnsXPreventsFreeze,
     [STRINGID_PKMNGAINEDITEM - BATTLESTRINGS_TABLE_START]                = sText_PkmnGainedItem,
+    [STRINGID_PKMNSXSUMMONEDFOG - BATTLESTRINGS_TABLE_START]             = sText_PkmnsXSummonedFog,
 };
 
 const u16 gMissStringIds[] =
