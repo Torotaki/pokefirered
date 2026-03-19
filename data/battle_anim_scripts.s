@@ -430,6 +430,7 @@ gBattleAnims_Moves::
 	.4byte Move_POISON_TRAP
 	.4byte Move_POISON_TRAP_HIT
 	.4byte Move_TRICK_MIRROR
+	.4byte Move_GHOST_WALK
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10761,6 +10762,9 @@ Move_TRICK_MIRROR:
 	waitbgfadein
 	clearmonbg ANIM_ATTACKER
 	end
+
+Move_GHOST_WALK:
+	goto Move_BATON_PASS
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
