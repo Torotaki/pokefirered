@@ -93,6 +93,7 @@ static const u8 sFloodbringerDescription[] = _("Sets FLOODING on entry.");
 static const u8 sVictoryDrawDescription[] = _("KO's prepare CUT and SLASH.");
 static const u8 sSnowCoverDescription[] = _("Boosts SP. DEF in snow.");
 static const u8 sEerieFogDescription[] = _("Summons fog in battle.");
+static const u8 sRagingRocksDescription[] = _("SHARP ROCKS hurt every turn.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -191,6 +192,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_VICTORY_DRAW] = sVictoryDrawDescription,
     [ABILITY_SNOW_COVER] = sSnowCoverDescription,
     [ABILITY_EERIE_FOG] = sEerieFogDescription,
+    [ABILITY_RAGING_ROCKS] = sRagingRocksDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -290,4 +292,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_VICTORY_DRAW] = _("VICTORY DRAW"),
     [ABILITY_SNOW_COVER] = _("SNOW COVER"),
     [ABILITY_EERIE_FOG] = _("EERIE FOG"),
+    [ABILITY_RAGING_ROCKS] = _("RAGING ROCKS"),
 };

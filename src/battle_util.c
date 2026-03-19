@@ -463,6 +463,7 @@ enum
     ENDTURN_HAIL,
     ENDTURN_AROMA,
     ENDTURN_FOG,
+    ENDTURN_RAGING_ROCKS,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -721,6 +722,28 @@ u8 DoFieldEndTurnEffects(void)
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FOG_CONTINUES;
                 BattleScriptExecute(BattleScript_FogContinues);
                 effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_RAGING_ROCKS:
+            if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SHARP_ROCKS)
+            {
+                gBattleStruct->turnSideTracker = 0;
+                while (gBattleStruct->turnSideTracker < gBattlersCount)
+                {
+                    u8 ability;
+                    struct BattlePokemon battleMon;
+                    battleMon = gBattleMons[gBattleStruct->turnSideTracker];
+                    ability = gSpeciesInfo[battleMon.species].abilities[battleMon.abilityNum];
+                    if (ability == ABILITY_RAGING_ROCKS)
+                    {
+                        BattleScriptExecute(BattleScript_RagingRocksContinues);
+                        effect++;
+                    }
+                    gBattleStruct->turnSideTracker++;
+                    if (effect != 0)
+                        break;
+                }
             }
             gBattleStruct->turnCountersTracker++;
             break;
@@ -2110,7 +2133,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         }
                         effect++;
                     }
-                    
+
                     break;
                 }
             }

@@ -48,6 +48,8 @@ extern const u8 BattleScript_DamagingWeatherContinues[];
 extern const u8 BattleScript_SandStormHailEnds[];
 extern const u8 BattleScript_SunlightContinues[];
 extern const u8 BattleScript_SunlightFaded[];
+extern const u8 BattleScript_RagingRocksContinues[];
+extern const u8 BattleScript_RagingRocksDoDamage[];
 extern const u8 BattleScript_OverworldWeatherStarts[];
 extern const u8 BattleScript_SideStatusWoreOff[];
 extern const u8 BattleScript_SafeguardProtected[];

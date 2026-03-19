@@ -10450,10 +10450,11 @@ static void Cmd_getrandom(void)
 static void Cmd_applyterrainentryeffects(void)
 {
     u8 battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    u8 arg = gBattlescriptCurrInstr[2];
     switch (ApplyTerrainEntryEffects(battler))
     {
     case TERRAIN_ENTRY_EFFECT_NONE:
-        gBattlescriptCurrInstr += 2;
+        gBattlescriptCurrInstr += 3;
         break;
     case TERRAIN_ENTRY_EFFECT_FLOODING:
         gBattlescriptCurrInstr = BattleScript_ReapplyFloodingTryConfuse;
@@ -10462,7 +10463,12 @@ static void Cmd_applyterrainentryeffects(void)
         gBattlescriptCurrInstr = BattleScript_ReapplyFrozenTerrainTrySlowing;
         break;
     case TERRAIN_ENTRY_EFFECT_SHARP_ROCKS:
-        gBattlescriptCurrInstr = BattleScript_ReapplySharpRockDmg;
+        if (arg != 0)
+        {
+            gBattlescriptCurrInstr = BattleScript_RagingRocksDoDamage;
+        } else {
+            gBattlescriptCurrInstr = BattleScript_ReapplySharpRockDmg;
+        }
         break;
     }
 }

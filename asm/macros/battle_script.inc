@@ -801,9 +801,10 @@
 	.byte 0x94
 	.endm
 
-	.macro applyterrainentryeffects battler:req
+	.macro applyterrainentryeffects battler:req arg=0
 	.byte 0x95
 	.byte \battler
+	.byte \arg
 	.endm
 
 	.macro weatherdamage

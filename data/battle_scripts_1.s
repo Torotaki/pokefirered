@@ -4165,6 +4165,25 @@ BattleScript_SunlightFaded::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_RagingRocksContinues::
+	printstring STRINGID_SUNLIGHTSTRONG
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gBattleCommunication, 0
+BattleScript_RagingRocksLoop::
+	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattleCommunication, 1
+	applyterrainentryeffects BS_ATTACKER, 1
+BattleScript_RagingRocksContinuesEnd::
+	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_RagingRocksEndedBattle
+	addbyte gBattleCommunication, 1
+	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_RagingRocksLoop
+BattleScript_RagingRocksEndedBattle::
+	end2
+
+BattleScript_RagingRocksDoDamage::
+	call BattleScript_SharpRockDoDamage
+	checkteamslost BattleScript_RagingRocksContinuesEnd
+	goto BattleScript_RagingRocksContinuesEnd
+
 BattleScript_OverworldWeatherStarts::
 	printfromtable gWeatherStartsStringIds
 	waitmessage B_WAIT_TIME_LONG
