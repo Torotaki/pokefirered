@@ -364,6 +364,7 @@ static const u8 sText_ButNothingHappened[] = _("But nothing happened!");
 static const u8 sText_ButItFailed[] = _("But it failed!");
 static const u8 sText_ItHurtConfusion[] = _("It hurt itself in its\nconfusion!");
 static const u8 sText_PkmnWasHurtBySharpRocks[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} was hurt by the\nSHARP ROCKS!");
+static const u8 sText_PkmnsXMadeRocksHurt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhurled around the SHARP ROCKS!");
 static const u8 sText_MirrorMoveFailed[] = _("The MIRROR MOVE failed!");
 static const u8 sText_StartedToRain[] = _("It started to rain!");
 static const u8 sText_DownpourStarted[] = _("A downpour started!"); // corresponds to DownpourText in pokegold and pokecrystal and is used by Rain Dance in GSC
@@ -968,6 +969,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSXSUMMONEDFOG - BATTLESTRINGS_TABLE_START]             = sText_PkmnsXSummonedFog,
     [STRINGID_PKMNINTRICKMIRROR - BATTLESTRINGS_TABLE_START]             = sText_PkmnInTrickMirror,
     [STRINGID_PKMNESCAPEDTRICKMIRROR - BATTLESTRINGS_TABLE_START]        = sText_PkmnEscapedTrickMirror,
+    [STRINGID_PKMNSXMADEROCKSHURT - BATTLESTRINGS_TABLE_START]           = sText_PkmnsXMadeRocksHurt,
 };
 
 const u16 gMissStringIds[] =

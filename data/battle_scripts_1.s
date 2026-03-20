@@ -4166,7 +4166,7 @@ BattleScript_SunlightFaded::
 	end2
 
 BattleScript_RagingRocksContinues::
-	printstring STRINGID_SUNLIGHTSTRONG
+	printstring STRINGID_PKMNSXMADEROCKSHURT
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gBattleCommunication, 0
 BattleScript_RagingRocksLoop::

@@ -737,6 +737,7 @@ u8 DoFieldEndTurnEffects(void)
                     ability = gSpeciesInfo[battleMon.species].abilities[battleMon.abilityNum];
                     if (ability == ABILITY_RAGING_ROCKS)
                     {
+                        gBattleScripting.battler = gBattleStruct->turnSideTracker;
                         BattleScriptExecute(BattleScript_RagingRocksContinues);
                         effect++;
                     }
