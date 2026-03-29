@@ -302,6 +302,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectContactTrap			 @ EFFECT_TRAP_POISON
 	.4byte BattleScript_EffectHit					 @ EFFECT_KO_SUBSTITUTE_HIT
 	.4byte BattleScript_TrickMirror					 @ EFFECT_TRICK_MIRROR
+	.4byte BattleScript_SleepTrance					 @ EFFECT_SLEEP_TRANCE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3067,6 +3068,14 @@ BattleScript_EffectFocusPunch::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_SleepTrance::
+	jumpifnodamage BattleScript_EffectSleep
+	attackcanceler
+	ppreduce
+	printstring STRINGID_PKMNTRANCEINTERRUPTED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectWakeUpSlap::
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
 	setmoveeffect MOVE_EFFECT_REMOVE_STATUS | MOVE_EFFECT_CERTAIN
@@ -4730,6 +4739,14 @@ BattleScript_FocusPunchSetUp::
 	waitmessage 1
 	playanimation BS_ATTACKER, B_ANIM_FOCUS_PUNCH_SETUP
 	printstring STRINGID_PKMNTIGHTENINGFOCUS
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_SleepTranceSetUp::
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	playanimation BS_ATTACKER, B_ANIM_SLEEP_TRANCE_SETUP
+	printstring STRINGID_PKMNSTARTEDTRANCEINFLICT
 	waitmessage B_WAIT_TIME_LONG
 	end2
 

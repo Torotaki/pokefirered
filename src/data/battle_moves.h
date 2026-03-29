@@ -5738,4 +5738,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_SLEEP_TRANCE] =
+    {
+        .effect = EFFECT_SLEEP_TRANCE,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 40,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = -3,
+        .flags = 0,
+        .category = CATEGORY_STATUS,
+    },
 };

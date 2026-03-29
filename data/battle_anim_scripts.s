@@ -431,6 +431,7 @@ gBattleAnims_Moves::
 	.4byte Move_POISON_TRAP_HIT
 	.4byte Move_TRICK_MIRROR
 	.4byte Move_GHOST_WALK
+	.4byte Move_SLEEP_TRANCE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -480,6 +481,7 @@ gBattleAnims_General::
 	.4byte General_Fog 		                @ B_ANIM_FOG_CONTINUES
 	.4byte General_LandingFromAirborne 		@ B_ANIM_LANDING_FROM_AIRBORNE
 	.4byte General_Flooding			 		@ B_ANIM_SET_FLOODING
+	.4byte General_SleepTranceSetUp			@ B_ANIM_SLEEP_TRANCE_SETUP
 
 	.align 2
 gBattleAnims_Special::
@@ -10766,6 +10768,20 @@ Move_TRICK_MIRROR:
 Move_GHOST_WALK:
 	goto Move_BATON_PASS
 
+Move_SLEEP_TRANCE:
+	loadspritegfx ANIM_TAG_GOLD_RING
+	fadetobg BG_GHOST
+	waitbgfadein
+	call HypnosisRings
+	call HypnosisRings
+	call HypnosisRings
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 2, 2, 0, 12, RGB(31, 18, 31)
+	waitforvisualfinish
+	delay 1
+	restorebg
+	waitbgfadein
+	end
+
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -11507,6 +11523,9 @@ General_FocusPunchSetUp:
 	call EndureEffect
 	waitforvisualfinish
 	end
+
+General_SleepTranceSetUp:
+	goto Move_GRUDGE
 
 General_IngrainHeal:
 	loadspritegfx ANIM_TAG_ORBS

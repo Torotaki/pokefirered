@@ -380,6 +380,7 @@
 #define B_ANIM_FOG_CONTINUES            30
 #define B_ANIM_LANDING_FROM_AIRBORNE    31
 #define B_ANIM_SET_FLOODING             32
+#define B_ANIM_SLEEP_TRANCE_SETUP       33
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

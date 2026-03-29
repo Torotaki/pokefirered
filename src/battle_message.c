@@ -238,6 +238,7 @@ static const u8 sText_NaturePowerTurnedInto[] = _("NATURE POWER turned into\n{B_
 static const u8 sText_PkmnStatusNormal[] = _("{B_ATK_NAME_WITH_PREFIX}'s status\nreturned to normal!");
 static const u8 sText_PkmnSubjectedToTorment[] = _("{B_DEF_NAME_WITH_PREFIX} was subjected\nto TORMENT!");
 static const u8 sText_PkmnTighteningFocus[] = _("{B_ATK_NAME_WITH_PREFIX} is tightening\nits focus!");
+static const u8 sText_PkmnStartedTranceInflict[] = _("{B_ATK_NAME_WITH_PREFIX} started inducing\na trance!");
 static const u8 sText_PkmnFellForTaunt[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe TAUNT!");
 static const u8 sText_PkmnReadyToHelp[] = _("{B_ATK_NAME_WITH_PREFIX} is ready to\nhelp {B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnSwitchedItems[] = _("{B_ATK_NAME_WITH_PREFIX} switched\nitems with its opponent!");
@@ -268,6 +269,7 @@ static const u8 sText_ItemsCantBeUsedNow[] = _("Items can't be used now.{PAUSE 6
 static const u8 sText_ForXCommaYZ[] = _("For {B_SCR_ACTIVE_NAME_WITH_PREFIX},\n{B_LAST_ITEM} {B_BUFF1}");
 static const u8 sText_PkmnUsedXToGetPumped[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used\n{B_LAST_ITEM} to hustle!");
 static const u8 sText_PkmnLostFocus[] = _("{B_ATK_NAME_WITH_PREFIX} lost its\nfocus and couldn't move!");
+static const u8 sText_PkmnTranceInterrupted[] = _("{B_ATK_NAME_WITH_PREFIX}'s trance was\ninterrupted!");
 static const u8 sText_PkmnWasDraggedOut[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndragged out!\p");
 static const u8 sText_TheWallShattered[] = _("The wall shattered!");
 static const u8 sText_ButNoEffect[] = _("But it had no effect!");
@@ -970,6 +972,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNINTRICKMIRROR - BATTLESTRINGS_TABLE_START]             = sText_PkmnInTrickMirror,
     [STRINGID_PKMNESCAPEDTRICKMIRROR - BATTLESTRINGS_TABLE_START]        = sText_PkmnEscapedTrickMirror,
     [STRINGID_PKMNSXMADEROCKSHURT - BATTLESTRINGS_TABLE_START]           = sText_PkmnsXMadeRocksHurt,
+    [STRINGID_PKMNSTARTEDTRANCEINFLICT - BATTLESTRINGS_TABLE_START]      = sText_PkmnStartedTranceInflict,
+    [STRINGID_PKMNTRANCEINTERRUPTED - BATTLESTRINGS_TABLE_START]         = sText_PkmnTranceInterrupted,
 };
 
 const u16 gMissStringIds[] =

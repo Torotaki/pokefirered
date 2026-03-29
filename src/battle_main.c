@@ -3783,6 +3783,14 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
                 BattleScriptExecute(BattleScript_FocusPunchSetUp);
                 return;
             }
+            if (gChosenMoveByBattler[gActiveBattler] == MOVE_SLEEP_TRANCE
+             && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
+             && !(gDisableStructs[gBattlerAttacker].truantCounter)
+             && !(gProtectStructs[gActiveBattler].noValidMoves))
+            {
+                BattleScriptExecute(BattleScript_SleepTranceSetUp);
+                return;
+            }
         }
     }
     TryClearRageStatuses();
