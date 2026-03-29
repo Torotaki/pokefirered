@@ -2432,9 +2432,13 @@ void SetMoveEffect(bool8 primary, u8 certain)
         {
             BattleScriptPush(gBattlescriptCurrInstr + 1);
 
-            if (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]] == STATUS1_SLEEP)
-                gBattleMons[gEffectBattler].status1 |= STATUS1_SLEEP_TURN((Random() & 3) + 2); // 2-5 turns
-            else
+            if (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]] == STATUS1_SLEEP){
+                u8 sleepTurns;
+                sleepTurns = (Random() & 3) + 2; // 2-5 turns
+                if (gBattleMons[gBattlerAttacker].ability == ABILITY_HYPNOTIST)
+                    sleepTurns = sleepTurns + 2;
+                gBattleMons[gEffectBattler].status1 |= STATUS1_SLEEP_TURN(sleepTurns);
+            } else
                 gBattleMons[gEffectBattler].status1 |= sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
 
             gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
@@ -2490,7 +2494,12 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else
                 {
-                    gBattleMons[gEffectBattler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
+                    u8 confusionTurns;
+                    confusionTurns = ((Random()) % 4) + 2; // 2-5 turns
+                    if (gBattleMons[gBattlerAttacker].ability == ABILITY_HYPNOTIST)
+                        confusionTurns = confusionTurns + 2;
+                    
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_CONFUSION_TURN(confusionTurns);
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
