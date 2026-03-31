@@ -3188,7 +3188,8 @@ static void HandleTurnActionSelectionState(void)
                 else
                 {
                     if (gBattleMons[gActiveBattler].status2 & STATUS2_MULTIPLETURNS
-                     || gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE)
+                     || gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE
+                     || (gDisableStructs[gActiveBattler].launchedAirborneTimer > 0))
                     {
                         gChosenActionByBattler[gActiveBattler] = B_ACTION_USE_MOVE;
                         gBattleCommunication[gActiveBattler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
