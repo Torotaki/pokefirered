@@ -981,3 +981,15 @@ void AnimTask_GetTargetHasSubstituteOrIsFlying(u8 taskId)
     
     DestroyAnimVisualTask(taskId);
 }
+
+void AnimTask_GetTargetHasSubstitute(u8 taskId)
+{
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+    {
+        gBattleAnimArgs[0] = TRUE;
+    } else {
+        gBattleAnimArgs[0] = FALSE;
+    }
+    
+    DestroyAnimVisualTask(taskId);
+}

@@ -9003,6 +9003,13 @@ static void Cmd_setsemiinvulnerablebit(void)
         gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         gDisableStructs[gBattlerAttacker].launchedAirborneTimer = 1;
         break;
+    case EFFECT_KNOCK_UNDERGROUND:
+        if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING)
+            gStatuses3[gBattlerTarget] |= STATUS3_UNDERWATER;
+        else
+            gStatuses3[gBattlerTarget] |= STATUS3_UNDERGROUND;
+        gDisableStructs[gBattlerTarget].launchedAirborneTimer = 2;
+        break;
     default:
         gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
         break;

@@ -304,6 +304,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_TrickMirror					 @ EFFECT_TRICK_MIRROR
 	.4byte BattleScript_SleepTrance					 @ EFFECT_SLEEP_TRANCE
 	.4byte BattleScript_MindControl					 @ EFFECT_MIND_CONTROL
+	.4byte BattleScript_EffectKnockUndergroundHit	 @ EFFECT_KNOCK_UNDERGROUND
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -966,6 +967,21 @@ BattleScript_EffectLaunchAirborneHit::
 	printstring STRINGID_PKMNLAUNCHEDAIRBORNE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_EffectKnockUndergroundHit::
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
+	call BattleScript_EffectHitAndReturn
+	cancelmultiturnmoves BS_TARGET
+	setsemiinvulnerablebit
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_ShowKnockedUnderwaterMsg
+	printstring STRINGID_PKMNKNOCKEDUNDERGROUND
+BattleScript_KnockUndergroundEnd::
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_CheckFaintAndMoveEnd
+
+BattleScript_ShowKnockedUnderwaterMsg::
+	printstring STRINGID_PKMNKNOCKEDUNDERWATER
+	goto BattleScript_KnockUndergroundEnd
 
 BattleScript_EffectSuperFang::
 	attackcanceler
@@ -4836,6 +4852,11 @@ BattleScript_MoveUsedStuckAirborne::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_MoveUsedStuckUnderneath::
+	printstring STRINGID_PKMNSTUCKUNDERNEATH
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_PrintUproarOverTurns::
 	printfromtable gUproarOverTurnStringIds
 	waitmessage B_WAIT_TIME_LONG
@@ -5096,6 +5117,14 @@ BattleScript_LandingFromLaunchedAirborne::
 	playanimation BS_ATTACKER, B_ANIM_LANDING_FROM_AIRBORNE
 	clearsemiinvulnerablebit
 	printstring STRINGID_PKMNLANDEDFROMAIRBORNE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_ResurfacedFromBelow::
+	makevisible BS_ATTACKER
+	playanimation BS_ATTACKER, B_ANIM_LANDING_FROM_AIRBORNE
+	clearsemiinvulnerablebit
+	printstring STRINGID_PKMNRESURFACED
 	waitmessage B_WAIT_TIME_LONG
 	end3
 

@@ -131,6 +131,10 @@ static const u8 sText_PkmnDistractedByAroma[] = _("{B_ATK_NAME_WITH_PREFIX} was\
 static const u8 sText_PkmnStuckAirborne[] = _("{B_ATK_NAME_WITH_PREFIX} is\nstuck high up in the air!");
 static const u8 sText_PkmnLaunchedAirborne[] = _("{B_DEF_NAME_WITH_PREFIX} got\nlaunched high up in the air!");
 static const u8 sText_PkmnLandedFromAirborne[] = _("{B_ATK_NAME_WITH_PREFIX} returned\nto the ground!");
+static const u8 sText_PkmnKnockedUnderground[] = _("{B_DEF_NAME_WITH_PREFIX} got\nknocked down underground!");
+static const u8 sText_PkmnStuckUnderneath[] = _("{B_ATK_NAME_WITH_PREFIX} is\nstuck underneath!");
+static const u8 sText_PkmnResurfaced[] = _("{B_ATK_NAME_WITH_PREFIX} has\nresurfaced!");
+static const u8 sText_PkmnKnockedUnderwater[] = _("{B_DEF_NAME_WITH_PREFIX} got\nknocked down underwater!");
 static const u8 sText_PkmnRegainedHealth[] = _("{B_DEF_NAME_WITH_PREFIX} regained\nhealth!");
 static const u8 sText_PkmnHPFull[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nHP is full!");
 static const u8 sText_PkmnRaisedSpDef[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nshields against SP. ATK!");
@@ -976,6 +980,10 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSTARTEDTRANCEINFLICT - BATTLESTRINGS_TABLE_START]      = sText_PkmnStartedTranceInflict,
     [STRINGID_PKMNTRANCEINTERRUPTED - BATTLESTRINGS_TABLE_START]         = sText_PkmnTranceInterrupted,
     [STRINGID_PKMNMADEFOEHITSELF - BATTLESTRINGS_TABLE_START]            = sText_PkmnMadeFoeHitSelf,
+    [STRINGID_PKMNKNOCKEDUNDERGROUND - BATTLESTRINGS_TABLE_START]        = sText_PkmnKnockedUnderground,
+    [STRINGID_PKMNSTUCKUNDERNEATH - BATTLESTRINGS_TABLE_START]           = sText_PkmnStuckUnderneath,
+    [STRINGID_PKMNRESURFACED - BATTLESTRINGS_TABLE_START]                = sText_PkmnResurfaced,
+    [STRINGID_PKMNKNOCKEDUNDERWATER - BATTLESTRINGS_TABLE_START]         = sText_PkmnKnockedUnderwater,
 };
 
 const u16 gMissStringIds[] =

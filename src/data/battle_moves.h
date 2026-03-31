@@ -2129,14 +2129,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CRABHAMMER] =
     {
-        .effect = EFFECT_HIGH_CRITICAL,
+        .effect = EFFECT_KNOCK_UNDERGROUND,
         .power = 70,
-        .type = TYPE_WATER,
+        .type = TYPE_BUG,
         .accuracy = 100,
         .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
-        .priority = 0,
+        .priority = -2,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .category = CATEGORY_PHYSICAL,
     },

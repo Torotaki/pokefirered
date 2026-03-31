@@ -1147,7 +1147,11 @@ u8 DoBattlerEndTurnEffects(void)
                 if (gDisableStructs[gActiveBattler].launchedAirborneTimer) {
                     if (--gDisableStructs[gActiveBattler].launchedAirborneTimer == 0)
                     {
-                        BattleScriptPushCursorAndCallback(BattleScript_LandingFromLaunchedAirborne);
+                        if (gStatuses3[gActiveBattler] & STATUS3_ON_AIR)
+                            BattleScriptPushCursorAndCallback(BattleScript_LandingFromLaunchedAirborne);
+                        else
+                            BattleScriptPushCursorAndCallback(BattleScript_ResurfacedFromBelow);
+
                         gBattleScripting.battler = gActiveBattler;
                         effect++;
                     }
@@ -1678,7 +1682,11 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_LAUNCHED: // Launched airborne
             if (gDisableStructs[gBattlerAttacker].launchedAirborneTimer > 0)
             {
-                gBattlescriptCurrInstr = BattleScript_MoveUsedStuckAirborne;
+                if (gStatuses3[gBattlerAttacker] & STATUS3_ON_AIR)
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedStuckAirborne;
+                else
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedStuckUnderneath;
+                
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
