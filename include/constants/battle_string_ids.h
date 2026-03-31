@@ -426,8 +426,9 @@
 #define STRINGID_PKMNSXMADEROCKSHURT 425
 #define STRINGID_PKMNSTARTEDTRANCEINFLICT 426
 #define STRINGID_PKMNTRANCEINTERRUPTED 427
+#define STRINGID_PKMNMADEFOEHITSELF 428
 
-#define BATTLESTRINGS_COUNT     428
+#define BATTLESTRINGS_COUNT     429
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -521,6 +522,7 @@
 #define B_MSG_PROTECT_FAILED   2
 #define B_MSG_SET_UP_TRAP      3
 #define B_MSG_FLEW_HIGH        4
+#define B_MSG_MADE_SELF_HIT    5
 
 // gRestUsedStringIds
 #define B_MSG_REST           0

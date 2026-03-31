@@ -6484,7 +6484,7 @@ static void Cmd_setprotectlike(void)
                 gMoveResultFlags |= MOVE_RESULT_FAILED;
             } else {
                 gDisableStructs[gBattlerTarget].confusionSelfHitGuaranteed = 1;
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_UP_TRAP;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MADE_SELF_HIT;
             }
             break;
         }

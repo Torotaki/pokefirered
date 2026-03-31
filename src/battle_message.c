@@ -69,6 +69,7 @@ static const u8 sText_PkmnMakesGroundMiss[] = _("{B_DEF_NAME_WITH_PREFIX} makes 
 static const u8 sText_PkmnAvoidedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!");
 static const u8 sText_PkmnSetTrap[] = _("{B_ATK_NAME_WITH_PREFIX}\nset a trap!");
 static const u8 sText_PkmnWasTrappedByContact[] = _("{B_ATK_NAME_WITH_PREFIX}'s attack made\ncontact with {B_DEF_NAME_WITH_PREFIX}'s trap!");
+static const u8 sText_PkmnMadeFoeHitSelf[] = _("{B_ATK_NAME_WITH_PREFIX} suggested\n{B_DEF_NAME_WITH_PREFIX} hit itself!");
 static const u8 sText_ItDoesntAffect[] = _("It doesn't affect\n{B_DEF_NAME_WITH_PREFIX}…");
 static const u8 sText_AttackerFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p");
 static const u8 sText_TargetFainted[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p");
@@ -974,6 +975,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSXMADEROCKSHURT - BATTLESTRINGS_TABLE_START]           = sText_PkmnsXMadeRocksHurt,
     [STRINGID_PKMNSTARTEDTRANCEINFLICT - BATTLESTRINGS_TABLE_START]      = sText_PkmnStartedTranceInflict,
     [STRINGID_PKMNTRANCEINTERRUPTED - BATTLESTRINGS_TABLE_START]         = sText_PkmnTranceInterrupted,
+    [STRINGID_PKMNMADEFOEHITSELF - BATTLESTRINGS_TABLE_START]            = sText_PkmnMadeFoeHitSelf,
 };
 
 const u16 gMissStringIds[] =
@@ -1055,7 +1057,8 @@ const u16 gProtectLikeUsedStringIds[] =
     [B_MSG_BRACED_ITSELF]    = STRINGID_PKMNBRACEDITSELF,
     [B_MSG_PROTECT_FAILED]   = STRINGID_BUTITFAILED,
     [B_MSG_SET_UP_TRAP]      = STRINGID_PKMNSETTRAP,
-    [B_MSG_FLEW_HIGH]        = STRINGID_PKMNFLEWHIGH
+    [B_MSG_FLEW_HIGH]        = STRINGID_PKMNFLEWHIGH,
+    [B_MSG_MADE_SELF_HIT]    = STRINGID_PKMNMADEFOEHITSELF
 };
 
 const u16 gReflectLightScreenSafeguardStringIds[] =
