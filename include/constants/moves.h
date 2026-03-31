@@ -412,8 +412,9 @@
 #define MOVE_TRICK_MIRROR 408
 #define MOVE_GHOST_WALK 409
 #define MOVE_SLEEP_TRANCE 410
+#define MOVE_MIND_CONTROL 411
 
-#define MOVES_COUNT 411
+#define MOVES_COUNT 412
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

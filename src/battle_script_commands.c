@@ -6445,36 +6445,48 @@ static void Cmd_setprotectlike(void)
 
     if (sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] >= Random() && notLastTurn)
     {
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_PROTECT)
+        switch (gBattleMoves[gCurrentMove].effect)
         {
+        case EFFECT_PROTECT:
             gProtectStructs[gBattlerAttacker].protected = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_ITSELF;
-        }
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
-        {
+            break;
+        case EFFECT_ENDURE:
             gProtectStructs[gBattlerAttacker].endured = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
-        }
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_OUTLAST)
-        {
+            break;
+        case EFFECT_OUTLAST:
             gProtectStructs[gBattlerAttacker].endured = 1;
             gProtectStructs[gBattlerAttacker].outlasted = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
-        }
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_TRAP_LEECH_SEED
-            || gBattleMoves[gCurrentMove].effect == EFFECT_TRAP_POISON)
-        {
+            break;
+        case EFFECT_TRAP_LEECH_SEED:
+        case EFFECT_TRAP_POISON:
             gProtectStructs[gBattlerAttacker].contactTrapped = 1;
             gDisableStructs[gBattlerAttacker].disabledMove = gCurrentMove;
-            gDisableStructs[gBattlerTarget].disableTimer = (Random() & 3) + 3;
-            gDisableStructs[gBattlerTarget].disableTimerStartValue = gDisableStructs[gBattlerTarget].disableTimer; // not sure what value but copied from disable
+            gDisableStructs[gBattlerAttacker].disableTimer = (Random() & 3) + 3;
+            gDisableStructs[gBattlerAttacker].disableTimerStartValue = gDisableStructs[gBattlerAttacker].disableTimer; // not sure what value but copied from disable
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_UP_TRAP;
-        }
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_DODGE)
-        {
+            break;
+        case EFFECT_DODGE:
             gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
             gDisableStructs[gBattlerAttacker].launchedAirborneTimer = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FLEW_HIGH;
+            break;
+        case EFFECT_MIND_CONTROL:
+            gDisableStructs[gBattlerAttacker].disabledMove = gCurrentMove;
+            gDisableStructs[gBattlerAttacker].disableTimer = (Random() & 3) + 3;
+            gDisableStructs[gBattlerAttacker].disableTimerStartValue = gDisableStructs[gBattlerAttacker].disableTimer; // not sure what value but copied from disable
+            
+            if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION))
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECT_FAILED;
+                gMoveResultFlags |= MOVE_RESULT_FAILED;
+            } else {
+                gDisableStructs[gBattlerTarget].confusionSelfHitGuaranteed = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_UP_TRAP;
+            }
+            break;
         }
         gDisableStructs[gBattlerAttacker].protectUses++;
     }

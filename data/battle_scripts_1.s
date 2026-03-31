@@ -303,6 +303,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit					 @ EFFECT_KO_SUBSTITUTE_HIT
 	.4byte BattleScript_TrickMirror					 @ EFFECT_TRICK_MIRROR
 	.4byte BattleScript_SleepTrance					 @ EFFECT_SLEEP_TRANCE
+	.4byte BattleScript_MindControl					 @ EFFECT_MIND_CONTROL
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1798,6 +1799,7 @@ BattleScript_DoGhostCurse::
 
 BattleScript_EffectDodge::
 BattleScript_EffectContactTrap::
+BattleScript_MindControl::
 BattleScript_EffectOutlast::
 BattleScript_EffectProtect::
 BattleScript_EffectEndure::

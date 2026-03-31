@@ -432,6 +432,7 @@ gBattleAnims_Moves::
 	.4byte Move_TRICK_MIRROR
 	.4byte Move_GHOST_WALK
 	.4byte Move_SLEEP_TRANCE
+	.4byte Move_MIND_CONTROL
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10781,6 +10782,9 @@ Move_SLEEP_TRANCE:
 	restorebg
 	waitbgfadein
 	end
+
+Move_MIND_CONTROL:
+	goto Move_SUPERSONIC
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

@@ -174,6 +174,7 @@ struct DisableStruct
     /*0x19*/ u8 rechargeTimer;
     /*0x1A*/ u8 unk1A[2];
     /*0x1C*/ u8 slashPreparedTimer;
+    /*0x1D*/ u8 confusionSelfHitGuaranteed : 1;
 };
 
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];

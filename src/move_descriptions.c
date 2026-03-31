@@ -403,6 +403,7 @@ const u8 gMoveDescription_PoisonTrap[] = _("Sets a trap that\npoisons the foe if
 const u8 gMoveDescription_TrickMirror[] = _("Sets a mirror to\nflip the foe's base\nATTACK and SP. ATK\nfor five turns.");
 const u8 gMoveDescription_GhostWalk[] = _("Slowly switches\nout, passing along\nany stat changes\nto the new battler.");
 const u8 gMoveDescription_SleepTrance[] = _("Attempt to slowly\nput the foe to\nsleep. Fails if hit\nduring the turn.");
+const u8 gMoveDescription_MindControl[] = _("Make the foe strike\nthemselves. Only\nworks on confused\ntargets.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -815,4 +816,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_TRICK_MIRROR  - 1] = gMoveDescription_TrickMirror,
     [MOVE_GHOST_WALK    - 1] = gMoveDescription_GhostWalk,
     [MOVE_SLEEP_TRANCE  - 1] = gMoveDescription_SleepTrance,
+    [MOVE_MIND_CONTROL  - 1] = gMoveDescription_MindControl,
 };

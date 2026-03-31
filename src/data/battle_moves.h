@@ -5752,4 +5752,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_MIND_CONTROL] =
+    {
+        .effect = EFFECT_MIND_CONTROL,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 3,
+        .flags = 0,
+        .category = CATEGORY_STATUS,
+    },
 };
