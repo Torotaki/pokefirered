@@ -2513,6 +2513,21 @@ BattleScript_HitsAllNoUndergroundBonus::
 	bicword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
 	setbyte sDMG_MULTIPLIER, 1
 BattleScript_DoHitAllWithUndergroundBonus::
+	jumpiftype BS_TARGET, TYPE_FLYING, BattleScript_HitAllWithUndergroundBonusMissed
+	jumpifability BS_TARGET, ABILITY_LEVITATE, BattleScript_HitAllWithUndergroundBonusMissed
+	jumpifability BS_TARGET, ABILITY_DRAGONFLIGHT, BattleScript_HitAllWithUndergroundBonusMissed
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_SAND_TRAP, BattleScript_EarthquakeCheckSharpRocks
+	setmovetype TYPE_GROUND
+BattleScript_EarthquakeCheckSharpRocks::
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_SHARP_ROCKS, BattleScript_EarthquakeCheckFlooding
+	setmovetype TYPE_ROCK
+BattleScript_EarthquakeCheckFlooding::
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_EarthquakeCheckFrozen
+	setmovetype TYPE_WATER
+BattleScript_EarthquakeCheckFrozen::
+	jumpifbyte CMP_NO_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FROZEN, BattleScript_DoHitAllAfterTypeChange
+	setmovetype TYPE_ICE
+BattleScript_DoHitAllAfterTypeChange::
 	accuracycheck BattleScript_HitAllWithUndergroundBonusMissed, ACC_CURR_MOVE
 	critcalc
 	damagecalc
