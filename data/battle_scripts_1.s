@@ -2505,9 +2505,10 @@ BattleScript_EffectEarthquake::
 	selectfirstvalidtarget
 BattleScript_HitsAllWithUndergroundBonusLoop::
 	movevaluescleanup
+	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERGROUND, BattleScript_HitsAllNoUndergroundBonus
 	orword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
-	setbyte sDMG_MULTIPLIER, 2
+	setbyte sDMG_MULTIPLIER, 1
 	goto BattleScript_DoHitAllWithUndergroundBonus
 BattleScript_HitsAllNoUndergroundBonus::
 	bicword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
