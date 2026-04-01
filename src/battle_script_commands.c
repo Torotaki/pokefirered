@@ -4698,6 +4698,7 @@ static void Cmd_switchindataupdate(void)
             gBattleMons[gActiveBattler].statStages[i] = oldData.statStages[i];
         }
         gBattleMons[gActiveBattler].status2 = oldData.status2;
+        gSpecialStatuses[gActiveBattler].batonPassing = 1;
     }
 
     SwitchInClearSetData();

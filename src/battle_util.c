@@ -1924,9 +1924,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case TERRAIN_ENTRY_EFFECT_FROZEN:
                     BattleScriptPushCursorAndCallback(BattleScript_FrozenTerrainTrySlowing);
                     effect++;
+                    break;
                 case TERRAIN_ENTRY_EFFECT_SHARP_ROCKS:
                     BattleScriptPushCursorAndCallback(BattleScript_SharpRockDmg);
                     effect++;
+                    break;
                 }
                 break;
             case ABILITY_DRIZZLE:
@@ -2043,6 +2045,49 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursorAndCallback(BattleScript_FloodbringerActivates);
                     gBattleScripting.battler = battler;
                     effect++;
+                }
+                break;
+            case ABILITY_HERO_SIGNAL:
+                if (!(gSpecialStatuses[battler].traced))
+                {
+                    gSpecialStatuses[battler].traced = 1;
+                    if (gSpecialStatuses[battler].batonPassing) {
+                        if (gBattleMons[battler].statStages[STAT_DEF] < MAX_STAT_STAGE
+                            && gBattleMons[battler].statStages[STAT_SPDEF] < MAX_STAT_STAGE)
+                        {
+                            gBattleMons[battler].statStages[STAT_DEF]++;
+                            gBattleMons[battler].statStages[STAT_SPDEF]++;
+                            PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_DEF);
+                            PREPARE_STAT_BUFFER(gBattleTextBuff2, STAT_SPDEF);
+                            BattleScriptPushCursorAndCallback(BattleScript_VictoryFlexActivates);
+                            gBattleScripting.battler = battler;
+                            effect++;
+                        }
+                        else
+                        {
+                            u8 statBuffed = 0;
+
+                            if (gBattleMons[battler].statStages[STAT_DEF] < MAX_STAT_STAGE)
+                            {
+                                gBattleMons[battler].statStages[STAT_DEF]++;
+                                statBuffed = STAT_DEF;
+                            }
+                            if (gBattleMons[battler].statStages[STAT_SPDEF] < MAX_STAT_STAGE)
+                            {
+                                gBattleMons[battler].statStages[STAT_SPDEF]++;
+                                statBuffed = STAT_SPDEF;
+                            }
+
+                            if (statBuffed > 0) {
+                                PREPARE_STAT_BUFFER(gBattleTextBuff1, statBuffed);
+                                gBattleScripting.animArg1 = 14 + statBuffed;
+                                gBattleScripting.animArg2 = 0;
+                                BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
+                                gBattleScripting.battler = battler;
+                                effect++;
+                            }
+                        }
+                    }
                 }
                 break;
             }

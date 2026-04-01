@@ -95,6 +95,7 @@ static const u8 sSnowCoverDescription[] = _("Boosts SP. DEF in snow.");
 static const u8 sEerieFogDescription[] = _("Summons fog in battle.");
 static const u8 sRagingRocksDescription[] = _("SHARP ROCKS hurt every turn.");
 static const u8 sHypnotistDescription[] = _("SLEEP and CONFUSION lasts 2 more turns.");
+static const u8 sHeroSignalDescription[] = _("Called by team boost DEFENSE and SP. DEF.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -195,6 +196,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_EERIE_FOG] = sEerieFogDescription,
     [ABILITY_RAGING_ROCKS] = sRagingRocksDescription,
     [ABILITY_HYPNOTIST] = sHypnotistDescription,
+    [ABILITY_HERO_SIGNAL] = sHeroSignalDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -296,4 +298,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_EERIE_FOG] = _("EERIE FOG"),
     [ABILITY_RAGING_ROCKS] = _("RAGING ROCKS"),
     [ABILITY_HYPNOTIST] = _("HYPNOTIST"),
+    [ABILITY_HERO_SIGNAL] = _("HERO SIGNAL"),
 };
