@@ -305,6 +305,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_SleepTrance					 @ EFFECT_SLEEP_TRANCE
 	.4byte BattleScript_MindControl					 @ EFFECT_MIND_CONTROL
 	.4byte BattleScript_EffectKnockUndergroundHit	 @ EFFECT_KNOCK_UNDERGROUND
+	.4byte BattleScript_EffectRefreshHit			 @ EFFECT_REFRESH_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3408,6 +3409,13 @@ BattleScript_EffectRefresh::
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_ATTACKER
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectRefreshHit::
+	cureifburnedparalysedorpoisoned BattleScript_EffectHit
+	printstring STRINGID_PKMNSTATUSNORMAL
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_ATTACKER
+	goto BattleScript_EffectHit
 
 BattleScript_EffectGrudge::
 	attackcanceler

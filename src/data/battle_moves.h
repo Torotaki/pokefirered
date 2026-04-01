@@ -1779,7 +1779,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WATERFALL] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_REFRESH_HIT,
         .power = 70,
         .type = TYPE_WATER,
         .accuracy = 100,
