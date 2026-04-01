@@ -1135,6 +1135,10 @@ static void Cmd_accuracycheck(void)
             && (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
             && gBattleMons[gBattlerAttacker].ability != ABILITY_ECHOLOCATION
             && gBattleMoves[move].effect != EFFECT_PURSUIT
+            && gBattleMoves[move].effect != EFFECT_EARTHQUAKE
+            && gBattleMoves[move].effect != EFFECT_HYPER_VOICE
+            && gBattleMoves[move].effect != EFFECT_SLEEP
+            && gBattleMoves[move].effect != EFFECT_DOUBLE_SLEEP
             && gBattleMoves[move].effect != EFFECT_LOCK_ON
             && gBattleMoves[move].effect != EFFECT_LOCK_ON_AND_BLOCK
             && gBattleMoves[move].effect != EFFECT_LOCK_ON_AND_DEF_BOOST2)
