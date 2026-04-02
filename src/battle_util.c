@@ -3185,7 +3185,11 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_STICK:
-                if (gBattleMons[battlerId].species == SPECIES_FARFETCHD && !moveTurn && gBattleMons[battlerId].statStages[STAT_ATK] < MAX_STAT_STAGE)
+                if (!moveTurn
+                    && gBattleMons[battlerId].statStages[STAT_ATK] < MAX_STAT_STAGE
+                    && (gBattleMons[battlerId].species == SPECIES_FARFETCHD
+                        || gBattleMons[battlerId].species == SPECIES_CUBONE 
+                        || gBattleMons[battlerId].species == SPECIES_MAROWAK))
                 {
                     if (Random() % 10 == 0) {
                         PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
