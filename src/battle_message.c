@@ -156,6 +156,7 @@ static const u8 sText_PkmnFlewHigh[] = _("{B_ATK_NAME_WITH_PREFIX} flew\nup high
 static const u8 sText_PkmnDugHole[] = _("{B_ATK_NAME_WITH_PREFIX} dug a hole!");
 static const u8 sText_PkmnHidUnderwater[] = _("{B_ATK_NAME_WITH_PREFIX} hid\nunderwater!");
 static const u8 sText_PkmnSprangUp[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!");
+static const u8 sText_PkmnPrepareDetonate[] = _("{B_ATK_NAME_WITH_PREFIX} prepared\nto detonate its item!");
 static const u8 sText_PkmnSqueezedByBind[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!");
 static const u8 sText_PkmnTrappedInVortex[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!");
 static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!");
@@ -984,6 +985,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSTUCKUNDERNEATH - BATTLESTRINGS_TABLE_START]           = sText_PkmnStuckUnderneath,
     [STRINGID_PKMNRESURFACED - BATTLESTRINGS_TABLE_START]                = sText_PkmnResurfaced,
     [STRINGID_PKMNKNOCKEDUNDERWATER - BATTLESTRINGS_TABLE_START]         = sText_PkmnKnockedUnderwater,
+    [STRINGID_PKMNPREPAREDETONATE - BATTLESTRINGS_TABLE_START]           = sText_PkmnPrepareDetonate,
 };
 
 const u16 gMissStringIds[] =
@@ -1155,7 +1157,8 @@ const u16 gFirstTurnOfTwoStringIds[] =
     [B_MSG_TURN1_FLY]        = STRINGID_PKMNFLEWHIGH,
     [B_MSG_TURN1_DIG]        = STRINGID_PKMNDUGHOLE,
     [B_MSG_TURN1_DIVE]       = STRINGID_PKMNHIDUNDERWATER,
-    [B_MSG_TURN1_BOUNCE]     = STRINGID_PKMNSPRANGUP
+    [B_MSG_TURN1_BOUNCE]     = STRINGID_PKMNSPRANGUP,
+    [B_MSG_TURN1_DETONATE]   = STRINGID_PKMNPREPAREDETONATE
 };
 
 // Index copied from move's index in gTrappingMoves

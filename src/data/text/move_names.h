@@ -411,4 +411,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_GHOST_WALK]    = _("GHOST WALK"),
     [MOVE_SLEEP_TRANCE]  = _("SLEEP TRANCE"),
     [MOVE_MIND_CONTROL]  = _("MIND CONTROL"),
+    [MOVE_DETONATE]      = _("DETONATE"),
 };

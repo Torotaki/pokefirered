@@ -306,6 +306,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_MindControl					 @ EFFECT_MIND_CONTROL
 	.4byte BattleScript_EffectKnockUndergroundHit	 @ EFFECT_KNOCK_UNDERGROUND
 	.4byte BattleScript_EffectRefreshHit			 @ EFFECT_REFRESH_HIT
+	.4byte BattleScript_EffectDetonate				 @ EFFECT_DETONATE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -539,6 +540,23 @@ BattleScript_ExplosionMissed:
 	jumpifnexttargetvalid BattleScript_ExplosionLoop
 	tryfaintmon BS_ATTACKER
 	end
+
+BattleScript_EffectDetonate:
+	jumpifitem BS_ATTACKER, ITEM_NONE, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_DetonateSecondTurn
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_DetonateSecondTurn
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_DETONATE
+	call BattleScriptFirstChargingTurn
+	goto BattleScript_MoveEnd
+
+BattleScript_DetonateSecondTurn::
+	attackcanceler
+	removeitem BS_ATTACKER
+	setmoveeffect MOVE_EFFECT_CHARGING
+	setbyte sB_ANIM_TURN, 1
+	clearstatusfromeffect BS_ATTACKER
+	orword gHitMarker, HITMARKER_NO_PPDEDUCT
+	goto BattleScript_HitFromAccCheck
 
 BattleScript_PreserveMissedBitDoMoveAnim:
 	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED

@@ -5766,4 +5766,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = 0,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_DETONATE] =
+    {
+        .effect = EFFECT_DETONATE,
+        .power = 200,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL,
+    },
 };

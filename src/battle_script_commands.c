@@ -328,6 +328,7 @@ static void Cmd_applyterrainentryeffects(void);
 static void Cmd_setmovetype(void);
 static void Cmd_setslashprepared(void);
 static void Cmd_createitemonmon(void);
+static void Cmd_jumpifitem(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -567,7 +568,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setweatherballtype,                      //0xE9
     Cmd_tryrecycleitem,                          //0xEA
     Cmd_settypetoterrain,                        //0xEB
-    Cmd_pursuitdoubles,                          //0xEC
+    Cmd_jumpifitem,                              //0xEC
     Cmd_snatchsetbattlers,                       //0xED
     Cmd_removelightscreenreflect,                //0xEE
     Cmd_handleballthrow,                         //0xEF
@@ -10550,4 +10551,16 @@ static void Cmd_createitemonmon(void)
     }
 
     gBattlescriptCurrInstr += 4;
+}
+
+static void Cmd_jumpifitem(void)
+{
+    u8 battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    u16 item = T2_READ_16(gBattlescriptCurrInstr + 2);
+    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 4);
+
+    if (gBattleMons[battler].item == item)
+        gBattlescriptCurrInstr = jumpPtr;
+    else
+        gBattlescriptCurrInstr += 8;
 }

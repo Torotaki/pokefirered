@@ -1204,9 +1204,11 @@
 	.4byte \param0
 	.endm
 
-	.macro pursuitrelated param0:req
+	.macro jumpifitem param0:req, item:req, ptr:req
 	.byte 0xec
-	.4byte \param0
+	.byte \param0
+	.2byte \item
+	.4byte \ptr
 	.endm
 
 	.macro snatchsetbattlers
