@@ -307,6 +307,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectKnockUndergroundHit	 @ EFFECT_KNOCK_UNDERGROUND
 	.4byte BattleScript_EffectRefreshHit			 @ EFFECT_REFRESH_HIT
 	.4byte BattleScript_EffectDetonate				 @ EFFECT_DETONATE
+	.4byte BattleScript_EffectFogAndSharpRocks		 @ EFFECT_FOG_AND_SHARP_ROCKS
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2219,6 +2220,18 @@ BattleScript_EffectSetFogHit::
 	attackcanceler
 	setfog
 	goto BattleScript_MoveWeatherHit
+
+BattleScript_EffectFogAndSharpRocks::
+	attackcanceler
+	attackstring
+	ppreduce
+	setsharprocks
+	attackanimation
+	waitanimation
+	printfromtable gMoveTerrainChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	setfog
+	goto BattleScript_PrintWeatherChange
 
 BattleScript_EffectClearWeather::
 	attackcanceler

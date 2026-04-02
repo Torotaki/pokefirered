@@ -414,8 +414,9 @@
 #define MOVE_SLEEP_TRANCE 410
 #define MOVE_MIND_CONTROL 411
 #define MOVE_DETONATE 412
+#define MOVE_CEMETERY 413
 
-#define MOVES_COUNT 413
+#define MOVES_COUNT 414
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

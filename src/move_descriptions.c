@@ -405,6 +405,7 @@ const u8 gMoveDescription_GhostWalk[] = _("Slowly switches\nout, passing along\n
 const u8 gMoveDescription_SleepTrance[] = _("Attempt to slowly\nput the foe to\nsleep. Fails if hit\nduring the turn.");
 const u8 gMoveDescription_MindControl[] = _("Make the foe strike\nthemselves. Only\nworks on confused\ntargets.");
 const u8 gMoveDescription_Detonate[] = _("Detonate the held\nitem on the 2nd\nturn for massive\ndamage.");
+const u8 gMoveDescription_Cemetery[] = _("Creates a thick fog\nand covers the\nfield in sharp\nrocks.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -819,4 +820,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_SLEEP_TRANCE  - 1] = gMoveDescription_SleepTrance,
     [MOVE_MIND_CONTROL  - 1] = gMoveDescription_MindControl,
     [MOVE_DETONATE      - 1] = gMoveDescription_Detonate,
+    [MOVE_CEMETERY      - 1] = gMoveDescription_Cemetery,
 };
