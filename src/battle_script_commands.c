@@ -1311,6 +1311,12 @@ void AI_CalcDmg(u8 attacker, u8 defender)
 
 static void ModulateDmgByType(u8 multiplier)
 {
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_POLTERGEIST
+        && multiplier == 0)
+    {
+        multiplier = TYPE_MUL_NORMAL;
+    }
+    
     gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
     if (gBattleMoveDamage == 0 && multiplier != 0)
         gBattleMoveDamage = 1;
@@ -1492,6 +1498,12 @@ static void CheckWonderGuardAndLevitate(void)
 // Same as ModulateDmgByType except different arguments
 static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
 {
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_POLTERGEIST
+        && multiplier == 0)
+    {
+        multiplier = TYPE_MUL_NORMAL;
+    }
+
     gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
     if (gBattleMoveDamage == 0 && multiplier != 0)
         gBattleMoveDamage = 1;

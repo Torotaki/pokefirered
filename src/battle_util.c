@@ -2090,6 +2090,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                 }
                 break;
+            case ABILITY_POLTERGEIST:
+                if (!(gBattleMons[battler].status2 & STATUS2_SUBSTITUTE))
+                {
+                    gCurrentMove = MOVE_SHADOW_BALL;
+                    BattleScriptPushCursorAndCallback(BattleScript_KoSetSubstitute);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1
