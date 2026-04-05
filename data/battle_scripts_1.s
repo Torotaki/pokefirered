@@ -3958,6 +3958,10 @@ BattleScript_LocalTrainerBattleWonGotMoney::
 BattleScript_PayDayMoneyAndPickUpItems::
 	givepaydaymoney
 	pickup
+	jumpifhalfword CMP_EQUAL gLastUsedItem, ITEM_NONE BattleScript_End2
+	printstring STRINGID_PLAYERPICKEDUPITEM
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_End2::
 	end2
 
 BattleScript_LocalBattleLost::
