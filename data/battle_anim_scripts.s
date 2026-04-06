@@ -435,6 +435,8 @@ gBattleAnims_Moves::
 	.4byte Move_MIND_CONTROL
 	.4byte Move_DETONATE
 	.4byte Move_CEMETERY
+	.4byte Move_COUNTERPUNCH
+	.4byte Move_COUNTERPUNCH_HIT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10871,6 +10873,12 @@ Move_CEMETERY:
 	delay 40
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BATTLERS_2, 1, 16, 0, RGB_BLACK
 	end
+
+Move_COUNTERPUNCH:
+	goto Move_DETECT
+
+Move_COUNTERPUNCH_HIT:
+	goto Move_MACH_PUNCH
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

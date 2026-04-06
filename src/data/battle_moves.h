@@ -5794,4 +5794,32 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MIRROR_MOVE_AFFECTED,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_COUNTERPUNCH] =
+    {
+        .effect = EFFECT_COUNTERPUNCH,
+        .power = 50,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 3,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED,
+        .category = CATEGORY_STATUS,
+    },
+
+    [MOVE_COUNTERPUNCH_HIT] =
+    {
+        .effect = EFFECT_ALWAYS_HIT,
+        .power = 50,
+        .type = TYPE_FIGHTING,
+        .accuracy = 0,
+        .pp = 1,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .category = CATEGORY_PHYSICAL
+    },
 };

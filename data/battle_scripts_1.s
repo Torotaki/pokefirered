@@ -308,6 +308,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectRefreshHit			 @ EFFECT_REFRESH_HIT
 	.4byte BattleScript_EffectDetonate				 @ EFFECT_DETONATE
 	.4byte BattleScript_EffectFogAndSharpRocks		 @ EFFECT_FOG_AND_SHARP_ROCKS
+	.4byte BattleScript_EffectContactTrap			 @ EFFECT_COUNTERPUNCH
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -1882,6 +1883,20 @@ BattleScript_TrapPoisonTriggered::
 	copybyte gBattlerAttacker, gEffectBattler
 	sethword gCurrentMove, MOVE_POISON_TRAP_HIT
 	setmoveeffect MOVE_EFFECT_POISON
+	goto BattleScript_HitFromCritCalc
+
+BattleScript_TrapCounterpunchTriggered::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	effectivenesssound
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gMoveResultFlags, 0
+	copybyte gEffectBattler, gBattlerTarget
+	copybyte gBattlerTarget, gBattlerAttacker
+	copybyte gBattlerAttacker, gEffectBattler
+	sethword gCurrentMove, MOVE_COUNTERPUNCH_HIT
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectSpikes::
