@@ -309,6 +309,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDetonate				 @ EFFECT_DETONATE
 	.4byte BattleScript_EffectFogAndSharpRocks		 @ EFFECT_FOG_AND_SHARP_ROCKS
 	.4byte BattleScript_EffectContactTrap			 @ EFFECT_COUNTERPUNCH
+	.4byte BattleScript_EffectPrioSecondHit			 @ EFFECT_PRIO_SECOND_HIT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -2098,7 +2099,6 @@ BattleScript_EffectMagnitude::
 	attackstring
 	ppreduce
 	selectfirstvalidtarget
-	magnitudedamagecalculation
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_MAGNITUDESTRENGTH
 	waitmessage B_WAIT_TIME_LONG
@@ -3844,6 +3844,11 @@ BattleScript_EffectSlash::
 	jumpifnostatus3 BS_ATTACKER, STATUS3_SLASH_PREPARED, BattleScript_EffectHit
 	setbyte sDMG_MULTIPLIER, 2
 	goto BattleScript_EffectHit
+
+BattleScript_EffectPrioSecondHit::
+	call BattleScript_EffectHitAndReturn
+	setsecondattackpriotimer
+	goto BattleScript_CheckFaintAndMoveEnd
 
 BattleScript_EffectSludge::
 	setmoveeffect MOVE_EFFECT_POISON

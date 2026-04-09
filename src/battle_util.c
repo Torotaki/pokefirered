@@ -211,6 +211,7 @@ void CancelMultiTurnMoves(u8 battler)
 
     gDisableStructs[battler].rolloutTimer = 0;
     gDisableStructs[battler].furyCutterCounter = 0;
+    gDisableStructs[battler].secondAttackPrioTimer = 0;
 }
 
 bool8 WasUnableToUseMove(u8 battler)
@@ -781,6 +782,7 @@ enum
     ENDTURN_LAUNCHED,
     ENDTURN_CANT_ESCAPE,
     ENDTURN_SLASH_PREPARED,
+    ENDTURN_SECOND_HIT_PRIO,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -1173,6 +1175,11 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_SLASH_PREPARED:
                 if (gDisableStructs[gActiveBattler].slashPreparedTimer && --gDisableStructs[gActiveBattler].slashPreparedTimer == 0)
                     gStatuses3[gActiveBattler] &= ~STATUS3_SLASH_PREPARED;
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_SECOND_HIT_PRIO:
+                if (gDisableStructs[gActiveBattler].secondAttackPrioTimer)
+                    gDisableStructs[gActiveBattler].secondAttackPrioTimer--;
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_BATTLER_COUNT:  // done
@@ -3666,7 +3673,7 @@ void CheckTerrainShiftUpdates(void)
     }
 }
 
-s8 GetMovePriority(u16 moveBattler1, u8 battler2)
+s8 GetMovePriority(u16 moveBattler1, u8 battler1, u8 battler2)
 {
     if (gBattleMoves[moveBattler1].effect == EFFECT_PURSUIT)
     {
@@ -3674,6 +3681,13 @@ s8 GetMovePriority(u16 moveBattler1, u8 battler2)
         {
             return -2;
         }
+    }
+
+    if (gBattleMoves[moveBattler1].effect == EFFECT_PRIO_SECOND_HIT
+        && gBattleMoves[gLastMoves[battler1]].effect == EFFECT_PRIO_SECOND_HIT
+        && gDisableStructs[battler1].secondAttackPrioTimer != 0)
+    {
+        return 1;
     }
 
     return gBattleMoves[moveBattler1].priority;

@@ -2445,6 +2445,7 @@ void SwitchInClearSetData(void)
     gLastHitByType[gActiveBattler] = 0;
     gLastResultingMoves[gActiveBattler] = MOVE_NONE;
     gLastPrintedMoves[gActiveBattler] = MOVE_NONE;
+    gDisableStructs[gActiveBattler].secondAttackPrioTimer = 0;
     gLastHitBy[gActiveBattler] = 0xFF;
 
     *(gBattleStruct->lastTakenMove + gActiveBattler * 2 + 0) = MOVE_NONE;
@@ -3600,8 +3601,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
             moveBattler2 = MOVE_NONE;
     }
 
-    priorityBattler1 = GetMovePriority(moveBattler1, battler2);
-    priorityBattler2 = GetMovePriority(moveBattler2, battler1);
+    priorityBattler1 = GetMovePriority(moveBattler1, battler1, battler2);
+    priorityBattler2 = GetMovePriority(moveBattler2, battler2, battler1);
 
     // either move priorities are different than 0
     if (priorityBattler1 != 0 || priorityBattler2 != 0)

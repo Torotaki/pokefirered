@@ -329,6 +329,7 @@ static void Cmd_setmovetype(void);
 static void Cmd_setslashprepared(void);
 static void Cmd_createitemonmon(void);
 static void Cmd_jumpifitem(void);
+static void Cmd_setsecondattackpriotimer(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -517,7 +518,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_friendshiptodamagecalculation,           //0xB6
     Cmd_presentdamagecalculation,                //0xB7
     Cmd_setsafeguard,                            //0xB8
-    Cmd_magnitudedamagecalculation,              //0xB9
+    Cmd_setsecondattackpriotimer,                //0xB9
     Cmd_jumpifnopursuitswitchdmg,                //0xBA
     Cmd_setmovetype,                             //0xBB
     Cmd_maxattackhalvehp,                        //0xBC
@@ -10554,4 +10555,12 @@ static void Cmd_jumpifitem(void)
         gBattlescriptCurrInstr = jumpPtr;
     else
         gBattlescriptCurrInstr += 8;
+}
+
+static void Cmd_setsecondattackpriotimer(void)
+{
+    if (gDisableStructs[gBattlerAttacker].secondAttackPrioTimer == 0)
+        gDisableStructs[gBattlerAttacker].secondAttackPrioTimer = 2;
+    
+    gBattlescriptCurrInstr += 1;
 }

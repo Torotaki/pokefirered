@@ -964,7 +964,7 @@
 	.byte 0xb8
 	.endm
 
-	.macro magnitudedamagecalculation
+	.macro setsecondattackpriotimer
 	.byte 0xb9
 	.endm
 
