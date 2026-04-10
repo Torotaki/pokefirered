@@ -9686,6 +9686,7 @@ static void Cmd_pickup(void)
     }
 
     opponentItem = GetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM);
+    gLastUsedItem = ITEM_NONE;
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && opponentItem != ITEM_NONE)
     {
         if (AddBagItem(opponentItem, 1)) {
