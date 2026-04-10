@@ -1891,8 +1891,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SOFT_BOILED] =
     {
-        .effect = EFFECT_SOFTBOILED,
-        .power = 0,
+        .effect = EFFECT_HEAL_ALLY_PERCENT,
+        .power = 50,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,
