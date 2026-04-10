@@ -2729,6 +2729,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
     }
 
+    if (attackerHoldEffect == HOLD_EFFECT_PUNCH_POWER && gBattleMoves[move].flags & FLAG_PUNCH)
+        damage = ((100 + attackerHoldEffectParam) * damage) / 100;
+
     return damage + 2;
 }
 

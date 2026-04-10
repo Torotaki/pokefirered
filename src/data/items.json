@@ -3553,12 +3553,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LUCKY PUNCH",
+      "english": "BOXING GLOVE",
       "itemId": "ITEM_LUCKY_PUNCH",
       "price": 10,
-      "holdEffect": "HOLD_EFFECT_LUCKY_PUNCH",
-      "holdEffectParam": 0,
-      "description_english": "A glove to be held by a CHANSEY.\\nIt raises CHANSEY's critical-hit\\nratio.",
+      "holdEffect": "HOLD_EFFECT_PUNCH_POWER",
+      "holdEffectParam": 50,
+      "description_english": "A glove to be held by a POKéMON.\\nIt raises damage on punching\\nmoves by 50 percent.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",

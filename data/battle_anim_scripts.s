@@ -10859,7 +10859,7 @@ Move_COUNTERPUNCH_HIT:
 	goto Move_MACH_PUNCH
 
 Move_DRAGON_HUNT:
-	goto Move_PERSUIT
+	goto Move_PURSUIT
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

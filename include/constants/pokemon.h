@@ -251,6 +251,7 @@
 #define FLAG_SNATCH_AFFECTED        (1 << 3)
 #define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
 #define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
+#define FLAG_PUNCH                  (1 << 6)
 
 // Battle move categories
 #define CATEGORY_STATUS     0
