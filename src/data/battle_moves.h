@@ -380,12 +380,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ROLLING_KICK] =
     {
-        .effect = EFFECT_FLINCH_HIT,
-        .power = 50,
-        .type = TYPE_FIGHTING,
+        .effect = EFFECT_SKY_UPPERCUT,
+        .power = 70,
+        .type = TYPE_FLYING,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 15,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -1751,12 +1751,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BONE_CLUB] =
     {
-        .effect = EFFECT_FLINCH_HIT,
-        .power = 50,
-        .type = TYPE_GROUND,
-        .accuracy = 95,
+        .effect = EFFECT_HIT,
+        .power = 30,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 10,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
@@ -2172,9 +2172,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_BONEMERANG] =
     {
         .effect = EFFECT_DOUBLE_HIT,
-        .power = 40,
-        .type = TYPE_GROUND,
-        .accuracy = 95,
+        .power = 30,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
         .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -2773,11 +2773,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BONE_RUSH] =
     {
-        .effect = EFFECT_MULTI_HIT,
-        .power = 25,
-        .type = TYPE_GROUND,
-        .accuracy = 75,
-        .pp = 20,
+        .effect = EFFECT_DOUBLE_HIT,
+        .power = 20,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -4761,11 +4761,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BOUNCE] =
     {
-        .effect = EFFECT_SEMI_INVULNERABLE,
-        .power = 70,
+        .effect = EFFECT_SKY_UPPERCUT,
+        .power = 40,
         .type = TYPE_FLYING,
-        .accuracy = 95,
-        .pp = 15,
+        .accuracy = 100,
+        .pp = 25,
         .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
