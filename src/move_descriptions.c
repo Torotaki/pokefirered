@@ -824,4 +824,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_CEMETERY      - 1] = gMoveDescription_Cemetery,
     [MOVE_COUNTERPUNCH  - 1] = gMoveDescription_Counterpunch,
     [MOVE_COUNTERPUNCH_HIT- 1] = gMoveDescription_Counterpunch,
+    [MOVE_DRAGON_HUNT   - 1] = gMoveDescription_Pursuit,
 };

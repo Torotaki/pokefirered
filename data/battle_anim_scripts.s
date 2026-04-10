@@ -437,6 +437,7 @@ gBattleAnims_Moves::
 	.4byte Move_CEMETERY
 	.4byte Move_COUNTERPUNCH
 	.4byte Move_COUNTERPUNCH_HIT
+	.4byte Move_DRAGON_HUNT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10879,6 +10880,9 @@ Move_COUNTERPUNCH:
 
 Move_COUNTERPUNCH_HIT:
 	goto Move_MACH_PUNCH
+
+Move_DRAGON_HUNT:
+	goto Move_PERSUIT
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

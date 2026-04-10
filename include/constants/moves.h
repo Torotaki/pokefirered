@@ -417,8 +417,9 @@
 #define MOVE_CEMETERY 413
 #define MOVE_COUNTERPUNCH 414
 #define MOVE_COUNTERPUNCH_HIT 415
+#define MOVE_DRAGON_HUNT 416
 
-#define MOVES_COUNT 416
+#define MOVES_COUNT 417
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
