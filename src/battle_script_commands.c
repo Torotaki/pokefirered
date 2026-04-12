@@ -684,6 +684,7 @@ static const u8 *const sTrapMoveEffectBS_Ptrs[] =
     [EFFECT_TRAP_LEECH_SEED]       = BattleScript_TrapLeechSeedTriggered,
     [EFFECT_TRAP_POISON]           = BattleScript_TrapPoisonTriggered,
     [EFFECT_COUNTERPUNCH]          = BattleScript_TrapCounterpunchTriggered,
+    [EFFECT_TRAP_HOLE]             = BattleScript_TrapHoleTriggered,
 };
 
 static const struct WindowTemplate sUnusedWinTemplate =
@@ -6490,6 +6491,7 @@ static void Cmd_setprotectlike(void)
         case EFFECT_TRAP_LEECH_SEED:
         case EFFECT_TRAP_POISON:
         case EFFECT_COUNTERPUNCH:
+        case EFFECT_TRAP_HOLE:
             gProtectStructs[gBattlerAttacker].contactTrapped = 1;
             gDisableStructs[gBattlerAttacker].disabledMove = gCurrentMove;
             gDisableStructs[gBattlerAttacker].disableTimer = (Random() & 3) + 3;

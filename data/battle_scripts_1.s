@@ -310,6 +310,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFogAndSharpRocks		 @ EFFECT_FOG_AND_SHARP_ROCKS
 	.4byte BattleScript_EffectContactTrap			 @ EFFECT_COUNTERPUNCH
 	.4byte BattleScript_EffectPrioSecondHit			 @ EFFECT_PRIO_SECOND_HIT
+	.4byte BattleScript_EffectTrapHole				 @ EFFECT_TRAP_HOLE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -993,6 +994,7 @@ BattleScript_EffectLaunchAirborneHit::
 BattleScript_EffectKnockUndergroundHit::
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
 	call BattleScript_EffectHitAndReturn
+BattleScript_KnockUndergroundAfterHit::
 	cancelmultiturnmoves BS_TARGET
 	setsemiinvulnerablebit
 	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_ShowKnockedUnderwaterMsg
@@ -1842,6 +1844,7 @@ BattleScript_EffectOutlast::
 BattleScript_EffectProtect::
 BattleScript_EffectEndure::
 	attackcanceler
+BattleScript_ProtectLikeafterAtkCanceller::
 	attackstring
 	ppreduce
 	setprotectlike
@@ -1851,9 +1854,8 @@ BattleScript_EffectEndure::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_TrapLeechSeedTriggered::
+BattleScript_TrapTriggeredPrepareTargets::
 	attackstring
-	ppreduce
 	pause B_WAIT_TIME_SHORT
 	effectivenesssound
 	resultmessage
@@ -1862,6 +1864,10 @@ BattleScript_TrapLeechSeedTriggered::
 	copybyte gEffectBattler, gBattlerTarget
 	copybyte gBattlerTarget, gBattlerAttacker
 	copybyte gBattlerAttacker, gEffectBattler
+	return
+
+BattleScript_TrapLeechSeedTriggered::
+	call BattleScript_TrapTriggeredPrepareTargets
 	sethword gCurrentMove, MOVE_SEED_TRAP_HIT
 	call BattleScript_EffectHitAndReturnAfterPPReduce
 	tryfaintmon BS_TARGET
@@ -1872,33 +1878,32 @@ BattleScript_TrapLeechSeedTriggered::
 	goto BattleScript_DoLeechSeed
 
 BattleScript_TrapPoisonTriggered::
-	attackstring
-	ppreduce
-	pause B_WAIT_TIME_SHORT
-	effectivenesssound
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	setbyte gMoveResultFlags, 0
-	copybyte gEffectBattler, gBattlerTarget
-	copybyte gBattlerTarget, gBattlerAttacker
-	copybyte gBattlerAttacker, gEffectBattler
+	call BattleScript_TrapTriggeredPrepareTargets
 	sethword gCurrentMove, MOVE_POISON_TRAP_HIT
 	setmoveeffect MOVE_EFFECT_POISON
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_TrapCounterpunchTriggered::
-	attackstring
-	ppreduce
-	pause B_WAIT_TIME_SHORT
-	effectivenesssound
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	setbyte gMoveResultFlags, 0
-	copybyte gEffectBattler, gBattlerTarget
-	copybyte gBattlerTarget, gBattlerAttacker
-	copybyte gBattlerAttacker, gEffectBattler
+	call BattleScript_TrapTriggeredPrepareTargets
 	sethword gCurrentMove, MOVE_COUNTERPUNCH_HIT
 	goto BattleScript_HitFromCritCalc
+	
+BattleScript_EffectTrapHole::
+	attackcanceler
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_ButItFailedAtkStringPpReduce
+	goto BattleScript_ProtectLikeafterAtkCanceller
+
+BattleScript_TrapHoleTriggered::
+	call BattleScript_TrapTriggeredPrepareTargets
+	jumpifbyte CMP_COMMON_BITS, gBattleTerrainEffect, B_TERRAIN_EFFECT_FLOODING, BattleScript_ButItFailed
+	jumpiftype BS_TARGET, TYPE_GROUND, BattleScript_NotAffected
+	jumpiftype BS_TARGET, TYPE_FLYING, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_LEVITATE, BattleScript_NotAffected
+	jumpifability BS_TARGET, ABILITY_DRAGONFLIGHT, BattleScript_NotAffected
+	sethword gCurrentMove, MOVE_TRAP_HOLE_HIT
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_HitFromCritCalc
+	call BattleScript_EffectHitAndReturnAfterPPReduce
+	goto BattleScript_KnockUndergroundAfterHit
 
 BattleScript_EffectSpikes::
 	attackcanceler

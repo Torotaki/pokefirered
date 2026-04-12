@@ -438,6 +438,8 @@ gBattleAnims_Moves::
 	.4byte Move_COUNTERPUNCH
 	.4byte Move_COUNTERPUNCH_HIT
 	.4byte Move_DRAGON_HUNT
+	.4byte Move_TRAP_HOLE
+	.4byte Move_TRAP_HOLE_HIT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10342,6 +10344,7 @@ SandTrapDirtPlumes:
 	createsprite gDirtPlumeSpriteTemplate, ANIM_TARGET, 2, 1, 0, 16, -16, -10, 24
 	createsprite gDirtPlumeSpriteTemplate, ANIM_TARGET, 2, 1, 1, 14, -52, -18, 24
 	createsprite gDirtPlumeSpriteTemplate, ANIM_TARGET, 2, 1, 1, 12, -32, -16, 24
+SandTrapDirtPlumesAttackerOnly:
 	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 12, -48, -16, 24
 	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 16, -16, -10, 24
 	createsprite gDirtPlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 14, -52, -18, 24
@@ -10860,6 +10863,26 @@ Move_COUNTERPUNCH_HIT:
 
 Move_DRAGON_HUNT:
 	goto Move_PURSUIT
+
+Move_TRAP_HOLE:
+	loadspritegfx ANIM_TAG_MUD_SAND
+	call SandTrapDirtPlumesAttackerOnly
+	delay 12
+	createvisualtask AnimTask_ShakeAndSinkMon, 5, ANIM_ATTACKER, 2, 0, 96, 30
+	call SandTrapDirtPlumesAttackerOnly
+	delay 12
+	call SandTrapDirtPlumesAttackerOnly
+	waitforvisualfinish
+	delay 16
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 4
+	waitforvisualfinish
+	end
+
+Move_TRAP_HOLE_HIT:
+	delay 1
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_TARGET, 3, 1, 0, 123, 0, 5
+	delay 6
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

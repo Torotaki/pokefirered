@@ -418,8 +418,10 @@
 #define MOVE_COUNTERPUNCH 414
 #define MOVE_COUNTERPUNCH_HIT 415
 #define MOVE_DRAGON_HUNT 416
+#define MOVE_TRAP_HOLE 417
+#define MOVE_TRAP_HOLE_HIT 418
 
-#define MOVES_COUNT 417
+#define MOVES_COUNT 419
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
