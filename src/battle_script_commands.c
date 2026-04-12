@@ -1142,6 +1142,7 @@ static void Cmd_accuracycheck(void)
             && gBattleMoves[move].effect != EFFECT_HYPER_VOICE
             && gBattleMoves[move].effect != EFFECT_SLEEP
             && gBattleMoves[move].effect != EFFECT_DOUBLE_SLEEP
+            && gBattleMoves[move].effect != EFFECT_SET_FOG_HIT
             && gBattleMoves[move].effect != EFFECT_LOCK_ON
             && gBattleMoves[move].effect != EFFECT_LOCK_ON_AND_BLOCK
             && gBattleMoves[move].effect != EFFECT_LOCK_ON_AND_DEF_BOOST2)

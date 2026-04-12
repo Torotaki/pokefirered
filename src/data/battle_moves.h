@@ -3977,16 +3977,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ERUPTION] =
     {
-        .effect = EFFECT_ERUPTION,
-        .power = 110,
+        .effect = EFFECT_SET_FOG_HIT,
+        .power = 50,
         .type = TYPE_FIRE,
         .accuracy = 100,
-        .pp = 5,
+        .pp = 25,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .category = CATEGORY_PHYSICAL,
+        .category = CATEGORY_SPECIAL,
     },
 
     [MOVE_SKILL_SWAP] =
