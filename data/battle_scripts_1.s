@@ -183,7 +183,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectUproar                 @ EFFECT_UPROAR
 	.4byte BattleScript_EffectStockpile              @ EFFECT_STOCKPILE
 	.4byte BattleScript_EffectSpitUp                 @ EFFECT_SPIT_UP
-	.4byte BattleScript_EffectSwallow                @ EFFECT_SWALLOW
+	.4byte BattleScript_EffectEatHeldItemAtkBoost    @ EFFECT_SWALLOW
 	.4byte BattleScript_EffectHit                    @ EFFECT_UNUSED_A3
 	.4byte BattleScript_EffectHail                   @ EFFECT_HAIL
 	.4byte BattleScript_EffectTorment                @ EFFECT_TORMENT
@@ -2979,6 +2979,27 @@ BattleScript_SwallowFail::
 	printfromtable gSwallowFailStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectEatHeldItemAtkBoost::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifitem BS_ATTACKER, ITEM_NONE, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	jumpifitem BS_ATTACKER, ITEM_BLACK_SLUDGE, BattleScript_EatHeldItemAtkBoostBlackSludge
+BattleScript_EatHeldItemDoAtkBoost::
+	removeitem BS_ATTACKER
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_StatUpEnd
+	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_StatUpDoAnim
+	pause B_WAIT_TIME_SHORT
+	goto BattleScript_StatUpPrintString
+
+BattleScript_EatHeldItemAtkBoostBlackSludge::
+	setmoveeffect EFFECT_POISON
+	seteffectprimary
+	goto BattleScript_EatHeldItemDoAtkBoost
 
 BattleScript_EffectHail::
 	attackcanceler
