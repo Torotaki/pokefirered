@@ -408,6 +408,7 @@ const u8 gMoveDescription_Detonate[] = _("Detonate the held\nitem on the 2nd\ntu
 const u8 gMoveDescription_Cemetery[] = _("Creates a thick fog\nand covers the\nfield in sharp\nrocks.");
 const u8 gMoveDescription_Counterpunch[] = _("Sets a trap that\npunches the foe if\nthey make contact\nthis turn.");
 const u8 gMoveDescription_TrapHole[] = _("Sets a trap that\ndrops the foe down\na hole if they make\ncontact this turn.");
+const u8 gMoveDescription_Ignite[] = _("Ignite the foe to\ninflict burn.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -828,4 +829,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_DRAGON_HUNT   - 1] = gMoveDescription_Pursuit,
     [MOVE_TRAP_HOLE     - 1] = gMoveDescription_TrapHole,
     [MOVE_TRAP_HOLE_HIT - 1] = gMoveDescription_TrapHole,
+    [MOVE_IGNITE - 1]        = gMoveDescription_Ignite,
 };

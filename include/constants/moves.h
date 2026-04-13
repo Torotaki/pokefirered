@@ -420,8 +420,9 @@
 #define MOVE_DRAGON_HUNT 416
 #define MOVE_TRAP_HOLE 417
 #define MOVE_TRAP_HOLE_HIT 418
+#define MOVE_IGNITE 419
 
-#define MOVES_COUNT 419
+#define MOVES_COUNT 420
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
