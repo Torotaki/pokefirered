@@ -2563,6 +2563,15 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
     }
 
+    if (gBattleTerrainEffect & B_TERRAIN_EFFECT_SHARP_ROCKS)
+    {
+        if (defender->ability == ABILITY_ROCK_ARMOR)
+        {
+            defense = 15 * defense / 10;
+            spDefense = 15 * spDefense / 10;
+        }
+    }
+
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;

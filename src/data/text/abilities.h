@@ -97,6 +97,7 @@ static const u8 sRagingRocksDescription[] = _("SHARP ROCKS hurt every turn.");
 static const u8 sHypnotistDescription[] = _("SLEEP and CONFUSION lasts 2 more turns.");
 static const u8 sHeroSignalDescription[] = _("Called by team boost DEFENSE and SP. DEF.");
 static const u8 sPoltergeistDescription[] = _("Enters with SUBSTITUTE. Loses immunities.");
+static const u8 sRockArmorDescription[] = _("Ups DEFENSE and SP. DEF in sharp rocks.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -199,6 +200,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_HYPNOTIST] = sHypnotistDescription,
     [ABILITY_HERO_SIGNAL] = sHeroSignalDescription,
     [ABILITY_POLTERGEIST] = sPoltergeistDescription,
+    [ABILITY_ROCK_ARMOR] = sRockArmorDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -302,4 +304,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_HYPNOTIST] = _("HYPNOTIST"),
     [ABILITY_HERO_SIGNAL] = _("HERO SIGNAL"),
     [ABILITY_POLTERGEIST] = _("POLTERGEIST"),
+    [ABILITY_ROCK_ARMOR] = _("ROCK ARMOR"),
 };
