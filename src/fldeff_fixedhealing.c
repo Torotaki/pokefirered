@@ -12,9 +12,11 @@
 
 void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex);
 void Task_DisplayHPRestoredMessageAndClose(u8 taskId);
+void Task_DisplayReviveHPRestoredMessage(u8 taskId);
 
 extern const u8 gText_PkmnHPRestoredByVar2[];
 extern const u8 gText_PkmnFellAsleep[];
+TaskFunc endingTask;
 
 bool8 SetUpFieldMove_FixedHealing(void)
 {
@@ -43,7 +45,7 @@ void Task_TryUseFixedHealingOnPartyMon(u8 taskId)
     u16 curHp, maxHp, healPower;
     u32 move;
     TaskFunc closingTask;
-    bool8 isUsedInBattle = gPartyMenu.data[1]; 
+    bool8 isUsedInBattle = gPartyMenu.data[1];
     
     if (recipientPartyId > PARTY_SIZE)
     { 
@@ -151,6 +153,63 @@ void Task_TryUseSleepOnPartyMon(u8 taskId)
     }
 }
 
+void Task_TryUseReviveOnPartyMon(u8 taskId)
+{
+    u8 userPartyId = gPartyMenu.slotId;
+    u8 recipientPartyId = gPartyMenu.slotId2;
+    u16 maxHp, healPower;
+    u32 move;
+    TaskFunc closingTask;
+    u8 recipientHp;
+    bool8 isUsedInBattle = gPartyMenu.data[1];
+    recipientHp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_HP);
+    
+    if (recipientPartyId > PARTY_SIZE)
+    { 
+        gPartyMenu.action = PARTY_ACTION_CHOOSE_MON;
+        DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+        gTasks[taskId].func = Task_HandleChooseMonInput;
+    }
+    else if (recipientHp != 0)
+    {
+        PlaySE(SE_FAILURE);
+    }
+    else
+    {
+        PlaySE(SE_USE_ITEM);
+        if (isUsedInBattle) {
+            move = gCurrentMove;
+
+            gBattlescriptCurrInstr += 5;
+            endingTask = Task_ClosePartyMenuAfterText;
+        } else {
+            u8 healMovePP, healMoveIndex;
+
+            GetHealMove(userPartyId, &healMovePP, &healMoveIndex);
+            healMovePP -= 1;
+            move = GetMonData(&gPlayerParty[userPartyId], MON_DATA_MOVE1 + healMoveIndex);
+            SetMonData(&gPlayerParty[userPartyId], MON_DATA_PP1 + healMoveIndex, &healMovePP);
+
+            endingTask = Task_FinishSoftboiled;
+        }
+        maxHp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_MAX_HP);
+
+        healPower = gBattleMoves[move].power * maxHp / 100;
+
+        if (GetMonAbility(&gPlayerParty[userPartyId]) == ABILITY_MEDIC)
+        {
+            healPower += GetMonData(&gPlayerParty[userPartyId], MON_DATA_MAX_HP) / 8;
+        }
+
+        if (healPower == 0)
+        {
+            healPower = 1;
+        }
+
+        PartyMenuModifyHP(taskId, recipientPartyId, 1, healPower, Task_DisplayReviveHPRestoredMessage);
+    }
+}
+
 void GetHealMove(u8 userPartyId, u8 *pp, u8 *moveIndex)
 {
     u8 i, j;
@@ -181,12 +240,33 @@ void Task_DisplayHPRestoredMessageAndClose(u8 taskId)
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 }
 
+void Task_DisplayReviveHPRestoredMessage(u8 taskId)
+{
+    StringCopy(gStringVar4, gStringVar2);
+    UpdatePartyMonAilmentGfxBySlotId(gPartyMenu.slotId2);
+    StringCopy(gStringVar2, gStringVar4);
+    GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = endingTask;
+}
+
 void Task_TryUseMoveOnPartyMon(u8 taskId)
 {
     if (gPartyMenu.data[1])
     {
         // We are in battle
-        Task_TryUseFixedHealingOnPartyMon(taskId);
+        switch (gPartyMenu.data[0])
+        {
+        case EFFECT_HEAL_ALLY_FIXED:
+        case EFFECT_HEAL_ALLY_PERCENT:
+            Task_TryUseFixedHealingOnPartyMon(taskId);
+            break;
+        case EFFECT_REVIVE:
+            Task_TryUseReviveOnPartyMon(taskId);
+            break;
+        }
         return;
     }
 
@@ -198,6 +278,9 @@ void Task_TryUseMoveOnPartyMon(u8 taskId)
         break;
     case FIELD_MOVE_SING:
         Task_TryUseSleepOnPartyMon(taskId);
+        break;
+    case FIELD_MOVE_REVIVE:
+        Task_TryUseReviveOnPartyMon(taskId);
         break;
     default:
         break;

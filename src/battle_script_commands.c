@@ -330,6 +330,7 @@ static void Cmd_setslashprepared(void);
 static void Cmd_createitemonmon(void);
 static void Cmd_jumpifitem(void);
 static void Cmd_setsecondattackpriotimer(void);
+static void Cmd_revivepartymon(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -542,7 +543,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_settorment,                              //0xCE
     Cmd_jumpifnodamage,                          //0xCF
     Cmd_settaunt,                                //0xD0
-    Cmd_trysethelpinghand,                       //0xD1
+    Cmd_revivepartymon,                          //0xD1
     Cmd_tryswapitems,                            //0xD2
     Cmd_trycopyability,                          //0xD3
     Cmd_trywish,                                 //0xD4
@@ -10317,6 +10318,7 @@ static void Cmd_fixedhealing(void)
         *(gBattleStruct->battlerPartyIndexes + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
         gPartyMenu.slotId = gActiveBattler;
         gPartyMenu.slotId2 = gActiveBattler;
+        gPartyMenu.data[0] = gBattleMoves[gCurrentMove].effect;
         gPartyMenu.data[1] = TRUE;
         
         BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_FIXED_HEAL_MOVE, *(gBattleStruct->monToSwitchIntoId + (gActiveBattler ^ 2)), 0, gBattleStruct->battlerPartyOrders[gActiveBattler]);
@@ -10587,4 +10589,69 @@ static void Cmd_setsecondattackpriotimer(void)
         gDisableStructs[gBattlerAttacker].secondAttackPrioTimer = 2;
     
     gBattlescriptCurrInstr += 1;
+}
+
+static void Cmd_revivepartymon(void)
+{
+    u8 battlerId, i, faintedCount;
+    u16 maxHp, healPower;
+    const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+ 
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER && gBattleMoves[gCurrentMove].target == MOVE_TARGET_PARTY)
+    {
+        faintedCount = 0;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+                    faintedCount++;
+            }
+        }
+
+        if (faintedCount == 0)
+            gBattlescriptCurrInstr = failPtr;
+        else {
+            gActiveBattler = gBattlerAttacker;
+            gPartyMenu.slotId = gActiveBattler;
+            gPartyMenu.slotId2 = gActiveBattler;
+            gPartyMenu.data[0] = EFFECT_REVIVE;
+            gPartyMenu.data[1] = TRUE;
+            
+            BtlController_EmitChoosePokemon(BUFFER_A, PARTY_ACTION_FIXED_HEAL_MOVE, *(gBattleStruct->monToSwitchIntoId + (gActiveBattler ^ 2)), ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
+            MarkBattlerForControllerExec(gActiveBattler);
+        }
+    } else {
+        faintedCount = 0;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
+            {
+                if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0) {
+                    faintedCount++;
+                    maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
+                    
+                    healPower = gBattleMoves[gCurrentMove].power * maxHp / 100;
+                    
+                    if (gBattleMons[gBattlerAttacker].ability == ABILITY_MEDIC)
+                    {
+                        healPower += gBattleMons[gBattlerAttacker].maxHP / 8;
+                    }
+                    
+                    if (healPower == 0)
+                    {
+                        healPower = 1;
+                    }
+                    
+                    SetMonData(&gEnemyParty[i], MON_DATA_HP, &healPower);
+                    break;
+                }
+            }
+        }
+
+        if (faintedCount == 0)
+            gBattlescriptCurrInstr = failPtr;
+        else
+            gBattlescriptCurrInstr += 5;
+    }
 }

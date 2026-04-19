@@ -311,6 +311,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectContactTrap			 @ EFFECT_COUNTERPUNCH
 	.4byte BattleScript_EffectPrioSecondHit			 @ EFFECT_PRIO_SECOND_HIT
 	.4byte BattleScript_EffectTrapHole				 @ EFFECT_TRAP_HOLE
+	.4byte BattleScript_EffectRevive				 @ EFFECT_REVIVE
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3261,7 +3262,6 @@ BattleScript_EffectHelpingHand::
 	attackcanceler
 	attackstring
 	ppreduce
-	trysethelpinghand BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNREADYTOHELP
@@ -3838,6 +3838,15 @@ BattleScript_EffectHealingSeed::
 	ppreduce
 	fixedhealing BattleScript_AlreadyAtFullHp, BS_TARGET
 	goto BattleScript_PresentHealTarget
+
+BattleScript_EffectRevive::
+	attackcanceler
+	attackstring
+	ppreduce
+	revivepartymon BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectReapplyTerrainHit::
 	call BattleScript_EffectHitAndReturn

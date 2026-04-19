@@ -1075,7 +1075,7 @@
 	.4byte \param0
 	.endm
 
-	.macro trysethelpinghand param0:req
+	.macro revivepartymon param0:req
 	.byte 0xd1
 	.4byte \param0
 	.endm

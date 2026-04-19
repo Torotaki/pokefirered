@@ -441,6 +441,7 @@ gBattleAnims_Moves::
 	.4byte Move_TRAP_HOLE
 	.4byte Move_TRAP_HOLE_HIT
 	.4byte Move_IGNITE
+	.4byte Move_REVIVE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10906,6 +10907,9 @@ Move_IGNITE:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
+
+Move_REVIVE:
+	goto Move_WISH
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

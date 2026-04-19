@@ -1728,7 +1728,8 @@ static const struct FieldMoveMapping sFieldMoveMappings[] = {
     [FIELD_MOVE_HEALING_SEED]= {0,                   {MOVE_HEALING_SEED, MOVE_AROMATHERAPY}},
     [FIELD_MOVE_PATCH_UP]    = {0,                   {MOVE_PATCH_UP}},
     [FIELD_MOVE_SING]        = {0,                   {MOVE_SING}},
-    [FIELD_MOVE_MAGNET_PULL] = {FLAG_CAN_MAGNET_PULL,{MOVE_MAGNET_PULL}}
+    [FIELD_MOVE_MAGNET_PULL] = {FLAG_CAN_MAGNET_PULL,{MOVE_MAGNET_PULL}},
+    [FIELD_MOVE_REVIVE]      = {0                   ,{MOVE_REVIVE}}
 };
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)

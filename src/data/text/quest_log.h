@@ -127,3 +127,4 @@ const u8 gText_QuestLog_UsedHealingSeed[] = _("{STR_VAR_1} healed an ally using 
 const u8 gText_QuestLog_UsedPatchUp[] = _("{STR_VAR_1} healed an ally using the move\nPATCH UP.");
 const u8 gText_QuestLog_UsedSing[] = _("{STR_VAR_1} put an ally to sleep using\nSING.");
 const u8 gText_QuestLog_UsedMagnetPull[] = _("{STR_VAR_1} used MAGNET PULL to find\nitems or wild STEEL POKéMON.");
+const u8 gText_QuestLog_UsedRevive[] = _("{STR_VAR_1} revived an ally using the move\nREVIVE.");

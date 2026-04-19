@@ -68,6 +68,7 @@
 #include "constants/quest_log.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
+#include "constants/battle_move_effects.h"
 
 #define PARTY_PAL_SELECTED     (1 << 0)
 #define PARTY_PAL_FAINTED      (1 << 1)
@@ -1242,6 +1243,9 @@ static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
         if (gPartyMenu.data[1])
         {
             PlaySE(SE_FAILURE);
+            if (gPartyMenu.data[0] == EFFECT_REVIVE) {
+                break;
+            }
             ApplyFixedHealToActiveMon();
             Task_ClosePartyMenu(taskId);
             break;
@@ -3956,6 +3960,7 @@ static void CursorCB_FieldMove(u8 taskId)
             case FIELD_MOVE_HEALING_SEED:
             case FIELD_MOVE_PATCH_UP:
             case FIELD_MOVE_SING:
+            case FIELD_MOVE_REVIVE:
                 ChooseMonForFixedHealing(taskId);
                 break;
             case FIELD_MOVE_TELEPORT:

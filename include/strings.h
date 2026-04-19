@@ -314,6 +314,7 @@ extern const u8 gText_ShareHp[];
 extern const u8 gText_HealPokemon[];
 extern const u8 gText_SleepPokemon[];
 extern const u8 gText_FetchItems[];
+extern const u8 gText_RevivePokemon[];
 extern const u8 gText_ReturnToAHealingSpot[];
 extern const u8 gText_Summary5[];
 extern const u8 gText_Switch2[];
@@ -1347,6 +1348,7 @@ extern const u8 gText_QuestLog_UsedHealingSeed[];
 extern const u8 gText_QuestLog_UsedPatchUp[];
 extern const u8 gText_QuestLog_UsedSing[];
 extern const u8 gText_QuestLog_UsedMagnetPull[];
+extern const u8 gText_QuestLog_UsedRevive[];
 
 // clear_save_data_screen
 extern const u8 gText_ClearAllSaveData[];

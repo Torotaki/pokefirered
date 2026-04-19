@@ -421,8 +421,9 @@
 #define MOVE_TRAP_HOLE 417
 #define MOVE_TRAP_HOLE_HIT 418
 #define MOVE_IGNITE 419
+#define MOVE_REVIVE 420
 
-#define MOVES_COUNT 420
+#define MOVES_COUNT 421
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
