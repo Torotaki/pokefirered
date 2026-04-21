@@ -1384,6 +1384,13 @@ static void Cmd_typecalc(void)
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
+    else if ((gStatuses3[gBattlerTarget] & STATUS3_ROOTED) && moveType == TYPE_ELECTRIC)
+    {
+        gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
+        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastHitByType[gBattlerTarget] = 0;
+        gBattleCommunication[MISS_TYPE] = B_MSG_ELEC_MISS;
+    }
     else
     {
         while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)

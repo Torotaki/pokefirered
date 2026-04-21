@@ -66,6 +66,7 @@ static const u8 sText_AttackMissed[] = _("{B_ATK_NAME_WITH_PREFIX}'s\nattack mis
 static const u8 sText_PkmnProtectedItself[] = _("{B_DEF_NAME_WITH_PREFIX}\nprotected itself!");
 static const u8 sText_AvoidedDamage[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\ndamage with {B_DEF_ABILITY}!");
 static const u8 sText_PkmnMakesGroundMiss[] = _("{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!");
+static const u8 sText_RootMakesElecMiss[] = _("{B_DEF_NAME_WITH_PREFIX}'s roots makes\nELECTRIC moves ineffective!");
 static const u8 sText_PkmnAvoidedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!");
 static const u8 sText_PkmnSetTrap[] = _("{B_ATK_NAME_WITH_PREFIX}\nset a trap!");
 static const u8 sText_PkmnWasTrappedByContact[] = _("{B_ATK_NAME_WITH_PREFIX}'s attack made\ncontact with {B_DEF_NAME_WITH_PREFIX}'s trap!");
@@ -988,6 +989,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNKNOCKEDUNDERWATER - BATTLESTRINGS_TABLE_START]         = sText_PkmnKnockedUnderwater,
     [STRINGID_PKMNPREPAREDETONATE - BATTLESTRINGS_TABLE_START]           = sText_PkmnPrepareDetonate,
     [STRINGID_PLAYERPICKEDUPITEM - BATTLESTRINGS_TABLE_START]            = sText_PlayerPickedUpItem,
+    [STRINGID_ROOTMAKESELECMISS - BATTLESTRINGS_TABLE_START]             = sText_RootMakesElecMiss,
 };
 
 const u16 gMissStringIds[] =
@@ -997,7 +999,8 @@ const u16 gMissStringIds[] =
     [B_MSG_AVOIDED_ATK] = STRINGID_PKMNAVOIDEDATTACK,
     [B_MSG_AVOIDED_DMG] = STRINGID_AVOIDEDDAMAGE,
     [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS,
-    [B_MSG_TRAPPED_MISS]= STRINGID_PKMNWASTRAPPEDBYCONTACT
+    [B_MSG_TRAPPED_MISS]= STRINGID_PKMNWASTRAPPEDBYCONTACT,
+    [B_MSG_ELEC_MISS]   = STRINGID_ROOTMAKESELECMISS
 };
 
 const u16 gNoEscapeStringIds[] =
