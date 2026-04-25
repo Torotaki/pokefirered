@@ -3492,7 +3492,11 @@ static void Cmd_getexp(void)
             gBattleBufferB[gBattleStruct->expGetterBattlerId][0] = 0;
             if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) != MAX_LEVEL)
             {
-                gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
+                if (gStatuses3[gBattleStruct->expGetterBattlerId] & STATUS3_GROWN) {
+                    gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP) / 2;
+                } else {
+                    gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
+                }
                 gBattleResources->beforeLvlUp->stats[STAT_ATK]   = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
                 gBattleResources->beforeLvlUp->stats[STAT_DEF]   = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
                 gBattleResources->beforeLvlUp->stats[STAT_SPEED] = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
@@ -4685,6 +4689,8 @@ static void Cmd_getswitchedmondata(void)
         return;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    
+    ResetGrowthHealth(gActiveBattler);
 
     gBattlerPartyIndexes[gActiveBattler] = *(gBattleStruct->monToSwitchIntoId + gActiveBattler);
 
@@ -9344,14 +9350,33 @@ static void Cmd_trywish(void)
 // Ingrain
 static void Cmd_trysetroots(void)
 {
-    if (gStatuses3[gBattlerAttacker] & STATUS3_ROOTED)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_INGRAIN)
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        if (gStatuses3[gBattlerAttacker] & STATUS3_ROOTED)
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        }
+        else
+        {
+            gStatuses3[gBattlerAttacker] |= STATUS3_ROOTED;
+            gBattlescriptCurrInstr += 5;
+        }
     }
-    else
+
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_DOUBLE_MAX_HP)
     {
-        gStatuses3[gBattlerAttacker] |= STATUS3_ROOTED;
-        gBattlescriptCurrInstr += 5;
+        if (gStatuses3[gBattlerAttacker] & STATUS3_GROWN)
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        }
+        else
+        {
+            gBattleMons[gBattlerAttacker].maxHP = 2 * gBattleMons[gBattlerAttacker].maxHP;
+            SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_MAX_HP, &gBattleMons[gBattlerAttacker].maxHP);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[gBattlerAttacker], &gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], HEALTHBOX_ALL);
+            gStatuses3[gBattlerAttacker] |= STATUS3_GROWN;
+            gBattlescriptCurrInstr += 5;
+        }
     }
 }
 

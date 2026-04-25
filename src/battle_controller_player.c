@@ -1104,6 +1104,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
             s32 currExp;
             u16 species;
             s32 expOnNextLvl;
+            s32 currentHP = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
 
             m4aSongNumStop(SE_EXP);
             level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
@@ -1116,6 +1117,16 @@ static void Task_GiveExpWithExpBar(u8 taskId)
 
                 SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &expOnNextLvl);
                 CalculateMonStats(&gPlayerParty[monId]);
+                if (gStatuses3[battlerId] & STATUS3_GROWN)
+                {
+                    s32 maxHP = GetMonData(&gPlayerParty[monId], MON_DATA_MAX_HP);
+                    gBattleScripting.levelUpHP = maxHP - gBattleResources->beforeLvlUp->stats[STAT_HP];
+                    maxHP = maxHP * 2;
+                    SetMonData(&gPlayerParty[monId], MON_DATA_MAX_HP, &maxHP);
+                    currentHP += gBattleScripting.levelUpHP;
+                    SetMonData(&gPlayerParty[monId], MON_DATA_HP, &currentHP);
+                }
+                
                 gainedExp -= expOnNextLvl - currExp;
                 savedActiveBattler = gActiveBattler;
                 gActiveBattler = battlerId;

@@ -312,6 +312,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPrioSecondHit			 @ EFFECT_PRIO_SECOND_HIT
 	.4byte BattleScript_EffectTrapHole				 @ EFFECT_TRAP_HOLE
 	.4byte BattleScript_EffectRevive				 @ EFFECT_REVIVE
+	.4byte BattleScript_EffectDoubleMaxHp			 @ EFFECT_DOUBLE_MAX_HP
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
@@ -3334,6 +3335,18 @@ BattleScript_EffectIngrain::
 	trysetroots BattleScript_ButItFailed
 	attackanimation
 	waitanimation
+	printstring STRINGID_PKMNPLANTEDROOTS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectDoubleMaxHp::
+	attackcanceler
+	attackstring
+	ppreduce
+	trysetroots BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER
 	printstring STRINGID_PKMNPLANTEDROOTS
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd

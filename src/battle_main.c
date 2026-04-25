@@ -2485,6 +2485,8 @@ void FaintClearSetData(void)
     for (i = 0; i < NUM_BATTLE_STATS; i++)
         gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
 
+    ResetGrowthHealth(gActiveBattler);
+
     gBattleMons[gActiveBattler].status2 = 0;
     gStatuses3[gActiveBattler] = 0;
 
@@ -3955,6 +3957,12 @@ static void HandleEndTurn_FinishBattle(void)
                 }
             }
         }
+
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+        {
+            ResetGrowthHealth(gActiveBattler);
+        }
+        
         TrySetQuestLogBattleEvent();
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             ClearRematchStateByTrainerId();

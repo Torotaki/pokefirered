@@ -3765,3 +3765,18 @@ u8 ApplyTerrainEntryEffects(u8 battler) {
     }
     return TERRAIN_ENTRY_EFFECT_NONE;
 }
+
+void ResetGrowthHealth(u8 battlerId) {
+    if (gStatuses3[battlerId] & STATUS3_GROWN)
+    {
+        gBattleMons[battlerId].maxHP = gBattleMons[battlerId].maxHP / 2;
+        SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MAX_HP, &gBattleMons[battlerId].maxHP);
+        
+        if (gBattleMons[battlerId].hp > gBattleMons[battlerId].maxHP)
+        {
+            gBattleMons[battlerId].hp = gBattleMons[battlerId].maxHP;
+            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP, &gBattleMons[battlerId].maxHP);
+        }
+        gStatuses3[battlerId] &= ~STATUS3_GROWN;
+    }
+}

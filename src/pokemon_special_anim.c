@@ -7,6 +7,7 @@
 #include "task.h"
 #include "constants/songs.h"
 #include "constants/items.h"
+#include "battle.h"
 
 // Functions related to the special anims Pokemon
 // make when using an item on them in the field.
@@ -694,7 +695,11 @@ u32 PSA_GetMonPersonality(void)
 
 void GetMonLevelUpWindowStats(struct Pokemon * pokemon, u16 *data)
 {
-    data[0] = GetMonData(pokemon, MON_DATA_MAX_HP);
+    if(gLeveledUpInBattle)
+        data[0] = gBattleResources->beforeLvlUp->stats[STAT_HP] + gBattleScripting.levelUpHP;
+    else
+        data[0] = GetMonData(pokemon, MON_DATA_MAX_HP);
+
     data[1] = GetMonData(pokemon, MON_DATA_ATK);
     data[2] = GetMonData(pokemon, MON_DATA_DEF);
     data[3] = GetMonData(pokemon, MON_DATA_SPEED);
