@@ -314,6 +314,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectRevive				 @ EFFECT_REVIVE
 	.4byte BattleScript_EffectDoubleMaxHp			 @ EFFECT_DOUBLE_MAX_HP
 	.4byte BattleScript_EffectIngrain				 @ EFFECT_TAKE_ROOT
+	.4byte BattleScript_EffectDodge					 @ EFFECT_DUCK
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::

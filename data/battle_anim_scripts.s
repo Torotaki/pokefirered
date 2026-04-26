@@ -443,6 +443,7 @@ gBattleAnims_Moves::
 	.4byte Move_IGNITE
 	.4byte Move_REVIVE
 	.4byte Move_TAKE_ROOT
+	.4byte Move_DUCK
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10942,6 +10943,9 @@ Move_TAKE_ROOT:
 	delay 10
 	waitforvisualfinish
 	end
+
+Move_DUCK:
+	goto DigSetUp
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

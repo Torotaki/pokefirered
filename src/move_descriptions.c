@@ -411,6 +411,7 @@ const u8 gMoveDescription_TrapHole[] = _("Sets a trap that\ndrops the foe down\n
 const u8 gMoveDescription_Ignite[] = _("Ignite the foe to\ninflict burn.");
 const u8 gMoveDescription_Revive[] = _("Revive an ally at\n1 HP.");
 const u8 gMoveDescription_TakeRoot[] = _("The user lays roots\nand grows large to\ndouble max HP and\nheal every turn.");
+const u8 gMoveDescription_Duck[] = _("Avoids an attack by\ngoing underground.\nIt may fail if used\nin succession.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -834,4 +835,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_IGNITE        - 1] = gMoveDescription_Ignite,
     [MOVE_REVIVE        - 1] = gMoveDescription_Revive,
     [MOVE_TAKE_ROOT     - 1] = gMoveDescription_TakeRoot,
+    [MOVE_DUCK          - 1] = gMoveDescription_Duck,
 };

@@ -5906,4 +5906,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_SNATCH_AFFECTED,
         .category = CATEGORY_STATUS,
     },
+
+    [MOVE_DUCK] =
+    {
+        .effect = EFFECT_DUCK,
+        .power = 0,
+        .type = TYPE_GROUND,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 3,
+        .flags = 0,
+        .category = CATEGORY_STATUS,
+    },
 };

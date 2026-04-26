@@ -532,6 +532,7 @@
 #define B_MSG_SET_UP_TRAP      3
 #define B_MSG_FLEW_HIGH        4
 #define B_MSG_MADE_SELF_HIT    5
+#define B_MSG_DUG_UNDERGROUND  6
 
 // gRestUsedStringIds
 #define B_MSG_REST           0

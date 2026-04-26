@@ -6479,7 +6479,8 @@ static void Cmd_setprotectlike(void)
     if (gBattleMoves[lastMove].effect != EFFECT_PROTECT
         && gBattleMoves[lastMove].effect != EFFECT_ENDURE
         && gBattleMoves[lastMove].effect != EFFECT_OUTLAST
-        && gBattleMoves[lastMove].effect != EFFECT_DODGE)
+        && gBattleMoves[lastMove].effect != EFFECT_DODGE
+        && gBattleMoves[lastMove].effect != EFFECT_DUCK)
         gDisableStructs[gBattlerAttacker].protectUses = 0;
 
     if (gCurrentTurnActionNumber == (gBattlersCount - 1))
@@ -6516,6 +6517,17 @@ static void Cmd_setprotectlike(void)
             gStatuses3[gBattlerAttacker] |= STATUS3_ON_AIR;
             gDisableStructs[gBattlerAttacker].launchedAirborneTimer = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FLEW_HIGH;
+            break;
+        case EFFECT_DUCK:
+            if (gBattleTerrainEffect & B_TERRAIN_EFFECT_FLOODING) {
+                gDisableStructs[gBattlerAttacker].protectUses = 0;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECT_FAILED;
+                gMoveResultFlags |= MOVE_RESULT_MISSED;
+            } else {
+                gStatuses3[gBattlerAttacker] |= STATUS3_UNDERGROUND;
+                gDisableStructs[gBattlerAttacker].launchedAirborneTimer = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DUG_UNDERGROUND;
+            }
             break;
         case EFFECT_MIND_CONTROL:
             gDisableStructs[gBattlerAttacker].disabledMove = gCurrentMove;
