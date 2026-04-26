@@ -420,4 +420,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_TRAP_HOLE_HIT] = _("TRAP HOLEHIT"),
     [MOVE_IGNITE]        = _("IGNITE"),
     [MOVE_REVIVE]        = _("REVIVE"),
+    [MOVE_TAKE_ROOT]     = _("TAKE ROOT"),
 };

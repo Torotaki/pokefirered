@@ -442,6 +442,7 @@ gBattleAnims_Moves::
 	.4byte Move_TRAP_HOLE_HIT
 	.4byte Move_IGNITE
 	.4byte Move_REVIVE
+	.4byte Move_TAKE_ROOT
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10910,6 +10911,37 @@ Move_IGNITE:
 
 Move_REVIVE:
 	goto Move_WISH
+
+Move_TAKE_ROOT:
+	loadspritegfx ANIM_TAG_ROOTS
+	loadspritegfx ANIM_TAG_ORBS
+	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, 16, 26, -1, 2, 150
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
+	delay 10
+	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, -32, 20, 1, 1, 140
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
+	delay 10
+	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, 32, 22, 1, 0, 130
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
+	delay 10
+	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, -16, 25, -1, 3, 120
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
+	delay 40
+	call GrowthEffect
+	createsprite gIngrainOrbSpriteTemplate, ANIM_ATTACKER, 3, 32, 26, -1, 3, 30
+	delay 5
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	createsprite gIngrainOrbSpriteTemplate, ANIM_ATTACKER, 3, -48, 20, 1, 2, 30
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	createsprite gIngrainOrbSpriteTemplate, ANIM_ATTACKER, 3, 48, 26, -2, 3, 18
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 10
+	waitforvisualfinish
+	end
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

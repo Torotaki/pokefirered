@@ -313,6 +313,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTrapHole				 @ EFFECT_TRAP_HOLE
 	.4byte BattleScript_EffectRevive				 @ EFFECT_REVIVE
 	.4byte BattleScript_EffectDoubleMaxHp			 @ EFFECT_DOUBLE_MAX_HP
+	.4byte BattleScript_EffectIngrain				 @ EFFECT_TAKE_ROOT
 
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::

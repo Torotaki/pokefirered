@@ -9350,34 +9350,36 @@ static void Cmd_trywish(void)
 // Ingrain
 static void Cmd_trysetroots(void)
 {
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_INGRAIN)
+    u8 effect;
+
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_INGRAIN
+        || gBattleMoves[gCurrentMove].effect == EFFECT_TAKE_ROOT)
     {
-        if (gStatuses3[gBattlerAttacker] & STATUS3_ROOTED)
-        {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        }
-        else
+        if (!(gStatuses3[gBattlerAttacker] & STATUS3_ROOTED))
         {
             gStatuses3[gBattlerAttacker] |= STATUS3_ROOTED;
-            gBattlescriptCurrInstr += 5;
+            effect++;
         }
     }
 
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_DOUBLE_MAX_HP)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_DOUBLE_MAX_HP
+        || gBattleMoves[gCurrentMove].effect == EFFECT_TAKE_ROOT)
     {
-        if (gStatuses3[gBattlerAttacker] & STATUS3_GROWN)
-        {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        }
-        else
+        if (!(gStatuses3[gBattlerAttacker] & STATUS3_GROWN))
         {
             gBattleMons[gBattlerAttacker].maxHP = 2 * gBattleMons[gBattlerAttacker].maxHP;
             SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_MAX_HP, &gBattleMons[gBattlerAttacker].maxHP);
             UpdateHealthboxAttribute(gHealthboxSpriteIds[gBattlerAttacker], &gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], HEALTHBOX_ALL);
             gStatuses3[gBattlerAttacker] |= STATUS3_GROWN;
-            gBattlescriptCurrInstr += 5;
+            effect++;
         }
     }
+    
+    if (effect)
+        gBattlescriptCurrInstr += 5;
+    else
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    
 }
 
 static void Cmd_doubledamagedealtifdamaged(void)
