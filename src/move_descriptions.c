@@ -836,4 +836,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_REVIVE        - 1] = gMoveDescription_Revive,
     [MOVE_TAKE_ROOT     - 1] = gMoveDescription_TakeRoot,
     [MOVE_DUCK          - 1] = gMoveDescription_Duck,
+    [MOVE_NOXIOUS_GAS   - 1] = gMoveDescription_Smog,
 };

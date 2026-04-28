@@ -424,8 +424,9 @@
 #define MOVE_REVIVE 420
 #define MOVE_TAKE_ROOT 421
 #define MOVE_DUCK 422
+#define MOVE_NOXIOUS_GAS 423
 
-#define MOVES_COUNT 423
+#define MOVES_COUNT 424
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

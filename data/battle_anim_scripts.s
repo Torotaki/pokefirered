@@ -444,6 +444,7 @@ gBattleAnims_Moves::
 	.4byte Move_REVIVE
 	.4byte Move_TAKE_ROOT
 	.4byte Move_DUCK
+	.4byte Move_NOXIOUS_GAS
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10946,6 +10947,9 @@ Move_TAKE_ROOT:
 
 Move_DUCK:
 	goto DigSetUp
+
+Move_NOXIOUS_GAS:
+	goto Move_SMOG
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
