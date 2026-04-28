@@ -1709,12 +1709,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LICK] =
     {
-        .effect = EFFECT_PARALYZE_HIT,
-        .power = 20,
+        .effect = EFFECT_POISON_SELF_HIT,
+        .power = 40,
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 25,
-        .secondaryEffectChance = 25,
+        .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
